@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisar Campos de IDOCs</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --bg-color: #f8f9fa;
+            --font-color: #343a40;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--font-color);
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+        }
+        #searchInput {
+            flex-grow: 1;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #searchButton {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #searchButton:hover {
+            background-color: #0056b3;
+        }
+        #status {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--secondary-color);
+            font-size: 1.1em;
+        }
+        .result-card {
+            background-color: var(--card-bg);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: var(--card-shadow);
+            transition: box-shadow 0.3s;
+        }
+        .result-card:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .result-card h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .result-card p { margin: 5px 0; }
+        .result-card .meta { font-size: 0.9em; color: #888; }
+        .result-card .meta span {
+            background-color: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ferramenta de Pesquisa de Campos de IDOCs</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Digite a descrição ou nome do campo..." onkeyup="handleKeyPress(event)">
+            <button id="searchButton" onclick="searchFields()">Pesquisar</button>
+        </div>
+        <div id="status"></div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const idocFiles = [
+            'DOCUMENTACAO_IDOC_CLIENTES.htm',
+            'DOCUMENTACAO_IDOC_FORNECEDOR.htm',
+            'DOCUMENTACAO_IDOC_MATERIAL.htm',
+            'DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.htm',
+            'DOCUMENTACAO_IDOC_MATQM01.htm',
+            'DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm'
+        ];
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                searchFields();
+            }
+        }
+
+        async function searchFields() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('results');
+            const statusContainer = document.getElementById('status');
+            
+            resultsContainer.innerHTML = '';
+
+            if (searchTerm.length < 3) {
+                statusContainer.textContent = 'Por favor, digite pelo menos 3 caracteres para pesquisar.';
+                return;
+            }
+            
+            statusContainer.textContent = 'Carregando e pesquisando arquivos...';
+            let totalFound = 0;
+
+            const fetchPromises = idocFiles.map(async (fileName) => {
+                try {
+                    const response = await fetch(fileName);
+                    if (!response.ok) {
+                        console.error(`Erro ao carregar o arquivo: ${fileName}`);
+                        return [];
+                    }
+
+                    // *** INÍCIO DA CORREÇÃO ***
+                    // Lê o arquivo como um buffer binário
+                    const buffer = await response.arrayBuffer(); 
+                    // Decodifica o buffer usando a codificação correta para caracteres latinos (Português)
+                    const decoder = new TextDecoder('windows-1252'); 
+                    const htmlText = decoder.decode(buffer);
+                    // *** FIM DA CORREÇÃO ***
+
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(htmlText, 'text/html');
+                    
+                    const idocTitle = doc.querySelector('h2, h3, h1')?.textContent.replace('Documentação', '').trim() || fileName;
+                    const fields = doc.querySelectorAll('ol > li');
+                    const foundItems = [];
+
+                    fields.forEach(li => {
+                        const fieldText = li.textContent.toLowerCase();
+                        if (fieldText.includes(searchTerm)) {
+                            let segmentTitle = 'Segmento não identificado';
+                            const segmentHeader = li.closest('ul > li')?.querySelector('h2, h3, h4');
+                            if (segmentHeader) {
+                                segmentTitle = segmentHeader.textContent;
+                            }
+                            
+                            foundItems.push({
+                                idoc: idocTitle,
+                                segment: segmentTitle,
+                                content: li.innerHTML
+                            });
+                            totalFound++;
+                        }
+                    });
+                    return foundItems;
+                } catch (error) {
+                    console.error(`Falha no fetch para ${fileName}:`, error);
+                    statusContainer.innerHTML += `<br><span style="color:red;">Falha ao carregar ${fileName}. Certifique-se de que o arquivo está na mesma pasta e que você está usando um servidor local.</span>`;
+                    return [];
+                }
+            });
+
+            const allResults = await Promise.all(fetchPromises);
+
+            allResults.flat().forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <div class="meta">
+                        <span><strong>IDOC:</strong> ${item.idoc}</span>
+                        <span><strong>Segmento:</strong> ${item.segment}</span>
+                    </div>
+                    <hr style="display:block; border-top: 1px solid #eee; margin: 10px 0;">
+                    <p>${item.content}</p>
+                `;
+                resultsContainer.appendChild(card);
+            });
+
+            statusContainer.textContent = `${totalFound} resultado(s) encontrado(s).`;
+        }
+    </script>
+
+</body>
+</html>

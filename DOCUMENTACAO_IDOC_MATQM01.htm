@@ -1,0 +1,237 @@
+<HTML>
+<HEAD>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<TITLE> Documentação para tipos de registro IDoc ou tipo de IDoc     </TITLE>
+</HEAD>
+<BODY>
+<HR>
+<h1><A NAME = "IDOCTYPE">Estrutura do tipo básico MATQM01</A></h1>
+<h1>
+Replicação de dados de controle QM
+</h1><p><hr>
+<ul>
+<p>
+<li><b>E1BP1001004_QMAT: Dds.controle QM material (QMAT) ALE distribuição com BAPI</b>
+<p>
+Status: Opcional,
+Núm.mín.: 1, núm.máx.: 999999999<p>
+<p>
+<A HREF = "#E1BP1001004_QMAT           STRUCT"><i>estrutura</i></A>
+</ul>
+<hr>
+<h1>
+<A NAME = "SEGMENTSTRUCT">Estruturas de segmento</A>
+</h1><p><hr>
+<ul>
+<p><li><h2><A NAME = "E1BP1001004_QMAT           STRUCT">E1BP1001004_QMAT: Dds.controle QM material (QMAT) ALE distribuição com BAPI</A></h2>
+<p>
+Definição de segmento E2BP1001004_QMAT004
+Liberado desde release 750, Comprim.segmento: 0238
+<p>
+<ol>
+<li>FUNCTION: <b>Função</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000003 posições<br>
+Posição no segmento: 001, offset: 0063. comprim.ext.: 000003<p>
+<li>INSPTYPE: <b>Tipo de controle</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000008 posições<br>
+Posição no segmento: 002, offset: 0066. comprim.ext.: 000008<p>
+<li>MATERIAL: <b>Nº do material</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000018 posições<br>
+Posição no segmento: 003, offset: 0074. comprim.ext.: 000018<p>
+<li>PLANT: <b>Centro</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000004 posições<br>
+Posição no segmento: 004, offset: 0092. comprim.ext.: 000004<p>
+<li>IND_INSP_WITH_TSK_LIST: <b>Controle com lista de tarefas</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 005, offset: 0096. comprim.ext.: 000001<p>
+<li>IND_SPEC_MATSPEC: <b>Controle com especificação de material</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 006, offset: 0097. comprim.ext.: 000001<p>
+<li>IND_SPEC_CONFIG: <b>Especificações de controle da configuração</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 007, offset: 0098. comprim.ext.: 000001<p>
+<li>IND_SPEC_BATCH: <b>Especificações de controle da determinação de lotes</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 008, offset: 0099. comprim.ext.: 000001<p>
+<li>IND_AUTO_ASSIGN: <b>Atribuição automática de especificações</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 009, offset: 0100. comprim.ext.: 000001<p>
+<li>IND_INSP_BY_CHARAC: <b>Efetuar controle por características</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 010, offset: 0101. comprim.ext.: 000001<p>
+<li>IND_POST_TO_INSP_STOCK: <b>Registro em estoque em controle de qualidade</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 011, offset: 0102. comprim.ext.: 000001<p>
+<li>IND_AUTOMATIC_UD: <b>Decisão de utilização automática prevista</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 012, offset: 0103. comprim.ext.: 000001<p>
+<li>SAMPLING_PROCEDURE: <b>Processo de amostra</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000008 posições<br>
+Posição no segmento: 013, offset: 0104. comprim.ext.: 000008<p>
+<li>DYN_MODIF_RULE: <b>Regra de controle dinâmico</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000003 posições<br>
+Posição no segmento: 014, offset: 0112. comprim.ext.: 000003<p>
+<li>INSP_PERCENTAGE: <b>Porcentagem de controle</b><p>
+<p>
+Ctg.dados interna: DEC<br>
+Comprim.int.: 000003 posições<br>
+Sem decimais, sem sinal<br>
+Posição no segmento: 015, offset: 0115. comprim.ext.: 000004<p>
+<li>IND_100_PERCENT_INSPECTION: <b>Controle a 100%</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 016, offset: 0119. comprim.ext.: 000001<p>
+<li>IND_SKIPS_ALLOWED: <b>Skips permitidos</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 017, offset: 0120. comprim.ext.: 000001<p>
+<li>IND_MANUAL_SAMPLE: <b>Indicar amostra manualmente</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 018, offset: 0121. comprim.ext.: 000001<p>
+<li>IND_MANUAL_SAMPLE_CALC: <b>Acionar cálculo de amostra manualmente</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 019, offset: 0122. comprim.ext.: 000001<p>
+<li>IND_SINGLE_UNITS_POSSIBLE: <b>Administração de nºs de série</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 020, offset: 0123. comprim.ext.: 000001<p>
+<li>AVE_INSP_DURATION: <b>Duração média do controle</b><p>
+<p>
+Ctg.dados interna: DEC<br>
+Comprim.int.: 000003 posições<br>
+Sem decimais, sem sinal<br>
+Posição no segmento: 021, offset: 0124. comprim.ext.: 000004<p>
+<li>CONTR_INSP_LOT_CREATE: <b>Controle da criação de lote de controle (agrupamento lotes)</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 022, offset: 0128. comprim.ext.: 000001<p>
+<li>QUAL_SCORE_PROCEDURE: <b>Processo para cálculo do índice de qualidade</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000002 posições<br>
+Posição no segmento: 023, offset: 0129. comprim.ext.: 000002<p>
+<li>ALLOWED_SCRAP_SHARE: <b>Quota de refugo permitida (em %) no lote de controle</b><p>
+<p>
+Ctg.dados interna: DEC<br>
+Comprim.int.: 000006 posições<br>
+000004 decimais, sem sinal<br>
+Posição no segmento: 024, offset: 0131. comprim.ext.: 000009<p>
+<li>IND_SPECIAL_QM_ORDER: <b>Entrar custos de controle na ordem QM individual</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 025, offset: 0140. comprim.ext.: 000001<p>
+<li>QM_ORDERID: <b>Nº ordem para a entrada de custos de controle</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000012 posições<br>
+Posição no segmento: 026, offset: 0141. comprim.ext.: 000012<p>
+<li>IND_INSPTYPE_MAT_ACTIVE: <b>Combinação tipo de controle - material está ativa</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 027, offset: 0153. comprim.ext.: 000001<p>
+<li>PREFERRED_INSPTYPE: <b>Tipo de controle preferido</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 028, offset: 0154. comprim.ext.: 000001<p>
+<li>INSPTYPE_DELETE: <b>Tps.contr.a serem eliminados (distr.ALE QM)</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000008 posições<br>
+Posição no segmento: 029, offset: 0155. comprim.ext.: 000008<p>
+<li>CREATION_TIME: <b>Momento de geração de um indicador de modificação</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000014 posições<br>
+Posição no segmento: 030, offset: 0163. comprim.ext.: 000014<p>
+<li>MATERIAL_EXTERNAL: <b>Nº de material longo para o campo MATERIAL</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000040 posições<br>
+Posição no segmento: 031, offset: 0177. comprim.ext.: 000040<p>
+<li>MATERIAL_GUID: <b>GUID externo para campo MATERIAL</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000032 posições<br>
+Posição no segmento: 032, offset: 0217. comprim.ext.: 000032<p>
+<li>MATERIAL_VERSION: <b>Nº de versão para campo MATERIAL</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000010 posições<br>
+Posição no segmento: 033, offset: 0249. comprim.ext.: 000010<p>
+<li>IND_HU_INSPECTION: <b>Controle da unidade comercial</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 034, offset: 0259. comprim.ext.: 000001<p>
+<li>MS_FLAG: <b>Código: especificações múltiplas</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000001 posições<br>
+Posição no segmento: 035, offset: 0260. comprim.ext.: 000001<p>
+<li>MATERIAL_LONG: <b>Nº material (40 caracteres, necessário por razões técnicas)</b><p>
+<p>
+Ctg.dados interna: CHAR<br>
+Comprim.int.: 000040 posições<br>
+Posição no segmento: 036, offset: 0261. comprim.ext.: 000040<p>
+</ol>
+<p>
+</ul>
+<p>
+<hr>
+<p>
+<h2><A NAME = "INFO"> Info... </A></h2>
+Documento HTML gerado automaticamente.<br>
+Criado em 14.04.2025 às 10:20:51<br>
+Mandante 100
+<br>
+Sistema EH8
+<br>
+Release 750
+<br>
+Idioma P
+<br>
+Transação WE60
+<p>
+Exibição p/release 750<br>
+Versão 3 tipos registro IDoc: Tipos de registro IDoc release SAP 4.0
+</BODY>
+</HTML>
