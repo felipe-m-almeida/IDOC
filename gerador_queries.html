@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador de Queries</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --danger-color: #e74c3c;
+            --bg-color: #ecf0f1;
+            --font-color: #34495e;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--font-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: var(--card-bg);
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        h1, h3 { text-align: center; color: var(--primary-color); }
+        h3 { color: var(--secondary-color); border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover { background-color: #2980b9; }
+        .result-box { margin-top: 30px; }
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        .query-fields {
+            display: none;
+            margin-top: 25px;
+            border-top: 2px solid #eee;
+            padding-top: 25px;
+        }
+        .when-clause {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+        .when-clause input { flex: 1; }
+        .when-clause button {
+            width: auto;
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: var(--danger-color);
+        }
+        .when-clause button:hover { background-color: #c0392b; }
+        .add-btn {
+            background-color: #2ecc71;
+            font-size: 14px;
+            padding: 10px;
+            margin-top: 0;
+        }
+        .add-btn:hover { background-color: #27ae60; }
+        .else-options label { display: inline-block; margin-right: 20px; font-weight: normal; }
+        #elseCustomValueContainer { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gerador de Queries</h1>
+
+        <div class="form-group">
+            <label for="queryType">Tipo de Query</label>
+            <select id="queryType">
+                <option value="" selected disabled>Selecione um tipo de query...</option>
+                <option value="substring">SUBSTRING</option>
+                <option value="case_when">CASE WHEN</option>
+                <option value="translate">TRANSLATE</option>
+            </select>
+        </div>
+
+        <div id="substringFields" class="query-fields">
+            <h3>Parâmetros para SUBSTRING</h3>
+            <div class="form-group">
+                <label for="subStepInput">Número da Etapa (X)</label>
+                <input type="number" id="subStepInput" placeholder="Ex: 1" min="1">
+            </div>
+            <div class="form-group">
+                <label for="subGuidInput">GUID do Campo</label>
+                <input type="text" id="subGuidInput" placeholder="Cole o GUID aqui">
+            </div>
+            <div class="form-group">
+                <label for="subStartInput">Posição Inicial (Y)</label>
+                <input type="number" id="subStartInput" placeholder="Ex: 1" min="1">
+            </div>
+            <div class="form-group">
+                <label for="subEndInput">Posição Final (Z)</label>
+                <input type="number" id="subEndInput" placeholder="Ex: 10" min="1">
+            </div>
+            <button onclick="generateQuery()">Gerar Query</button>
+            <div class="result-box">
+                <label for="subResultQuery">Query Gerada</label>
+                <textarea id="subResultQuery" readonly placeholder="Sua query aparecerá aqui..."></textarea>
+            </div>
+        </div>
+
+        <div id="caseWhenFields" class="query-fields">
+            <h3>Parâmetros para CASE WHEN</h3>
+            <div class="form-group">
+                <label for="caseStepInput">Número da Etapa (X)</label>
+                <input type="number" id="caseStepInput" placeholder="Ex: 1" min="1">
+            </div>
+            <div class="form-group">
+                <label for="caseGuidInput">GUID do Campo</label>
+                <input type="text" id="caseGuidInput" placeholder="Cole o GUID aqui">
+            </div>
+            
+            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
+
+            <label>Condições (WHEN ... THEN ...)</label>
+            <div id="whenClausesContainer">
+            </div>
+            <button onclick="addWhenClause()" class="add-btn" type="button">+ Adicionar WHEN</button>
+
+            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
+
+            <div class="form-group">
+                <label>Condição Final (ELSE)</label>
+                <div class="else-options">
+                    <label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor do campo</label>
+                    <label><input type="radio" name="elseOption" value="customValue" onchange="toggleElseInput()"> Usar outro valor</label>
+                </div>
+                <div id="elseCustomValueContainer" style="display:none;">
+                    <input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE">
+                </div>
+            </div>
+
+            <button onclick="generateQuery()">Gerar Query</button>
+            <div class="result-box">
+                <label for="caseResultQuery">Query Gerada</label>
+                <textarea id="caseResultQuery" readonly placeholder="Sua query aparecerá aqui..."></textarea>
+            </div>
+        </div>
+        
+        <div id="translateFields" class="query-fields">
+            <h3>Parâmetros para TRANSLATE</h3>
+            <div class="form-group">
+                <label for="translateStepInput">Número da Etapa (X)</label>
+                <input type="number" id="translateStepInput" placeholder="Ex: 1" min="1">
+            </div>
+            <div class="form-group">
+                <label for="translateGuidInput">GUID do Campo</label>
+                <input type="text" id="translateGuidInput" placeholder="Cole o GUID aqui">
+            </div>
+            <div class="form-group">
+                <label for="translateFromInput">Traduzir De (caracteres a serem trocados)</label>
+                <input type="text" id="translateFromInput" placeholder="Ex: ,">
+            </div>
+            <div class="form-group">
+                <label for="translateToInput">Traduzir Para (novos caracteres)</label>
+                <input type="text" id="translateToInput" placeholder="Ex: . (pode ser deixado em branco)">
+            </div>
+            <button onclick="generateQuery()">Gerar Query</button>
+            <div class="result-box">
+                <label for="translateResultQuery">Query Gerada</label>
+                <textarea id="translateResultQuery" readonly placeholder="Sua query aparecerá aqui..."></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('queryType').addEventListener('change', function() {
+            document.querySelectorAll('.query-fields').forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            document.querySelectorAll('textarea').forEach(area => area.value = '');
+
+            const selectedType = this.value;
+            if (selectedType === 'substring') {
+                document.getElementById('substringFields').style.display = 'block';
+            } else if (selectedType === 'case_when') {
+                const caseFields = document.getElementById('caseWhenFields');
+                caseFields.style.display = 'block';
+                if (document.getElementById('whenClausesContainer').childElementCount === 0) {
+                    addWhenClause();
+                }
+            } else if (selectedType === 'translate') {
+                document.getElementById('translateFields').style.display = 'block';
+            }
+        });
+
+        function addWhenClause() {
+            const container = document.getElementById('whenClausesContainer');
+            const newClause = document.createElement('div');
+            newClause.className = 'when-clause';
+            newClause.innerHTML = `
+                <input type="text" class="when-value" placeholder="Se o valor for...">
+                <input type="text" class="then-value" placeholder="Então, trocar por...">
+                <button type="button" onclick="removeWhenClause(this)">Remover</button>
+            `;
+            container.appendChild(newClause);
+        }
+
+        function removeWhenClause(buttonElement) {
+            buttonElement.parentElement.remove();
+        }
+
+        function toggleElseInput() {
+            const useCustom = document.querySelector('input[name="elseOption"][value="customValue"]').checked;
+            const customContainer = document.getElementById('elseCustomValueContainer');
+            customContainer.style.display = useCustom ? 'block' : 'none';
+        }
+
+        function generateQuery() {
+            const queryType = document.getElementById('queryType').value;
+
+            if (queryType === 'substring') {
+                const step = document.getElementById('subStepInput').value;
+                const guid = document.getElementById('subGuidInput').value;
+                const start = document.getElementById('subStartInput').value;
+                const end = document.getElementById('subEndInput').value;
+                const resultArea = document.getElementById('subResultQuery');
+
+                if (!step || !guid || !start || !end) {
+                    alert('Por favor, preencha todos os campos para gerar a query.');
+                    resultArea.value = '';
+                    return;
+                }
+                resultArea.value = `substring(ans${step}.data->'values'->>'${guid}', ${start}, ${end})`;
+
+            } else if (queryType === 'case_when') {
+                const step = document.getElementById('caseStepInput').value;
+                const guid = document.getElementById('caseGuidInput').value;
+                const resultArea = document.getElementById('caseResultQuery');
+
+                if (!step || !guid) {
+                    alert('Por favor, preencha a Etapa e o GUID.');
+                    resultArea.value = '';
+                    return;
+                }
+
+                const baseField = `ans${step}.data->'values'->>'${guid}'`;
+                let query = 'CASE\n';
+
+                const whenClauses = document.querySelectorAll('#whenClausesContainer .when-clause');
+                if (whenClauses.length === 0) {
+                    alert('Adicione pelo menos uma condição WHEN.');
+                    return;
+                }
+                
+                let allClausesValid = true;
+                whenClauses.forEach(clause => {
+                    const whenValue = clause.querySelector('.when-value').value;
+                    const thenValue = clause.querySelector('.then-value').value;
+                    if (whenValue === '' || thenValue === '') {
+                        allClausesValid = false;
+                    }
+                    query += `    WHEN ${baseField} = '${whenValue}' THEN '${thenValue}'\n`;
+                });
+                
+                if (!allClausesValid) {
+                    alert('Por favor, preencha todos os campos das cláusulas WHEN.');
+                    return;
+                }
+
+                const useCustomElse = document.querySelector('input[name="elseOption"][value="customValue"]').checked;
+                if (useCustomElse) {
+                    const elseValue = document.getElementById('elseValueInput').value;
+                    if (elseValue === '') {
+                        alert('Por favor, preencha o valor para a condição ELSE.');
+                        return;
+                    }
+                    query += `    ELSE '${elseValue}'\n`;
+                } else {
+                    query += `    ELSE ${baseField}\n`;
+                }
+
+                query += 'END';
+                resultArea.value = query;
+
+            } else if (queryType === 'translate') {
+                const step = document.getElementById('translateStepInput').value;
+                const guid = document.getElementById('translateGuidInput').value;
+                const translateFrom = document.getElementById('translateFromInput').value;
+                const translateTo = document.getElementById('translateToInput').value;
+                const resultArea = document.getElementById('translateResultQuery');
+
+                // *** INÍCIO DA MUDANÇA: Validação ajustada para permitir que o campo "Traduzir Para" seja vazio ***
+                if (!step || !guid || translateFrom === '') {
+                    alert('Por favor, preencha os campos "Etapa", "GUID" e "Traduzir De".');
+                    resultArea.value = '';
+                    return;
+                }
+                // *** FIM DA MUDANÇA ***
+                
+                const baseField = `ans${step}.data->'values'->>'${guid}'`;
+                const query = `translate(${baseField}, '${translateFrom}', '${translateTo}')`;
+                resultArea.value = query;
+            }
+        }
+    </script>
+
+</body>
+</html>
