@@ -36,14 +36,14 @@
             margin: 30px 0;
         }
         #searchInput {
-            flex: 2 1 300px; /* Flexbox para responsividade */
+            flex: 2 1 300px;
             padding: 12px 15px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
         #idocFilter {
-            flex: 1 1 200px; /* Flexbox para responsividade */
+            flex: 1 1 200px;
             padding: 12px 10px;
             font-size: 16px;
             border: 1px solid #ccc;
@@ -117,6 +117,7 @@
                 <option value="DOCUMENTACAO_IDOC_MATQM01.htm">Material - Dados de QM (MATQM01)</option>
                 <option value="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm">Endereços (ADRMAS)</option>
             </select>
+            
             <button id="searchButton" onclick="searchFields()">Pesquisar</button>
         </div>
         <div id="status"></div>
@@ -144,7 +145,6 @@
             const resultsContainer = document.getElementById('results');
             const statusContainer = document.getElementById('status');
             
-            // *** INÍCIO DA MUDANÇA: Lógica para ler o filtro ***
             const filterValue = document.getElementById('idocFilter').value;
             let filesToSearch;
 
@@ -153,7 +153,6 @@
             } else {
                 filesToSearch = [filterValue];
             }
-            // *** FIM DA MUDANÇA ***
             
             resultsContainer.innerHTML = '';
 
@@ -165,7 +164,6 @@
             statusContainer.textContent = 'Carregando e pesquisando arquivos...';
             let totalFound = 0;
 
-            // Altera a busca para usar a lista de arquivos filtrada
             const fetchPromises = filesToSearch.map(async (fileName) => {
                 try {
                     const response = await fetch(fileName);
@@ -174,9 +172,11 @@
                         return [];
                     }
 
-                    const buffer = await response.arrayBuffer(); 
-                    const decoder = new TextDecoder('windows-1252'); 
-                    const htmlText = decoder.decode(buffer);
+                    // *** INÍCIO DA CORREÇÃO ***
+                    // A forma padrão .text() é a mais confiável, pois ela respeita 
+                    // a tag <meta charset="..."> definida no próprio arquivo HTML.
+                    const htmlText = await response.text();
+                    // *** FIM DA CORREÇÃO ***
 
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlText, 'text/html');
