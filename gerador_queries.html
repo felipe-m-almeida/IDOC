@@ -75,23 +75,25 @@
             border-top: 2px solid #eee;
             padding-top: 25px;
         }
-        .when-clause {
+        .when-clause, .concat-item {
             display: flex;
             gap: 10px;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
             border: 1px dashed #ccc;
             border-radius: 5px;
+            flex-wrap: wrap;
         }
         .when-clause input { flex: 1; }
-        .when-clause button {
+        .remove-btn {
             width: auto;
             padding: 5px 10px;
             font-size: 14px;
             background-color: var(--danger-color);
+            margin-top: 0;
         }
-        .when-clause button:hover { background-color: #c0392b; }
+        .remove-btn:hover { background-color: #c0392b; }
         .add-btn {
             background-color: #2ecc71;
             font-size: 14px;
@@ -99,7 +101,7 @@
             margin-top: 0;
         }
         .add-btn:hover { background-color: #27ae60; }
-        .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; }
+        .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; cursor: pointer; }
         .hidden-container { display: none; }
     </style>
 </head>
@@ -113,8 +115,9 @@
             <select id="queryType">
                 <option value="" selected disabled>Selecione um tipo de query...</option>
                 <option value="substring">SUBSTRING</option>
-                <option value="case_when">CASE WHEN</option>
+                <option value="caseWhen">CASE WHEN</option>
                 <option value="translate">TRANSLATE</option>
+                <option value="concat">CONCAT</option>
             </select>
         </div>
 
@@ -194,22 +197,42 @@
             <button onclick="generateQuery()">Gerar Query</button>
             <div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" readonly></textarea></div>
         </div>
+        
+        <div id="concatFields" class="query-fields">
+            <h3>Parâmetros para CONCAT</h3>
+            <label>Itens para Concatenar</label>
+            <div id="concatItemsContainer">
+            </div>
+            <button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button>
+            <button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button>
+            <div class="result-box">
+                <label for="concatResultQuery">Query Gerada</label>
+                <textarea id="concatResultQuery" readonly></textarea>
+            </div>
+        </div>
     </div>
 
     <script>
+        let concatItemCounter = 0;
+
         document.getElementById('queryType').addEventListener('change', function() {
             document.querySelectorAll('.query-fields').forEach(div => div.style.display = 'none');
             document.querySelectorAll('textarea').forEach(area => area.value = '');
 
             const selectedType = this.value;
-            if (selectedType === 'substring') {
-                document.getElementById('substringFields').style.display = 'block';
-            } else if (selectedType === 'case_when') {
-                const caseFields = document.getElementById('caseWhenFields');
-                caseFields.style.display = 'block';
-                if (document.getElementById('whenClausesContainer').childElementCount === 0) addWhenClause();
-            } else if (selectedType === 'translate') {
-                document.getElementById('translateFields').style.display = 'block';
+            // CORREÇÃO: Constrói o ID usando a convenção camelCase para 'caseWhen'
+            const divId = selectedType.replace('_', '') + 'Fields';
+            const fieldsDiv = document.getElementById(divId);
+            
+            if (fieldsDiv) {
+                fieldsDiv.style.display = 'block';
+            }
+
+            if (selectedType === 'caseWhen' && document.getElementById('whenClausesContainer').childElementCount === 0) {
+                addWhenClause();
+            } else if (selectedType === 'concat' && document.getElementById('concatItemsContainer').childElementCount === 0) {
+                addConcatItem();
+                addConcatItem();
             }
         });
 
@@ -223,17 +246,61 @@
             const container = document.getElementById('whenClausesContainer');
             const newClause = document.createElement('div');
             newClause.className = 'when-clause';
-            newClause.innerHTML = `<input type="text" class="when-value" placeholder="Se o valor for..."><input type="text" class="then-value" placeholder="Então, trocar por..."><button type="button" onclick="removeWhenClause(this)">Remover</button>`;
+            newClause.innerHTML = `<input type="text" class="when-value" placeholder="Se o valor for..."><input type="text" class="then-value" placeholder="Então, trocar por..."><button type="button" class="remove-btn" onclick="removeClause(this)">Remover</button>`;
             container.appendChild(newClause);
         }
 
-        function removeWhenClause(buttonElement) {
+        function removeClause(buttonElement) {
             buttonElement.parentElement.remove();
         }
 
         function toggleElseInput() {
             const useCustom = document.querySelector('input[name="elseOption"][value="customValue"]').checked;
             document.getElementById('elseCustomValueContainer').style.display = useCustom ? 'block' : 'none';
+        }
+        
+        function addConcatItem() {
+            concatItemCounter++;
+            const container = document.getElementById('concatItemsContainer');
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'concat-item';
+            itemDiv.innerHTML = `
+                <div style="width: 100%; display: flex; flex-direction: column; gap: 10px;">
+                    <div class="radio-group">
+                        <label><input type="radio" name="concatType_${concatItemCounter}" value="guid" checked onchange="toggleConcatItemFields(this)"> GUID</label>
+                        <label><input type="radio" name="concatType_${concatItemCounter}" value="variable" onchange="toggleConcatItemFields(this)"> Variável</label>
+                        <label><input type="radio" name="concatType_${concatItemCounter}" value="value" onchange="toggleConcatItemFields(this)"> Valor Fixo</label>
+                    </div>
+                    <div class="guid-inputs" style="display: flex; gap: 10px;">
+                        <input type="text" class="step-input" placeholder="Etapa (X)" style="flex:1;">
+                        <input type="text" class="guid-input" placeholder="GUID do Campo" style="flex:2;">
+                    </div>
+                    <div class="variable-inputs hidden-container">
+                        <input type="text" class="variable-input" placeholder="Nome da Variável">
+                    </div>
+                    <div class="value-inputs hidden-container">
+                        <input type="text" class="value-input" placeholder="Valor Fixo (Ex: um espaço ou um traço)">
+                    </div>
+                </div>
+                <button type="button" class="remove-btn" onclick="removeClause(this)">Remover</button>
+            `;
+            container.appendChild(itemDiv);
+            toggleConcatItemFields(itemDiv.querySelector('input[type="radio"]:checked'));
+        }
+
+        function toggleConcatItemFields(radioElement) {
+            const itemContainer = radioElement.closest('.concat-item');
+            const guidInputs = itemContainer.querySelector('.guid-inputs');
+            const variableInputs = itemContainer.querySelector('.variable-inputs');
+            const valueInputs = itemContainer.querySelector('.value-inputs');
+
+            guidInputs.style.display = 'none';
+            variableInputs.style.display = 'none';
+            valueInputs.style.display = 'none';
+
+            if (radioElement.value === 'guid') guidInputs.style.display = 'flex';
+            else if (radioElement.value === 'variable') variableInputs.style.display = 'block';
+            else if (radioElement.value === 'value') valueInputs.style.display = 'block';
         }
 
         function getBaseField(prefix) {
@@ -243,7 +310,7 @@
                 const guid = document.getElementById(`${prefix}GuidInput`).value;
                 if (!step || !guid) return null;
                 return `ans${step}.data->'values'->>'${guid}'`;
-            } else { // variable
+            } else {
                 const variableName = document.getElementById(`${prefix}VariableInput`).value;
                 if (!variableName) return null;
                 return variableName;
@@ -251,30 +318,31 @@
         }
 
         function generateQuery() {
-            const queryType = document.getElementById('queryType').value;
+            const queryType = document.getElementById('queryType').value.replace('_', '');
+            let resultArea, baseField, query;
 
             if (queryType === 'substring') {
-                const resultArea = document.getElementById('subResultQuery');
-                const baseField = getBaseField('sub');
+                resultArea = document.getElementById('subResultQuery');
+                resultArea.value = '';
+                baseField = getBaseField('sub');
                 const start = document.getElementById('subStartInput').value;
                 const end = document.getElementById('subEndInput').value;
                 if (!baseField || !start || !end) {
                     alert('Por favor, preencha todos os campos para gerar a query.');
-                    resultArea.value = '';
                     return;
                 }
                 resultArea.value = `substring(${baseField}, ${start}, ${end})`;
 
-            } else if (queryType === 'case_when') {
-                const resultArea = document.getElementById('caseResultQuery');
-                const baseField = getBaseField('case');
+            } else if (queryType === 'caseWhen') {
+                resultArea = document.getElementById('caseResultQuery');
+                resultArea.value = '';
+                baseField = getBaseField('case');
                 if (!baseField) {
                     alert('Por favor, preencha os campos de origem (GUID ou Variável).');
-                    resultArea.value = '';
                     return;
                 }
 
-                let query = 'CASE\n';
+                query = 'CASE\n';
                 const whenClauses = document.querySelectorAll('#whenClausesContainer .when-clause');
                 if (whenClauses.length === 0) { alert('Adicione pelo menos uma condição WHEN.'); return; }
                 
@@ -299,16 +367,54 @@
                 resultArea.value = query;
 
             } else if (queryType === 'translate') {
-                const resultArea = document.getElementById('translateResultQuery');
-                const baseField = getBaseField('translate');
+                resultArea = document.getElementById('translateResultQuery');
+                resultArea.value = '';
+                baseField = getBaseField('translate');
                 const translateFrom = document.getElementById('translateFromInput').value;
                 const translateTo = document.getElementById('translateToInput').value;
                 if (!baseField || translateFrom === '') {
                     alert('Por favor, preencha o campo de origem e o campo "Traduzir De".');
-                    resultArea.value = '';
                     return;
                 }
                 resultArea.value = `translate(${baseField}, '${translateFrom}', '${translateTo}')`;
+
+            } else if (queryType === 'concat') {
+                resultArea = document.getElementById('concatResultQuery');
+                resultArea.value = '';
+                const itemsToConcat = [];
+                let allItemsValid = true;
+
+                document.querySelectorAll('#concatItemsContainer .concat-item').forEach(item => {
+                    if(!allItemsValid) return;
+                    const sourceType = item.querySelector('input[type="radio"]:checked').value;
+                    let currentItem = '';
+
+                    if (sourceType === 'guid') {
+                        const step = item.querySelector('.step-input').value;
+                        const guid = item.querySelector('.guid-input').value;
+                        if (!step || !guid) allItemsValid = false;
+                        else currentItem = `ans${step}.data->'values'->>'${guid}'`;
+                    } else if (sourceType === 'variable') {
+                        const variableName = item.querySelector('.variable-input').value;
+                        if (!variableName) allItemsValid = false;
+                        else currentItem = variableName;
+                    } else if (sourceType === 'value') {
+                        const fixedValue = item.querySelector('.value-input').value;
+                        currentItem = `'${fixedValue}'`;
+                    }
+                    if(allItemsValid) itemsToConcat.push(currentItem);
+                });
+
+                if (!allItemsValid) {
+                    alert('Por favor, preencha todos os campos dos itens de concatenação.');
+                    return;
+                }
+                if (itemsToConcat.length < 2) {
+                    alert('Adicione pelo menos dois itens para concatenar.');
+                    return;
+                }
+
+                resultArea.value = `CONCAT(${itemsToConcat.join(', ')})`;
             }
         }
     </script>
