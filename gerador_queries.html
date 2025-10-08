@@ -22,7 +22,7 @@
         }
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             margin: 20px auto;
             background-color: var(--card-bg);
             padding: 30px 40px;
@@ -85,13 +85,13 @@
             border-radius: 5px;
             flex-wrap: wrap;
         }
-        .when-clause input { flex: 1; }
         .remove-btn {
             width: auto;
             padding: 5px 10px;
             font-size: 14px;
             background-color: var(--danger-color);
             margin-top: 0;
+            align-self: center;
         }
         .remove-btn:hover { background-color: #c0392b; }
         .add-btn {
@@ -103,6 +103,14 @@
         .add-btn:hover { background-color: #27ae60; }
         .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; cursor: pointer; }
         .hidden-container { display: none; }
+        .clause-section { flex: 1; min-width: 280px; }
+        .clause-section .radio-group { margin-bottom: 10px; }
+        .flex-container { display: flex; gap: 10px; }
+        .nested-group {
+            border-left: 3px solid #eee;
+            padding-left: 15px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +125,7 @@
                 <option value="substring">SUBSTRING</option>
                 <option value="caseWhen">CASE WHEN</option>
                 <option value="translate">TRANSLATE</option>
-                <option value="concat">CONCAT</option>
+                <option value="concat">CONCAT (||)</option>
             </select>
         </div>
 
@@ -146,7 +154,7 @@
         <div id="caseWhenFields" class="query-fields">
             <h3>Parâmetros para CASE WHEN</h3>
              <div class="form-group">
-                <label>Qual o tipo de campo de origem?</label>
+                <label>Campo Principal (a ser comparado)</label>
                 <div class="radio-group">
                     <label><input type="radio" name="caseSourceType" value="guid" checked onchange="toggleSourceFields('case')"> GUID</label>
                     <label><input type="radio" name="caseSourceType" value="variable" onchange="toggleSourceFields('case')"> Variável</label>
@@ -159,18 +167,48 @@
             <div id="caseVariableContainer" class="hidden-container">
                 <div class="form-group"><label for="caseVariableInput">Nome da Variável</label><input type="text" id="caseVariableInput" placeholder="Ex: minha_variavel"></div>
             </div>
+            
             <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
             <label>Condições (WHEN ... THEN ...)</label>
             <div id="whenClausesContainer"></div>
             <button onclick="addWhenClause()" class="add-btn" type="button">+ Adicionar WHEN</button>
             <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
+
             <div class="form-group">
                 <label>Condição Final (ELSE)</label>
                 <div class="radio-group else-options">
-                    <label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor do campo</label>
+                    <label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor</label>
                     <label><input type="radio" name="elseOption" value="customValue" onchange="toggleElseInput()"> Usar outro valor</label>
+                    <label><input type="radio" name="elseOption" value="guid" onchange="toggleElseInput()"> Usar Outro Campo</label>
+                    <label><input type="radio" name="elseOption" value="substring" onchange="toggleElseInput()"> Usar Substring</label>
                 </div>
-                <div id="elseCustomValueContainer" class="hidden-container"><input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE"></div>
+                <div id="elseCustomValueContainer" class="hidden-container"><input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE (pode ser vazio)"></div>
+                <div id="elseGuidContainer" class="hidden-container">
+                    <div class="flex-container">
+                        <input type="text" id="elseStepInput" placeholder="Etapa" style="flex:1;">
+                        <input type="text" id="elseGuidInput" placeholder="GUID" style="flex:2;">
+                    </div>
+                </div>
+                <div id="elseSubstringContainer" class="hidden-container">
+                    <div class="nested-group">
+                        <label style="font-size: 0.9em; font-weight: normal;">Origem do Substring:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="elseSubstringSource" value="guid" checked onchange="toggleSubstringSourceFields(this, 'else')"> GUID</label>
+                            <label><input type="radio" name="elseSubstringSource" value="variable" onchange="toggleSubstringSourceFields(this, 'else')"> Variável</label>
+                        </div>
+                        <div class="else-substring-guid-inputs flex-container">
+                            <input type="text" id="elseSubstringStep" placeholder="Etapa" style="flex:1">
+                            <input type="text" id="elseSubstringGuid" placeholder="GUID" style="flex:2">
+                        </div>
+                        <div class="else-substring-variable-inputs hidden-container">
+                            <input type="text" id="elseSubstringVariable" placeholder="Nome da Variável">
+                        </div>
+                        <div class="flex-container" style="margin-top:10px;">
+                            <input type="number" id="elseSubstringStart" placeholder="Início" min="1">
+                            <input type="number" id="elseSubstringEnd" placeholder="Fim" min="1">
+                        </div>
+                    </div>
+                </div>
             </div>
             <button onclick="generateQuery()">Gerar Query</button>
             <div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" readonly></textarea></div>
@@ -199,10 +237,9 @@
         </div>
         
         <div id="concatFields" class="query-fields">
-            <h3>Parâmetros para CONCAT</h3>
+            <h3>Parâmetros para CONCAT (||)</h3>
             <label>Itens para Concatenar</label>
-            <div id="concatItemsContainer">
-            </div>
+            <div id="concatItemsContainer"></div>
             <button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button>
             <button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button>
             <div class="result-box">
@@ -214,15 +251,14 @@
 
     <script>
         let concatItemCounter = 0;
+        let whenClauseCounter = 0;
 
         document.getElementById('queryType').addEventListener('change', function() {
             document.querySelectorAll('.query-fields').forEach(div => div.style.display = 'none');
             document.querySelectorAll('textarea').forEach(area => area.value = '');
 
             const selectedType = this.value;
-            // CORREÇÃO: Constrói o ID usando a convenção camelCase para 'caseWhen'
-            const divId = selectedType.replace('_', '') + 'Fields';
-            const fieldsDiv = document.getElementById(divId);
+            const fieldsDiv = document.getElementById(selectedType + 'Fields');
             
             if (fieldsDiv) {
                 fieldsDiv.style.display = 'block';
@@ -243,20 +279,92 @@
         }
 
         function addWhenClause() {
+            whenClauseCounter++;
             const container = document.getElementById('whenClausesContainer');
             const newClause = document.createElement('div');
             newClause.className = 'when-clause';
-            newClause.innerHTML = `<input type="text" class="when-value" placeholder="Se o valor for..."><input type="text" class="then-value" placeholder="Então, trocar por..."><button type="button" class="remove-btn" onclick="removeClause(this)">Remover</button>`;
+            newClause.innerHTML = `
+                <div class="clause-section">
+                    <label>Comparar com (WHEN)</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="whenType_${whenClauseCounter}" value="value" checked onchange="toggleWhenThenFields(this)"> Valor Fixo</label>
+                        <label><input type="radio" name="whenType_${whenClauseCounter}" value="guid" onchange="toggleWhenThenFields(this)"> Outro Campo</label>
+                    </div>
+                    <div class="when-value-container"><input type="text" class="when-input-value" placeholder="Se o valor for..."></div>
+                    <div class="when-guid-container hidden-container flex-container">
+                        <input type="text" class="when-input-step" placeholder="Etapa" style="flex:1;"><input type="text" class="when-input-guid" placeholder="GUID" style="flex:2;">
+                    </div>
+                </div>
+                <div class="clause-section">
+                    <label>Resultado (THEN)</label>
+                     <div class="radio-group">
+                        <label><input type="radio" name="thenType_${whenClauseCounter}" value="value" checked onchange="toggleWhenThenFields(this)"> Valor Fixo</label>
+                        <label><input type="radio" name="thenType_${whenClauseCounter}" value="guid" onchange="toggleWhenThenFields(this)"> Outro Campo</label>
+                        <label><input type="radio" name="thenType_${whenClauseCounter}" value="substring" onchange="toggleWhenThenFields(this)"> Substring</label>
+                    </div>
+                    <div class="then-value-container"><input type="text" class="then-input-value" placeholder="Então, trocar por..."></div>
+                    <div class="then-guid-container hidden-container flex-container">
+                        <input type="text" class="then-input-step" placeholder="Etapa" style="flex:1;"><input type="text" class="then-input-guid" placeholder="GUID" style="flex:2;">
+                    </div>
+                    <div class="then-substring-container hidden-container">
+                        <div class="nested-group">
+                            <label style="font-size: 0.9em; font-weight: normal;">Origem do Substring:</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="thenSubstringSource_${whenClauseCounter}" value="guid" checked onchange="toggleSubstringSourceFields(this, 'then')"> GUID</label>
+                                <label><input type="radio" name="thenSubstringSource_${whenClauseCounter}" value="variable" onchange="toggleSubstringSourceFields(this, 'then')"> Variável</label>
+                            </div>
+                            <div class="then-substring-guid-inputs flex-container">
+                                <input type="text" class="then-substring-step" placeholder="Etapa" style="flex:1"><input type="text" class="then-substring-guid" placeholder="GUID" style="flex:2">
+                            </div>
+                            <div class="then-substring-variable-inputs hidden-container"><input type="text" class="then-substring-variable" placeholder="Nome da Variável"></div>
+                            <div class="flex-container" style="margin-top:10px;"><input type="number" class="then-substring-start" placeholder="Início" min="1"><input type="number" class="then-substring-end" placeholder="Fim" min="1"></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="remove-btn" onclick="removeClause(this)">Remover</button>
+            `;
             container.appendChild(newClause);
+            
+            newClause.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                if (radio.name.startsWith('whenType_') || radio.name.startsWith('thenType_')) {
+                    toggleWhenThenFields(radio);
+                } else if (radio.name.startsWith('thenSubstringSource_')) {
+                    toggleSubstringSourceFields(radio, 'then');
+                }
+            });
+        }
+
+        function toggleWhenThenFields(radioElement) {
+            const section = radioElement.closest('.clause-section');
+            const selectedValue = radioElement.value;
+            
+            section.querySelectorAll('.when-value-container, .when-guid-container, .then-value-container, .then-guid-container, .then-substring-container').forEach(el => {
+                if(el) el.style.display = 'none';
+            });
+            
+            const targetClass = `.${radioElement.name.split('_')[0]}-${selectedValue}-container`;
+            const target = section.querySelector(targetClass);
+            if (target) {
+                target.style.display = selectedValue === 'guid' ? 'flex' : 'block';
+            }
+        }
+        
+        function toggleSubstringSourceFields(radioElement, prefix) {
+            const subContainer = radioElement.closest('.nested-group');
+            const isGuid = radioElement.value === 'guid';
+            subContainer.querySelector(`.${prefix}-substring-guid-inputs`).style.display = isGuid ? 'flex' : 'none';
+            subContainer.querySelector(`.${prefix}-substring-variable-inputs`).style.display = isGuid ? 'none' : 'block';
         }
 
         function removeClause(buttonElement) {
-            buttonElement.parentElement.remove();
+            buttonElement.closest('.when-clause, .concat-item').remove();
         }
 
         function toggleElseInput() {
-            const useCustom = document.querySelector('input[name="elseOption"][value="customValue"]').checked;
-            document.getElementById('elseCustomValueContainer').style.display = useCustom ? 'block' : 'none';
+            const elseChoice = document.querySelector('input[name="elseOption"]:checked').value;
+            document.getElementById('elseCustomValueContainer').style.display = elseChoice === 'customValue' ? 'block' : 'none';
+            document.getElementById('elseGuidContainer').style.display = elseChoice === 'guid' ? 'block' : 'none';
+            document.getElementById('elseSubstringContainer').style.display = elseChoice === 'substring' ? 'block' : 'none';
         }
         
         function addConcatItem() {
@@ -271,7 +379,7 @@
                         <label><input type="radio" name="concatType_${concatItemCounter}" value="variable" onchange="toggleConcatItemFields(this)"> Variável</label>
                         <label><input type="radio" name="concatType_${concatItemCounter}" value="value" onchange="toggleConcatItemFields(this)"> Valor Fixo</label>
                     </div>
-                    <div class="guid-inputs" style="display: flex; gap: 10px;">
+                    <div class="guid-inputs flex-container">
                         <input type="text" class="step-input" placeholder="Etapa (X)" style="flex:1;">
                         <input type="text" class="guid-input" placeholder="GUID do Campo" style="flex:2;">
                     </div>
@@ -290,17 +398,11 @@
 
         function toggleConcatItemFields(radioElement) {
             const itemContainer = radioElement.closest('.concat-item');
-            const guidInputs = itemContainer.querySelector('.guid-inputs');
-            const variableInputs = itemContainer.querySelector('.variable-inputs');
-            const valueInputs = itemContainer.querySelector('.value-inputs');
-
-            guidInputs.style.display = 'none';
-            variableInputs.style.display = 'none';
-            valueInputs.style.display = 'none';
-
-            if (radioElement.value === 'guid') guidInputs.style.display = 'flex';
-            else if (radioElement.value === 'variable') variableInputs.style.display = 'block';
-            else if (radioElement.value === 'value') valueInputs.style.display = 'block';
+            itemContainer.querySelector('.guid-inputs').style.display = 'none';
+            itemContainer.querySelector('.variable-inputs').style.display = 'none';
+            itemContainer.querySelector('.value-inputs').style.display = 'none';
+            const classToShow = `.${radioElement.value}-inputs`;
+            itemContainer.querySelector(classToShow).style.display = radioElement.value === 'guid' ? 'flex' : 'block';
         }
 
         function getBaseField(prefix) {
@@ -318,7 +420,7 @@
         }
 
         function generateQuery() {
-            const queryType = document.getElementById('queryType').value.replace('_', '');
+            const queryType = document.getElementById('queryType').value;
             let resultArea, baseField, query;
 
             if (queryType === 'substring') {
@@ -328,8 +430,7 @@
                 const start = document.getElementById('subStartInput').value;
                 const end = document.getElementById('subEndInput').value;
                 if (!baseField || !start || !end) {
-                    alert('Por favor, preencha todos os campos para gerar a query.');
-                    return;
+                    alert('Por favor, preencha todos os campos para gerar a query.'); return;
                 }
                 resultArea.value = `substring(${baseField}, ${start}, ${end})`;
 
@@ -338,29 +439,93 @@
                 resultArea.value = '';
                 baseField = getBaseField('case');
                 if (!baseField) {
-                    alert('Por favor, preencha os campos de origem (GUID ou Variável).');
-                    return;
+                    alert('Por favor, preencha os campos de origem do campo principal (GUID ou Variável).'); return;
                 }
-
                 query = 'CASE\n';
                 const whenClauses = document.querySelectorAll('#whenClausesContainer .when-clause');
                 if (whenClauses.length === 0) { alert('Adicione pelo menos uma condição WHEN.'); return; }
                 
                 let allClausesValid = true;
                 whenClauses.forEach(clause => {
-                    const whenValue = clause.querySelector('.when-value').value;
-                    const thenValue = clause.querySelector('.then-value').value;
-                    if (whenValue === '' || thenValue === '') allClausesValid = false;
-                    query += `    WHEN ${baseField} = '${whenValue}' THEN '${thenValue}'\n`;
-                });
-                if (!allClausesValid) { alert('Por favor, preencha todos os campos das cláusulas WHEN.'); return; }
+                    if (!allClausesValid) return;
+                    let whenPart = '', thenPart = '';
 
-                const useCustomElse = document.querySelector('input[name="elseOption"][value="customValue"]').checked;
-                if (useCustomElse) {
-                    const elseValue = document.getElementById('elseValueInput').value;
-                    if (elseValue === '') { alert('Por favor, preencha o valor para a condição ELSE.'); return; }
-                    query += `    ELSE '${elseValue}'\n`;
-                } else {
+                    const whenType = clause.querySelector('input[name^="whenType_"]:checked').value;
+                    if (whenType === 'value') {
+                        whenPart = `'${clause.querySelector('.when-input-value').value}'`;
+                    } else {
+                        const step = clause.querySelector('.when-input-step').value;
+                        const guid = clause.querySelector('.when-input-guid').value;
+                        if (!step || !guid) { allClausesValid = false; }
+                        else { whenPart = `ans${step}.data->'values'->>'${guid}'`; }
+                    }
+
+                    const thenType = clause.querySelector('input[name^="thenType_"]:checked').value;
+                    if (thenType === 'value') {
+                        thenPart = `'${clause.querySelector('.then-input-value').value}'`;
+                    } else if (thenType === 'guid') {
+                        const step = clause.querySelector('.then-input-step').value;
+                        const guid = clause.querySelector('.then-input-guid').value;
+                        if (!step || !guid) { allClausesValid = false; }
+                        else { thenPart = `ans${step}.data->'values'->>'${guid}'`; }
+                    } else if (thenType === 'substring') {
+                        const subContainer = clause.querySelector('.then-substring-container');
+                        const subSourceType = subContainer.querySelector('input[name^="thenSubstringSource_"]:checked').value;
+                        let subSourceField = '';
+                        if (subSourceType === 'guid') {
+                            const step = subContainer.querySelector('.then-substring-step').value;
+                            const guid = subContainer.querySelector('.then-substring-guid').value;
+                            if (!step || !guid) { allClausesValid = false; }
+                            else { subSourceField = `ans${step}.data->'values'->>'${guid}'`; }
+                        } else {
+                            const variableName = subContainer.querySelector('.then-substring-variable').value;
+                            if (!variableName) { allClausesValid = false; }
+                            else { subSourceField = variableName; }
+                        }
+                        const start = subContainer.querySelector('.then-substring-start').value;
+                        const end = subContainer.querySelector('.then-substring-end').value;
+                        if (!start || !end) { allClausesValid = false; }
+                        if (allClausesValid) { thenPart = `substring(${subSourceField}, ${start}, ${end})`; }
+                    }
+
+                    if (allClausesValid) { query += `    WHEN ${baseField} = ${whenPart} THEN ${thenPart}\n`; }
+                });
+                if (!allClausesValid) { alert('Por favor, preencha todos os campos obrigatórios das cláusulas WHEN e THEN.'); return; }
+
+                const elseChoice = document.querySelector('input[name="elseOption"]:checked').value;
+                if (elseChoice === 'customValue') {
+                    query += `    ELSE '${document.getElementById('elseValueInput').value}'\n`;
+                } else if (elseChoice === 'guid') {
+                    const step = document.getElementById('elseStepInput').value;
+                    const guid = document.getElementById('elseGuidInput').value;
+                    if (!step || !guid) { alert('Por favor, preencha a Etapa e o GUID para a condição ELSE.'); return; }
+                    query += `    ELSE ans${step}.data->'values'->>'${guid}'\n`;
+                } else if (elseChoice === 'substring') {
+                    const subContainer = document.getElementById('elseSubstringContainer');
+                    const subSourceType = subContainer.querySelector('input[name="elseSubstringSource"]:checked').value;
+                    let subSourceField = '';
+                    let subIsValid = true;
+                    if (subSourceType === 'guid') {
+                        const step = subContainer.querySelector('#elseSubstringStep').value;
+                        const guid = subContainer.querySelector('#elseSubstringGuid').value;
+                        if (!step || !guid) { subIsValid = false; }
+                        else { subSourceField = `ans${step}.data->'values'->>'${guid}'`; }
+                    } else { // variable
+                        const variableName = subContainer.querySelector('#elseSubstringVariable').value;
+                        if (!variableName) { subIsValid = false; }
+                        else { subSourceField = variableName; }
+                    }
+                    const start = subContainer.querySelector('#elseSubstringStart').value;
+                    const end = subContainer.querySelector('#elseSubstringEnd').value;
+                    if (!start || !end) { subIsValid = false; }
+                    
+                    if (subIsValid) {
+                        query += `    ELSE substring(${subSourceField}, ${start}, ${end})\n`;
+                    } else {
+                        alert('Por favor, preencha todos os campos do Substring na condição ELSE.'); return;
+                    }
+                }
+                else { // sameField
                     query += `    ELSE ${baseField}\n`;
                 }
                 query += 'END';
@@ -373,8 +538,7 @@
                 const translateFrom = document.getElementById('translateFromInput').value;
                 const translateTo = document.getElementById('translateToInput').value;
                 if (!baseField || translateFrom === '') {
-                    alert('Por favor, preencha o campo de origem e o campo "Traduzir De".');
-                    return;
+                    alert('Por favor, preencha o campo de origem e o campo "Traduzir De".'); return;
                 }
                 resultArea.value = `translate(${baseField}, '${translateFrom}', '${translateTo}')`;
 
@@ -404,20 +568,14 @@
                     }
                     if(allItemsValid) itemsToConcat.push(currentItem);
                 });
-
-                if (!allItemsValid) {
-                    alert('Por favor, preencha todos os campos dos itens de concatenação.');
-                    return;
+                if (!allItemsValid) { alert('Por favor, preencha todos os campos dos itens de concatenação.'); return; }
+                if (itemsToConcat.length < 2) { 
+                     alert('Adicione pelo menos dois itens para concatenar.'); 
+                     return;
                 }
-                if (itemsToConcat.length < 2) {
-                    alert('Adicione pelo menos dois itens para concatenar.');
-                    return;
-                }
-
-                resultArea.value = `CONCAT(${itemsToConcat.join(', ')})`;
+                resultArea.value = itemsToConcat.join(' || ');
             }
         }
     </script>
-
 </body>
 </html>
