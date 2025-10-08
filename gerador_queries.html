@@ -256,19 +256,13 @@
         document.getElementById('queryType').addEventListener('change', function() {
             document.querySelectorAll('.query-fields').forEach(div => div.style.display = 'none');
             document.querySelectorAll('textarea').forEach(area => area.value = '');
-
             const selectedType = this.value;
             const fieldsDiv = document.getElementById(selectedType + 'Fields');
-            
-            if (fieldsDiv) {
-                fieldsDiv.style.display = 'block';
-            }
-
+            if (fieldsDiv) { fieldsDiv.style.display = 'block'; }
             if (selectedType === 'caseWhen' && document.getElementById('whenClausesContainer').childElementCount === 0) {
                 addWhenClause();
             } else if (selectedType === 'concat' && document.getElementById('concatItemsContainer').childElementCount === 0) {
-                addConcatItem();
-                addConcatItem();
+                addConcatItem(); addConcatItem();
             }
         });
 
@@ -338,14 +332,20 @@
             const section = radioElement.closest('.clause-section');
             const selectedValue = radioElement.value;
             
+            // Esconde todos os containers de input da seção
             section.querySelectorAll('.when-value-container, .when-guid-container, .then-value-container, .then-guid-container, .then-substring-container').forEach(el => {
-                if(el) el.style.display = 'none';
+                if (el) el.style.display = 'none';
             });
             
-            const targetClass = `.${radioElement.name.split('_')[0]}-${selectedValue}-container`;
+            // *** INÍCIO DA CORREÇÃO ***
+            // Constrói o nome da classe alvo corretamente
+            const prefix = radioElement.name.includes('when') ? 'when' : 'then';
+            const targetClass = `.${prefix}-${selectedValue}-container`;
+            // *** FIM DA CORREÇÃO ***
+
             const target = section.querySelector(targetClass);
             if (target) {
-                target.style.display = selectedValue === 'guid' ? 'flex' : 'block';
+                target.style.display = (selectedValue === 'guid' || target.classList.contains('flex-container')) ? 'flex' : 'block';
             }
         }
         
