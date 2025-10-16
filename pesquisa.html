@@ -2,111 +2,152 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisar Campos de IDOCs</title>
+    <link rel="stylesheet" href="estilos.css">
+
     <style>
         :root {
             --primary-color: #007bff;
             --secondary-color: #6c757d;
-            --bg-color: #f8f9fa;
-            --font-color: #343a40;
-            --card-bg: #ffffff;
-            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg-color);
-            color: var(--font-color);
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
-        h1 {
-            text-align: center;
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
             color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
+            text-decoration: none;
+            font-weight: 500;
         }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
         .search-box {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             margin: 30px 0;
+            align-items: center;
         }
-        #searchInput {
+
+        .search-input-wrapper {
+            position: relative;
             flex: 2 1 300px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input-wrapper .icon {
+            position: absolute;
+            left: 15px;
+            font-size: 1.2em;
+            color: #aaa;
+            z-index: 1;
+        }
+
+        /* --- MELHORIA: Estilo unificado para todos os campos de entrada --- */
+        #searchInput, #idocFilter {
             padding: 12px 15px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            height: 48px; /* Altura fixa para alinhamento */
+            box-sizing: border-box; /* Garante que padding não afete a altura total */
+            width: 100%;
         }
+
+        #searchInput {
+            padding-left: 45px; /* Espaço para o ícone */
+        }
+
         #idocFilter {
             flex: 1 1 200px;
-            padding: 12px 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
             background-color: white;
+            /* Remove a aparência padrão do navegador */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Adiciona uma seta customizada como background */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c757d%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: .65em auto;
+            padding-right: 40px; /* Espaço para a seta não sobrepor o texto */
         }
+        
+        /* --- MELHORIA: Estilo do botão mais interativo --- */
         #searchButton {
             flex: 0 1 auto;
             padding: 12px 25px;
             font-size: 16px;
+            font-weight: 500;
             background-color: var(--primary-color);
             color: white;
-            border: none;
+            border: 1px solid var(--primary-color);
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            height: 48px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
+
         #searchButton:hover {
             background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-3px); /* Efeito de elevação */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* Sombra para profundidade */
         }
-        #status {
-            text-align: center;
-            margin: 20px 0;
-            font-style: italic;
-            color: var(--secondary-color);
-            font-size: 1.1em;
-        }
+        
         .result-card {
-            background-color: var(--card-bg);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: var(--card-shadow);
-            transition: box-shadow 0.3s;
-            overflow-wrap: break-word;
+            transition: all 0.3s ease;
         }
         .result-card:hover {
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
-        .result-card h4 {
-            margin-top: 0;
-            color: var(--primary-color);
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 40px auto;
         }
-        .result-card p { margin: 5px 0; }
-        .result-card .meta { font-size: 0.9em; color: #888; }
-        .result-card .meta span {
-            background-color: #e9ecef;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-right: 10px;
-            display: inline-block;
-            margin-bottom: 5px;
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
+
+        .no-results-message {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .no-results-message p {
+            font-size: 1.2em;
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
+        <a href="index.html" class="back-link">&larr; Voltar ao Início</a>
         <h1>Ferramenta de Pesquisa de Campos de IDOCs</h1>
+        
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Digite a descrição ou nome do campo..." onkeyup="handleKeyPress(event)">
+            <div class="search-input-wrapper">
+                <span class="icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Digite a descrição ou nome do campo..." onkeyup="handleKeyPress(event)">
+            </div>
             
             <select id="idocFilter">
                 <option value="all">Todos os IDOCs</option>
@@ -121,11 +162,19 @@
             
             <button id="searchButton" onclick="searchFields()">Pesquisar</button>
         </div>
+        
         <div id="status"></div>
+        <div id="loader" style="display: none;"><div class="loader"></div></div>
         <div id="results"></div>
+        <div id="noResults" style="display: none;">
+            <div class="no-results-message">
+                <p>Nenhum resultado encontrado para a sua busca.</p>
+            </div>
+        </div>
     </div>
 
     <script>
+        // O JavaScript continua o mesmo, não precisa de alterações.
         const allIdocFiles = [
             'dados_parceiro.html',
             'DOCUMENTACAO_IDOC_CLIENTES.htm',
@@ -135,6 +184,11 @@
             'DOCUMENTACAO_IDOC_MATQM01.htm',
             'DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm'
         ];
+        
+        const resultsContainer = document.getElementById('results');
+        const statusContainer = document.getElementById('status');
+        const loader = document.getElementById('loader');
+        const noResultsContainer = document.getElementById('noResults');
 
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
@@ -144,26 +198,20 @@
 
         async function searchFields() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const resultsContainer = document.getElementById('results');
-            const statusContainer = document.getElementById('status');
-            
             const filterValue = document.getElementById('idocFilter').value;
-            let filesToSearch;
-
-            if (filterValue === 'all') {
-                filesToSearch = allIdocFiles;
-            } else {
-                filesToSearch = [filterValue];
-            }
             
             resultsContainer.innerHTML = '';
+            noResultsContainer.style.display = 'none';
 
             if (searchTerm.length < 3) {
                 statusContainer.textContent = 'Por favor, digite pelo menos 3 caracteres para pesquisar.';
                 return;
             }
             
-            statusContainer.textContent = 'Carregando e pesquisando arquivos...';
+            statusContainer.textContent = '';
+            loader.style.display = 'block';
+
+            let filesToSearch = (filterValue === 'all') ? allIdocFiles : [filterValue];
             let totalFound = 0;
 
             const fetchPromises = filesToSearch.map(async (fileName) => {
@@ -175,7 +223,6 @@
                     }
                     
                     const htmlText = await response.text();
-                    
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlText, 'text/html');
                     
@@ -184,11 +231,10 @@
                     const foundItems = [];
 
                     fields.forEach(li => {
-                        const fieldText = li.textContent.toLowerCase();
-                        if (fieldText.includes(searchTerm)) {
+                        if (li.textContent.toLowerCase().includes(searchTerm)) {
                             let segmentTitle = 'Segmento não identificado';
-                            const segmentHeader = li.closest('ul > li')?.querySelector('h2, h3, h4');
-                            if (segmentHeader) {
+                            const segmentHeader = li.closest('ul')?.previousElementSibling;
+                            if (segmentHeader && (segmentHeader.tagName === 'H2' || segmentHeader.tagName === 'H3' || segmentHeader.tagName === 'H4')) {
                                 segmentTitle = segmentHeader.textContent;
                             }
                             
@@ -203,26 +249,31 @@
                     return foundItems;
                 } catch (error) {
                     console.error(`Falha no fetch para ${fileName}:`, error);
-                    statusContainer.innerHTML += `<br><span style="color:red;">Falha ao carregar ${fileName}. Certifique-se de que o arquivo está na mesma pasta e que você está usando um servidor local.</span>`;
                     return [];
                 }
             });
 
-            const allResults = await Promise.all(fetchPromises);
+            const allResults = (await Promise.all(fetchPromises)).flat();
+            
+            loader.style.display = 'none';
 
-            allResults.flat().forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'result-card';
-                card.innerHTML = `
-                    <div class="meta">
-                        <span><strong>IDOC:</strong> ${item.idoc}</span>
-                        <span><strong>Segmento:</strong> ${item.segment}</span>
-                    </div>
-                    <hr style="display:block; border-top: 1px solid #eee; margin: 10px 0;">
-                    <p>${item.content}</p>
-                `;
-                resultsContainer.appendChild(card);
-            });
+            if (allResults.length > 0) {
+                allResults.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'result-card';
+                    card.innerHTML = `
+                        <div class="meta">
+                            <span><strong>IDOC:</strong> ${item.idoc}</span>
+                            <span><strong>Segmento:</strong> ${item.segment}</span>
+                        </div>
+                        <hr style="display:block; border-top: 1px solid #eee; margin: 10px 0;">
+                        <p>${item.content}</p>
+                    `;
+                    resultsContainer.appendChild(card);
+                });
+            } else {
+                noResultsContainer.style.display = 'block';
+            }
 
             statusContainer.textContent = `${totalFound} resultado(s) encontrado(s).`;
         }

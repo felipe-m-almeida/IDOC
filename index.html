@@ -2,86 +2,129 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Índice de Ferramentas e Documentação IDOCs</title>
+    <link rel="stylesheet" href="estilos.css">
+
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
+        /* Ajustes no container do seu CSS para centralizar melhor */
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
+
         .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 900px; /* Um pouco mais largo para o grid */
+            width: 100%;
             text-align: center;
-            max-width: 800px;
-            width: 90%;
         }
+
         h1 {
-            color: #2c3e50;
+            font-size: 2.2em; /* Ajuste no tamanho da fonte */
             margin-bottom: 30px;
-            border-bottom: 2px solid #3498db;
+        }
+
+        .section-title {
+            color: #343a40;
+            text-align: left;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #007bff;
             padding-bottom: 10px;
         }
-        ul {
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             list-style-type: none;
             padding: 0;
         }
-        li {
-            margin: 15px 0;
-        }
-        a {
-            display: block;
-            padding: 15px 20px;
-            background-color: #3498db;
-            color: #ffffff;
+
+        .links-grid li a {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #0056b3;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
-        a:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+
+        .links-grid li a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            background-color: #007bff;
+            color: #ffffff;
+            border-color: #007bff;
         }
-        /* Estilo para o botão de pesquisa */
-        a.search-button {
-            background-color: #28a745; /* Verde */
+        
+        .links-grid li a .icon {
+            font-size: 1.8em;
+            margin-right: 15px;
         }
-        a.search-button:hover {
-            background-color: #218838; /* Verde mais escuro */
+
+        /* Cores especiais para os botões de ferramentas */
+        .search-button {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
         }
-        /* Estilo para o botão de queries */
-        a.query-button {
-            background-color: #8e44ad; /* Roxo */
+        .search-button:hover {
+            background-color: #218838;
+            border-color: #218838;
         }
-        a.query-button:hover {
-            background-color: #732d91; /* Roxo mais escuro */
+
+        .query-button {
+            background-color: #8e44ad;
+            color: white;
+            border-color: #8e44ad;
         }
+        .query-button:hover {
+            background-color: #732d91;
+            border-color: #732d91;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Índice de Ferramentas e Documentação IDOCs</h1>
-        <ul>
-            <li><a href="pesquisa.html" target="_blank" class="search-button">Abrir Ferramenta de Pesquisa</a></li>
-            <li><a href="gerador_queries.html" target="_blank" class="query-button">Abrir Gerador de Queries</a></li>
-            
-            <hr style="margin: 30px 0; border: 1px solid #eee;">
 
-            <li><a href="dados_parceiro.html" target="_blank">JSON de Parceiro de Negócios (BP)</a></li>
-            <li><a href="DOCUMENTACAO_IDOC_CLIENTES.htm" target="_blank">IDOC de Clientes (DEBMAS)</a></li>
-            <li><a href="DOCUMENTACAO_IDOC_FORNECEDOR.htm" target="_blank">IDOC de Fornecedores (CREMAS)</a></li>
-            <li><a href="DOCUMENTACAO_IDOC_MATERIAL.htm" target="_blank">IDOC de Material (MATMAS)</a></li>
-            <li><a href="DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.htm" target="_blank">IDOC de Material - Características (CLFMAS)</a></li>
-            <li><a href="DOCUMENTACAO_IDOC_MATQM01.htm" target="_blank">IDOC de Material - Dados de QM (MATQM01)</a></li>
-            <li><a href="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm" target="_blank">IDOC de Endereços (ADRMAS)</a></li>
+        <h2 class="section-title">Ferramentas Interativas</h2>
+        <ul class="links-grid">
+            <li>
+                <a href="pesquisa.html" class="search-button">
+                    <span class="icon">🔍</span> 
+                    <span>Abrir Ferramenta de Pesquisa</span>
+                </a>
+            </li>
+            <li>
+                <a href="gerador_queries.html" class="query-button">
+                    <span class="icon">⚙️</span>
+                    <span>Abrir Gerador de Queries</span>
+                </a>
+            </li>
+        </ul>
+
+        <h2 class="section-title">Documentação de Referência</h2>
+        <ul class="links-grid">
+            <li><a href="dados_parceiro.html" target="_blank"><span class="icon">👤</span> <span>JSON de Parceiro de Negócios (BP)</span></a></li>
+            <li><a href="DOCUMENTACAO_IDOC_CLIENTES.htm" target="_blank"><span class="icon">🏢</span> <span>IDOC de Clientes (DEBMAS)</span></a></li>
+            <li><a href="DOCUMENTACAO_IDOC_FORNECEDOR.htm" target="_blank"><span class="icon">🚚</span> <span>IDOC de Fornecedores (CREMAS)</span></a></li>
+            <li><a href="DOCUMENTACAO_IDOC_MATERIAL.htm" target="_blank"><span class="icon">📦</span> <span>IDOC de Material (MATMAS)</span></a></li>
+            <li><a href="DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.htm" target="_blank"><span class="icon">🏷️</span> <span>IDOC de Material - Características (CLFMAS)</span></a></li>
+            <li><a href="DOCUMENTACAO_IDOC_MATQM01.htm" target="_blank"><span class="icon">🔬</span> <span>IDOC de Material - Dados de QM (MATQM01)</span></a></li>
+            <li><a href="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm" target="_blank"><span class="icon">📫</span> <span>IDOC de Endereços (ADRMAS)</span></a></li>
         </ul>
     </div>
 </body>
