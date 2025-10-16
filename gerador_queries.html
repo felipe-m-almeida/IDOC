@@ -28,6 +28,13 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
         input[type="text"], input[type="number"], select {
             width: 100%;
@@ -77,76 +84,111 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
         
-        .add-btn {
-            background-color: var(--success-color);
-            font-size: 14px;
-            padding: 10px;
-            margin-top: 0;
-            height: auto;
-        }
+        .add-btn { background-color: var(--success-color); font-size: 14px; padding: 10px; margin-top: 0; height: auto; }
         .add-btn:hover { background-color: #218838; }
 
-        .remove-btn {
-            width: auto;
-            padding: 8px 12px;
-            font-size: 14px;
-            background-color: var(--danger-color);
-            margin-top: 0;
-            height: auto;
-            align-self: center;
-        }
+        .remove-btn { width: auto; padding: 8px 12px; font-size: 14px; background-color: var(--danger-color); margin-top: 0; height: auto; align-self: center; }
         .remove-btn:hover { background-color: #c82333; }
 
-        /* --- CORREÇÃO APLICADA AQUI --- */
-        .query-fields {
-            display: none; /* Esconde as seções por padrão */
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 1px solid #dee2e6;
+        .query-fields { display: none; margin-top: 30px; padding-top: 25px; border-top: 1px solid #dee2e6; }
+
+        .query-fields > h3 { color: #343a40; text-align: left; margin-bottom: 25px; font-size: 1.5em; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+
+        .when-clause, .concat-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px; padding: 20px; border: 1px solid #dee2e6; border-radius: 8px; flex-wrap: wrap; background-color: #f8f9fa; }
+        
+        textarea { width: 100%; min-height: 150px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 15px; padding: 15px; border: 1px solid #ced4da; border-radius: 5px; background-color: #e9ecef; color: #495057; resize: vertical; box-sizing: border-box; }
+        .hidden-container { display: none; }
+
+        .help-btn {
+            width: 48px;
+            height: 48px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            border: none;
+            margin: 0;
+            padding: 0;
+            line-height: 48px;
+            flex-shrink: 0;
+        }
+        .help-btn:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px) scale(1.05);
         }
 
-        .query-fields > h3 {
-            color: #343a40;
-            text-align: left;
-            margin-bottom: 25px;
-            font-size: 1.5em;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
         }
 
-        .when-clause, .concat-item {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 20px;
-            border: 1px solid #dee2e6;
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px 30px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
             border-radius: 8px;
-            flex-wrap: wrap;
-            background-color: #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus {
+            color: black;
+            text-decoration: none;
         }
         
-        textarea {
-            width: 100%;
-            min-height: 150px;
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-            font-size: 15px;
-            padding: 15px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            background-color: #e9ecef;
-            color: #495057;
-            resize: vertical;
-            box-sizing: border-box;
+        .modal-body h4 {
+            color: #343a40;
+            margin-top: 20px;
         }
-        .hidden-container { display: none; }
+        .modal-body code {
+            background-color: #e4e4e4;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+        
+        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+        @keyframes slideIn { from {transform: translateY(-50px)} to {transform: translateY(0)} }
     </style>
 </head>
 <body>
 
     <div class="container">
         <a href="index.html" class="back-link">&larr; Voltar ao Início</a>
-        <h1>Gerador de Queries</h1>
+        
+        <div class="header-container">
+            <h1>Gerador de Queries</h1>
+            <button id="helpButton" class="help-btn" title="Ajuda">?</button>
+        </div>
 
         <div class="form-group">
             <label for="queryType">Tipo de Query</label>
@@ -164,189 +206,94 @@
 
         <div id="substringFields" class="query-fields">
             <h3>Parâmetros para SUBSTRING</h3>
-            <div class="form-group">
-                <label>Qual o tipo de campo de origem?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="subSourceType" value="guid" checked onchange="toggleSourceFields('sub')"> GUID</label>
-                    <label><input type="radio" name="subSourceType" value="variable" onchange="toggleSourceFields('sub')"> Variável</label>
-                </div>
-            </div>
-            <div id="subGuidContainer">
-                <div class="form-group"><label for="subStepInput">Número da Etapa (X)</label><input type="text" id="subStepInput" placeholder="Ex: 1 ou sub"></div>
-                <div class="form-group"><label for="subGuidInput">GUID do Campo</label><input type="text" id="subGuidInput" placeholder="Cole o GUID aqui"></div>
-            </div>
-            <div id="subVariableContainer" class="hidden-container">
-                <div class="form-group"><label for="subVariableInput">Nome da Variável</label><input type="text" id="subVariableInput" placeholder="Ex: minha_variavel"></div>
-            </div>
+            <div class="form-group"><label>Qual o tipo de campo de origem?</label><div class="radio-group"><label><input type="radio" name="subSourceType" value="guid" checked onchange="toggleSourceFields('sub')"> GUID</label><label><input type="radio" name="subSourceType" value="variable" onchange="toggleSourceFields('sub')"> Variável</label></div></div>
+            <div id="subGuidContainer"><div class="form-group"><label for="subStepInput">Número da Etapa (X)</label><input type="text" id="subStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="subGuidInput">GUID do Campo</label><input type="text" id="subGuidInput" placeholder="Cole o GUID aqui"></div></div>
+            <div id="subVariableContainer" class="hidden-container"><div class="form-group"><label for="subVariableInput">Nome da Variável</label><input type="text" id="subVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="subStartInput">Posição Inicial (Y)</label><input type="number" id="subStartInput" placeholder="Ex: 1" min="1"></div>
             <div class="form-group"><label for="subEndInput">Tamanho (Z)</label><input type="number" id="subEndInput" placeholder="Ex: 10" min="1"></div>
-            <button onclick="generateQuery()">Gerar Query</button>
-            <div class="result-box"><label for="subResultQuery">Query Gerada</label><textarea id="subResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="subResultQuery">Query Gerada</label><textarea id="subResultQuery" readonly></textarea></div>
         </div>
-
         <div id="caseWhenFields" class="query-fields">
             <h3>Parâmetros para CASE WHEN</h3>
-             <div class="form-group">
-                <label>Campo Principal (a ser comparado)</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="caseSourceType" value="guid" checked onchange="toggleSourceFields('case')"> GUID</label>
-                    <label><input type="radio" name="caseSourceType" value="variable" onchange="toggleSourceFields('case')"> Variável</label>
-                </div>
-            </div>
-            <div id="caseGuidContainer">
-                <div class="form-group"><label for="caseStepInput">Número da Etapa (X)</label><input type="text" id="caseStepInput" placeholder="Ex: 1 ou sub"></div>
-                <div class="form-group"><label for="caseGuidInput">GUID do Campo</label><input type="text" id="caseGuidInput" placeholder="Cole o GUID aqui"></div>
-            </div>
-            <div id="caseVariableContainer" class="hidden-container">
-                <div class="form-group"><label for="caseVariableInput">Nome da Variável</label><input type="text" id="caseVariableInput" placeholder="Ex: minha_variavel"></div>
-            </div>
-            
-            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
-            <label>Condições (WHEN ... THEN ...)</label>
-            <div id="whenClausesContainer"></div>
-            <button onclick="addWhenClause()" class="add-btn" type="button">+ Adicionar WHEN</button>
-            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
-
-            <div class="form-group">
-                <label>Condição Final (ELSE)</label>
-                <div class="radio-group else-options">
-                    <label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor</label>
-                    <label><input type="radio" name="elseOption" value="customValue" onchange="toggleElseInput()"> Usar outro valor</label>
-                    <label><input type="radio" name="elseOption" value="guid" onchange="toggleElseInput()"> Usar Outro Campo</label>
-                    <label><input type="radio" name="elseOption" value="substring" onchange="toggleElseInput()"> Substring</label>
-                    <label><input type="radio" name="elseOption" value="translate" onchange="toggleElseInput()"> Translate</label>
-                    <label><input type="radio" name="elseOption" value="concat" onchange="toggleElseInput()"> Concat</label>
-                    <label><input type="radio" name="elseOption" value="dateFormat" onchange="toggleElseInput()"> Formatar Data</label>
-                    <label><input type="radio" name="elseOption" value="lpad" onchange="toggleElseInput()"> Zeros à Esquerda</label>
-                </div>
-                <div id="elseCustomValueContainer" class="hidden-container"><input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE (pode ser vazio)"></div>
-                <div id="elseGuidContainer" class="hidden-container">
-                    <div class="flex-container">
-                        <input type="text" id="elseStepInput" placeholder="Etapa" style="flex:1;">
-                        <input type="text" id="elseGuidInput" placeholder="GUID" style="flex:2;">
-                    </div>
-                </div>
-                <div id="elseSubstringContainer" class="hidden-container nested-group"></div>
-                <div id="elseTranslateContainer" class="hidden-container nested-group"></div>
-                <div id="elseConcatContainer" class="hidden-container nested-group"></div>
-                <div id="elseDateFormatContainer" class="hidden-container nested-group"></div>
-                <div id="elseLpadContainer" class="hidden-container nested-group"></div>
-
-            </div>
-            <button onclick="generateQuery()">Gerar Query</button>
-            <div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" readonly></textarea></div>
+            <div class="form-group"><label>Campo Principal (a ser comparado)</label><div class="radio-group"><label><input type="radio" name="caseSourceType" value="guid" checked onchange="toggleSourceFields('case')"> GUID</label><label><input type="radio" name="caseSourceType" value="variable" onchange="toggleSourceFields('case')"> Variável</label></div></div>
+            <div id="caseGuidContainer"><div class="form-group"><label for="caseStepInput">Número da Etapa (X)</label><input type="text" id="caseStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="caseGuidInput">GUID do Campo</label><input type="text" id="caseGuidInput" placeholder="Cole o GUID aqui"></div></div>
+            <div id="caseVariableContainer" class="hidden-container"><div class="form-group"><label for="caseVariableInput">Nome da Variável</label><input type="text" id="caseVariableInput" placeholder="Ex: minha_variavel"></div></div>
+            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;"><label>Condições (WHEN ... THEN ...)</label><div id="whenClausesContainer"></div><button onclick="addWhenClause()" class="add-btn" type="button">+ Adicionar WHEN</button><hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
+            <div class="form-group"><label>Condição Final (ELSE)</label><div class="radio-group else-options"><label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor</label><label><input type="radio" name="elseOption" value="customValue" onchange="toggleElseInput()"> Usar outro valor</label><label><input type="radio" name="elseOption" value="guid" onchange="toggleElseInput()"> Usar Outro Campo</label><label><input type="radio" name="elseOption" value="substring" onchange="toggleElseInput()"> Substring</label><label><input type="radio" name="elseOption" value="translate" onchange="toggleElseInput()"> Translate</label><label><input type="radio" name="elseOption" value="concat" onchange="toggleElseInput()"> Concat</label><label><input type="radio" name="elseOption" value="dateFormat" onchange="toggleElseInput()"> Formatar Data</label><label><input type="radio" name="elseOption" value="lpad" onchange="toggleElseInput()"> Zeros à Esquerda</label></div><div id="elseCustomValueContainer" class="hidden-container"><input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE (pode ser vazio)"></div><div id="elseGuidContainer" class="hidden-container"><div class="flex-container"><input type="text" id="elseStepInput" placeholder="Etapa" style="flex:1;"><input type="text" id="elseGuidInput" placeholder="GUID" style="flex:2;"></div></div><div id="elseSubstringContainer" class="hidden-container nested-group"></div><div id="elseTranslateContainer" class="hidden-container nested-group"></div><div id="elseConcatContainer" class="hidden-container nested-group"></div><div id="elseDateFormatContainer" class="hidden-container nested-group"></div><div id="elseLpadContainer" class="hidden-container nested-group"></div></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" readonly></textarea></div>
         </div>
-        
         <div id="translateFields" class="query-fields">
             <h3>Parâmetros para TRANSLATE</h3>
-            <div class="form-group">
-                <label>Qual o tipo de campo de origem?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="translateSourceType" value="guid" checked onchange="toggleSourceFields('translate')"> GUID</label>
-                    <label><input type="radio" name="translateSourceType" value="variable" onchange="toggleSourceFields('translate')"> Variável</label>
-                </div>
-            </div>
-            <div id="translateGuidContainer">
-                <div class="form-group"><label for="translateStepInput">Número da Etapa (X)</label><input type="text" id="translateStepInput" placeholder="Ex: 1 ou sub"></div>
-                <div class="form-group"><label for="translateGuidInput">GUID do Campo</label><input type="text" id="translateGuidInput" placeholder="Cole o GUID aqui"></div>
-            </div>
-            <div id="translateVariableContainer" class="hidden-container">
-                <div class="form-group"><label for="translateVariableInput">Nome da Variável</label><input type="text" id="translateVariableInput" placeholder="Ex: minha_variavel"></div>
-            </div>
+            <div class="form-group"><label>Qual o tipo de campo de origem?</label><div class="radio-group"><label><input type="radio" name="translateSourceType" value="guid" checked onchange="toggleSourceFields('translate')"> GUID</label><label><input type="radio" name="translateSourceType" value="variable" onchange="toggleSourceFields('translate')"> Variável</label></div></div>
+            <div id="translateGuidContainer"><div class="form-group"><label for="translateStepInput">Número da Etapa (X)</label><input type="text" id="translateStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="translateGuidInput">GUID do Campo</label><input type="text" id="translateGuidInput" placeholder="Cole o GUID aqui"></div></div>
+            <div id="translateVariableContainer" class="hidden-container"><div class="form-group"><label for="translateVariableInput">Nome da Variável</label><input type="text" id="translateVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="translateFromInput">Traduzir De (caracteres a serem trocados)</label><input type="text" id="translateFromInput" placeholder="Ex: ,"></div>
             <div class="form-group"><label for="translateToInput">Traduzir Para (novos caracteres)</label><input type="text" id="translateToInput" placeholder="Ex: . (pode ser deixado em branco)"></div>
-            <button onclick="generateQuery()">Gerar Query</button>
-            <div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" readonly></textarea></div>
         </div>
-        
         <div id="concatFields" class="query-fields">
-            <h3>Parâmetros para CONCAT()</h3>
-            <label>Itens para Concatenar</label>
-            <div id="concatItemsContainer"></div>
-            <button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button>
-            <button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button>
-            <div class="result-box">
-                <label for="concatResultQuery">Query Gerada</label>
-                <textarea id="concatResultQuery" readonly></textarea>
-            </div>
+            <h3>Parâmetros para CONCAT()</h3><label>Itens para Concatenar</label><div id="concatItemsContainer"></div><button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button><button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button><div class="result-box"><label for="concatResultQuery">Query Gerada</label><textarea id="concatResultQuery" readonly></textarea></div>
         </div>
-
         <div id="dateFormatFields" class="query-fields">
             <h3>Parâmetros para Formatar Data</h3>
-            <div class="form-group">
-                <label>Qual o tipo de campo de origem (que contém a data)?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="dateFormatSourceType" value="guid" checked onchange="toggleSourceFields('dateFormat')"> GUID</label>
-                    <label><input type="radio" name="dateFormatSourceType" value="variable" onchange="toggleSourceFields('dateFormat')"> Variável</label>
-                </div>
-            </div>
-            <div id="dateFormatGuidContainer">
-                <div class="form-group"><label for="dateFormatStepInput">Número da Etapa (X)</label><input type="text" id="dateFormatStepInput" placeholder="Ex: 1 ou sub"></div>
-                <div class="form-group"><label for="dateFormatGuidInput">GUID do Campo</label><input type="text" id="dateFormatGuidInput" placeholder="Cole o GUID aqui"></div>
-            </div>
-            <div id="dateFormatVariableContainer" class="hidden-container">
-                <div class="form-group"><label for="dateFormatVariableInput">Nome da Variável</label><input type="text" id="dateFormatVariableInput" placeholder="Ex: minha_variavel_data"></div>
-            </div>
-            <div class="form-group">
-                <label for="dateFormatInputMask">Formato de Entrada da Data (formato atual)</label>
-                <input type="text" id="dateFormatInputMask" placeholder="Ex: YYYY-MM-DD, DDMMYYYY, YYYY/MM/DD HH24:MI:SS">
-            </div>
-            <div class="form-group">
-                <label for="dateFormatOutputMask">Máscara de Formatação de Saída (formato desejado)</label>
-                <input type="text" id="dateFormatOutputMask" placeholder="Ex: YYYYMMDD, DD/MM/YYYY, YYYY-MM-DD HH24:MI:SS">
-            </div>
-            <button onclick="generateQuery()">Gerar Query</button>
-            <div class="result-box">
-                <label for="dateFormatResultQuery">Query Gerada</label>
-                <textarea id="dateFormatResultQuery" readonly></textarea>
-            </div>
+            <div class="form-group"><label>Qual o tipo de campo de origem (que contém a data)?</label><div class="radio-group"><label><input type="radio" name="dateFormatSourceType" value="guid" checked onchange="toggleSourceFields('dateFormat')"> GUID</label><label><input type="radio" name="dateFormatSourceType" value="variable" onchange="toggleSourceFields('dateFormat')"> Variável</label></div></div>
+            <div id="dateFormatGuidContainer"><div class="form-group"><label for="dateFormatStepInput">Número da Etapa (X)</label><input type="text" id="dateFormatStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="dateFormatGuidInput">GUID do Campo</label><input type="text" id="dateFormatGuidInput" placeholder="Cole o GUID aqui"></div></div>
+            <div id="dateFormatVariableContainer" class="hidden-container"><div class="form-group"><label for="dateFormatVariableInput">Nome da Variável</label><input type="text" id="dateFormatVariableInput" placeholder="Ex: minha_variavel_data"></div></div>
+            <div class="form-group"><label for="dateFormatInputMask">Formato de Entrada da Data (formato atual)</label><input type="text" id="dateFormatInputMask" placeholder="Ex: YYYY-MM-DD, DDMMYYYY, YYYY/MM/DD HH24:MI:SS"></div>
+            <div class="form-group"><label for="dateFormatOutputMask">Máscara de Formatação de Saída (formato desejado)</label><input type="text" id="dateFormatOutputMask" placeholder="Ex: YYYYMMDD, DD/MM/YYYY, YYYY-MM-DD HH24:MI:SS"></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="dateFormatResultQuery">Query Gerada</label><textarea id="dateFormatResultQuery" readonly></textarea></div>
         </div>
-
         <div id="lpadFields" class="query-fields">
             <h3>Parâmetros para Adicionar Zeros à Esquerda (LPAD)</h3>
-            <div class="form-group">
-                <label>Qual o tipo de campo de origem?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="lpadSourceType" value="guid" checked onchange="toggleSourceFields('lpad')"> GUID</label>
-                    <label><input type="radio" name="lpadSourceType" value="variable" onchange="toggleSourceFields('lpad')"> Variável</label>
-                </div>
-            </div>
-            <div id="lpadGuidContainer">
-                <div class="form-group"><label for="lpadStepInput">Número da Etapa (X)</label><input type="text" id="lpadStepInput" placeholder="Ex: 1 ou sub"></div>
-                <div class="form-group"><label for="lpadGuidInput">GUID do Campo</label><input type="text" id="lpadGuidInput" placeholder="Cole o GUID aqui"></div>
-            </div>
-            <div id="lpadVariableContainer" class="hidden-container">
-                <div class="form-group"><label for="lpadVariableInput">Nome da Variável</label><input type="text" id="lpadVariableInput" placeholder="Ex: minha_variavel"></div>
-            </div>
-            <div class="form-group">
-                <label for="lpadLengthInput">Tamanho Final do Campo (com os zeros)</label>
-                <input type="number" id="lpadLengthInput" placeholder="Ex: 10" min="1">
-            </div>
-            <button onclick="generateQuery()">Gerar Query</button>
-            <div class="result-box">
-                <label for="lpadResultQuery">Query Gerada</label>
-                <textarea id="lpadResultQuery" readonly></textarea>
-            </div>
+            <div class="form-group"><label>Qual o tipo de campo de origem?</label><div class="radio-group"><label><input type="radio" name="lpadSourceType" value="guid" checked onchange="toggleSourceFields('lpad')"> GUID</label><label><input type="radio" name="lpadSourceType" value="variable" onchange="toggleSourceFields('lpad')"> Variável</label></div></div>
+            <div id="lpadGuidContainer"><div class="form-group"><label for="lpadStepInput">Número da Etapa (X)</label><input type="text" id="lpadStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="lpadGuidInput">GUID do Campo</label><input type="text" id="lpadGuidInput" placeholder="Cole o GUID aqui"></div></div>
+            <div id="lpadVariableContainer" class="hidden-container"><div class="form-group"><label for="lpadVariableInput">Nome da Variável</label><input type="text" id="lpadVariableInput" placeholder="Ex: minha_variavel"></div></div>
+            <div class="form-group"><label for="lpadLengthInput">Tamanho Final do Campo (com os zeros)</label><input type="number" id="lpadLengthInput" placeholder="Ex: 10" min="1"></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="lpadResultQuery">Query Gerada</label><textarea id="lpadResultQuery" readonly></textarea></div>
         </div>
-        
         <div id="joinExpansionFields" class="query-fields">
             <h3>Parâmetros para Expansão de JOIN</h3>
-            <div class="form-group">
-                <label for="joinTenantInput">Tenant</label>
-                <input type="text" id="joinTenantInput" placeholder="Ex: 4mdg">
+            <div class="form-group"><label for="joinTenantInput">Tenant</label><input type="text" id="joinTenantInput" placeholder="Ex: 4mdg"></div>
+            <div class="form-group"><label for="joinAliasInput">Apelido (alias) para a tabela</label><input type="text" id="joinAliasInput" placeholder="Ex: ans_centro"></div>
+            <div class="form-group"><label for="joinGuidInput">GUID da Etapa</label><input type="text" id="joinGuidInput" placeholder="Cole o GUID da etapa aqui"></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="joinResultQuery">Query Gerada</label><textarea id="joinResultQuery" readonly></textarea></div>
+        </div>
+    </div>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Guia de Queries</h2>
+                <span class="close-btn">&times;</span>
             </div>
-            <div class="form-group">
-                <label for="joinAliasInput">Apelido (alias) para a tabela</label>
-                <input type="text" id="joinAliasInput" placeholder="Ex: ans_centro">
-            </div>
-            <div class="form-group">
-                <label for="joinGuidInput">GUID da Etapa</label>
-                <input type="text" id="joinGuidInput" placeholder="Cole o GUID da etapa aqui">
-            </div>
-            <button onclick="generateQuery()">Gerar Query</button>
-            <div class="result-box">
-                <label for="joinResultQuery">Query Gerada</label>
-                <textarea id="joinResultQuery" readonly></textarea>
+            <div class="modal-body">
+                <h4><code>SUBSTRING</code></h4>
+                <p><b>O que faz:</b> Extrai uma parte de um texto a partir de uma posição inicial e com um tamanho definido.</p>
+                <p><b>Quando usar:</b> Útil para pegar apenas alguns caracteres de um campo. Por exemplo, extrair os 4 primeiros dígitos de um código de material ou o dia de uma data no formato 'YYYYMMDD'.</p>
+
+                <h4><code>CASE WHEN</code></h4>
+                <p><b>O que faz:</b> Cria uma lógica condicional, como um "Se, Então, Senão". Você pode definir várias condições (<code>WHEN</code>) e os resultados (<code>THEN</code>) para cada uma, além de um resultado padrão (<code>ELSE</code>).</p>
+                <p><b>Quando usar:</b> Perfeito para mapear valores (ex: De '01' para 'Ativo', '02' para 'Inativo') ou para aplicar transformações diferentes dependendo do valor de um campo.</p>
+
+                <h4><code>TRANSLATE</code></h4>
+                <p><b>O que faz:</b> Substitui caracteres específicos em um texto. É como um "Localizar e Substituir" para múltiplos caracteres de uma só vez.</p>
+                <p><b>Quando usar:</b> Ideal para limpar dados, como remover pontos e traços de um CPF/CNPJ ou trocar vírgulas por pontos em um valor numérico.</p>
+
+                <h4><code>CONCAT()</code></h4>
+                <p><b>O que faz:</b> Junta (concatena) dois ou mais textos ou campos em um único resultado.</p>
+                <p><b>Quando usar:</b> Para criar um campo composto a partir de outros. Por exemplo, juntar os campos 'Rua', 'Número' e 'Bairro' para formar um endereço completo.</p>
+                
+                <h4><code>Formatar Data</code></h4>
+                <p><b>O que faz:</b> Converte um texto que representa uma data de um formato para outro.</p>
+                <p><b>Quando usar:</b> Quando você recebe uma data em um formato (ex: <code>DD/MM/YYYY</code>) e precisa enviá-la em outro (ex: <code>YYYY-MM-DD</code>).</p>
+                
+                <h4><code>LPAD</code> (Adicionar zeros à esquerda)</h4>
+                <p><b>O que faz:</b> Preenche um texto à esquerda com um caractere (geralmente '0') até que ele atinja um tamanho total específico.</p>
+                <p><b>Quando usar:</b> Essencial quando um sistema de destino exige que um código tenha um tamanho fixo. Por exemplo, um código de cliente '123' precisa ser enviado como '0000000123'.</p>
+
+                <h4><code>Expansão para JOIN</code></h4>
+                <p><b>O que faz:</b> Gera um trecho de código SQL padrão para fazer a junção (<code>JOIN</code>) entre a tabela principal de respostas e a tabela de respostas de uma etapa específica.</p>
+                <p><b>Quando usar:</b> É um atalho para uma operação muito comum, evitando que você precise digitar o mesmo código de JOIN repetidamente ao buscar dados de diferentes etapas do processo.</p>
             </div>
         </div>
     </div>
@@ -469,7 +416,6 @@
             `;
             container.appendChild(newClause);
             
-            // Auto-trigger toggle to show default fields
             toggleWhenThenFields(newClause.querySelector('input[name^="whenType_"]:checked'));
             toggleWhenThenFields(newClause.querySelector('input[name^="thenType_"]:checked'));
         }
@@ -489,7 +435,6 @@
 
             if (targetContainer) {
                 targetContainer.style.display = 'block';
-                // Lazy-load the content if it's empty
                 if (targetContainer.innerHTML.trim() === '') {
                      if (selectedValue === 'guid') {
                          targetContainer.innerHTML = `<input type="text" class="then-input-step" placeholder="Etapa" style="flex:1;"><input type="text" class="then-input-guid" placeholder="GUID" style="flex:2;">`;
@@ -510,7 +455,6 @@
                          targetContainer.innerHTML = `
                              <div class="then-concat-items-container"></div>
                              <button type="button" class="add-btn" onclick="addCaseConcatItem(this)">+ Item</button>`;
-                         // Add initial items for concat
                          addCaseConcatItem(targetContainer.querySelector('.add-btn'));
                          addCaseConcatItem(targetContainer.querySelector('.add-btn'));
                      } else if (selectedValue === 'dateFormat') {
@@ -548,7 +492,6 @@
             
             if (targetContainer) {
                 targetContainer.style.display = 'block';
-                 // Lazy load content
                 if (targetContainer.innerHTML.trim() === '') {
                      if (elseChoice === 'substring') {
                          targetContainer.innerHTML = `${createSourceFieldHtml('else_sub', 0)}<div class="flex-container" style="margin-top:10px;"><input type="number" id="elseSubstringStart" placeholder="Início" min="1"><input type="number" id="elseSubstringLength" placeholder="Tamanho" min="1"></div>`;
@@ -572,7 +515,7 @@
             const container = document.getElementById('concatItemsContainer');
             const itemDiv = document.createElement('div');
             itemDiv.className = 'concat-item';
-            itemDiv.innerHTML = createConcatItemHtml('main_concat', concatItemCounter); // Use um prefixo único
+            itemDiv.innerHTML = createConcatItemHtml('main_concat', concatItemCounter);
             container.appendChild(itemDiv);
             toggleConcatItemFields(itemDiv.querySelector('input[type="radio"]:checked'));
         }
@@ -601,11 +544,9 @@
             }
         }
 
-        // --- Funções Auxiliares para Geração de Query ---
-        
         function getSourceFieldValue(container, prefix) {
             const sourceTypeRadio = container.querySelector(`input[name^="${prefix}"][name$="_SourceType"]:checked`);
-            if (!sourceTypeRadio) return null; // Safety check
+            if (!sourceTypeRadio) return null;
             const sourceType = sourceTypeRadio.value;
 
             if (sourceType === 'guid') {
@@ -613,7 +554,7 @@
                 const guid = container.querySelector(`.${prefix}-guid`).value;
                 if (!step || !guid) return null;
                 return `ans${step}.data->'values'->>'${guid}'`;
-            } else { // variable
+            } else {
                 const variableName = container.querySelector(`.${prefix}-variable`).value;
                 if (!variableName) return null;
                 return variableName;
@@ -636,7 +577,7 @@
                     const variableName = item.querySelector('.variable-input').value;
                     if (!variableName) allItemsValid = false;
                     else currentItem = variableName;
-                } else { // value
+                } else {
                     currentItem = `'${item.querySelector('.value-input').value}'`;
                 }
                 if(allItemsValid) itemsToConcat.push(currentItem);
@@ -645,12 +586,10 @@
             return `CONCAT(${itemsToConcat.join(', ')})`;
         }
         
-
         function generateQuery() {
             const queryType = document.getElementById('queryType').value;
             let resultArea, baseField, query;
             
-            // --- Lógica dos geradores principais ---
             if (queryType === 'substring') {
                 resultArea = document.getElementById('subResultQuery');
                 resultArea.value = '';
@@ -712,7 +651,6 @@
                 }
                 resultArea.value = `JOIN ${tenant}.answers ${alias} ON ${alias}.step_id = '${stepGuid}'\n    AND ${alias}.concluded_at IS NOT NULL\n    AND ${alias}.deleted_at IS NULL`;
             }
-            // --- Lógica do CASE WHEN ---
             else if (queryType === 'caseWhen') {
                 resultArea = document.getElementById('caseResultQuery');
                 resultArea.value = '';
@@ -732,7 +670,7 @@
                     const whenType = clause.querySelector('input[name^="whenType_"]:checked').value;
                     if (whenType === 'value') {
                         whenPart = `'${clause.querySelector('.when-input-value').value}'`;
-                    } else { /* guid */
+                    } else {
                         const step = clause.querySelector('.when-input-step').value;
                         const guid = clause.querySelector('.when-input-guid').value;
                         if (!step || !guid) { allClausesValid = false; }
@@ -741,7 +679,6 @@
 
                     const thenType = clause.querySelector('input[name^="thenType_"]:checked').value;
                     const thenContainer = clause.querySelector(`.then-${thenType}-container`);
-                    const idCounter = clause.dataset.id;
                     
                     if (thenType === 'value') {
                         thenPart = `'${thenContainer.querySelector('.then-input-value').value}'`;
@@ -783,7 +720,6 @@
                 });
                 if (!allClausesValid) { alert('Preencha todos os campos das cláusulas WHEN/THEN.'); return; }
 
-                // Lógica do ELSE
                 const elseChoice = document.querySelector('input[name="elseOption"]:checked').value;
                 let elsePart = '';
                 if (elseChoice === 'sameField') {
@@ -828,6 +764,23 @@
                 }
                 query += `    ELSE ${elsePart}\nEND`;
                 resultArea.value = query;
+            }
+        }
+
+        // --- LÓGICA PARA O MODAL DE AJUDA ---
+        const modal = document.getElementById("helpModal");
+        const helpBtn = document.getElementById("helpButton");
+        const closeBtn = document.querySelector(".close-btn");
+
+        helpBtn.onclick = function() {
+            modal.style.display = "block";
+        }
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
         }
     </script>
