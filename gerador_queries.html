@@ -127,6 +127,8 @@
                 <option value="translate">TRANSLATE</option>
                 <option value="concat">CONCAT (||)</option>
                 <option value="dateFormat">Formatar Data</option>
+                <option value="lpad">Adicionar zeros a esquerda</option>
+                <option value="joinExpansion">Expansão para JOIN (Centros, Org, etc.)</option>
             </select>
         </div>
 
@@ -279,6 +281,55 @@
                 <textarea id="dateFormatResultQuery" readonly></textarea>
             </div>
         </div>
+
+        <div id="lpadFields" class="query-fields">
+            <h3>Parâmetros para Adicionar Zeros à Esquerda (LPAD)</h3>
+            <div class="form-group">
+                <label>Qual o tipo de campo de origem?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="lpadSourceType" value="guid" checked onchange="toggleSourceFields('lpad')"> GUID</label>
+                    <label><input type="radio" name="lpadSourceType" value="variable" onchange="toggleSourceFields('lpad')"> Variável</label>
+                </div>
+            </div>
+            <div id="lpadGuidContainer">
+                <div class="form-group"><label for="lpadStepInput">Número da Etapa (X)</label><input type="text" id="lpadStepInput" placeholder="Ex: 1 ou sub"></div>
+                <div class="form-group"><label for="lpadGuidInput">GUID do Campo</label><input type="text" id="lpadGuidInput" placeholder="Cole o GUID aqui"></div>
+            </div>
+            <div id="lpadVariableContainer" class="hidden-container">
+                <div class="form-group"><label for="lpadVariableInput">Nome da Variável</label><input type="text" id="lpadVariableInput" placeholder="Ex: minha_variavel"></div>
+            </div>
+            <div class="form-group">
+                <label for="lpadLengthInput">Tamanho Final do Campo (com os zeros)</label>
+                <input type="number" id="lpadLengthInput" placeholder="Ex: 10" min="1">
+            </div>
+            <button onclick="generateQuery()">Gerar Query</button>
+            <div class="result-box">
+                <label for="lpadResultQuery">Query Gerada</label>
+                <textarea id="lpadResultQuery" readonly></textarea>
+            </div>
+        </div>
+        
+        <div id="joinExpansionFields" class="query-fields">
+            <h3>Parâmetros para Expansão de JOIN</h3>
+            <div class="form-group">
+                <label for="joinTenantInput">Tenant</label>
+                <input type="text" id="joinTenantInput" placeholder="Ex: 4mdg">
+            </div>
+            <div class="form-group">
+                <label for="joinAliasInput">Apelido (alias) para a tabela</label>
+                <input type="text" id="joinAliasInput" placeholder="Ex: ans_centro">
+            </div>
+            <div class="form-group">
+                <label for="joinGuidInput">GUID da Etapa</label>
+                <input type="text" id="joinGuidInput" placeholder="Cole o GUID da etapa aqui">
+            </div>
+            <button onclick="generateQuery()">Gerar Query</button>
+            <div class="result-box">
+                <label for="joinResultQuery">Query Gerada</label>
+                <textarea id="joinResultQuery" readonly></textarea>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -615,6 +666,37 @@
                 }
                 
                 resultArea.value = `to_char(to_timestamp(${baseField}, '${inputMask}'), '${outputMask}')`;
+            } else if (queryType === 'lpad') {
+                resultArea = document.getElementById('lpadResultQuery');
+                resultArea.value = '';
+                baseField = getBaseField('lpad');
+                const length = document.getElementById('lpadLengthInput').value;
+
+                if (!baseField || !length) {
+                    alert('Por favor, preencha o campo de origem e o tamanho final do campo.');
+                    return;
+                }
+
+                const lpadQuery = `CASE
+    WHEN ${baseField} != '' THEN lpad(${baseField}, ${length}, '0')
+    ELSE ${baseField}
+END`;
+                resultArea.value = lpadQuery;
+            } else if (queryType === 'joinExpansion') {
+                resultArea = document.getElementById('joinResultQuery');
+                resultArea.value = '';
+                const tenant = document.getElementById('joinTenantInput').value;
+                const alias = document.getElementById('joinAliasInput').value;
+                const stepGuid = document.getElementById('joinGuidInput').value;
+
+                if (!tenant || !alias || !stepGuid) {
+                    alert('Por favor, preencha todos os campos para gerar o JOIN.');
+                    return;
+                }
+
+                resultArea.value = `JOIN ${tenant}.answers ${alias} ON ${alias}.step_id = '${stepGuid}'
+    AND ${alias}.concluded_at IS NOT NULL
+    AND ${alias}.deleted_at IS NULL`;
             }
         }
     </script>
