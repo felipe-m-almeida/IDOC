@@ -126,6 +126,7 @@
                 <option value="caseWhen">CASE WHEN</option>
                 <option value="translate">TRANSLATE</option>
                 <option value="concat">CONCAT (||)</option>
+                <option value="dateFormat">Formatar Data</option>
             </select>
         </div>
 
@@ -247,6 +248,37 @@
                 <textarea id="concatResultQuery" readonly></textarea>
             </div>
         </div>
+
+        <div id="dateFormatFields" class="query-fields">
+            <h3>Parâmetros para Formatar Data</h3>
+            <div class="form-group">
+                <label>Qual o tipo de campo de origem (que contém a data)?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="dateFormatSourceType" value="guid" checked onchange="toggleSourceFields('dateFormat')"> GUID</label>
+                    <label><input type="radio" name="dateFormatSourceType" value="variable" onchange="toggleSourceFields('dateFormat')"> Variável</label>
+                </div>
+            </div>
+            <div id="dateFormatGuidContainer">
+                <div class="form-group"><label for="dateFormatStepInput">Número da Etapa (X)</label><input type="text" id="dateFormatStepInput" placeholder="Ex: 1 ou sub"></div>
+                <div class="form-group"><label for="dateFormatGuidInput">GUID do Campo</label><input type="text" id="dateFormatGuidInput" placeholder="Cole o GUID aqui"></div>
+            </div>
+            <div id="dateFormatVariableContainer" class="hidden-container">
+                <div class="form-group"><label for="dateFormatVariableInput">Nome da Variável</label><input type="text" id="dateFormatVariableInput" placeholder="Ex: minha_variavel_data"></div>
+            </div>
+            <div class="form-group">
+                <label for="dateFormatInputMask">Formato de Entrada da Data (formato atual)</label>
+                <input type="text" id="dateFormatInputMask" placeholder="Ex: YYYY-MM-DD, DDMMYYYY, YYYY/MM/DD HH24:MI:SS">
+            </div>
+            <div class="form-group">
+                <label for="dateFormatOutputMask">Máscara de Formatação de Saída (formato desejado)</label>
+                <input type="text" id="dateFormatOutputMask" placeholder="Ex: YYYYMMDD, DD/MM/YYYY, YYYY-MM-DD HH24:MI:SS">
+            </div>
+            <button onclick="generateQuery()">Gerar Query</button>
+            <div class="result-box">
+                <label for="dateFormatResultQuery">Query Gerada</label>
+                <textarea id="dateFormatResultQuery" readonly></textarea>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -332,16 +364,12 @@
             const section = radioElement.closest('.clause-section');
             const selectedValue = radioElement.value;
             
-            // Esconde todos os containers de input da seção
             section.querySelectorAll('.when-value-container, .when-guid-container, .then-value-container, .then-guid-container, .then-substring-container').forEach(el => {
                 if (el) el.style.display = 'none';
             });
             
-            // *** INÍCIO DA CORREÇÃO ***
-            // Constrói o nome da classe alvo corretamente
             const prefix = radioElement.name.includes('when') ? 'when' : 'then';
             const targetClass = `.${prefix}-${selectedValue}-container`;
-            // *** FIM DA CORREÇÃO ***
 
             const target = section.querySelector(targetClass);
             if (target) {
@@ -574,6 +602,19 @@
                      return;
                 }
                 resultArea.value = itemsToConcat.join(' || ');
+            } else if (queryType === 'dateFormat') {
+                resultArea = document.getElementById('dateFormatResultQuery');
+                resultArea.value = '';
+                baseField = getBaseField('dateFormat');
+                const inputMask = document.getElementById('dateFormatInputMask').value;
+                const outputMask = document.getElementById('dateFormatOutputMask').value;
+
+                if (!baseField || !inputMask || !outputMask) {
+                    alert('Por favor, preencha o campo de origem e os formatos de entrada e saída da data.');
+                    return;
+                }
+                
+                resultArea.value = `to_char(to_timestamp(${baseField}, '${inputMask}'), '${outputMask}')`;
             }
         }
     </script>
