@@ -110,6 +110,7 @@
             
             <select id="idocFilter">
                 <option value="all">Todos os IDOCs</option>
+                <option value="dados_parceiro.html">Parceiro de Negócios (BP)</option>
                 <option value="DOCUMENTACAO_IDOC_CLIENTES.htm">Clientes (DEBMAS)</option>
                 <option value="DOCUMENTACAO_IDOC_FORNECEDOR.htm">Fornecedores (CREMAS)</option>
                 <option value="DOCUMENTACAO_IDOC_MATERIAL.htm">Material (MATMAS)</option>
@@ -126,6 +127,7 @@
 
     <script>
         const allIdocFiles = [
+            'dados_parceiro.html',
             'DOCUMENTACAO_IDOC_CLIENTES.htm',
             'DOCUMENTACAO_IDOC_FORNECEDOR.htm',
             'DOCUMENTACAO_IDOC_MATERIAL.htm',
@@ -171,13 +173,9 @@
                         console.error(`Erro ao carregar o arquivo: ${fileName}`);
                         return [];
                     }
-
-                    // *** INÍCIO DA CORREÇÃO ***
-                    // A forma padrão .text() é a mais confiável, pois ela respeita 
-                    // a tag <meta charset="..."> definida no próprio arquivo HTML.
+                    
                     const htmlText = await response.text();
-                    // *** FIM DA CORREÇÃO ***
-
+                    
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlText, 'text/html');
                     

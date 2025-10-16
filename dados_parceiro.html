@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<TITLE> Documentação Estrutura de Dados BUPARTNER </TITLE>
+<link rel="stylesheet" href="estilos.css">
+</HEAD>
+<BODY>
+<HR>
+<h3><a name="IDOCTYPE">Documentação Estrutura de Dados: BUPARTNER</a></h3>
+<p><hr>
+<ul>
+<p>
+<li><b>BUPARTNER: Estrutura principal do Parceiro de Negócios</b>
+<p>
+Status : Necessário  ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#BUPARTNER_STRUCT"><i>estrutura</i></a>
+<ul>
+<p>
+<li><b>CENTRALDATA: Dados Centrais</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATA_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>ADDRESSDATA: Dados de Endereço</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :       9999      <p>
+<p>
+<a href="#ADDRESSDATA_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>TAX_DATA: Dados Fiscais</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :       9999      <p>
+<p>
+<a href="#TAX_DATA_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>BUSINESSPARTNERROLE: Funções do Parceiro de Negócios</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :       9999      <p>
+<p>
+<a href="#BUSINESSPARTNERROLE_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATAPERSON: Dados Pessoais</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATAPERSON_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATAORGANIZATION: Dados da Organização</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATAORGANIZATION_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATAGROUP: Dados de Grupo</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATAGROUP_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATA_X: Marcação de Campos para Edição (Dados Centrais)</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATA_X_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATAPERSON_X: Marcação de Campos para Edição (Dados Pessoais)</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATAPERSON_X_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATAORGANIZATION_X: Marcação de Campos para Edição (Dados da Organização)</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATAORGANIZATION_X_STRUCT"><i>estrutura</i></a>
+</p>
+<li><b>CENTRALDATAGROUP_X: Marcação de Campos para Edição (Dados de Grupo)</b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<a href="#CENTRALDATAGROUP_X_STRUCT"><i>estrutura</i></a>
+</p>
+</ul>
+</ul>
+<hr>
+<h1>
+<a name="SEGMENTSTRUCT">Estruturas de Segmento</a>
+</h1><p><hr>
+<ul>
+<p><li><h2><a name="BUPARTNER_STRUCT">BUPARTNER: Estrutura principal do Parceiro de Negócios</a></h2>
+<p>
+Definição de segmento BUPARTNER
+<p>
+<ol>
+<li>BUSINESSPARTNEREXTERN     : <b>Nº parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>NATURALPERSON     : <b>Parceiro negócios é válido como pessoa física a nível fiscal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNERCATEGORY     : <b>Categoria do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNERGROUP     : <b>Agrupamento de parceiros de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATA_STRUCT">CENTRALDATA: Dados Centrais</a></h2>
+<p>
+Definição de segmento CENTRALDATA
+<p>
+<ol>
+<li>AUTHORIZATIONGROUP     : <b>Grupo de autorizações</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>CENTRALARCHIVINGFLAG     : <b>Marcação para arquivamento central</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CENTRALBLOCK     : <b>Bloqueio central para parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>COMM_TYPE     : <b>Meio comunicação (chave) (administração endereços central)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>CONTACTALLOWANCE     : <b>Parceiro de negócios: permissão de contato</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>DATAORIGINTYPE     : <b>Tipos de origem dos dados</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>NOTRELEASED     : <b>Código: não liberado</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNEREXTERNAL     : <b>Nº parceiro de negócios no sistema externo</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 20 posições <br>
+<li>PARTNERLANGUAGE     : <b>Parceiro de negócio: idioma</b><p>
+<p>
+Ctg.dados interna : LANG<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNERLANGUAGEISO     : <b>Código de idiomas SAP de 2 dígitos</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>PARTNERTYPE     : <b>Tipo de parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>PRINT_MODE     : <b>Formato da impressão parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>SEARCHTERM1     : <b>Termo de pesquisa 1 para parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 20 posições <br>
+<li>SEARCHTERM2     : <b>Termo de pesquisa 2 para parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 20 posições <br>
+<li>TITLELETTER     : <b>Vocativo</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 50 posições <br>
+<li>TITLE_KEY     : <b>Chave de forma de tratamento</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="ADDRESSDATA_STRUCT">ADDRESSDATA: Dados de Endereço</a></h2>
+<p>
+Definição de segmento ADDRESSDATA
+<p>
+<ol>
+<li>BUILDING     : <b>Edifício (nº ou sigla)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 20 posições <br>
+<li>CHCKSTATUS     : <b>Status de verificação para file de localidades</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CITY     : <b>Cidade</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>CITY_NO     : <b>Codificação da localidade para file de localidades e ruas</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 12 posições <br>
+<li>COMM_TYPE     : <b>Meio comunicação (chave) (administração endereços central)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>COUNTRY     : <b>Chave do país/região</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>COUNTRYISO     : <b>Código ISO do país/região</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>COUNTY     : <b>Distrito</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>COUNTY_NO     : <b>Código para município</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 8 posições <br>
+<li>C_O_NAME     : <b>Nome c/o</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>DELI_SERV_NUMBER     : <b>Nº do serviço de entrega</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>DELI_SERV_TYPE     : <b>Tipo do serviço de entrega</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>DISTRICT     : <b>Bairro</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>DISTRCT_NO     : <b>Codificação do bairro para file de bairros e ruas</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 8 posições <br>
+<li>DONT_USE_P     : <b>Código para impossibilidade entrega em endereço caixa postal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>DONT_USE_S     : <b>Código para impossibilidade entrega no endereço de rua</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>EXTADDRESSNUMBER     : <b>Nº endereço em sistema externo</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 20 posições <br>
+<li>FLOOR     : <b>Andar do edifício</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>HOMECITYNO     : <b>Codificação local.residência diferente p/file ruas/localids.</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 12 posições <br>
+<li>HOME_CITY     : <b>Localidade de residência (diferente da localidade postal)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>HOUSE_NO     : <b>Nº</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>HOUSE_NO2     : <b>Complemento do nº</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>HOUSE_NO3     : <b>Área do nº (não suportado)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>LANGU     : <b>Código de idioma</b><p>
+<p>
+Ctg.dados interna : LANG<br>
+Comprim.int.: 1 posições <br>
+<li>LANGUISO     : <b>Código de idiomas SAP de 2 dígitos</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>LOCATION     : <b>Rua 5</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>MOVE_ADDR_GUID     : <b>ID único em representação de caracteres</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 32 posições <br>
+<li>MOVE_ADDRESS     : <b>Nº do endereço de destino de mudança em mudanças de endereço</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>MOVE_DATE     : <b>Data de mudança</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+<li>PBOXCIT_NO     : <b>Codificação localidade por caixa postal (file localidades)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 12 posições <br>
+<li>PCODE1_EXT     : <b>Ampl.p/cód.postal local, p.ex.cód.ZIP+4+2 (não suportado)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>PCODE2_EXT     : <b>Ampliação p/cód.postal da caixa postal (não suportada)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>PCODE3_EXT     : <b>Ampliação p/cód.postal de cliente importante (não suportada)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>POBOX_CTRY     : <b>País/região da caixa postal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>POSTL_COD1     : <b>Código postal da cidade</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>POSTL_COD2     : <b>Código postal da cx.postal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>POSTL_COD3     : <b>Código postal da empresa (para clientes importantes)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>PO_BOX     : <b>Caixa postal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>PO_BOX_CIT     : <b>Localidade da caixa postal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>PO_BOX_LOBBY     : <b>Agência da caixa postal (PO Box Lobby)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>PO_BOX_REG     : <b>Região para a caixa postal (país, estado, província, ...)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>PO_CTRYISO     : <b>Código ISO do país/região</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>PO_W_O_NO     : <b>Código: indicação de caixa postal sem nº</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>REGION     : <b>Região (estado, província, município)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>REGIOGROUP     : <b>Agrupamento da estrutura regional</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 8 posições <br>
+<li>ROOM_NO     : <b>Nº morada, apartamento ou sala</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>STANDARDADDRESS     : <b>Seleção: endereço é endereço standard</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>STREET     : <b>Rua</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 60 posições <br>
+<li>STREET_NO     : <b>Codificação da rua para file de localidades e ruas</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 12 posições <br>
+<li>STR_ABBR     : <b>Abreviatura da denominação de rua (não suportada)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>STR_SUPPL1     : <b>Rua 2</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>STR_SUPPL2     : <b>Rua 3</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>STR_SUPPL3     : <b>Rua 4</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>TAXJURCODE     : <b>Domicílio fiscal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 15 posições <br>
+<li>TIME_ZONE     : <b>Fuso horário do endereço</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 6 posições <br>
+<li>TOWNSHIP     : <b>Cidade</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>TOWNSHIP_NO     : <b>Código para cidade</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 8 posições <br>
+<li>TRANSPZONE     : <b>Zona de transporte para a qual ou da qual é fornecido</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>VALIDFROMDATE     : <b>Data de validade (válido desde)</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+<li>VALIDTODATE     : <b>Data de validade (válido até)</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="TAX_DATA_STRUCT">TAX_DATA: Dados Fiscais</a></h2>
+<p>
+Definição de segmento TAX_DATA
+<p>
+<ol>
+<li>TAXNUMBER     : <b>Nº ID fiscal para parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 20 posições <br>
+<li>TAXNUMXL     : <b>Nº de identificação fiscal do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 60 posições <br>
+<li>TAXTYPE     : <b>Tipo de nº fiscal</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="BUSINESSPARTNERROLE_STRUCT">BUSINESSPARTNERROLE: Funções do Parceiro de Negócios</a></h2>
+<p>
+Definição de segmento BUSINESSPARTNERROLE
+<p>
+<ol>
+<li>PARTNERROLE     : <b>Função de parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 6 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATAPERSON_STRUCT">CENTRALDATAPERSON: Dados Pessoais</a></h2>
+<p>
+Definição de segmento CENTRALDATAPERSON
+<p>
+<ol>
+<li>BIRTHDATE     : <b>Data de nascimento do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+<li>BIRTHDT_STATUS     : <b>Data de nascimento: status</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>BIRTHNAME     : <b>Sobrenome de solteiro do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>BIRTHPLACE     : <b>Localidade de nascimento do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>CORRESPONDLANGUAGE     : <b>Parceiro de negócio: idioma de correspondência</b><p>
+<p>
+Ctg.dados interna : LANG<br>
+Comprim.int.: 1 posições <br>
+<li>CORRESPONDLANGUAGEISO     : <b>Código de idiomas SAP de 2 dígitos</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>COUNTRYORIGIN     : <b>País/região de procedência em não residentes</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>DEATHDATE     : <b>Data de morte do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+<li>EMPLOYER     : <b>Nome do empregador de uma pessoa física</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 35 posições <br>
+<li>FIRSTNAME     : <b>1º nome do parceiro de negócios (pessoa)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>FULLNAME     : <b>Nome completo</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 80 posições <br>
+<li>GENDER     : <b>Sexo do parceiro de negócios (pessoa)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>INITIALS     : <b>Inicial do segundo nome ou iniciais da pessoa</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>LASTNAME     : <b>Sobrenome do parceiro de negócios (pessoa)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>MARITALSTATUS     : <b>Estado civil do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>MIDDLENAME     : <b>2º nome ou nome do meio da pessoa</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>NAMCOUNTRY     : <b>País/região para regra de edição de nomes</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>NAMCOUNTRYISO     : <b>Código ISO do país/região</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>NAMEFORMAT     : <b>Formato para a edição de nomes</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>NATIONALITY     : <b>Nacionalidade do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 3 posições <br>
+<li>NATIONALITYISO     : <b>Código ISO do país/região</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>NICKNAME     : <b>O parceiro de negócios é conhecido como (pessoa)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>OCCUPATION     : <b>Ocupação do parceiro de negócios</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>PREFIX1     : <b>Prefixo do nome (chave)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>PREFIX2     : <b>2º prefixo do nome (chave)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>SECONDNAME     : <b>2º sobrenome da pessoa</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>SEX     : <b>Sexo do parceiro de negócios (pessoa)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>TITLE_ACA1     : <b>Título acadêmico: chave</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>TITLE_ACA2     : <b>Segundo título académico (chave)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>TITLE_SPPL     : <b>Complemento do nome, p.ex.título nobiliárquico (chave)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATAORGANIZATION_STRUCT">CENTRALDATAORGANIZATION: Dados da Organização</a></h2>
+<p>
+Definição de segmento CENTRALDATAORGANIZATION
+<p>
+<ol>
+<li>CHK_DIGIT     : <b>Dígito de controle da matrícula internacional da empresa</b><p>
+<p>
+Ctg.dados interna : NUMC<br>
+Comprim.int.: 1 posições <br>
+<li>FOUNDATIONDATE     : <b>Data de fundação da organização</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+<li>INDUSTRYSECTOR     : <b>Setor industrial</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 10 posições <br>
+<li>LEGALFORM     : <b>PN: forma jurídica da organização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>LEGALORG     : <b>Pessoa jurídica da organização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 2 posições <br>
+<li>LIQUIDATIONDATE     : <b>Data de liquidação da organização</b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 8 posições <br>
+<li>LOC_NO_1     : <b>Nº global de localização (parte 1)</b><p>
+<p>
+Ctg.dados interna : NUMC<br>
+Comprim.int.: 7 posições <br>
+<li>LOC_NO_2     : <b>Número global de localização (parte 2)</b><p>
+<p>
+Ctg.dados interna : NUMC<br>
+Comprim.int.: 5 posições <br>
+<li>NAME1     : <b>Nome 1 da organização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>NAME2     : <b>Nome 2 da organização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>NAME3     : <b>Nome 3 da organização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>NAME4     : <b>Nome 4 da organização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATAGROUP_STRUCT">CENTRALDATAGROUP: Dados de Grupo</a></h2>
+<p>
+Definição de segmento CENTRALDATAGROUP
+<p>
+<ol>
+<li>GROUPTYPE     : <b>Tipo de grupo</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 4 posições <br>
+<li>NAMEGROUP1     : <b>Nome 1 (grupo)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+<li>NAMEGROUP2     : <b>Nome 2 (grupo)</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 40 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATA_X_STRUCT">CENTRALDATA_X: Marcação de Campos para Edição (Dados Centrais)</a></h2>
+<p>
+Definição de segmento CENTRALDATA_X
+<p>
+<ol>
+<li>AUTHORIZATIONGROUP     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CENTRALARCHIVINGFLAG     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CENTRALBLOCK     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>COMM_TYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CONTACTALLOWANCE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>DATAORIGINTYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NOTRELEASED     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNEREXTERNAL     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNERLANGUAGE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNERLANGUAGEISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PARTNERTYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PRINT_MODE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>SEARCHTERM1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>SEARCHTERM2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>TITLELETTER     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>TITLE_KEY     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATAPERSON_X_STRUCT">CENTRALDATAPERSON_X: Marcação de Campos para Edição (Dados Pessoais)</a></h2>
+<p>
+Definição de segmento CENTRALDATAPERSON_X
+<p>
+<ol>
+<li>BIRTHDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>BIRTHDT_STATUS     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>BIRTHNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>BIRTHPLACE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CORRESPONDLANGUAGE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>CORRESPONDLANGUAGEISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>COUNTRYORIGIN     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>DEATHDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>EMPLOYER     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>FIRSTNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>FULLNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>GENDER     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>INITIALS     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>LASTNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>MARITALSTATUS     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>MIDDLENAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAMCOUNTRY     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAMCOUNTRYISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAMEFORMAT     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NATIONALITY     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NATIONALITYISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NICKNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>OCCUPATION     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PREFIX1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>PREFIX2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>SECONDNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>SEX     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>TITLE_ACA1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>TITLE_ACA2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>TITLE_SPPL     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATAORGANIZATION_X_STRUCT">CENTRALDATAORGANIZATION_X: Marcação de Campos para Edição (Dados da Organização)</a></h2>
+<p>
+Definição de segmento CENTRALDATAORGANIZATION_X
+<p>
+<ol>
+<li>CHK_DIGIT     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>FOUNDATIONDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>INDUSTRYSECTOR     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>LEGALFORM     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>LEGALORG     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>LIQUIDATIONDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>LOC_NO_1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>LOC_NO_2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAME1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAME2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAME3     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAME4     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+</ol>
+<p>
+<p><li><h2><a name="CENTRALDATAGROUP_X_STRUCT">CENTRALDATAGROUP_X: Marcação de Campos para Edição (Dados de Grupo)</a></h2>
+<p>
+Definição de segmento CENTRALDATAGROUP_X
+<p>
+<ol>
+<li>GROUPTYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAMEGROUP1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+<li>NAMEGROUP2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 1 posições <br>
+</ol>
+<p>
+</ul>
+<p>
+<hr>
+<p>
+<h2><a name="INFO"> Info... </a></h2>
+Documento HTML gerado a partir de dados_parceiro.html.<br>
+</BODY>
+</HTML>
