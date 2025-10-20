@@ -211,7 +211,7 @@
             <div id="subVariableContainer" class="hidden-container"><div class="form-group"><label for="subVariableInput">Nome da Variável</label><input type="text" id="subVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="subStartInput">Posição Inicial (Y)</label><input type="number" id="subStartInput" placeholder="Ex: 1" min="1"></div>
             <div class="form-group"><label for="subEndInput">Tamanho (Z)</label><input type="number" id="subEndInput" placeholder="Ex: 10" min="1"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="subResultQuery">Query Gerada</label><textarea id="subResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="subResultQuery">Query Gerada</label><textarea id="subResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
         <div id="caseWhenFields" class="query-fields">
             <h3>Parâmetros para CASE WHEN</h3>
@@ -220,7 +220,7 @@
             <div id="caseVariableContainer" class="hidden-container"><div class="form-group"><label for="caseVariableInput">Nome da Variável</label><input type="text" id="caseVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;"><label>Condições (WHEN ... THEN ...)</label><div id="whenClausesContainer"></div><button onclick="addWhenClause()" class="add-btn" type="button">+ Adicionar WHEN</button><hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
             <div class="form-group"><label>Condição Final (ELSE)</label><div class="radio-group else-options"><label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor</label><label><input type="radio" name="elseOption" value="customValue" onchange="toggleElseInput()"> Usar outro valor</label><label><input type="radio" name="elseOption" value="guid" onchange="toggleElseInput()"> Usar Outro Campo</label><label><input type="radio" name="elseOption" value="substring" onchange="toggleElseInput()"> Substring</label><label><input type="radio" name="elseOption" value="translate" onchange="toggleElseInput()"> Translate</label><label><input type="radio" name="elseOption" value="concat" onchange="toggleElseInput()"> Concat</label><label><input type="radio" name="elseOption" value="dateFormat" onchange="toggleElseInput()"> Formatar Data</label><label><input type="radio" name="elseOption" value="lpad" onchange="toggleElseInput()"> Zeros à Esquerda</label></div><div id="elseCustomValueContainer" class="hidden-container"><input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE (pode ser vazio)"></div><div id="elseGuidContainer" class="hidden-container"><div class="flex-container"><input type="text" id="elseStepInput" placeholder="Etapa" style="flex:1;"><input type="text" id="elseGuidInput" placeholder="GUID" style="flex:2;"></div></div><div id="elseSubstringContainer" class="hidden-container nested-group"></div><div id="elseTranslateContainer" class="hidden-container nested-group"></div><div id="elseConcatContainer" class="hidden-container nested-group"></div><div id="elseDateFormatContainer" class="hidden-container nested-group"></div><div id="elseLpadContainer" class="hidden-container nested-group"></div></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
         <div id="translateFields" class="query-fields">
             <h3>Parâmetros para TRANSLATE</h3>
@@ -229,10 +229,10 @@
             <div id="translateVariableContainer" class="hidden-container"><div class="form-group"><label for="translateVariableInput">Nome da Variável</label><input type="text" id="translateVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="translateFromInput">Traduzir De (caracteres a serem trocados)</label><input type="text" id="translateFromInput" placeholder="Ex: ,"></div>
             <div class="form-group"><label for="translateToInput">Traduzir Para (novos caracteres)</label><input type="text" id="translateToInput" placeholder="Ex: . (pode ser deixado em branco)"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
         <div id="concatFields" class="query-fields">
-            <h3>Parâmetros para CONCAT()</h3><label>Itens para Concatenar</label><div id="concatItemsContainer"></div><button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button><button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button><div class="result-box"><label for="concatResultQuery">Query Gerada</label><textarea id="concatResultQuery" readonly></textarea></div>
+            <h3>Parâmetros para CONCAT()</h3><label>Itens para Concatenar</label><div id="concatItemsContainer"></div><button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button><button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button><div class="result-box"><label for="concatResultQuery">Query Gerada</label><textarea id="concatResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
         <div id="dateFormatFields" class="query-fields">
             <h3>Parâmetros para Formatar Data</h3>
@@ -241,7 +241,7 @@
             <div id="dateFormatVariableContainer" class="hidden-container"><div class="form-group"><label for="dateFormatVariableInput">Nome da Variável</label><input type="text" id="dateFormatVariableInput" placeholder="Ex: minha_variavel_data"></div></div>
             <div class="form-group"><label for="dateFormatInputMask">Formato de Entrada da Data (formato atual)</label><input type="text" id="dateFormatInputMask" placeholder="Ex: YYYY-MM-DD, DDMMYYYY, YYYY/MM/DD HH24:MI:SS"></div>
             <div class="form-group"><label for="dateFormatOutputMask">Máscara de Formatação de Saída (formato desejado)</label><input type="text" id="dateFormatOutputMask" placeholder="Ex: YYYYMMDD, DD/MM/YYYY, YYYY-MM-DD HH24:MI:SS"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="dateFormatResultQuery">Query Gerada</label><textarea id="dateFormatResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="dateFormatResultQuery">Query Gerada</label><textarea id="dateFormatResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
         <div id="lpadFields" class="query-fields">
             <h3>Parâmetros para Adicionar Zeros à Esquerda (LPAD)</h3>
@@ -249,14 +249,14 @@
             <div id="lpadGuidContainer"><div class="form-group"><label for="lpadStepInput">Número da Etapa (X)</label><input type="text" id="lpadStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="lpadGuidInput">GUID do Campo</label><input type="text" id="lpadGuidInput" placeholder="Cole o GUID aqui"></div></div>
             <div id="lpadVariableContainer" class="hidden-container"><div class="form-group"><label for="lpadVariableInput">Nome da Variável</label><input type="text" id="lpadVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="lpadLengthInput">Tamanho Final do Campo (com os zeros)</label><input type="number" id="lpadLengthInput" placeholder="Ex: 10" min="1"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="lpadResultQuery">Query Gerada</label><textarea id="lpadResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="lpadResultQuery">Query Gerada</label><textarea id="lpadResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
         <div id="joinExpansionFields" class="query-fields">
             <h3>Parâmetros para Expansão de JOIN</h3>
             <div class="form-group"><label for="joinTenantInput">Tenant</label><input type="text" id="joinTenantInput" placeholder="Ex: 4mdg"></div>
             <div class="form-group"><label for="joinAliasInput">Apelido (alias) para a tabela</label><input type="text" id="joinAliasInput" placeholder="Ex: ans_centro"></div>
             <div class="form-group"><label for="joinGuidInput">GUID da Etapa</label><input type="text" id="joinGuidInput" placeholder="Cole o GUID da etapa aqui"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="joinResultQuery">Query Gerada</label><textarea id="joinResultQuery" readonly></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="joinResultQuery">Query Gerada</label><textarea id="joinResultQuery" readonly><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></textarea></div>
         </div>
     </div>
 
@@ -301,6 +301,33 @@
     <script>
         let concatItemCounter = 0;
         let whenClauseCounter = 0;
+
+        function copyQuery(textareaId, buttonElement) {
+            const textarea = document.getElementById(textareaId);
+            const textToCopy = textarea.value;
+
+            // Não faz nada se não houver texto para copiar
+            if (!textToCopy) {
+                return;
+            }
+
+            // Usa a API moderna do navegador para copiar
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Feedback visual para o usuário
+                const originalText = buttonElement.textContent;
+                buttonElement.textContent = 'Copiado!';
+                buttonElement.style.backgroundColor = 'var(--success-color)';
+
+                // Volta ao estado original após 2 segundos
+                setTimeout(() => {
+                    buttonElement.textContent = originalText;
+                    buttonElement.style.backgroundColor = 'var(--secondary-color)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao tentar copiar a query: ', err);
+                alert('Ocorreu um erro ao copiar a query.');
+            });
+        }
 
         // Função para gerar o HTML de um campo de origem (GUID vs Variável)
         function createSourceFieldHtml(prefix, idCounter) {
