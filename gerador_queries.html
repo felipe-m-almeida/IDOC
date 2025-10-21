@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="estilos.css">
 
     <style>
+        /* Estilos mantidos da versão anterior */
         :root {
             --primary-color: #007bff;
             --secondary-color: #6c757d;
             --success-color: #28a745;
             --danger-color: #dc3545;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -28,7 +29,7 @@
         .back-link:hover {
             text-decoration: underline;
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
@@ -36,7 +37,7 @@
             margin-bottom: 20px;
         }
 
-        input[type="text"], input[type="number"], select {
+        input[type="text"], input[type="number"], select, textarea { /* Incluído textarea */
             width: 100%;
             padding: 12px 15px;
             font-size: 16px;
@@ -47,13 +48,20 @@
             height: 48px;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
+        textarea { /* Ajuste específico para textarea */
+             min-height: 80px; /* Reduzido para multi-valor */
+             height: auto;
+             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+             font-size: 15px;
+             resize: vertical;
+        }
         input:focus, select:focus, textarea:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
             outline: none;
         }
 
-        select#queryType {
+        select { /* Estilo específico para selects */
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -63,7 +71,7 @@
             background-size: .65em auto;
             padding-right: 40px;
         }
-        
+
         button {
             width: 100%;
             padding: 12px;
@@ -83,7 +91,7 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
-        
+
         .add-btn { background-color: var(--success-color); font-size: 14px; padding: 10px; margin-top: 0; height: auto; }
         .add-btn:hover { background-color: #218838; }
 
@@ -95,8 +103,22 @@
         .query-fields > h3 { color: #343a40; text-align: left; margin-bottom: 25px; font-size: 1.5em; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
 
         .when-clause, .concat-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px; padding: 20px; border: 1px solid #dee2e6; border-radius: 8px; flex-wrap: wrap; background-color: #f8f9fa; }
-        
-        textarea { width: 100%; min-height: 150px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 15px; padding: 15px; border: 1px solid #ced4da; border-radius: 5px; background-color: #e9ecef; color: #495057; resize: vertical; box-sizing: border-box; }
+
+        /* Ajustado textarea resultado */
+        textarea.result-query {
+             width: 100%;
+             min-height: 150px;
+             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+             font-size: 15px;
+             padding: 15px;
+             border: 1px solid #ced4da;
+             border-radius: 5px;
+             background-color: #e9ecef;
+             color: #495057;
+             resize: vertical;
+             box-sizing: border-box;
+             height: auto; /* Para permitir expansão */
+        }
         .hidden-container { display: none; }
 
         .help-btn {
@@ -116,66 +138,19 @@
             background-color: #5a6268;
             transform: translateY(-2px) scale(1.05);
         }
+        .form-group { margin-bottom: 15px; } /* Espaçamento entre grupos de formulário */
+        .radio-group label { margin-right: 15px; } /* Espaçamento entre radios */
+        .flex-container { display: flex; gap: 10px; } /* Container flexível genérico */
 
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px 30px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 700px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .modal-header h2 {
-            margin: 0;
-            color: var(--primary-color);
-        }
-
-        .close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-btn:hover, .close-btn:focus {
-            color: black;
-            text-decoration: none;
-        }
-        
-        .modal-body h4 {
-            color: #343a40;
-            margin-top: 20px;
-        }
-        .modal-body code {
-            background-color: #e4e4e4;
-            padding: 3px 6px;
-            border-radius: 4px;
-        }
-        
+        /* Estilos do modal mantidos da versão anterior */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); animation: fadeIn 0.3s; }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px 30px; border: 1px solid #888; width: 80%; max-width: 700px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideIn 0.3s; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #dee2e6; padding-bottom: 15px; margin-bottom: 20px; }
+        .modal-header h2 { margin: 0; color: var(--primary-color); }
+        .close-btn { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-btn:hover, .close-btn:focus { color: black; text-decoration: none; }
+        .modal-body h4 { color: #343a40; margin-top: 20px; }
+        .modal-body code { background-color: #e4e4e4; padding: 3px 6px; border-radius: 4px; }
         @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
         @keyframes slideIn { from {transform: translateY(-50px)} to {transform: translateY(0)} }
     </style>
@@ -184,7 +159,7 @@
 
     <div class="container">
         <a href="index.html" class="back-link">&larr; Voltar ao Início</a>
-        
+
         <div class="header-container">
             <h1>Gerador de Queries</h1>
             <button id="helpButton" class="help-btn" title="Ajuda">?</button>
@@ -211,8 +186,9 @@
             <div id="subVariableContainer" class="hidden-container"><div class="form-group"><label for="subVariableInput">Nome da Variável</label><input type="text" id="subVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="subStartInput">Posição Inicial (Y)</label><input type="number" id="subStartInput" placeholder="Ex: 1" min="1"></div>
             <div class="form-group"><label for="subEndInput">Tamanho (Z)</label><input type="number" id="subEndInput" placeholder="Ex: 10" min="1"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="subResultQuery">Query Gerada</label><textarea id="subResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="subResultQuery">Query Gerada</label><textarea id="subResultQuery" class="result-query" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
         </div>
+
         <div id="caseWhenFields" class="query-fields">
             <h3>Parâmetros para CASE WHEN</h3>
             <div class="form-group"><label>Campo Principal (a ser comparado)</label><div class="radio-group"><label><input type="radio" name="caseSourceType" value="guid" checked onchange="toggleSourceFields('case')"> GUID</label><label><input type="radio" name="caseSourceType" value="variable" onchange="toggleSourceFields('case')"> Variável</label></div></div>
@@ -220,8 +196,9 @@
             <div id="caseVariableContainer" class="hidden-container"><div class="form-group"><label for="caseVariableInput">Nome da Variável</label><input type="text" id="caseVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;"><label>Condições (WHEN ... THEN ...)</label><div id="whenClausesContainer"></div><button onclick="addWhenClause()" class="add-btn" type="button">+ Adicionar WHEN</button><hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
             <div class="form-group"><label>Condição Final (ELSE)</label><div class="radio-group else-options"><label><input type="radio" name="elseOption" value="sameField" checked onchange="toggleElseInput()"> Manter o mesmo valor</label><label><input type="radio" name="elseOption" value="customValue" onchange="toggleElseInput()"> Usar outro valor</label><label><input type="radio" name="elseOption" value="guid" onchange="toggleElseInput()"> Usar Outro Campo</label><label><input type="radio" name="elseOption" value="substring" onchange="toggleElseInput()"> Substring</label><label><input type="radio" name="elseOption" value="translate" onchange="toggleElseInput()"> Translate</label><label><input type="radio" name="elseOption" value="concat" onchange="toggleElseInput()"> Concat</label><label><input type="radio" name="elseOption" value="dateFormat" onchange="toggleElseInput()"> Formatar Data</label><label><input type="radio" name="elseOption" value="lpad" onchange="toggleElseInput()"> Zeros à Esquerda</label></div><div id="elseCustomValueContainer" class="hidden-container"><input type="text" id="elseValueInput" placeholder="Digite o valor para o ELSE (pode ser vazio)"></div><div id="elseGuidContainer" class="hidden-container"><div class="flex-container"><input type="text" id="elseStepInput" placeholder="Etapa" style="flex:1;"><input type="text" id="elseGuidInput" placeholder="GUID" style="flex:2;"></div></div><div id="elseSubstringContainer" class="hidden-container nested-group"></div><div id="elseTranslateContainer" class="hidden-container nested-group"></div><div id="elseConcatContainer" class="hidden-container nested-group"></div><div id="elseDateFormatContainer" class="hidden-container nested-group"></div><div id="elseLpadContainer" class="hidden-container nested-group"></div></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="caseResultQuery">Query Gerada</label><textarea id="caseResultQuery" class="result-query" readonly></textarea><button class="copy-btn" onclick="copyQuery('caseResultQuery', this)">Copiar</button></div>
         </div>
+
         <div id="translateFields" class="query-fields">
             <h3>Parâmetros para TRANSLATE</h3>
             <div class="form-group"><label>Qual o tipo de campo de origem?</label><div class="radio-group"><label><input type="radio" name="translateSourceType" value="guid" checked onchange="toggleSourceFields('translate')"> GUID</label><label><input type="radio" name="translateSourceType" value="variable" onchange="toggleSourceFields('translate')"> Variável</label></div></div>
@@ -229,11 +206,13 @@
             <div id="translateVariableContainer" class="hidden-container"><div class="form-group"><label for="translateVariableInput">Nome da Variável</label><input type="text" id="translateVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="translateFromInput">Traduzir De (caracteres a serem trocados)</label><input type="text" id="translateFromInput" placeholder="Ex: ,"></div>
             <div class="form-group"><label for="translateToInput">Traduzir Para (novos caracteres)</label><input type="text" id="translateToInput" placeholder="Ex: . (pode ser deixado em branco)"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="translateResultQuery">Query Gerada</label><textarea id="translateResultQuery" class="result-query" readonly></textarea><button class="copy-btn" onclick="copyQuery('translateResultQuery', this)">Copiar</button></div>
         </div>
+
         <div id="concatFields" class="query-fields">
-            <h3>Parâmetros para CONCAT()</h3><label>Itens para Concatenar</label><div id="concatItemsContainer"></div><button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button><button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button><div class="result-box"><label for="concatResultQuery">Query Gerada</label><textarea id="concatResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
+            <h3>Parâmetros para CONCAT()</h3><label>Itens para Concatenar</label><div id="concatItemsContainer"></div><button onclick="addConcatItem()" class="add-btn" type="button">+ Adicionar Item para Concatenar</button><button onclick="generateQuery()" style="margin-top: 20px;">Gerar Query</button><div class="result-box"><label for="concatResultQuery">Query Gerada</label><textarea id="concatResultQuery" class="result-query" readonly></textarea><button class="copy-btn" onclick="copyQuery('concatResultQuery', this)">Copiar</button></div>
         </div>
+
         <div id="dateFormatFields" class="query-fields">
             <h3>Parâmetros para Formatar Data</h3>
             <div class="form-group"><label>Qual o tipo de campo de origem (que contém a data)?</label><div class="radio-group"><label><input type="radio" name="dateFormatSourceType" value="guid" checked onchange="toggleSourceFields('dateFormat')"> GUID</label><label><input type="radio" name="dateFormatSourceType" value="variable" onchange="toggleSourceFields('dateFormat')"> Variável</label></div></div>
@@ -241,22 +220,24 @@
             <div id="dateFormatVariableContainer" class="hidden-container"><div class="form-group"><label for="dateFormatVariableInput">Nome da Variável</label><input type="text" id="dateFormatVariableInput" placeholder="Ex: minha_variavel_data"></div></div>
             <div class="form-group"><label for="dateFormatInputMask">Formato de Entrada da Data (formato atual)</label><input type="text" id="dateFormatInputMask" placeholder="Ex: YYYY-MM-DD, DDMMYYYY, YYYY/MM/DD HH24:MI:SS"></div>
             <div class="form-group"><label for="dateFormatOutputMask">Máscara de Formatação de Saída (formato desejado)</label><input type="text" id="dateFormatOutputMask" placeholder="Ex: YYYYMMDD, DD/MM/YYYY, YYYY-MM-DD HH24:MI:SS"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="dateFormatResultQuery">Query Gerada</label><textarea id="dateFormatResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="dateFormatResultQuery">Query Gerada</label><textarea id="dateFormatResultQuery" class="result-query" readonly></textarea><button class="copy-btn" onclick="copyQuery('dateFormatResultQuery', this)">Copiar</button></div>
         </div>
+
         <div id="lpadFields" class="query-fields">
             <h3>Parâmetros para Adicionar Zeros à Esquerda (LPAD)</h3>
             <div class="form-group"><label>Qual o tipo de campo de origem?</label><div class="radio-group"><label><input type="radio" name="lpadSourceType" value="guid" checked onchange="toggleSourceFields('lpad')"> GUID</label><label><input type="radio" name="lpadSourceType" value="variable" onchange="toggleSourceFields('lpad')"> Variável</label></div></div>
             <div id="lpadGuidContainer"><div class="form-group"><label for="lpadStepInput">Número da Etapa (X)</label><input type="text" id="lpadStepInput" placeholder="Ex: 1 ou sub"></div><div class="form-group"><label for="lpadGuidInput">GUID do Campo</label><input type="text" id="lpadGuidInput" placeholder="Cole o GUID aqui"></div></div>
             <div id="lpadVariableContainer" class="hidden-container"><div class="form-group"><label for="lpadVariableInput">Nome da Variável</label><input type="text" id="lpadVariableInput" placeholder="Ex: minha_variavel"></div></div>
             <div class="form-group"><label for="lpadLengthInput">Tamanho Final do Campo (com os zeros)</label><input type="number" id="lpadLengthInput" placeholder="Ex: 10" min="1"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="lpadResultQuery">Query Gerada</label><textarea id="lpadResultQuery" readonly></textarea><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="lpadResultQuery">Query Gerada</label><textarea id="lpadResultQuery" class="result-query" readonly></textarea><button class="copy-btn" onclick="copyQuery('lpadResultQuery', this)">Copiar</button></div>
         </div>
-        <div id="joinExpansionFields" class="query-fields">
+
+         <div id="joinExpansionFields" class="query-fields">
             <h3>Parâmetros para Expansão de JOIN</h3>
             <div class="form-group"><label for="joinTenantInput">Tenant</label><input type="text" id="joinTenantInput" placeholder="Ex: 4mdg"></div>
             <div class="form-group"><label for="joinAliasInput">Apelido (alias) para a tabela</label><input type="text" id="joinAliasInput" placeholder="Ex: ans_centro"></div>
             <div class="form-group"><label for="joinGuidInput">GUID da Etapa</label><input type="text" id="joinGuidInput" placeholder="Cole o GUID da etapa aqui"></div>
-            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="joinResultQuery">Query Gerada</label><textarea id="joinResultQuery" readonly><button class="copy-btn" onclick="copyQuery('subResultQuery', this)">Copiar</button></textarea></div>
+            <button onclick="generateQuery()">Gerar Query</button><div class="result-box"><label for="joinResultQuery">Query Gerada</label><textarea id="joinResultQuery" class="result-query" readonly><button class="copy-btn" onclick="copyQuery('joinResultQuery', this)">Copiar</button></textarea></div>
         </div>
     </div>
 
@@ -272,8 +253,8 @@
                 <p><b>Quando usar:</b> Útil para pegar apenas alguns caracteres de um campo. Por exemplo, extrair os 4 primeiros dígitos de um código de material ou o dia de uma data no formato 'YYYYMMDD'.</p>
 
                 <h4><code>CASE WHEN</code></h4>
-                <p><b>O que faz:</b> Cria uma lógica condicional, como um "Se, Então, Senão". Você pode definir várias condições (<code>WHEN</code>) e os resultados (<code>THEN</code>) para cada uma, além de um resultado padrão (<code>ELSE</code>).</p>
-                <p><b>Quando usar:</b> Perfeito para mapear valores (ex: De '01' para 'Ativo', '02' para 'Inativo') ou para aplicar transformações diferentes dependendo do valor de um campo.</p>
+                <p><b>O que faz:</b> Cria uma lógica condicional, como um "Se, Então, Senão". Você pode definir várias condições (<code>WHEN</code>) e os resultados (<code>THEN</code>) para cada uma, além de um resultado padrão (<code>ELSE</code>). Agora permite comparar por igualdade (<code>=</code>), diferença (<code>!=</code>) ou verificar se o valor está em uma lista (<code>IN</code> / <code>NOT IN</code>).</p>
+                <p><b>Quando usar:</b> Perfeito para mapear valores (ex: De '01' para 'Ativo', '02' para 'Inativo'), para aplicar transformações diferentes dependendo do valor de um campo, ou para tratar múltiplos valores de uma vez (ex: Se o país for 'BR', 'AR' ou 'UY', então 'América do Sul').</p>
 
                 <h4><code>TRANSLATE</code></h4>
                 <p><b>O que faz:</b> Substitui caracteres específicos em um texto. É como um "Localizar e Substituir" para múltiplos caracteres de uma só vez.</p>
@@ -282,11 +263,11 @@
                 <h4><code>CONCAT()</code></h4>
                 <p><b>O que faz:</b> Junta (concatena) dois ou mais textos ou campos em um único resultado.</p>
                 <p><b>Quando usar:</b> Para criar um campo composto a partir de outros. Por exemplo, juntar os campos 'Rua', 'Número' e 'Bairro' para formar um endereço completo.</p>
-                
+
                 <h4><code>Formatar Data</code></h4>
                 <p><b>O que faz:</b> Converte um texto que representa uma data de um formato para outro.</p>
                 <p><b>Quando usar:</b> Quando você recebe uma data em um formato (ex: <code>DD/MM/YYYY</code>) e precisa enviá-la em outro (ex: <code>YYYY-MM-DD</code>).</p>
-                
+
                 <h4><code>LPAD</code> (Adicionar zeros à esquerda)</h4>
                 <p><b>O que faz:</b> Preenche um texto à esquerda com um caractere (geralmente '0') até que ele atinja um tamanho total específico.</p>
                 <p><b>Quando usar:</b> Essencial quando um sistema de destino exige que um código tenha um tamanho fixo. Por exemplo, um código de cliente '123' precisa ser enviado como '0000000123'.</p>
@@ -306,19 +287,12 @@
             const textarea = document.getElementById(textareaId);
             const textToCopy = textarea.value;
 
-            // Não faz nada se não houver texto para copiar
-            if (!textToCopy) {
-                return;
-            }
+            if (!textToCopy) return;
 
-            // Usa a API moderna do navegador para copiar
             navigator.clipboard.writeText(textToCopy).then(() => {
-                // Feedback visual para o usuário
                 const originalText = buttonElement.textContent;
                 buttonElement.textContent = 'Copiado!';
                 buttonElement.style.backgroundColor = 'var(--success-color)';
-
-                // Volta ao estado original após 2 segundos
                 setTimeout(() => {
                     buttonElement.textContent = originalText;
                     buttonElement.style.backgroundColor = 'var(--secondary-color)';
@@ -329,7 +303,6 @@
             });
         }
 
-        // Função para gerar o HTML de um campo de origem (GUID vs Variável)
         function createSourceFieldHtml(prefix, idCounter) {
             const uniqueName = `${prefix}_${idCounter}`;
             return `
@@ -346,10 +319,9 @@
                     <input type="text" class="${prefix}-variable" placeholder="Nome da Variável">
                 </div>`;
         }
-        
-        // Função para gerar o HTML dos itens de concatenação
+
         function createConcatItemHtml(prefix, id) {
-            return `
+             return `
                 <div class="concat-item" data-id="${id}">
                     <div style="width: 100%; display: flex; flex-direction: column; gap: 10px;">
                         <div class="radio-group">
@@ -372,7 +344,6 @@
                 </div>`;
         }
 
-        // Função para adicionar um item de concatenação dentro do CASE WHEN
         function addCaseConcatItem(button) {
             const container = button.previousElementSibling;
             const prefix = container.id.includes('else') ? 'else' : `then_${container.closest('.when-clause').dataset.id}`;
@@ -385,7 +356,7 @@
 
         document.getElementById('queryType').addEventListener('change', function() {
             document.querySelectorAll('.query-fields').forEach(div => div.style.display = 'none');
-            document.querySelectorAll('textarea').forEach(area => area.value = '');
+            document.querySelectorAll('.result-query').forEach(area => area.value = ''); // Alterado para classe .result-query
             const selectedType = this.value;
             const fieldsDiv = document.getElementById(selectedType + 'Fields');
             if (fieldsDiv) { fieldsDiv.style.display = 'block'; }
@@ -402,6 +373,7 @@
             document.getElementById(`${prefix}VariableContainer`).style.display = (sourceType === 'variable') ? 'block' : 'none';
         }
 
+        // *** MODIFICADO addWhenClause ***
         function addWhenClause() {
             whenClauseCounter++;
             const container = document.getElementById('whenClausesContainer');
@@ -409,18 +381,34 @@
             newClause.className = 'when-clause';
             newClause.dataset.id = whenClauseCounter; // Add unique ID for radio button names
             newClause.innerHTML = `
-                <div class="clause-section">
+                <div class="clause-section" style="flex: 1;">
                     <label>Comparar com (WHEN)</label>
                     <div class="radio-group">
                         <label><input type="radio" name="whenType_${whenClauseCounter}" value="value" checked onchange="toggleWhenThenFields(this)"> Valor Fixo</label>
                         <label><input type="radio" name="whenType_${whenClauseCounter}" value="guid" onchange="toggleWhenThenFields(this)"> Outro Campo</label>
                     </div>
-                    <div class="when-value-container"><input type="text" class="when-input-value" placeholder="Se o valor for..."></div>
+                     <div class="form-group">
+                        <label>Operador:</label>
+                        <select class="when-operator">
+                            <option value="=" selected>Igual a (=)</option>
+                            <option value="!=">Diferente de (!=)</option>
+                            <option value="IN">Em (IN)</option>
+                            <option value="NOT IN">Não em (NOT IN)</option>
+                        </select>
+                    </div>
+                    <div class="when-value-container form-group">
+                         <label>Valor:</label>
+                         <input type="text" class="when-input-value" placeholder="Se o valor for...">
+                    </div>
+                    <div class="when-multi-value-container hidden-container form-group">
+                        <label>Valores (separados por vírgula):</label>
+                        <textarea class="when-input-multi-value" placeholder="Valor1, Valor2, Valor3..."></textarea>
+                    </div>
                     <div class="when-guid-container hidden-container flex-container">
                         <input type="text" class="when-input-step" placeholder="Etapa" style="flex:1;"><input type="text" class="when-input-guid" placeholder="GUID" style="flex:2;">
                     </div>
                 </div>
-                <div class="clause-section">
+                <div class="clause-section" style="flex: 1;">
                     <label>Resultado (THEN)</label>
                      <div class="radio-group">
                         <label><input type="radio" name="thenType_${whenClauseCounter}" value="value" checked onchange="toggleWhenThenFields(this)"> Valor Fixo</label>
@@ -431,7 +419,7 @@
                         <label><input type="radio" name="thenType_${whenClauseCounter}" value="dateFormat" onchange="toggleWhenThenFields(this)"> Formatar Data</label>
                         <label><input type="radio" name="thenType_${whenClauseCounter}" value="lpad" onchange="toggleWhenThenFields(this)"> Zeros à Esquerda</label>
                     </div>
-                    <div class="then-value-container hidden-container"><input type="text" class="then-input-value" placeholder="Então, trocar por..."></div>
+                    <div class="then-value-container"><input type="text" class="then-input-value" placeholder="Então, trocar por..."></div>
                     <div class="then-guid-container hidden-container flex-container"></div>
                     <div class="then-substring-container hidden-container nested-group"></div>
                     <div class="then-translate-container hidden-container nested-group"></div>
@@ -442,67 +430,102 @@
                 <button type="button" class="remove-btn" onclick="removeClause(this)">Remover</button>
             `;
             container.appendChild(newClause);
-            
+
+            // Adiciona listener para o select do operador
+            const operatorSelect = newClause.querySelector('.when-operator');
+            operatorSelect.addEventListener('change', function() { toggleWhenValueInputs(this); });
+
             toggleWhenThenFields(newClause.querySelector('input[name^="whenType_"]:checked'));
             toggleWhenThenFields(newClause.querySelector('input[name^="thenType_"]:checked'));
+            toggleWhenValueInputs(operatorSelect); // Ajusta a visibilidade inicial dos campos de valor
         }
 
-        function toggleWhenThenFields(radioElement) {
+        // *** NOVA FUNÇÃO toggleWhenValueInputs ***
+        // Controla a visibilidade dos inputs de valor único vs múltiplos valores
+        function toggleWhenValueInputs(selectElement) {
+            const clauseSection = selectElement.closest('.clause-section');
+            const singleValueContainer = clauseSection.querySelector('.when-value-container');
+            const multiValueContainer = clauseSection.querySelector('.when-multi-value-container');
+            const operator = selectElement.value;
+
+            if (operator === 'IN' || operator === 'NOT IN') {
+                singleValueContainer.style.display = 'none';
+                multiValueContainer.style.display = 'block';
+            } else {
+                singleValueContainer.style.display = 'block';
+                multiValueContainer.style.display = 'none';
+            }
+        }
+
+
+        // *** MODIFICADO toggleWhenThenFields ***
+         function toggleWhenThenFields(radioElement) {
             const section = radioElement.closest('.clause-section');
             const selectedValue = radioElement.value;
             const isWhen = radioElement.name.startsWith('when');
             const idCounter = section.closest('.when-clause').dataset.id;
-            
-            const containers = section.querySelectorAll('.when-value-container, .when-guid-container, .then-value-container, .then-guid-container, .then-substring-container, .then-translate-container, .then-concat-container, .then-dateFormat-container, .then-lpad-container');
-            containers.forEach(el => el.style.display = 'none');
-            
-            const prefix = isWhen ? 'when' : 'then';
-            const targetClass = `.${prefix}-${selectedValue}-container`;
-            const targetContainer = section.querySelector(targetClass);
 
-            if (targetContainer) {
-                targetContainer.style.display = 'block';
-                if (targetContainer.innerHTML.trim() === '') {
-                     if (selectedValue === 'guid') {
-                         targetContainer.innerHTML = `<input type="text" class="then-input-step" placeholder="Etapa" style="flex:1;"><input type="text" class="then-input-guid" placeholder="GUID" style="flex:2;">`;
-                         targetContainer.style.display = 'flex';
-                     } else if (selectedValue === 'substring') {
-                         targetContainer.innerHTML = `
-                            ${createSourceFieldHtml(`then_sub`, idCounter)}
-                            <div class="flex-container" style="margin-top:10px;">
-                                <input type="number" class="then-substring-start" placeholder="Início" min="1">
-                                <input type="number" class="then-substring-length" placeholder="Tamanho" min="1">
-                            </div>`;
-                     } else if (selectedValue === 'translate') {
-                         targetContainer.innerHTML = `
-                            ${createSourceFieldHtml(`then_trans`, idCounter)}
-                            <input type="text" class="then-translate-from" placeholder="Traduzir De" style="margin-top:10px;">
-                            <input type="text" class="then-translate-to" placeholder="Traduzir Para" style="margin-top:10px;">`;
-                     } else if (selectedValue === 'concat') {
-                         targetContainer.innerHTML = `
-                             <div class="then-concat-items-container"></div>
-                             <button type="button" class="add-btn" onclick="addCaseConcatItem(this)">+ Item</button>`;
-                         addCaseConcatItem(targetContainer.querySelector('.add-btn'));
-                         addCaseConcatItem(targetContainer.querySelector('.add-btn'));
-                     } else if (selectedValue === 'dateFormat') {
-                         targetContainer.innerHTML = `
-                            ${createSourceFieldHtml(`then_date`, idCounter)}
-                            <input type="text" class="then-date-in" placeholder="Formato de Entrada" style="margin-top:10px;">
-                            <input type="text" class="then-date-out" placeholder="Formato de Saída" style="margin-top:10px;">`;
-                     } else if (selectedValue === 'lpad') {
-                          targetContainer.innerHTML = `
-                            ${createSourceFieldHtml(`then_lpad`, idCounter)}
-                            <input type="number" class="then-lpad-length" placeholder="Tamanho Final" min="1" style="margin-top:10px;">`;
+            // Esconde todos os containers específicos da seção atual
+             const containers = section.querySelectorAll('.when-value-container, .when-multi-value-container, .when-guid-container, .then-value-container, .then-guid-container, .then-substring-container, .then-translate-container, .then-concat-container, .then-dateFormat-container, .then-lpad-container');
+             containers.forEach(el => el.style.display = 'none');
+
+            const prefix = isWhen ? 'when' : 'then';
+            let targetClass;
+             let targetContainer;
+
+             if (isWhen) {
+                 if (selectedValue === 'value') {
+                     // Mostra o select do operador e ajusta os inputs de valor
+                     section.querySelector('.form-group label:first-of-type + select').closest('.form-group').style.display = 'block'; // Mostra o select
+                     toggleWhenValueInputs(section.querySelector('.when-operator')); // Mostra o input/textarea correto
+                 } else if (selectedValue === 'guid') {
+                     // Mostra apenas o container GUID e esconde o operador e os valores fixos
+                     section.querySelector('.form-group label:first-of-type + select').closest('.form-group').style.display = 'none'; // Esconde o select
+                     section.querySelector('.when-value-container').style.display = 'none';
+                     section.querySelector('.when-multi-value-container').style.display = 'none';
+                     targetContainer = section.querySelector('.when-guid-container');
+                     if (targetContainer) targetContainer.style.display = 'flex';
+                 }
+             } else { // Se for THEN
+                 targetClass = `.${prefix}-${selectedValue}-container`;
+                 targetContainer = section.querySelector(targetClass);
+                 if (targetContainer) {
+                     targetContainer.style.display = 'block';
+                      // Lógica para preencher o container se estiver vazio (mantida)
+                     if (targetContainer.innerHTML.trim() === '') {
+                         if (selectedValue === 'guid') {
+                             targetContainer.innerHTML = `<input type="text" class="then-input-step" placeholder="Etapa" style="flex:1;"><input type="text" class="then-input-guid" placeholder="GUID" style="flex:2;">`;
+                             targetContainer.style.display = 'flex';
+                         } else if (selectedValue === 'substring') {
+                             targetContainer.innerHTML = `${createSourceFieldHtml(`then_sub`, idCounter)}<div class="flex-container" style="margin-top:10px;"><input type="number" class="then-substring-start" placeholder="Início" min="1"><input type="number" class="then-substring-length" placeholder="Tamanho" min="1"></div>`;
+                         } else if (selectedValue === 'translate') {
+                             targetContainer.innerHTML = `${createSourceFieldHtml(`then_trans`, idCounter)}<input type="text" class="then-translate-from" placeholder="Traduzir De" style="margin-top:10px;"><input type="text" class="then-translate-to" placeholder="Traduzir Para" style="margin-top:10px;">`;
+                         } else if (selectedValue === 'concat') {
+                             targetContainer.innerHTML = `<div class="then-concat-items-container"></div><button type="button" class="add-btn" onclick="addCaseConcatItem(this)">+ Item</button>`;
+                             addCaseConcatItem(targetContainer.querySelector('.add-btn'));
+                             addCaseConcatItem(targetContainer.querySelector('.add-btn'));
+                         } else if (selectedValue === 'dateFormat') {
+                             targetContainer.innerHTML = `${createSourceFieldHtml(`then_date`, idCounter)}<input type="text" class="then-date-in" placeholder="Formato de Entrada" style="margin-top:10px;"><input type="text" class="then-date-out" placeholder="Formato de Saída" style="margin-top:10px;">`;
+                         } else if (selectedValue === 'lpad') {
+                             targetContainer.innerHTML = `${createSourceFieldHtml(`then_lpad`, idCounter)}<input type="number" class="then-lpad-length" placeholder="Tamanho Final" min="1" style="margin-top:10px;">`;
+                         }
                      }
-                }
+                      // Certifica-se que o container de valor fixo do THEN seja exibido corretamente
+                      if (selectedValue === 'value' && targetContainer) {
+                         targetContainer.style.display = 'block';
+                      }
+                 }
             }
         }
-        
+
         function toggleSourceSubFields(radio, prefix) {
-            const container = radio.closest('.nested-group, .then-substring-container, .then-translate-container, .then-dateFormat-container, .then-lpad-container');
+            const container = radio.closest('.nested-group, .then-substring-container, .then-translate-container, .then-dateFormat-container, .then-lpad-container, #elseSubstringContainer, #elseTranslateContainer, #elseDateFormatContainer, #elseLpadContainer'); // Incluído containers do ELSE
+            if (!container) return; // Segurança
             const isGuid = radio.value === 'guid';
-            container.querySelector(`.${prefix}-guid-inputs`).style.display = isGuid ? 'flex' : 'none';
-            container.querySelector(`.${prefix}-variable-inputs`).style.display = isGuid ? 'none' : 'block';
+            const guidInputs = container.querySelector(`.${prefix}-guid-inputs`);
+            const variableInputs = container.querySelector(`.${prefix}-variable-inputs`);
+            if (guidInputs) guidInputs.style.display = isGuid ? 'flex' : 'none';
+            if (variableInputs) variableInputs.style.display = isGuid ? 'none' : 'block';
         }
 
         function removeClause(buttonElement) {
@@ -514,12 +537,17 @@
             const allElseContainers = document.querySelectorAll('#elseCustomValueContainer, #elseGuidContainer, #elseSubstringContainer, #elseTranslateContainer, #elseConcatContainer, #elseDateFormatContainer, #elseLpadContainer');
             allElseContainers.forEach(c => c.style.display = 'none');
 
-            const targetId = `#else${elseChoice.charAt(0).toUpperCase() + elseChoice.slice(1)}Container`;
+            let targetId = `#else${elseChoice.charAt(0).toUpperCase() + elseChoice.slice(1)}Container`;
+             // Ajuste para 'sameField' e 'customValue' que não seguem o padrão
+             if (elseChoice === 'sameField') return; // Não há container específico
+             if (elseChoice === 'customValue') targetId = '#elseCustomValueContainer';
+
             const targetContainer = document.querySelector(targetId);
-            
+
             if (targetContainer) {
                 targetContainer.style.display = 'block';
-                if (targetContainer.innerHTML.trim() === '') {
+                 // Preenche o container se estiver vazio
+                 if (targetContainer.innerHTML.trim() === '') {
                      if (elseChoice === 'substring') {
                          targetContainer.innerHTML = `${createSourceFieldHtml('else_sub', 0)}<div class="flex-container" style="margin-top:10px;"><input type="number" id="elseSubstringStart" placeholder="Início" min="1"><input type="number" id="elseSubstringLength" placeholder="Tamanho" min="1"></div>`;
                      } else if (elseChoice === 'translate') {
@@ -533,32 +561,47 @@
                      } else if (elseChoice === 'lpad') {
                          targetContainer.innerHTML = `${createSourceFieldHtml('else_lpad', 0)}<input type="number" id="elseLpadLength" placeholder="Tamanho Final" min="1" style="margin-top:10px;">`;
                      }
-                }
+                 }
+                  // Chama toggleSourceSubFields se necessário para garantir a exibição correta
+                  if (['substring', 'translate', 'dateFormat', 'lpad'].includes(elseChoice)) {
+                     const radioChecked = targetContainer.querySelector(`input[name^="else_"][name$="_SourceType"]:checked`);
+                     if(radioChecked) {
+                         const prefix = radioChecked.name.split('_')[1]; // Extrai 'sub', 'trans', 'date', 'lpad'
+                         toggleSourceSubFields(radioChecked, `else_${prefix}`);
+                     }
+                  }
             }
         }
-        
+
+
         function addConcatItem() {
             concatItemCounter++;
             const container = document.getElementById('concatItemsContainer');
             const itemDiv = document.createElement('div');
-            itemDiv.className = 'concat-item';
+            // itemDiv.className = 'concat-item'; // Classe será adicionada pelo createConcatItemHtml
             itemDiv.innerHTML = createConcatItemHtml('main_concat', concatItemCounter);
-            container.appendChild(itemDiv);
-            toggleConcatItemFields(itemDiv.querySelector('input[type="radio"]:checked'));
+            container.appendChild(itemDiv.firstElementChild); // Adiciona o elemento criado
+            toggleConcatItemFields(container.querySelector(`.concat-item[data-id="${concatItemCounter}"] input[type="radio"]:checked`));
         }
+
 
         function toggleConcatItemFields(radioElement) {
             const itemContainer = radioElement.closest('.concat-item');
+            if(!itemContainer) return; // Segurança
             itemContainer.querySelector('.guid-inputs').style.display = 'none';
             itemContainer.querySelector('.variable-inputs').style.display = 'none';
             itemContainer.querySelector('.value-inputs').style.display = 'none';
             const classToShow = `.${radioElement.value}-inputs`;
             const elToShow = itemContainer.querySelector(classToShow);
-            elToShow.style.display = radioElement.value === 'guid' ? 'flex' : 'block';
+             if(elToShow) {
+                elToShow.style.display = radioElement.value === 'guid' ? 'flex' : 'block';
+             }
         }
 
         function getBaseField(prefix) {
-            const sourceType = document.querySelector(`input[name="${prefix}SourceType"]:checked`).value;
+            const sourceTypeRadio = document.querySelector(`input[name="${prefix}SourceType"]:checked`);
+             if(!sourceTypeRadio) return null; // Segurança
+            const sourceType = sourceTypeRadio.value;
             if (sourceType === 'guid') {
                 const step = document.getElementById(`${prefix}StepInput`).value;
                 const guid = document.getElementById(`${prefix}GuidInput`).value;
@@ -570,6 +613,7 @@
                 return variableName;
             }
         }
+
 
         function getSourceFieldValue(container, prefix) {
             const sourceTypeRadio = container.querySelector(`input[name^="${prefix}"][name$="_SourceType"]:checked`);
@@ -587,13 +631,16 @@
                 return variableName;
             }
         }
-        
+
         function buildConcatQuery(container) {
+             if (!container) return null; // Segurança
             const itemsToConcat = [];
             let allItemsValid = true;
             container.querySelectorAll('.concat-item').forEach(item => {
                 if(!allItemsValid) return;
-                const sourceType = item.querySelector('input[type="radio"]:checked').value;
+                 const sourceTypeRadio = item.querySelector('input[type="radio"]:checked');
+                 if (!sourceTypeRadio) { allItemsValid = false; return; } // Segurança
+                const sourceType = sourceTypeRadio.value;
                 let currentItem = '';
                 if (sourceType === 'guid') {
                     const step = item.querySelector('.step-input').value;
@@ -604,7 +651,7 @@
                     const variableName = item.querySelector('.variable-input').value;
                     if (!variableName) allItemsValid = false;
                     else currentItem = variableName;
-                } else {
+                } else { // value
                     currentItem = `'${item.querySelector('.value-input').value}'`;
                 }
                 if(allItemsValid) itemsToConcat.push(currentItem);
@@ -612,103 +659,118 @@
             if (!allItemsValid || itemsToConcat.length < 1) return null;
             return `CONCAT(${itemsToConcat.join(', ')})`;
         }
-        
+
+         // *** MODIFICADO generateQuery ***
         function generateQuery() {
             const queryType = document.getElementById('queryType').value;
             let resultArea, baseField, query;
-            
+
+             // Reset specific result area based on type
+             if (queryType) {
+                 resultArea = document.getElementById(`${queryType.replace('Expansion', '')}ResultQuery`); // Ajuste para joinExpansion ID
+                 if(resultArea) resultArea.value = ''; // Limpa antes de gerar
+                 else console.error(`Textarea com ID ${queryType}ResultQuery não encontrada.`); // Debug
+             }
+
             if (queryType === 'substring') {
                 resultArea = document.getElementById('subResultQuery');
-                resultArea.value = '';
                 baseField = getBaseField('sub');
                 const start = document.getElementById('subStartInput').value;
                 const length = document.getElementById('subEndInput').value;
-                if (!baseField || !start || !length) {
-                    alert('Por favor, preencha todos os campos para gerar a query.'); return;
-                }
+                if (!baseField || !start || !length) { alert('Por favor, preencha todos os campos para gerar a query.'); return; }
                 resultArea.value = `substring(${baseField}, ${start}, ${length})`;
             } else if (queryType === 'translate') {
                 resultArea = document.getElementById('translateResultQuery');
-                resultArea.value = '';
                 baseField = getBaseField('translate');
                 const translateFrom = document.getElementById('translateFromInput').value;
                 const translateTo = document.getElementById('translateToInput').value;
-                if (!baseField || translateFrom === '') {
-                    alert('Por favor, preencha o campo de origem e o campo "Traduzir De".'); return;
-                }
+                if (!baseField || translateFrom === '') { alert('Por favor, preencha o campo de origem e o campo "Traduzir De".'); return; }
                 resultArea.value = `translate(${baseField}, '${translateFrom}', '${translateTo}')`;
             } else if (queryType === 'concat') {
                 resultArea = document.getElementById('concatResultQuery');
                 const container = document.getElementById('concatItemsContainer');
                 const concatQuery = buildConcatQuery(container);
-                if(concatQuery) {
-                    resultArea.value = concatQuery;
-                } else {
-                    alert('Preencha todos os campos dos itens a serem concatenados.');
-                    resultArea.value = '';
-                }
+                if (concatQuery) resultArea.value = concatQuery;
+                else { alert('Preencha todos os campos dos itens a serem concatenados.'); resultArea.value = ''; }
             } else if (queryType === 'dateFormat') {
                 resultArea = document.getElementById('dateFormatResultQuery');
-                resultArea.value = '';
                 baseField = getBaseField('dateFormat');
                 const inputMask = document.getElementById('dateFormatInputMask').value;
                 const outputMask = document.getElementById('dateFormatOutputMask').value;
-                if (!baseField || !inputMask || !outputMask) {
-                    alert('Por favor, preencha o campo de origem e os formatos de entrada e saída da data.'); return;
-                }
+                if (!baseField || !inputMask || !outputMask) { alert('Por favor, preencha o campo de origem e os formatos de entrada e saída da data.'); return; }
                 resultArea.value = `to_char(to_timestamp(${baseField}, '${inputMask}'), '${outputMask}')`;
             } else if (queryType === 'lpad') {
                 resultArea = document.getElementById('lpadResultQuery');
-                resultArea.value = '';
                 baseField = getBaseField('lpad');
                 const length = document.getElementById('lpadLengthInput').value;
-                if (!baseField || !length) {
-                    alert('Por favor, preencha o campo de origem e o tamanho final do campo.'); return;
-                }
+                if (!baseField || !length) { alert('Por favor, preencha o campo de origem e o tamanho final do campo.'); return; }
                 const lpadQuery = `CASE\n    WHEN ${baseField} != '' THEN lpad(${baseField}, ${length}, '0')\n    ELSE ${baseField}\nEND`;
                 resultArea.value = lpadQuery;
             } else if (queryType === 'joinExpansion') {
                 resultArea = document.getElementById('joinResultQuery');
-                resultArea.value = '';
                 const tenant = document.getElementById('joinTenantInput').value;
                 const alias = document.getElementById('joinAliasInput').value;
                 const stepGuid = document.getElementById('joinGuidInput').value;
-                if (!tenant || !alias || !stepGuid) {
-                    alert('Por favor, preencha todos os campos para gerar o JOIN.'); return;
-                }
+                if (!tenant || !alias || !stepGuid) { alert('Por favor, preencha todos os campos para gerar o JOIN.'); return; }
                 resultArea.value = `JOIN ${tenant}.answers ${alias} ON ${alias}.step_id = '${stepGuid}'\n    AND ${alias}.concluded_at IS NOT NULL\n    AND ${alias}.deleted_at IS NULL`;
-            }
-            else if (queryType === 'caseWhen') {
+            } else if (queryType === 'caseWhen') {
                 resultArea = document.getElementById('caseResultQuery');
-                resultArea.value = '';
                 baseField = getBaseField('case');
-                if (!baseField) {
-                    alert('Por favor, preencha o campo principal do CASE.'); return;
-                }
+                if (!baseField) { alert('Por favor, preencha o campo principal do CASE.'); return; }
                 query = 'CASE\n';
                 const whenClauses = document.querySelectorAll('#whenClausesContainer .when-clause');
                 if (whenClauses.length === 0) { alert('Adicione pelo menos uma condição WHEN.'); return; }
-                
+
                 let allClausesValid = true;
                 whenClauses.forEach(clause => {
                     if (!allClausesValid) return;
                     let whenPart = '', thenPart = '';
 
-                    const whenType = clause.querySelector('input[name^="whenType_"]:checked').value;
+                    const whenTypeRadio = clause.querySelector('input[name^="whenType_"]:checked');
+                    if (!whenTypeRadio) { allClausesValid = false; return; } // Segurança
+                    const whenType = whenTypeRadio.value;
+                    const operatorSelect = clause.querySelector('.when-operator');
+                    const operator = operatorSelect ? operatorSelect.value : '='; // Default para '=' se não for valor fixo
+
                     if (whenType === 'value') {
-                        whenPart = `'${clause.querySelector('.when-input-value').value}'`;
-                    } else {
+                        if (operator === 'IN' || operator === 'NOT IN') {
+                            const multiValueInput = clause.querySelector('.when-input-multi-value');
+                            const valuesRaw = multiValueInput ? multiValueInput.value.trim() : '';
+                            if (!valuesRaw) { allClausesValid = false; }
+                             else {
+                                const values = valuesRaw.split(',')
+                                    .map(v => `'${v.trim()}'`) // Assumindo strings, adiciona aspas
+                                    .filter(v => v !== "''"); // Remove vazios
+                                 if (values.length === 0) { allClausesValid = false; }
+                                 else { whenPart = ` ${operator} (${values.join(', ')})`; }
+                             }
+                        } else { // '=' ou '!='
+                            const singleValueInput = clause.querySelector('.when-input-value');
+                            const value = singleValueInput ? singleValueInput.value : '';
+                             // Permite valor vazio para = '' ou != ''
+                            whenPart = ` ${operator} '${value}'`;
+                        }
+                    } else { // guid
                         const step = clause.querySelector('.when-input-step').value;
                         const guid = clause.querySelector('.when-input-guid').value;
                         if (!step || !guid) { allClausesValid = false; }
-                        else { whenPart = `ans${step}.data->'values'->>'${guid}'`; }
+                        else {
+                             // Comparação com outro campo sempre usa '=' ou '!='
+                             const comparisonOperator = (operator === '!=' || operator === 'NOT IN') ? '!=' : '=';
+                             whenPart = ` ${comparisonOperator} ans${step}.data->'values'->>'${guid}'`;
+                        }
                     }
 
-                    const thenType = clause.querySelector('input[name^="thenType_"]:checked').value;
+                     // ---- Lógica THEN (mantida) ----
+                    const thenTypeRadio = clause.querySelector('input[name^="thenType_"]:checked');
+                    if (!thenTypeRadio) { allClausesValid = false; return; } // Segurança
+                    const thenType = thenTypeRadio.value;
                     const thenContainer = clause.querySelector(`.then-${thenType}-container`);
-                    
+                    if(!thenContainer) { allClausesValid = false; return; } // Segurança
+
                     if (thenType === 'value') {
-                        thenPart = `'${thenContainer.querySelector('.then-input-value').value}'`;
+                        const thenValueInput = thenContainer.querySelector('.then-input-value');
+                        thenPart = `'${thenValueInput ? thenValueInput.value : ''}'`;
                     } else if (thenType === 'guid') {
                         const step = thenContainer.querySelector('.then-input-step').value;
                         const guid = thenContainer.querySelector('.then-input-guid').value;
@@ -724,7 +786,7 @@
                          const source = getSourceFieldValue(thenContainer, `then_trans`);
                          const from = thenContainer.querySelector('.then-translate-from').value;
                          const to = thenContainer.querySelector('.then-translate-to').value;
-                         if (!source || from === '') { allClausesValid = false; }
+                         if (!source || from === '') { allClausesValid = false; } // 'to' pode ser vazio
                          else { thenPart = `translate(${source}, '${from}', '${to}')`; }
                     } else if (thenType === 'concat') {
                         const subContainer = thenContainer.querySelector('.then-concat-items-container');
@@ -742,17 +804,22 @@
                         if (!source || !length) { allClausesValid = false; }
                         else { thenPart = `lpad(${source}, ${length}, '0')`; }
                     }
+                    // --- Fim lógica THEN ---
 
-                    if (allClausesValid) { query += `    WHEN ${baseField} = ${whenPart} THEN ${thenPart}\n`; }
+                    if (allClausesValid) { query += `    WHEN ${baseField}${whenPart} THEN ${thenPart}\n`; }
                 });
                 if (!allClausesValid) { alert('Preencha todos os campos das cláusulas WHEN/THEN.'); return; }
 
-                const elseChoice = document.querySelector('input[name="elseOption"]:checked').value;
+                 // --- Lógica ELSE (mantida, mas com verificações de segurança) ---
+                const elseChoiceRadio = document.querySelector('input[name="elseOption"]:checked');
+                if (!elseChoiceRadio) { alert('Selecione uma opção para o ELSE.'); return; } // Segurança
+                const elseChoice = elseChoiceRadio.value;
                 let elsePart = '';
                 if (elseChoice === 'sameField') {
                     elsePart = baseField;
                 } else if (elseChoice === 'customValue') {
-                    elsePart = `'${document.getElementById('elseValueInput').value}'`;
+                    const elseValueInput = document.getElementById('elseValueInput');
+                    elsePart = `'${elseValueInput ? elseValueInput.value : ''}'`;
                 } else if (elseChoice === 'guid') {
                     const step = document.getElementById('elseStepInput').value;
                     const guid = document.getElementById('elseGuidInput').value;
@@ -760,6 +827,8 @@
                     elsePart = `ans${step}.data->'values'->>'${guid}'`;
                 } else {
                     const elseContainer = document.getElementById(`else${elseChoice.charAt(0).toUpperCase() + elseChoice.slice(1)}Container`);
+                     if(!elseContainer) { alert('Erro interno: Container ELSE não encontrado.'); return; } // Segurança
+
                     if(elseChoice === 'substring') {
                          const source = getSourceFieldValue(elseContainer, 'else_sub');
                          const start = elseContainer.querySelector('#elseSubstringStart').value;
@@ -791,20 +860,18 @@
                 }
                 query += `    ELSE ${elsePart}\nEND`;
                 resultArea.value = query;
+                 // --- Fim lógica ELSE ---
             }
         }
 
-        // --- LÓGICA PARA O MODAL DE AJUDA ---
+
+        // --- LÓGICA PARA O MODAL DE AJUDA (mantida) ---
         const modal = document.getElementById("helpModal");
         const helpBtn = document.getElementById("helpButton");
         const closeBtn = document.querySelector(".close-btn");
 
-        helpBtn.onclick = function() {
-            modal.style.display = "block";
-        }
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
+        if(helpBtn) helpBtn.onclick = function() { modal.style.display = "block"; }
+        if(closeBtn) closeBtn.onclick = function() { modal.style.display = "none"; }
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
