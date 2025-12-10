@@ -1,0 +1,295 @@
+<HTML>
+<HEAD>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<TITLE> Documentação para tipos de registro IDoc ou tipo de IDoc     </TITLE>
+</HEAD>
+<BODY>
+<HR>
+<h1><A NAME = "IDOCTYPE">estrutura do tipo básico SRVMAS01</A></h1>
+<h1>
+Registro mestre de atividades com textos
+</h1><p><hr>
+<ul>
+<p>
+<li><b>E1ASMDM                     : Mestre serviços prestados dados básicos                                                                                             </b>
+<p>
+Status : Necessário  ,
+Núm.mín. :          1     , núm.máx. :          1      <p>
+<p>
+<A HREF = "#E1ASMDM                    STRUCT"><i>estrutura</i></A>
+<ul>
+<p>
+<li><b>E1ASMDT                     : Mestre de serviços prestados textos breves                                                                                          </b>
+<p>
+Status : Necessário  ,
+Núm.mín. :          1     , núm.máx. :         99      <p>
+<p>
+<A HREF = "#E1ASMDT                    STRUCT"><i>estrutura</i></A>
+<ul>
+<p>
+<li><b>E1SMLTH                     : Mestre de serviços texto descritivo identificação de texto                                                                          </b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :          9      <p>
+<p>
+<A HREF = "#E1SMLTH                    STRUCT"><i>estrutura</i></A>
+<ul>
+<p>
+<li><b>E1SMLTL                     : Mestre serviços texto descritivo linha de texto                                                                                     </b>
+<p>
+Status : Opcional    ,
+Núm.mín. :          1     , núm.máx. :       9999      <p>
+<p>
+<A HREF = "#E1SMLTL                    STRUCT"><i>estrutura</i></A>
+</ul>
+</ul>
+</ul>
+</ul>
+<hr>
+<h1>
+<A NAME = "SEGMENTSTRUCT">estruturas segmento</A>
+>/h1><p><hr>
+<ul>
+<p><li><h2><A NAME = "E1ASMDM                    STRUCT">E1ASMDM                     : Mestre serviços prestados dados básicos                                                                                             </A></h2>
+<p>
+Definição de segmento E2ASMDM003
+Liberado desde release 752 , Comprim.segmento: 0153
+<p>
+<ol>
+<li>MSGFN                          : <b>Função                                                                                                                              </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000003 posições <br>
+Posição no segmento : 001, offset : 0063. comprim.ext.: 000003<p>
+<li>ASNUM                          : <b>Nº de serviço                                                                                                                       </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000018 posições <br>
+Posição no segmento : 002, offset : 0066. comprim.ext.: 000018<p>
+<li>LVORM                          : <b>Marcação para eliminação                                                                                                            </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000001 posições <br>
+Posição no segmento : 003, offset : 0084. comprim.ext.: 000001<p>
+<li>MATKL                          : <b>Grupo de mercadorias                                                                                                                </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000009 posições <br>
+Posição no segmento : 004, offset : 0085. comprim.ext.: 000009<p>
+<li>MEINS                          : <b>Unidade de medida básica                                                                                                            </b><p>
+<p>
+Ctg.dados interna : UNIT<br>
+Comprim.int.: 000003 posições <br>
+Posição no segmento : 005, offset : 0094. comprim.ext.: 000003<p>
+<li>ASTYP                          : <b>Categoria de serviços                                                                                                               </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000004 posições <br>
+Posição no segmento : 006, offset : 0097. comprim.ext.: 000004<p>
+<li>EAN11                          : <b>Nº europeu do artigo (EAN)                                                                                                          </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000018 posições <br>
+Posição no segmento : 007, offset : 0101. comprim.ext.: 000018<p>
+<li>NUMTP                          : <b>Ctg.de número do nº europeu do artigo                                                                                               </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000002 posições <br>
+Posição no segmento : 008, offset : 0119. comprim.ext.: 000002<p>
+<li>SPART                          : <b>Setor de atividade                                                                                                                  </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000002 posições <br>
+Posição no segmento : 009, offset : 0121. comprim.ext.: 000002<p>
+<li>BEGRU                          : <b>Grupo de autorizações                                                                                                               </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000004 posições <br>
+Posição no segmento : 010, offset : 0123. comprim.ext.: 000004<p>
+<li>MSTAE                          : <b>Status material p/todos os centros                                                                                                  </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000002 posições <br>
+Posição no segmento : 011, offset : 0127. comprim.ext.: 000002<p>
+<li>MSTDE                          : <b>Data a partir da qual status material p/tds.centros é válido                                                                        </b><p>
+<p>
+Ctg.dados interna : DATS<br>
+Comprim.int.: 000008 posições <br>
+Posição no segmento : 012, offset : 0129. comprim.ext.: 000008<p>
+<li>BKLAS                          : <b>Classe de avaliação                                                                                                                 </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000004 posições <br>
+Posição no segmento : 013, offset : 0137. comprim.ext.: 000004<p>
+<li>LSTHI                          : <b>Nº de serviço de hierarquia                                                                                                         </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000018 posições <br>
+Posição no segmento : 014, offset : 0141. comprim.ext.: 000018<p>
+<li>MLANG                          : <b>Idioma principal para textos referentes ao objeto                                                                                   </b><p>
+<p>
+Ctg.dados interna : LANG<br>
+Comprim.int.: 000001 posições <br>
+Posição no segmento : 015, offset : 0159. comprim.ext.: 000001<p>
+<li>LGART                          : <b>Rubrica salarial                                                                                                                    </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000004 posições <br>
+Posição no segmento : 016, offset : 0160. comprim.ext.: 000004<p>
+<li>LBNUM                          : <b>Denominação do tipo de serviço                                                                                                      </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000003 posições <br>
+Posição no segmento : 017, offset : 0164. comprim.ext.: 000003<p>
+<li>AUSGB                          : <b>Saída do tipo de serviço                                                                                                            </b><p>
+<p>
+Ctg.dados interna : NUMC<br>
+Comprim.int.: 000004 posições <br>
+Posição no segmento : 018, offset : 0167. comprim.ext.: 000004<p>
+<li>STLVPOS                        : <b>Item de relação de serviços standard                                                                                                </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000018 posições <br>
+Posição no segmento : 019, offset : 0171. comprim.ext.: 000018<p>
+<li>TAXIM                          : <b>Indicador de imposto do serviço (compras)                                                                                           </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000001 posições <br>
+Posição no segmento : 020, offset : 0189. comprim.ext.: 000001<p>
+<li>IWUMZ                          : <b>Campo de caracteres de comprimento 6                                                                                                </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000006 posições <br>
+Posição no segmento : 021, offset : 0190. comprim.ext.: 000006<p>
+<li>IWUMN                          : <b>Campo de caracteres de comprimento 6                                                                                                </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000006 posições <br>
+Posição no segmento : 022, offset : 0196. comprim.ext.: 000006<p>
+<li>IWEIN                          : <b>Unidade de medida                                                                                                                   </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000003 posições <br>
+Posição no segmento : 023, offset : 0202. comprim.ext.: 000003<p>
+<li>FORMELNR                       : <b>Nº fórmula                                                                                                                          </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000010 posições <br>
+Posição no segmento : 024, offset : 0205. comprim.ext.: 000010<p>
+<li>CHGTEXT                        : <b>Mod.texto breve permit.                                                                                                             </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000001 posições <br>
+Posição no segmento : 025, offset : 0215. comprim.ext.: 000001<p>
+</ol>
+<p>
+<p><li><h2><A NAME = "E1ASMDT                    STRUCT">E1ASMDT                     : Mestre de serviços prestados textos breves                                                                                          </A></h2>
+<p>
+Definição de segmento E2ASMDT001
+Liberado desde release 40A , Comprim.segmento: 0046
+<p>
+<ol>
+<li>MSGFN                          : <b>Função                                                                                                                              </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000003 posições <br>
+Posição no segmento : 001, offset : 0063. comprim.ext.: 000003<p>
+<li>SPRAS                          : <b>Código de idioma                                                                                                                    </b><p>
+<p>
+Ctg.dados interna : LANG<br>
+Comprim.int.: 000001 posições <br>
+Posição no segmento : 002, offset : 0066. comprim.ext.: 000001<p>
+<li>ASKTX                          : <b>Texto breve serviço                                                                                                                 </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000040 posições <br>
+Posição no segmento : 003, offset : 0067. comprim.ext.: 000040<p>
+<li>SPRAS_ISO                      : <b>Código de idiomas SAP de 2 dígitos                                                                                                  </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000002 posições <br>
+Posição no segmento : 004, offset : 0107. comprim.ext.: 000002<p>
+</ol>
+<p>
+<p><li><h2><A NAME = "E1SMLTH                    STRUCT">E1SMLTH                     : Mestre de serviços texto descritivo identificação de texto                                                                          </A></h2>
+<p>
+Definição de segmento E2SMLTH001
+não liberado , Comprim.segmento: 0042
+<p>
+<ol>
+<li>MSGFN                          : <b>Função                                                                                                                              </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000003 posições <br>
+Posição no segmento : 001, offset : 0063. comprim.ext.: 000003<p>
+<li>TDOBJECT                       : <b>Textos: objeto de aplicação                                                                                                         </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000010 posições <br>
+Posição no segmento : 002, offset : 0066. comprim.ext.: 000010<p>
+<li>TDNAME                         : <b>TDIC nome do texto                                                                                                                  </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000016 posições <br>
+Posição no segmento : 003, offset : 0076. comprim.ext.: 000016<p>
+<li>TDID                           : <b>ID de texto                                                                                                                         </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000004 posições <br>
+Posição no segmento : 004, offset : 0092. comprim.ext.: 000004<p>
+<li>TDSPRAS                        : <b>Código de idioma                                                                                                                    </b><p>
+<p>
+Ctg.dados interna : LANG<br>
+Comprim.int.: 000001 posições <br>
+Posição no segmento : 005, offset : 0096. comprim.ext.: 000001<p>
+<li>TDTEXTTYPE                     : <b>SAPscript: formato de um texto                                                                                                      </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000006 posições <br>
+Posição no segmento : 006, offset : 0097. comprim.ext.: 000006<p>
+<li>TDSPRAS_ISO                    : <b>Código de idiomas SAP de 2 dígitos                                                                                                  </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000002 posições <br>
+Posição no segmento : 007, offset : 0103. comprim.ext.: 000002<p>
+</ol>
+<p>
+<p><li><h2><A NAME = "E1SMLTL                    STRUCT">E1SMLTL                     : Mestre serviços texto descritivo linha de texto                                                                                     </A></h2>
+<p>
+Definição de segmento E2SMLTL
+Liberado desde release 31G , Comprim.segmento: 0134
+<p>
+<ol>
+<li>TDFORMAT                       : <b>Coluna de formato                                                                                                                   </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000002 posições <br>
+Posição no segmento : 001, offset : 0063. comprim.ext.: 000002<p>
+<li>TDLINE                         : <b>Linha de texto                                                                                                                      </b><p>
+<p>
+Ctg.dados interna : CHAR<br>
+Comprim.int.: 000132 posições <br>
+Posição no segmento : 002, offset : 0065. comprim.ext.: 000132<p>
+</ol>
+<p>
+</ul>
+<p>
+<hr>
+<p>
+<h2><A NAME = "INFO"> Info... </A></h2>
+Documento HTML gerado automaticam.<br>
+Criado em 10.12.2025           às 15:58:27             <br>
+Mandante 310
+<br>
+Sistema QS4
+<br>
+Release 758
+<br>
+Idioma P
+<br>
+Transação WE60
+<p>
+Exibição do status atual <br>
+Versão 3 tipos registro IDoc : Tipos de registro IDoc release SAP 4.0
+</BODY>
+</HTML>
