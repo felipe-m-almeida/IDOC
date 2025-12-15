@@ -388,3 +388,41 @@ tr:hover td {
     transform: translateY(0); 
     opacity: 1; 
 }
+
+/* =========================================
+   BOTÃO VOLTAR AO INDEX (GLOBAL)
+   ========================================= */
+#global-back-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 9999; /* Garante que fique acima de tudo */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1.5rem;
+    border: 2px solid white;
+}
+
+#global-back-btn:hover {
+    background-color: #1d4ed8; /* Azul mais escuro */
+    transform: scale(1.1) rotate(-10deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+#global-back-btn:active {
+    transform: scale(0.95);
+}
+
+/* Esconde o botão quando imprimir a página */
+@media print {
+    #global-back-btn { display: none; }
+}

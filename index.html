@@ -311,5 +311,17 @@
             event.currentTarget.classList.add('active');
         }
     </script>
+
+    <script>
+    // Injetor do Botão Home
+    (function() {
+        const btn = document.createElement('a');
+        btn.id = 'global-back-btn';
+        btn.href = 'index.html';
+        btn.innerHTML = '🏠'; 
+        btn.title = 'Voltar ao Início';
+        document.body.appendChild(btn);
+    })();
+</script>
 </body>
 </html>
