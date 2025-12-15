@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de Dados SAP</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="dados_campos.js"></script> 
+</head>
+<body>
+
+    <header>
+        <div class="brand">HUB DE FERRAMENTAS <span>Validador SAP</span></div>
+        <div style="display:flex; gap:10px;">
+             <a href="index.html" style="text-decoration:none; color:#64748b; font-weight:600; font-size:0.9rem; align-self:center;">Voltar ao Portal</a>
+        </div>
+    </header>
+
+    <div class="workspace" style="background-color: #f8fafc; padding: 40px; display: block; overflow-y: auto;">
+        
+        <div class="validator-container">
+            <h2 style="margin-top: 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 25px;">
+                Simulador de Campo SAP
+            </h2>
+
+            <div class="val-group" style="margin-bottom: 25px; background: #e0f2fe; padding: 15px; border-radius: 8px; border: 1px solid #bae6fd;">
+                <label class="val-label" style="color: #0369a1;">🔎 Buscar Campo do Projeto</label>
+                <input list="fieldsList" id="fieldSearch" class="val-input" placeholder="Digite o nome (ex: MATNR, KUNNR)..." onchange="autoConfigure()">
+                <datalist id="fieldsList"></datalist>
+                <div id="fieldDesc" style="font-size: 0.85rem; color: #0284c7; margin-top: 5px; font-style: italic;"></div>
+            </div>
+
+            <div class="val-row">
+                <div class="val-group">
+                    <label class="val-label">Tipo de Dado</label>
+                    <input type="text" id="dataTypeDisplay" class="val-input" readonly style="background: #f1f5f9; color: #64748b;" value="--">
+                    </div>
+                <div class="val-group">
+                    <label class="val-label">Tamanho (Length)</label>
+                    <input type="number" id="dataLen" class="val-input" readonly style="background: #f1f5f9; color: #64748b;" value="0">
+                </div>
+            </div>
+
+            <div class="val-group" style="margin-bottom: 20px;">
+                <label class="val-label">Valor de Entrada</label>
+                <input type="text" id="inputVal" class="val-input" placeholder="Selecione um campo acima primeiro..." disabled oninput="validate()">
+                <div id="typeHint" class="helper-text"></div>
+            </div>
+
+            <div id="resultBox" class="val-result-box" style="display:none;">
+                <div id="statusText" class="val-status"></div>
+                <div id="msgText" style="font-size: 0.9rem; color: #475569;"></div>
+                
+                <label class="val-label" style="margin-top: 10px;">Valor Formatado (Payload):</label>
+                <div class="val-output">
+                    <span id="formattedVal"></span>
+                    <button class="btn-copy-val" onclick="copyResult()">Copiar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // --- INICIALIZAÇÃO ---
+        window.onload = function() {
+            const list = document.getElementById('fieldsList');
+            // Popula o datalist com os campos do arquivo JS
+            if(typeof GLOBAL_FIELDS !== 'undefined') {
+                for (const [key, val] of Object.entries(GLOBAL_FIELDS)) {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.textContent = `${val.desc} (${val.type}, ${val.len})`;
+                    list.appendChild(opt);
+                }
+            }
+        };
+
+        function autoConfigure() {
+            const fieldName = document.getElementById('fieldSearch').value.trim();
+            const descEl = document.getElementById('fieldDesc');
+            const typeDisplay = document.getElementById('dataTypeDisplay');
+            const lenInput = document.getElementById('dataLen');
+            const inputVal = document.getElementById('inputVal');
+
+            if (fieldName && typeof GLOBAL_FIELDS !== 'undefined' && GLOBAL_FIELDS[fieldName]) {
+                const data = GLOBAL_FIELDS[fieldName];
+                
+                // Configura a UI
+                descEl.innerText = data.desc;
+                typeDisplay.value = data.type; // ex: CHAR
+                lenInput.value = data.len;
+                
+                // Habilita entrada
+                inputVal.disabled = false;
+                inputVal.placeholder = `Digite o valor para ${fieldName}...`;
+                inputVal.focus();
+                
+                // Limpa resultado anterior
+                document.getElementById('resultBox').style.display = 'none';
+                inputVal.value = '';
+            } else {
+                descEl.innerText = "Campo não encontrado na base de dados.";
+                typeDisplay.value = "--";
+                lenInput.value = 0;
+                inputVal.disabled = true;
+            }
+        }
+
+        function validate() {
+            const type = document.getElementById('dataTypeDisplay').value;
+            const len = parseInt(document.getElementById('dataLen').value) || 0;
+            const input = document.getElementById('inputVal').value;
+            
+            const resultBox = document.getElementById('resultBox');
+            const statusText = document.getElementById('statusText');
+            const msgText = document.getElementById('msgText');
+            const formattedVal = document.getElementById('formattedVal');
+            const hint = document.getElementById('typeHint');
+
+            if (!input) { resultBox.style.display = 'none'; return; }
+            resultBox.style.display = 'flex';
+
+            let finalValue = input;
+
+            // Lógica de validação (Simplificada do anterior)
+            if (type.includes('CHAR') || type.includes('LANG')) {
+                hint.innerText = "Texto livre.";
+                if (input.length > len) {
+                    statusText.innerHTML = '⚠️ Tamanho Excedido (Será cortado)';
+                    statusText.className = 'val-status invalid';
+                    finalValue = input.substring(0, len);
+                } else {
+                    statusText.innerHTML = '✅ Válido';
+                    statusText.className = 'val-status valid';
+                }
+            }
+            else if (type.includes('NUMC') || type.includes('INT')) {
+                hint.innerText = "Numérico. Zeros à esquerda automáticos.";
+                const numeric = input.replace(/\D/g, '');
+                if (!numeric) {
+                    statusText.innerHTML = '❌ Apenas números'; statusText.className = 'val-status invalid';
+                } else if (numeric.length > len) {
+                    statusText.innerHTML = '❌ Estouro de tamanho'; statusText.className = 'val-status invalid';
+                } else {
+                    statusText.innerHTML = '✅ Válido'; statusText.className = 'val-status valid';
+                    finalValue = numeric.padStart(len, '0');
+                }
+            }
+            else if (type.includes('DATS')) {
+                hint.innerText = "Data YYYYMMDD.";
+                let clean = input.replace(/[\/\-\.]/g, '');
+                if (clean.length === 8) {
+                    // Tenta adivinhar DDMMYYYY -> YYYYMMDD
+                    if (clean.match(/^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{4}$/)) { // Parece DDMMYYYY
+                         const d = clean.substring(0,2); const m = clean.substring(2,4); const y = clean.substring(4,8);
+                         finalValue = y + m + d;
+                         statusText.innerHTML = '✅ Convertido'; statusText.className = 'val-status valid';
+                    } else {
+                         finalValue = clean;
+                         statusText.innerHTML = '✅ Válido'; statusText.className = 'val-status valid';
+                    }
+                } else {
+                    statusText.innerHTML = '❌ Formato Data Inválido'; statusText.className = 'val-status invalid';
+                }
+            }
+            // Adicionar outros tipos conforme necessário (DEC, TIMS)
+            
+            formattedVal.innerText = finalValue;
+        }
+
+        function copyResult() {
+            navigator.clipboard.writeText(document.getElementById('formattedVal').innerText);
+        }
+        
+        // Home Button
+        (function() {
+            const btn = document.createElement('a'); btn.id = 'global-back-btn'; btn.href = 'index.html'; btn.innerHTML = '🏠'; btn.title = 'Voltar'; document.body.appendChild(btn);
+        })();
+    </script>
+</body>
+</html>

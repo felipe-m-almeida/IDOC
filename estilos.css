@@ -426,3 +426,381 @@ tr:hover td {
 @media print {
     #global-back-btn { display: none; }
 }
+
+/* =========================================
+   GERADOR DE PAYLOAD (Item 1)
+   ========================================= */
+
+/* Botão no Header do Card */
+.btn-payload {
+    background-color: #fff;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-payload:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-payload::before {
+    content: "{ }"; /* Ícone de código */
+    font-family: monospace;
+    font-weight: 700;
+}
+
+/* Modal de Payload */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.modal-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-container {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.2s;
+}
+
+.modal-overlay.open .modal-container {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+}
+
+.modal-title { font-size: 1.1rem; font-weight: 700; color: #1e293b; }
+.modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b; }
+.modal-close:hover { color: #ef4444; }
+
+.modal-body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.payload-tabs {
+    display: flex;
+    background: #f1f5f9;
+    border-bottom: 1px solid var(--border);
+}
+
+.payload-tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #64748b;
+    border-bottom: 2px solid transparent;
+}
+
+.payload-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    background: white;
+}
+
+.payload-content {
+    display: none;
+    padding: 20px;
+    margin: 0;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85rem;
+    color: #334155;
+    background: #ffffff;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: auto;
+}
+
+.payload-content.active { display: block; }
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border);
+    background: #f8fafc;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* =========================================
+   BOTÃO EXPORTAR CSV (Item 2)
+   ========================================= */
+.btn-csv {
+    background-color: #fff;
+    color: #15803d; /* Verde escuro */
+    border: 1px solid #15803d;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-csv:hover {
+    background-color: #15803d;
+    color: white;
+}
+
+.btn-csv::before {
+    content: "📊"; /* Ícone de gráfico/tabela */
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   HISTÓRICO DE NAVEGAÇÃO (Item 3)
+   ========================================= */
+.history-container {
+    padding: 1rem;
+    border-bottom: 1px solid var(--sidebar-border);
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.history-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8; /* Cor mais clara para destaque */
+    font-weight: 700;
+}
+
+.btn-clear-history {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 0.65rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.btn-clear-history:hover { color: #ef4444; }
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-link {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    border-left: 2px solid transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-left-color: var(--primary);
+}
+
+.history-link::before {
+    content: "🕒 ";
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+/* =========================================
+   PÁGINA DE TROUBLESHOOTING (Item 4)
+   ========================================= */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    gap: 8px;
+}
+
+.status-success { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.status-warning { background-color: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+.status-error   { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+.status-badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.solution-box {
+    background-color: #f8fafc;
+    border-left: 4px solid var(--primary);
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.solution-title {
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   VALIDADOR & PLAYGROUND (Item 5)
+   ========================================= */
+.validator-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+}
+
+.val-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.val-group {
+    flex: 1;
+}
+
+.val-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.val-input, .val-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: monospace;
+    transition: all 0.2s;
+}
+
+.val-input:focus, .val-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Feedback Visual */
+.val-result-box {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.val-status {
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.val-status.valid { color: #166534; }
+.val-status.invalid { color: #991b1b; }
+
+.val-output {
+    font-family: 'Consolas', monospace;
+    background: white;
+    padding: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    color: #334155;
+    position: relative;
+}
+
+.btn-copy-val {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e2e8f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+}
+.btn-copy-val:hover { background: #cbd5e1; }
+
+.helper-text {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 5px;
+}

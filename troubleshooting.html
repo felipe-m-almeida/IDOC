@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting & Status SAP</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Grid de Erros */
+        .error-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .error-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .error-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        
+        .error-title {
+            margin-top: 0;
+            color: #b91c1c; /* Vermelho escuro */
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .error-code {
+            font-size: 0.75rem;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        /* Tags de Categoria */
+        .cat-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .solution-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            margin-top: auto; /* Empurra para o fundo do card */
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">HUB DE SUPORTE <span>Troubleshooting</span></div>
+        <div class="search-box">
+            <input type="text" id="errorSearch" placeholder="Busque por erro, código (51, 401) ou mensagem...">
+        </div>
+        <div style="display:flex; gap:10px;">
+             <a href="index.html" style="text-decoration:none; color:#64748b; font-weight:600; font-size:0.9rem; align-self:center;">Voltar ao Portal</a>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <aside>
+            <div class="history-container">
+                <div class="history-header"><span class="history-title">Vistos Recentemente</span></div>
+                <div id="history-list" class="history-list"></div>
+            </div>
+            
+            <div class="tree-container">
+                <div class="tree-label">Categorias</div>
+                <div style="margin-left: 0;">
+                    <a href="#status-codes" class="node-item active" onclick="scrollToSection('status-codes')"><strong>Status IDoc (WE02)</strong></a>
+                    <a href="#mapping-errors" class="node-item" onclick="scrollToSection('mapping-errors')"><strong>Erros de Dados (Mapping)</strong></a>
+                    <a href="#functional-errors" class="node-item" onclick="scrollToSection('functional-errors')"><strong>Erros Funcionais SAP</strong></a>
+                    <a href="#connectivity" class="node-item" onclick="scrollToSection('connectivity')"><strong>Conectividade (HTTP/Net)</strong></a>
+                </div>
+            </div>
+        </aside>
+
+        <main id="mainContent">
+
+            <div id="status-codes" style="margin-bottom: 50px;">
+                <div class="card-header" style="border-radius: 8px; margin-bottom: 20px;">
+                    <div class="card-title"><h2>Códigos de Status IDoc (Transação WE02/WE05)</h2></div>
+                </div>
+
+                <div class="table-wrapper segment-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 8%">Cod</th>
+                                <th style="width: 10%">Tipo</th>
+                                <th style="width: 35%">Significado</th>
+                                <th style="width: 47%">Ação Recomendada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statusTableBody">
+                            <tr>
+                                <td><span class="status-badge status-success">53</span></td>
+                                <td>Sucesso</td>
+                                <td><strong>Documento lançado</strong><br>O processo foi concluído com sucesso.</td>
+                                <td>Nenhuma ação necessária.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-badge status-error">51</span></td>
+                                <td>Erro</td>
+                                <td><strong>Doc. aplicação não lançado</strong><br>Erro funcional (dados inválidos para o negócio).</td>
+                                <td>Verificar o log detalhado no status. Geralmente requer correção na origem e reenvio, ou correção manual na BD87.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-badge status-warning">64</span></td>
+                                <td>Aguardando</td>
+                                <td><strong>Pronto para processamento</strong><br>O IDoc chegou, mas o JOB ainda não rodou.</td>
+                                <td>Aguardar o job <code>RBDAPP01</code> ou processar manualmente na <code>BD87</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-badge status-error">56</span></td>
+                                <td>Config</td>
+                                <td><strong>IDoc com estrutura incorreta</strong><br>Segmento faltando ou parceiro não configurado.</td>
+                                <td>Verificar transação <code>WE20</code> (Perfil de Parceiro) e se o payload XML contém todos os segmentos obrigatórios.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-badge status-error">68</span></td>
+                                <td>Falha</td>
+                                <td><strong>Erro - sem processamento posterior</strong><br>IDoc marcado manualmente para não ser processado.</td>
+                                <td>Verificar auditoria (quem marcou?). Geralmente indica um IDoc duplicado que foi cancelado.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-badge status-warning">69</span></td>
+                                <td>Audit</td>
+                                <td><strong>IDoc foi editado</strong><br>Os dados foram alterados manualmente.</td>
+                                <td>Atenção: Indica intervenção manual. Verificar integridade dos dados.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="mapping-errors" style="margin-bottom: 50px;">
+                <div class="card-header" style="border-radius: 8px; margin-bottom: 20px;">
+                    <div class="card-title"><h2>Erros de Dados e Mapeamento</h2></div>
+                </div>
+
+                <div class="error-grid">
+                    
+                    <div class="error-card">
+                        <span class="cat-tag">Formato</span>
+                        <h3 class="error-title">Data Inválida (dd.mm.yyyy) <span class="error-code">Date Format</span></h3>
+                        <p><strong>Sintoma:</strong> IDoc quebra ou data entra como 00.00.0000.</p>
+                        <p><strong>Causa:</strong> O SAP espera <code>YYYYMMDD</code> puro. Formatos com barras (/) ou pontos (.) falham.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Use a função <strong>FORMAT DATE</strong>. Converta <code>31/12/2025</code> para <code>20251231</code>.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Formato</span>
+                        <h3 class="error-title">Objeto não encontrado (Zeros) <span class="error-code">Leading Zeros</span></h3>
+                        <p><strong>Sintoma:</strong> Erro "Cliente 123 não existe", mas o cliente existe.</p>
+                        <p><strong>Causa:</strong> Campos numéricos (KUNNR, MATNR, LIFNR) exigem zeros à esquerda.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Use a função <strong>LPAD</strong>. Preencha com '0' até o tamanho total (ex: 10).<br>
+                            <code>123</code> -> <code>0000000123</code>.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Numérico</span>
+                        <h3 class="error-title">Erro de Valor/Montante <span class="error-code">Decimal Format</span></h3>
+                        <p><strong>Sintoma:</strong> Valor 100,00 entra como 10000 ou erro de conversão.</p>
+                        <p><strong>Causa:</strong> O SAP (via IDoc) espera ponto <code>.</code> como decimal e <strong>nenhum</strong> separador de milhar.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Use <strong>TRANSLATE</strong> ou Replace.<br>
+                            Errado: <code>1.234,56</code> | Certo: <code>1234.56</code>.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Validação</span>
+                        <h3 class="error-title">Estouro de Campo <span class="error-code">Length Exceeded</span></h3>
+                        <p><strong>Sintoma:</strong> Erro técnico "Value is too long for field X".</p>
+                        <p><strong>Causa:</strong> Enviar 40 caracteres num campo CHAR(35) (ex: Endereço, Nome).</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Use a função <strong>SUBSTRING</strong> para cortar o excesso ou divida o valor em dois campos (ex: <code>STRAS</code> e <code>ORT02</code>).
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Domínio</span>
+                        <h3 class="error-title">Unidade não prevista <span class="error-code">ISO Code</span></h3>
+                        <p><strong>Sintoma:</strong> Erro "Unidade PC não existe".</p>
+                        <p><strong>Causa:</strong> O IDoc espera o código ISO (Tabela T006) e não o comercial.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Faça um De/Para.<br>
+                            Peça -> <strong>PCE</strong> (ISO) ou <strong>ST</strong> (SAP Internal).<br>
+                            Caixa -> <strong>CX</strong> ou <strong>BX</strong>.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Encoding</span>
+                        <h3 class="error-title">Caracteres Inválidos (XML) <span class="error-code">Parsing Error</span></h3>
+                        <p><strong>Sintoma:</strong> O fluxo falha antes de entrar no SAP (Erro de Parse XML).</p>
+                        <p><strong>Causa:</strong> Caracteres como <code>&</code>, <code><</code>, <code>></code> no meio do texto quebram o XML.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Escape os caracteres na origem.<br>
+                            <code>&</code> vira <code>&amp;amp;</code><br>
+                            <code><</code> vira <code>&amp;lt;</code>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="functional-errors" style="margin-bottom: 50px;">
+                <div class="card-header" style="border-radius: 8px; margin-bottom: 20px;">
+                    <div class="card-title"><h2>Erros Funcionais (Regra de Negócio)</h2></div>
+                </div>
+
+                <div class="error-grid">
+                    
+                    <div class="error-card">
+                        <span class="cat-tag">Mestre de Materiais</span>
+                        <h3 class="error-title">Material não ampliado <span class="error-code">M3 351</span></h3>
+                        <p><strong>Erro:</strong> "O material não está criado no centro XXXX".</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            O material existe (MARA), mas falta a visão de Centro (MARC). É necessário criar a visão de centro antes de fazer movimentos ou pedidos.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Financeiro</span>
+                        <h3 class="error-title">Período Contábil Fechado <span class="error-code">F5 201</span></h3>
+                        <p><strong>Erro:</strong> "Período 01/2024 não está aberto para conta X".</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            O mês contábil virou. Solicitar à contabilidade a abertura do período na transação <strong>MMPV</strong> ou <strong>OB52</strong>.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Vendas</span>
+                        <h3 class="error-title">Organização de Vendas <span class="error-code">V1 306</span></h3>
+                        <p><strong>Erro:</strong> "Cliente X não está ampliado para a área de vendas Y/Z".</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Verifique os campos <code>VKORG</code> (Org Vendas), <code>VTWEG</code> (Canal) e <code>SPART</code> (Setor). O cliente precisa ser estendido para essa combinação (KNVV).
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Compras</span>
+                        <h3 class="error-title">Fornecedor Bloqueado <span class="error-code">M8 088</span></h3>
+                        <p><strong>Erro:</strong> "Fornecedor bloqueado para a organização de compras".</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Verificar campo <code>SPERM</code> (Bloqueio compras) no mestre. Se for intencional, não é possível integrar pedidos.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="connectivity" style="margin-bottom: 50px;">
+                <div class="card-header" style="border-radius: 8px; margin-bottom: 20px;">
+                    <div class="card-title"><h2>Erros de Conectividade (HTTP)</h2></div>
+                </div>
+
+                <div class="error-grid">
+                    
+                    <div class="error-card">
+                        <span class="cat-tag">Autenticação</span>
+                        <h3 class="error-title">Não Autorizado <span class="error-code">401 Unauthorized</span></h3>
+                        <p><strong>Causa:</strong> Usuário ou senha incorretos na chamada do serviço.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Verificar credenciais do usuário de serviço (ex: <code>INTEG_USER</code>). Verificar se a senha expirou na <code>SU01</code>.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Permissão</span>
+                        <h3 class="error-title">Proibido <span class="error-code">403 Forbidden</span></h3>
+                        <p><strong>Causa:</strong> O usuário logou, mas não tem permissão para este serviço específico.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Verificar roles (PFCG) do usuário. Falta objeto de autorização para o serviço SICF ou para o objeto de negócio.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Servidor</span>
+                        <h3 class="error-title">Erro Interno <span class="error-code">500 Internal Error</span></h3>
+                        <p><strong>Causa:</strong> Crash no programa ABAP (Dump) durante o processamento.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Verificar a transação <strong>ST22</strong> (ABAP Dumps) no SAP para ver o erro técnico detalhado (ex: Time Out, Memory Low).
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Rede</span>
+                        <h3 class="error-title">Connection Timed Out <span class="error-code">Timeout</span></h3>
+                        <p><strong>Causa:</strong> Firewall bloqueando ou sistema destino offline.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Verificar se o IP de origem está liberado no Firewall/Cloud Connector. Testar conectividade básica (Ping/Telnet).
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // --- BUSCA INTELIGENTE ---
+        document.getElementById('errorSearch').addEventListener('keyup', function(e) {
+            const term = e.target.value.toUpperCase();
+            
+            // 1. Filtra Tabela de Status
+            const rows = document.querySelectorAll('#statusTableBody tr');
+            let hasVisibleRow = false;
+            rows.forEach(row => {
+                const text = row.innerText.toUpperCase();
+                if (text.includes(term)) {
+                    row.style.display = '';
+                    hasVisibleRow = true;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // 2. Filtra Cards de Erro
+            const cards = document.querySelectorAll('.error-card');
+            cards.forEach(card => {
+                const text = card.innerText.toUpperCase();
+                card.style.display = text.includes(term) ? 'flex' : 'none';
+            });
+        });
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // --- HISTORY LOGIC (Igual aos outros) ---
+        (function() {
+            const MAX_HISTORY = 10;
+            const HISTORY_KEY = 'sap_docs_history';
+            
+            // Salva histórico
+            if (!window.location.pathname.endsWith('index.html')) {
+                const currentPage = { title: document.title, url: window.location.pathname.split('/').pop() };
+                let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                history = history.filter(h => h.url !== currentPage.url);
+                history.unshift(currentPage);
+                if (history.length > MAX_HISTORY) history.pop();
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+                
+                const btn = document.createElement('a'); btn.id = 'global-back-btn'; btn.href = 'index.html'; btn.innerHTML = '🏠'; btn.title = 'Voltar ao Início'; document.body.appendChild(btn);
+            }
+
+            // Renderiza histórico
+            const container = document.getElementById('history-list');
+            if (container) {
+                const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                if (history.length === 0) container.innerHTML = '<div style="padding:5px 8px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
+                else {
+                    container.innerHTML = history.map(h => `<a href="${h.url}" class="history-link">${h.title}</a>`).join('');
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
