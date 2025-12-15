@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCUMENTACAO IDOC MATERIAL CARACTERISTICAS</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <div class="brand">DOCUMENTACAO IDOC MATERIAL CARACTERISTICAS</div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar campo, segmento ou descrição...">
+        </div>
+    </header>
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Estrutura Hierárquica</div>
+    <div class="node">
+        <a href="#E1OCLFM" class="node-item" onclick="activateNode(this)">
+            <strong>E1OCLFM</strong>
+            <span>Mestre classificação objetos...</span>
+        </a>
+        <div class="node">
+        <a href="#E1KSSKM" class="node-item" onclick="activateNode(this)">
+            <strong>E1KSSKM</strong>
+            <span>Classificação distribuição: ...</span>
+        </a>
+        
+        <a href="#E1AUSPM" class="node-item" onclick="activateNode(this)">
+            <strong>E1AUSPM</strong>
+            <span>Distribuição classificação: ...</span>
+        </a>
+        
+        <a href="#E1DATEM" class="node-item" onclick="activateNode(this)">
+            <strong>E1DATEM</strong>
+            <span>Data-chave mestra e nº de mo...</span>
+        </a>
+        </div>
+        <a href="#E1UPSLINK" class="node-item" onclick="activateNode(this)">
+            <strong>E1UPSLINK</strong>
+            <span>Referência de objeto a UPS s...</span>
+        </a>
+        </div>
+            </div>
+        </aside>
+        <main id="mainContent">
+    
+    <div id="E1OCLFM" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1OCLFM <span class="desc">Mestre classificação objetos</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">6 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MSGFN</span></td>
+            <td>Função</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBTAB</span></td>
+            <td>Nome da tabela de banco de dados do objeto</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJEK</span></td>
+            <td>Chave do objeto a ser classificado</td>
+            <td><span class="dt-type">CHAR(50)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">KLART</span></td>
+            <td>Tipo de classe</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MAFID</span></td>
+            <td>Código objeto/classe</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJECT_TABLE</span></td>
+            <td>Nome da tabela de banco de dados do objeto</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1KSSKM" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1KSSKM <span class="desc">Classificação distribuição: atribuição à classe de objeto</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">6 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MSGFN</span></td>
+            <td>Função</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CLASS</span></td>
+            <td>Nº classe</td>
+            <td><span class="dt-type">CHAR(18)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">AENNR</span></td>
+            <td>Nº modificação</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DATUV</span></td>
+            <td>Data início validade</td>
+            <td><span class="dt-type">DATS(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STATU</span></td>
+            <td>Status da classificação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STDCL</span></td>
+            <td>Código: classe standard</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1AUSPM" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1AUSPM <span class="desc">Distribuição classificação: avaliação características objeto</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">18 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MSGFN</span></td>
+            <td>Função</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATNAM</span></td>
+            <td>Nome da característica</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">AENNR</span></td>
+            <td>Nº modificação</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DATUV</span></td>
+            <td>Data início validade</td>
+            <td><span class="dt-type">DATS(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATWRT</span></td>
+            <td>Valor da característica</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATFLV</span></td>
+            <td>Valor interno vírgula flutuante desde</td>
+            <td><span class="dt-type">CHAR(22)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATAWE</span></td>
+            <td>Unidade medida</td>
+            <td><span class="dt-type">UNIT(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATFLB</span></td>
+            <td>Valor interno vírgula flutuante até</td>
+            <td><span class="dt-type">CHAR(22)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATAW1</span></td>
+            <td>Unidade medida</td>
+            <td><span class="dt-type">UNIT(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATCOD</span></td>
+            <td>Code para dependência de valores</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATTLV</span></td>
+            <td>Tolerância de</td>
+            <td><span class="dt-type">CHAR(22)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATTLB</span></td>
+            <td>Tolerância até</td>
+            <td><span class="dt-type">CHAR(22)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATPRZ</span></td>
+            <td>Código de indicações de tolerâncias em %</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATINC</span></td>
+            <td>Incremento dentro de um intervalo</td>
+            <td><span class="dt-type">CHAR(22)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATAUT</span></td>
+            <td>Classificação: autor</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATIMB</span></td>
+            <td>Nº característica da ctg.dados definida pelo usuário</td>
+            <td><span class="dt-type">NUMC(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ATZIS</span></td>
+            <td>Contador de instâncias</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">UDEF_CHAR</span></td>
+            <td>Nome da característica</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1DATEM" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1DATEM <span class="desc">Data-chave mestra e nº de modificação</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">4 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MSGFN</span></td>
+            <td>Função</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">KEY_DATE</span></td>
+            <td>Data do sistema</td>
+            <td><span class="dt-type">DATS(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">AENNR</span></td>
+            <td>Nº modificação</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">EFFECTIVITY</span></td>
+            <td>Avaliar parâmetros de validade / substituir nºs modificação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1UPSLINK" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1UPSLINK <span class="desc">Referência de objeto a UPS superior</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">5 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">UPSNAM</span></td>
+            <td>Pacote de distribuição ALE: nome</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ORGNAM</span></td>
+            <td>Pacote de distribuição ALE: pacote original (nome)</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MESTYP</span></td>
+            <td>Tipo de mensagem</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJID</span></td>
+            <td>Pacote de distribuição ALE: chave de objeto</td>
+            <td><span class="dt-type">CHAR(120)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJVAL</span></td>
+            <td>Pacote de distribuição ALE: validade do objeto</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+        </main>
+    </div>
+    
+    <div id="toast">Copiado!</div>
+    
+    <script>
+        // Função de Copiar
+        function copy(el) { 
+            navigator.clipboard.writeText(el.innerText).then(() => { 
+                let t = document.getElementById('toast'); 
+                t.classList.add('show'); 
+                setTimeout(() => t.classList.remove('show'), 2000); 
+            }); 
+        }
+        
+        // Ativar item na sidebar
+        function activateNode(el) { 
+            document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active')); 
+            el.classList.add('active'); 
+        }
+        
+        // Busca em Tempo Real
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            let term = e.target.value.toUpperCase();
+            document.querySelectorAll('.segment-card').forEach(card => {
+                let show = false;
+                
+                // Verifica título do card
+                if(card.querySelector('.card-header').innerText.toUpperCase().includes(term)) show = true;
+                
+                // Verifica linhas da tabela
+                card.querySelectorAll('tbody tr').forEach(row => {
+                    if(row.innerText.toUpperCase().includes(term)) {
+                        row.classList.remove('hidden');
+                        if(term) row.style.backgroundColor = '#fffbeb'; 
+                        else row.style.backgroundColor = '';
+                        show = true;
+                    } else { 
+                        row.classList.add('hidden'); 
+                    }
+                });
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+    

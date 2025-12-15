@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCUMENTACAO IDOC MATQM01</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <div class="brand">DOCUMENTACAO IDOC MATQM01</div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar campo, segmento ou descrição...">
+        </div>
+    </header>
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Estrutura Hierárquica</div>
+    <div class="node">
+        <a href="#E1BP1001004_QMAT" class="node-item" onclick="activateNode(this)">
+            <strong>E1BP1001004_QMAT</strong>
+            <span>Dds.controle QM material (QM...</span>
+        </a>
+        </div>
+            </div>
+        </aside>
+        <main id="mainContent">
+    
+    <div id="E1BP1001004_QMAT" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BP1001004_QMAT <span class="desc">Dds.controle QM material (QMAT) ALE distribuição com BAPI</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">36 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FUNCTION</span></td>
+            <td>Função</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">INSPTYPE</span></td>
+            <td>Tipo de controle</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MATERIAL</span></td>
+            <td>Nº do material</td>
+            <td><span class="dt-type">CHAR(18)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PLANT</span></td>
+            <td>Centro</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_INSP_WITH_TSK_LIST</span></td>
+            <td>Controle com lista de tarefas</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_SPEC_MATSPEC</span></td>
+            <td>Controle com especificação de material</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_SPEC_CONFIG</span></td>
+            <td>Especificações de controle da configuração</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_SPEC_BATCH</span></td>
+            <td>Especificações de controle da determinação de lotes</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_AUTO_ASSIGN</span></td>
+            <td>Atribuição automática de especificações</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_INSP_BY_CHARAC</span></td>
+            <td>Efetuar controle por características</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_POST_TO_INSP_STOCK</span></td>
+            <td>Registro em estoque em controle de qualidade</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_AUTOMATIC_UD</span></td>
+            <td>Decisão de utilização automática prevista</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SAMPLING_PROCEDURE</span></td>
+            <td>Processo de amostra</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DYN_MODIF_RULE</span></td>
+            <td>Regra de controle dinâmico</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">INSP_PERCENTAGE</span></td>
+            <td>Porcentagem de controle</td>
+            <td><span class="dt-type">DEC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_100_PERCENT_INSPECTION</span></td>
+            <td>Controle a 100%</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_SKIPS_ALLOWED</span></td>
+            <td>Skips permitidos</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_MANUAL_SAMPLE</span></td>
+            <td>Indicar amostra manualmente</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_MANUAL_SAMPLE_CALC</span></td>
+            <td>Acionar cálculo de amostra manualmente</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_SINGLE_UNITS_POSSIBLE</span></td>
+            <td>Administração de nºs de série</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">AVE_INSP_DURATION</span></td>
+            <td>Duração média do controle</td>
+            <td><span class="dt-type">DEC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONTR_INSP_LOT_CREATE</span></td>
+            <td>Controle da criação de lote de controle (agrupamento lotes)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">QUAL_SCORE_PROCEDURE</span></td>
+            <td>Processo para cálculo do índice de qualidade</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ALLOWED_SCRAP_SHARE</span></td>
+            <td>Quota de refugo permitida (em %) no lote de controle</td>
+            <td><span class="dt-type">DEC(6)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_SPECIAL_QM_ORDER</span></td>
+            <td>Entrar custos de controle na ordem QM individual</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">QM_ORDERID</span></td>
+            <td>Nº ordem para a entrada de custos de controle</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_INSPTYPE_MAT_ACTIVE</span></td>
+            <td>Combinação tipo de controle - material está ativa</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PREFERRED_INSPTYPE</span></td>
+            <td>Tipo de controle preferido</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">INSPTYPE_DELETE</span></td>
+            <td>Tps.contr.a serem eliminados (distr.ALE QM)</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CREATION_TIME</span></td>
+            <td>Momento de geração de um indicador de modificação</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MATERIAL_EXTERNAL</span></td>
+            <td>Nº de material longo para o campo MATERIAL</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MATERIAL_GUID</span></td>
+            <td>GUID externo para campo MATERIAL</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MATERIAL_VERSION</span></td>
+            <td>Nº de versão para campo MATERIAL</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IND_HU_INSPECTION</span></td>
+            <td>Controle da unidade comercial</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MS_FLAG</span></td>
+            <td>Código: especificações múltiplas</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">MATERIAL_LONG</span></td>
+            <td>Nº material (40 caracteres, necessário por razões técnicas)</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+        </main>
+    </div>
+    
+    <div id="toast">Copiado!</div>
+    
+    <script>
+        // Função de Copiar
+        function copy(el) { 
+            navigator.clipboard.writeText(el.innerText).then(() => { 
+                let t = document.getElementById('toast'); 
+                t.classList.add('show'); 
+                setTimeout(() => t.classList.remove('show'), 2000); 
+            }); 
+        }
+        
+        // Ativar item na sidebar
+        function activateNode(el) { 
+            document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active')); 
+            el.classList.add('active'); 
+        }
+        
+        // Busca em Tempo Real
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            let term = e.target.value.toUpperCase();
+            document.querySelectorAll('.segment-card').forEach(card => {
+                let show = false;
+                
+                // Verifica título do card
+                if(card.querySelector('.card-header').innerText.toUpperCase().includes(term)) show = true;
+                
+                // Verifica linhas da tabela
+                card.querySelectorAll('tbody tr').forEach(row => {
+                    if(row.innerText.toUpperCase().includes(term)) {
+                        row.classList.remove('hidden');
+                        if(term) row.style.backgroundColor = '#fffbeb'; 
+                        else row.style.backgroundColor = '';
+                        show = true;
+                    } else { 
+                        row.classList.add('hidden'); 
+                    }
+                });
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+    

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>IDoc Docs: SRVMAS01</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            SRVMAS01 <span>Registro mestre de atividades</span>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar campo, descrição ou tipo (ex: MATKL)...">
+        </div>
+    </header>
+
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Hierarquia do IDoc</div>
+                
+                <div style="margin-left: 0;">
+                    <a href="#E1ASMDM" class="node-item" onclick="activateNode(this)">
+                        <strong>E1ASMDM</strong>
+                        <span>Dados básicos</span>
+                    </a>
+                    
+                    <div class="node">
+                        <a href="#E1ASMDT" class="node-item" onclick="activateNode(this)">
+                            <strong>E1ASMDT</strong>
+                            <span>Textos breves</span>
+                        </a>
+
+                        <div class="node">
+                            <a href="#E1SMLTH" class="node-item" onclick="activateNode(this)">
+                                <strong>E1SMLTH</strong>
+                                <span>Texto descritivo (Header)</span>
+                            </a>
+
+                            <div class="node">
+                                <a href="#E1SMLTL" class="node-item" onclick="activateNode(this)">
+                                    <strong>E1SMLTL</strong>
+                                    <span>Texto descritivo (Linha)</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 1rem; font-size: 0.7rem; opacity: 0.5; border-top: 1px solid #334155;">
+                Versão: 758 / 10.12.2025
+            </div>
+        </aside>
+
+        <main id="mainContent">
+
+            <div id="E1ASMDM" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>E1ASMDM <span class="desc">Mestre serviços prestados dados básicos</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-req">Obrigatório</span>
+                        <span class="badge badge-meta">Min: 1</span>
+                        <span class="badge badge-meta">Máx: 1</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 15%">Campo</th>
+                                <th style="width: 40%">Descrição</th>
+                                <th style="width: 20%">Tipo Técnico</th>
+                                <th style="width: 25%">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MSGFN</span></td><td>Função (Create/Update/Delete)</td><td><span class="dt-type">CHAR(3)</span></td><td><span class="dt-pos">Pos: 1 | Off: 63</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">ASNUM</span></td><td>Nº de serviço</td><td><span class="dt-type">CHAR(18)</span></td><td><span class="dt-pos">Pos: 2 | Off: 66</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LVORM</span></td><td>Marcação para eliminação</td><td><span class="dt-type">CHAR(1)</span></td><td><span class="dt-pos">Pos: 3 | Off: 84</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MATKL</span></td><td>Grupo de mercadorias</td><td><span class="dt-type">CHAR(9)</span></td><td><span class="dt-pos">Pos: 4 | Off: 85</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MEINS</span></td><td>Unidade de medida básica</td><td><span class="dt-type">UNIT(3)</span></td><td><span class="dt-pos">Pos: 5 | Off: 94</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">ASTYP</span></td><td>Categoria de serviços</td><td><span class="dt-type">CHAR(4)</span></td><td><span class="dt-pos">Pos: 6 | Off: 97</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">EAN11</span></td><td>Nº europeu do artigo (EAN)</td><td><span class="dt-type">CHAR(18)</span></td><td><span class="dt-pos">Pos: 7 | Off: 101</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NUMTP</span></td><td>Ctg.de número do EAN</td><td><span class="dt-type">CHAR(2)</span></td><td><span class="dt-pos">Pos: 8 | Off: 119</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SPART</span></td><td>Setor de atividade</td><td><span class="dt-type">CHAR(2)</span></td><td><span class="dt-pos">Pos: 9 | Off: 121</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BEGRU</span></td><td>Grupo de autorizações</td><td><span class="dt-type">CHAR(4)</span></td><td><span class="dt-pos">Pos: 10 | Off: 123</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MSTAE</span></td><td>Status material p/todos os centros</td><td><span class="dt-type">CHAR(2)</span></td><td><span class="dt-pos">Pos: 11 | Off: 127</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MSTDE</span></td><td>Data validade status material</td><td><span class="dt-type">DATS(8)</span></td><td><span class="dt-pos">Pos: 12 | Off: 129</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BKLAS</span></td><td>Classe de avaliação</td><td><span class="dt-type">CHAR(4)</span></td><td><span class="dt-pos">Pos: 13 | Off: 137</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LSTHI</span></td><td>Nº de serviço de hierarquia</td><td><span class="dt-type">CHAR(18)</span></td><td><span class="dt-pos">Pos: 14 | Off: 141</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MLANG</span></td><td>Idioma principal textos</td><td><span class="dt-type">LANG(1)</span></td><td><span class="dt-pos">Pos: 15 | Off: 159</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LGART</span></td><td>Rubrica salarial</td><td><span class="dt-type">CHAR(4)</span></td><td><span class="dt-pos">Pos: 16 | Off: 160</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LBNUM</span></td><td>Denominação do tipo de serviço</td><td><span class="dt-type">CHAR(3)</span></td><td><span class="dt-pos">Pos: 17 | Off: 164</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">AUSGB</span></td><td>Saída do tipo de serviço</td><td><span class="dt-type">NUMC(4)</span></td><td><span class="dt-pos">Pos: 18 | Off: 167</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">STLVPOS</span></td><td>Item de relação de serviços standard</td><td><span class="dt-type">CHAR(18)</span></td><td><span class="dt-pos">Pos: 19 | Off: 171</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TAXIM</span></td><td>Indicador de imposto (compras)</td><td><span class="dt-type">CHAR(1)</span></td><td><span class="dt-pos">Pos: 20 | Off: 189</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">IWUMZ</span></td><td>Campo char (6)</td><td><span class="dt-type">CHAR(6)</span></td><td><span class="dt-pos">Pos: 21 | Off: 190</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">IWUMN</span></td><td>Campo char (6)</td><td><span class="dt-type">CHAR(6)</span></td><td><span class="dt-pos">Pos: 22 | Off: 196</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">IWEIN</span></td><td>Unidade de medida</td><td><span class="dt-type">CHAR(3)</span></td><td><span class="dt-pos">Pos: 23 | Off: 202</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">FORMELNR</span></td><td>Nº fórmula</td><td><span class="dt-type">CHAR(10)</span></td><td><span class="dt-pos">Pos: 24 | Off: 205</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">CHGTEXT</span></td><td>Mod.texto breve permit.</td><td><span class="dt-type">CHAR(1)</span></td><td><span class="dt-pos">Pos: 25 | Off: 215</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="E1ASMDT" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>E1ASMDT <span class="desc">Mestre de serviços prestados textos breves</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-req">Obrigatório</span>
+                        <span class="badge badge-meta">Min: 1</span>
+                        <span class="badge badge-meta">Máx: 99</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 15%">Campo</th>
+                                <th style="width: 40%">Descrição</th>
+                                <th style="width: 20%">Tipo Técnico</th>
+                                <th style="width: 25%">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MSGFN</span></td><td>Função</td><td><span class="dt-type">CHAR(3)</span></td><td><span class="dt-pos">Pos: 1 | Off: 63</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SPRAS</span></td><td>Código de idioma</td><td><span class="dt-type">LANG(1)</span></td><td><span class="dt-pos">Pos: 2 | Off: 66</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">ASKTX</span></td><td>Texto breve serviço</td><td><span class="dt-type">CHAR(40)</span></td><td><span class="dt-pos">Pos: 3 | Off: 67</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SPRAS_ISO</span></td><td>Código idioma ISO</td><td><span class="dt-type">CHAR(2)</span></td><td><span class="dt-pos">Pos: 4 | Off: 107</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="E1SMLTH" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>E1SMLTH <span class="desc">Mestre de serviços texto descritivo ID (Header)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1</span>
+                        <span class="badge badge-meta">Máx: 9</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 15%">Campo</th>
+                                <th style="width: 40%">Descrição</th>
+                                <th style="width: 20%">Tipo Técnico</th>
+                                <th style="width: 25%">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MSGFN</span></td><td>Função</td><td><span class="dt-type">CHAR(3)</span></td><td><span class="dt-pos">Pos: 1 | Off: 63</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDOBJECT</span></td><td>Textos: objeto de aplicação</td><td><span class="dt-type">CHAR(10)</span></td><td><span class="dt-pos">Pos: 2 | Off: 66</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDNAME</span></td><td>TDIC nome do texto</td><td><span class="dt-type">CHAR(16)</span></td><td><span class="dt-pos">Pos: 3 | Off: 76</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDID</span></td><td>ID de texto</td><td><span class="dt-type">CHAR(4)</span></td><td><span class="dt-pos">Pos: 4 | Off: 92</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDSPRAS</span></td><td>Código de idioma</td><td><span class="dt-type">LANG(1)</span></td><td><span class="dt-pos">Pos: 5 | Off: 96</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDTEXTTYPE</span></td><td>SAPscript: formato de um texto</td><td><span class="dt-type">CHAR(6)</span></td><td><span class="dt-pos">Pos: 6 | Off: 97</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDSPRAS_ISO</span></td><td>Código idioma ISO</td><td><span class="dt-type">CHAR(2)</span></td><td><span class="dt-pos">Pos: 7 | Off: 103</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="E1SMLTL" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>E1SMLTL <span class="desc">Mestre serviços texto descritivo linha de texto</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1</span>
+                        <span class="badge badge-meta">Máx: 9999</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 15%">Campo</th>
+                                <th style="width: 40%">Descrição</th>
+                                <th style="width: 20%">Tipo Técnico</th>
+                                <th style="width: 25%">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDFORMAT</span></td><td>Coluna de formato</td><td><span class="dt-type">CHAR(2)</span></td><td><span class="dt-pos">Pos: 1 | Off: 63</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TDLINE</span></td><td>Linha de texto</td><td><span class="dt-type">CHAR(132)</span></td><td><span class="dt-pos">Pos: 2 | Off: 65</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="toast">Copiado para a área de transferência!</div>
+
+    <script>
+        // --- COPY TO CLIPBOARD ---
+        function copy(element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // --- NAVIGATION HIGHLIGHT ---
+        function activateNode(el) {
+            document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // --- SEARCH ENGINE ---
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const term = e.target.value.toUpperCase();
+            const cards = document.querySelectorAll('.segment-card');
+            const nodes = document.querySelectorAll('.node-item');
+
+            // Filtra os Cards Principais
+            cards.forEach(card => {
+                const rows = card.querySelectorAll('tbody tr');
+                let cardVisible = false;
+                
+                // Verifica Header do Card
+                const cardHeader = card.querySelector('.card-header').innerText.toUpperCase();
+                if (cardHeader.includes(term)) cardVisible = true;
+
+                // Verifica Linhas da Tabela
+                rows.forEach(row => {
+                    const rowText = row.innerText.toUpperCase();
+                    if (rowText.includes(term)) {
+                        row.classList.remove('hidden');
+                        if (term !== '') row.classList.add('highlight'); // Highlight se tiver busca
+                        else row.classList.remove('highlight');
+                        cardVisible = true;
+                    } else {
+                        row.classList.add('hidden');
+                        row.classList.remove('highlight');
+                    }
+                });
+
+                if (cardVisible) card.classList.remove('hidden');
+                else card.classList.add('hidden');
+            });
+
+            // Filtra Sidebar (opcional, visual feedback)
+            nodes.forEach(node => {
+                if (node.innerText.toUpperCase().includes(term)) {
+                    node.style.opacity = '1';
+                    node.style.color = '#fff';
+                } else {
+                    node.style.opacity = term ? '0.3' : '1';
+                    node.style.color = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

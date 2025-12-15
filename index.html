@@ -3,131 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Índice de Ferramentas e Documentação IDOCs</title>
+    <title>Portal de Documentação SAP</title>
     <link rel="stylesheet" href="estilos.css">
-
     <style>
-        /* Ajustes no container do seu CSS para centralizar melhor */
-        body {
+        /* Estilos específicos do Dashboard */
+        .welcome-section {
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .welcome-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; color: white; border: none; }
+        .welcome-text { font-size: 1rem; opacity: 0.9; max-width: 600px; }
+
+        .section-header {
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px; /* Um pouco mais largo para o grid */
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.2em; /* Ajuste no tamanho da fonte */
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            color: #343a40;
-            text-align: left;
-            margin-top: 40px;
             margin-bottom: 20px;
-            font-size: 1.5em;
-            border-bottom: 2px solid #007bff;
+            margin-top: 40px;
+            border-bottom: 1px solid var(--border);
             padding-bottom: 10px;
         }
+        
+        .section-icon { font-size: 1.5rem; margin-right: 10px; }
+        .section-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin: 0; border: none; padding: 0;}
 
-        .links-grid {
+        /* Grid de Cards */
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
-            list-style-type: none;
-            padding: 0;
         }
 
-        .links-grid li a {
+        .nav-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* Cores de borda superior para categorias */
+        .card-tool { border-top: 4px solid #10b981; } /* Verde para ferramentas */
+        .card-doc { border-top: 4px solid #3b82f6; }  /* Azul para docs */
+        .card-json { border-top: 4px solid #f59e0b; } /* Laranja para JSON */
+
+        .nc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .nc-icon {
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            padding: 20px;
-            background-color: #ffffff;
-            color: #0056b3;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 500;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            justify-content: center;
+            font-size: 1.2rem;
         }
 
-        .links-grid li a:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            background-color: #007bff;
-            color: #ffffff;
-            border-color: #007bff;
-        }
-        
-        .links-grid li a .icon {
-            font-size: 1.8em;
-            margin-right: 15px;
+        .nc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
         }
 
-        /* Cores especiais para os botões de ferramentas */
-        .search-button {
-            background-color: #28a745;
-            color: white;
-            border-color: #28a745;
-        }
-        .search-button:hover {
-            background-color: #218838;
-            border-color: #218838;
+        .nc-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
+            flex: 1; /* Empurra o footer para baixo */
         }
 
-        .query-button {
-            background-color: #8e44ad;
-            color: white;
-            border-color: #8e44ad;
+        .nc-footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
         }
-        .query-button:hover {
-            background-color: #732d91;
-            border-color: #732d91;
+
+        .nc-arrow {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nc-badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: #f1f5f9;
+            color: #475569;
         }
 
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Índice de Ferramentas e Documentação IDOCs</h1>
 
-        <h2 class="section-title">Ferramentas Interativas</h2>
-        <ul class="links-grid">
-            <li>
-                <a href="pesquisa.html" class="search-button">
-                    <span class="icon">🔍</span> 
-                    <span>Abrir Ferramenta de Pesquisa</span>
-                </a>
-            </li>
-            <li>
-                <a href="gerador_queries.html" class="query-button">
-                    <span class="icon">⚙️</span>
-                    <span>Abrir Gerador de Queries</span>
-                </a>
-            </li>
-        </ul>
+    <header>
+        <div class="brand">
+            PORTAL SAP <span>Documentação & Integração</span>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Pesquisa rápida..." onclick="window.location.href='pesquisa.html'">
+        </div>
+    </header>
 
-        <h2 class="section-title">Documentação de Referência</h2>
-        <ul class="links-grid">
-            <li><a href="dados_parceiro.html" target="_blank"><span class="icon">👤</span> <span>JSON de Parceiro de Negócios (BP)</span></a></li>
-            <li><a href="DOCUMENTACAO_IDOC_CLIENTES.htm" target="_blank"><span class="icon">🏢</span> <span>IDOC de Clientes (DEBMAS)</span></a></li>
-            <li><a href="DOCUMENTACAO_IDOC_FORNECEDOR.htm" target="_blank"><span class="icon">🚚</span> <span>IDOC de Fornecedores (CREMAS)</span></a></li>
-            <li><a href="DOCUMENTACAO_IDOC_MATERIAL.htm" target="_blank"><span class="icon">📦</span> <span>IDOC de Material (MATMAS)</span></a></li>
-            <li><a href="DOC_ARTMAS09.html" target="_blank"><span class="icon">📦</span> <span>IDOC de Material Retail (ARTMAS)</span></a></li>
-            <li><a href="SRVMAS01.htm" target="_blank"><span class="icon">🪛</span> <span>IDOC de Serviços (SRVMAS)</span></a></li>
-            <li><a href="DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.htm" target="_blank"><span class="icon">🏷️</span> <span>IDOC de Material - Características (CLFMAS)</span></a></li>
-            <li><a href="DOCUMENTACAO_IDOC_MATQM01.htm" target="_blank"><span class="icon">🔬</span> <span>IDOC de Material - Dados de QM (MATQM01)</span></a></li>
-            <li><a href="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm" target="_blank"><span class="icon">📫</span> <span>IDOC de Endereços (ADRMAS)</span></a></li>
-        </ul>
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Navegação</div>
+                <div style="margin-left: 0;">
+                    <a href="#ferramentas" class="node-item active" onclick="scrollToSection('ferramentas')">
+                        <strong>Ferramentas</strong>
+                    </a>
+                    <a href="#master-data" class="node-item" onclick="scrollToSection('master-data')">
+                        <strong>Dados Mestres</strong>
+                    </a>
+                    <a href="#transacional" class="node-item" onclick="scrollToSection('transacional')">
+                        <strong>Transacional</strong>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="padding: 20px; font-size: 0.75rem; color: #64748b; border-top: 1px solid #1e293b;">
+                <p>Atualizado em: Dez/2025</p>
+                <p>Equipe de Integração</p>
+            </div>
+        </aside>
+
+        <main id="mainContent">
+
+            <div class="welcome-section">
+                <h1 class="welcome-title">Bem-vindo ao Hub de Integração</h1>
+                <p class="welcome-text">Acesse a documentação técnica detalhada de IDocs, estruturas JSON e ferramentas de produtividade para desenvolvimento SAP.</p>
+            </div>
+
+            <div id="ferramentas">
+                <div class="section-header">
+                    <span class="section-icon">🛠️</span>
+                    <h2 class="section-title">Ferramentas de Produtividade</h2>
+                </div>
+                <div class="dashboard-grid">
+                    
+                    <a href="pesquisa.html" class="nav-card card-tool">
+                        <div class="nc-header">
+                            <div class="nc-icon">🔍</div>
+                            <span class="nc-badge">Busca</span>
+                        </div>
+                        <div class="nc-title">Pesquisa Inteligente</div>
+                        <div class="nc-desc">Busque por campos técnicos (ex: MATKL), descrições ou segmentos em todos os arquivos de documentação simultaneamente.</div>
+                        <div class="nc-footer">
+                            <span class="nc-arrow">Acessar &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a href="gerador_queries.html" class="nav-card card-tool">
+                        <div class="nc-header">
+                            <div class="nc-icon">⚡</div>
+                            <span class="nc-badge">SQL</span>
+                        </div>
+                        <div class="nc-title">Gerador de Queries</div>
+                        <div class="nc-desc">Ferramenta auxiliar para montar queries de extração ou validação de dados baseadas nas estruturas.</div>
+                        <div class="nc-footer">
+                            <span class="nc-arrow">Acessar &rarr;</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+            <div id="master-data">
+                <div class="section-header">
+                    <span class="section-icon">📦</span>
+                    <h2 class="section-title">Dados Mestres (Master Data)</h2>
+                </div>
+                <div class="dashboard-grid">
+
+                    <a href="dados_parceiro.html" class="nav-card card-json">
+                        <div class="nc-header">
+                            <div class="nc-icon">👤</div>
+                            <span class="nc-badge">JSON / API</span>
+                        </div>
+                        <div class="nc-title">Parceiro de Negócios</div>
+                        <div class="nc-desc">Estrutura BUPARTNER. Inclui dados centrais, endereços, identificação fiscal e funções do parceiro.</div>
+                    </a>
+
+                    <a href="DOC_ARTMAS09.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">👕</div>
+                            <span class="nc-badge">IDOC Retail</span>
+                        </div>
+                        <div class="nc-title">Material Retail (ARTMAS)</div>
+                        <div class="nc-desc">Mestre de materiais completo para Varejo. Inclui dados básicos, fashion, segmentação e logística.</div>
+                    </a>
+
+                    <a href="DOCUMENTACAO_IDOC_MATERIAL.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">📦</div>
+                            <span class="nc-badge">IDOC Std</span>
+                        </div>
+                        <div class="nc-title">Material Standard (MATMAS)</div>
+                        <div class="nc-desc">Estrutura clássica do mestre de materiais para indústrias (não-retail).</div>
+                    </a>
+
+                    <a href="DOCUMENTACAO_IDOC_CLIENTES.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">🏢</div>
+                            <span class="nc-badge">IDOC</span>
+                        </div>
+                        <div class="nc-title">Clientes (DEBMAS)</div>
+                        <div class="nc-desc">Dados mestre de clientes (Customer Master), área de vendas e dados da empresa.</div>
+                    </a>
+
+                    <a href="DOCUMENTACAO_IDOC_FORNECEDOR.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">🚚</div>
+                            <span class="nc-badge">IDOC</span>
+                        </div>
+                        <div class="nc-title">Fornecedores (CREMAS)</div>
+                        <div class="nc-desc">Dados mestre de fornecedores (Vendor Master) e dados de compras.</div>
+                    </a>
+
+                    <a href="SRVMAS01.htm" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">🪛</div>
+                            <span class="nc-badge">IDOC</span>
+                        </div>
+                        <div class="nc-title">Serviços (SRVMAS)</div>
+                        <div class="nc-desc">Mestre de serviços prestados, textos breves e descritivos.</div>
+                    </a>
+
+                </div>
+            </div>
+
+            <div id="transacional">
+                <div class="section-header">
+                    <span class="section-icon">📑</span>
+                    <h2 class="section-title">Dados Complementares</h2>
+                </div>
+                <div class="dashboard-grid">
+
+                    <a href="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">📫</div>
+                            <span class="nc-badge">IDOC</span>
+                        </div>
+                        <div class="nc-title">Endereços (ADRMAS)</div>
+                        <div class="nc-desc">Distribuição isolada de endereços de parceiros.</div>
+                    </a>
+
+                    <a href="DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">🏷️</div>
+                            <span class="nc-badge">IDOC</span>
+                        </div>
+                        <div class="nc-title">Características (CLFMAS)</div>
+                        <div class="nc-desc">Sistema de classificação, classes e valoração de características.</div>
+                    </a>
+
+                    <a href="DOCUMENTACAO_IDOC_MATQM01.html" class="nav-card card-doc">
+                        <div class="nc-header">
+                            <div class="nc-icon">🔬</div>
+                            <span class="nc-badge">IDOC</span>
+                        </div>
+                        <div class="nc-title">Dados de QM (MATQM)</div>
+                        <div class="nc-desc">Extensão de dados de qualidade para materiais.</div>
+                    </a>
+
+                </div>
+            </div>
+
+        </main>
     </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            
+            // Atualiza sidebar ativa
+            document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
+            // Adiciona active no item clicado (lógica simplificada)
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>

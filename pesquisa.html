@@ -3,306 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisar Campos de IDOCs</title>
+    <title>Busca Inteligente - IDocs</title>
     <link rel="stylesheet" href="estilos.css">
-
     <style>
-        :root {
-            --primary-color: #007bff;
-            --secondary-color: #6c757d;
-        }
-        
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        
-        .search-box {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 30px 0;
-            align-items: center;
+        /* Estilos específicos para a página de busca que complementam o estilos.css */
+        body {
+            overflow-y: auto; /* Permite scroll na página inteira */
+            background-color: var(--body-bg);
         }
 
-        .search-input-wrapper {
-            position: relative;
-            flex: 2 1 300px;
-            display: flex;
-            align-items: center;
+        .search-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
-        
-        .search-input-wrapper .icon {
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Barra de Busca Aprimorada */
+        .search-wrapper {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .input-group {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-icon {
             position: absolute;
             left: 15px;
-            font-size: 1.2em;
-            color: #aaa;
-            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
         }
 
-        #searchInput, #idocFilter {
-            padding: 12px 15px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            height: 48px;
-            box-sizing: border-box;
+        .main-input {
             width: 100%;
-        }
-
-        #searchInput {
-            padding-left: 45px;
-        }
-
-        #idocFilter {
-            flex: 1 1 200px;
-            background-color: white;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c757d%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: .65em auto;
-            padding-right: 40px;
-        }
-        
-        #searchButton {
-            flex: 0 1 auto;
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 500;
-            background-color: var(--primary-color);
-            color: white;
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-            cursor: pointer;
-            height: 48px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-
-        #searchButton:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-        
-        .result-card {
-            transition: all 0.3s ease;
-        }
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 40px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .no-results-message {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #f2f2f2;
+            padding: 14px 14px 14px 45px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            margin-top: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
         }
-        .no-results-message p {
-            font-size: 1.2em;
-            margin: 0;
-            color: var(--secondary-color);
+
+        .main-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
         }
+
+        .filter-select {
+            padding: 0 20px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            color: #334155;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn-search {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Cards de Resultado */
+        .results-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .result-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .result-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+        }
+
+        .res-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .res-idoc {
+            font-weight: 700;
+            color: var(--primary);
+            background: #eff6ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .res-segment {
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .res-content {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .res-content b {
+            color: #0f172a;
+        }
+
+        /* Highlight do termo encontrado */
+        .highlight-term {
+            background-color: #fef08a; /* Amarelo suave */
+            color: #854d0e;
+            padding: 0 2px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+
+        .btn-link {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            text-decoration: none;
+            background: white;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .result-item:hover .btn-link {
+            opacity: 1;
+        }
+
+        .status-msg {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Loader */
+        .loader {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e2e8f0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <a href="index.html" class="back-link">&larr; Voltar ao Início</a>
-        <h1>Ferramenta de Pesquisa de Campos de IDOCs</h1>
+    <div class="search-container">
         
-        <div class="search-box">
-            <div class="search-input-wrapper">
-                <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Digite a descrição ou nome do campo..." onkeyup="handleKeyPress(event)">
+        <div class="hero-section">
+            <div class="hero-title">Pesquisa Global de IDocs</div>
+            <div class="hero-subtitle">Encontre campos, segmentos e descrições em toda a documentação técnica.</div>
+        </div>
+
+        <div class="search-wrapper">
+            <div class="input-group">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="main-input" placeholder="Ex: Grupo de mercadorias, MATKL, E1ASMDM..." onkeyup="handleEnter(event)">
             </div>
             
-            <select id="idocFilter">
-                <option value="all">Todos os IDOCs</option>
-                <option value="dados_parceiro.html">Parceiro de Negócios (BP)</option>
-                <option value="DOCUMENTACAO_IDOC_CLIENTES.htm">Clientes (DEBMAS)</option>
-                <option value="DOCUMENTACAO_IDOC_FORNECEDOR.htm">Fornecedores (CREMAS)</option>
-                <option value="DOCUMENTACAO_IDOC_MATERIAL.htm">Material (MATMAS)</option>
+            <select id="idocFilter" class="filter-select">
+                <option value="all">Todos os Arquivos</option>
+                <option value="dados_parceiro.html">Parceiros (BP)</option>
                 <option value="DOC_ARTMAS09.html">Material (ARTMAS)</option>
-                <option value="SRVMAS01.htm">Serviço (SRVMAS)</option>
-                <option value="DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.htm">Material - Características (CLFMAS)</option>
-                <option value="DOCUMENTACAO_IDOC_MATQM01.htm">Material - Dados de QM (MATQM01)</option>
-                <option value="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm">Endereços (ADRMAS)</option>
-            </select>
-            
-            <button id="searchButton" onclick="searchFields()">Pesquisar</button>
+                <option value="SRVMAS01.html">Serviço (SRVMAS)</option>
+                </select>
+
+            <button class="btn-search" onclick="performSearch()">Buscar</button>
         </div>
-        
-        <div id="status"></div>
-        <div id="loader" style="display: none;"><div class="loader"></div></div>
-        <div id="results"></div>
-        <div id="noResults" style="display: none;">
-            <div class="no-results-message">
-                <p>Nenhum resultado encontrado para a sua busca.</p>
-            </div>
-        </div>
+
+        <div id="statusArea"></div>
+        <div id="resultsArea" class="results-area"></div>
+
     </div>
 
     <script>
-        const allIdocFiles = [
-            'dados_parceiro.html',
-            'DOCUMENTACAO_IDOC_CLIENTES.htm',
-            'DOCUMENTACAO_IDOC_FORNECEDOR.htm',
-            'DOCUMENTACAO_IDOC_MATERIAL.htm',
-            'DOC_ARTMAS09.html',
-            'SRVMAS01.htm',
-            'DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.htm',
-            'DOCUMENTACAO_IDOC_MATQM01.htm',
-            'DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.htm'
+        // Lista de arquivos para buscar. 
+        // DICA: Se você rodar o script Python, atualize esses nomes para os _Refatorado.html
+        const FILES_TO_SEARCH = [
+            { name: 'Parceiro de Negócios', file: 'dados_parceiro.html' },
+            { name: 'Material Retail', file: 'DOC_ARTMAS09.html' },
+            { name: 'Serviços', file: 'SRVMAS01.html' },
+            { name: 'Clientes', file: 'DOCUMENTACAO_IDOC_CLIENTES.html' },
+            { name: 'Fornecedores', file: 'DOCUMENTACAO_IDOC_FORNECEDOR.html' },
+            { name: 'Material Std', file: 'DOCUMENTACAO_IDOC_MATERIAL.html' },
+            { name: 'Características', file: 'DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.html' },
+            { name: 'QM', file: 'DOCUMENTACAO_IDOC_MATQM01.html' },
+            { name: 'Endereços', file: 'DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.html' }
         ];
-        
-        const resultsContainer = document.getElementById('results');
-        const statusContainer = document.getElementById('status');
-        const loader = document.getElementById('loader');
-        const noResultsContainer = document.getElementById('noResults');
 
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                searchFields();
-            }
+        // Populando o Select dinamicamente (opcional, mas garante sincronia)
+        const select = document.getElementById('idocFilter');
+        select.innerHTML = '<option value="all">Todos os Arquivos</option>';
+        FILES_TO_SEARCH.forEach(f => {
+            const opt = document.createElement('option');
+            opt.value = f.file;
+            opt.textContent = f.name;
+            select.appendChild(opt);
+        });
+
+        function handleEnter(e) {
+            if(e.key === 'Enter') performSearch();
         }
 
-        // --- FUNÇÃO CORRIGIDA ---
-        // Nova função auxiliar para encontrar o cabeçalho anterior de forma mais robusta
-        function findPreviousHeader(element) {
-            let current = element;
-            while (current) {
-                let sibling = current.previousElementSibling;
-                while (sibling) {
-                    if (['H2', 'H3', 'H4'].includes(sibling.tagName)) {
-                        return sibling;
-                    }
-                    // Também verifica se o irmão contém um cabeçalho dentro dele
-                    const headerInside = sibling.querySelector('h2, h3, h4');
-                    if (headerInside) {
-                        return headerInside;
-                    }
-                    sibling = sibling.previousElementSibling;
-                }
-                // Se não encontrou nos irmãos, sobe para o pai e repete o processo
-                current = current.parentElement;
-            }
-            return null; // Retorna nulo se não encontrar nada
-        }
+        async function performSearch() {
+            const term = document.getElementById('searchInput').value.trim().toLowerCase();
+            const filterFile = document.getElementById('idocFilter').value;
+            const resultsArea = document.getElementById('resultsArea');
+            const statusArea = document.getElementById('statusArea');
 
-        async function searchFields() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const filterValue = document.getElementById('idocFilter').value;
-            
-            resultsContainer.innerHTML = '';
-            noResultsContainer.style.display = 'none';
-
-            if (searchTerm.length < 3) {
-                statusContainer.textContent = 'Por favor, digite pelo menos 3 caracteres para pesquisar.';
+            if (term.length < 3) {
+                statusArea.innerHTML = '<p class="status-msg">Digite pelo menos 3 caracteres.</p>';
                 return;
             }
-            
-            statusContainer.textContent = '';
-            loader.style.display = 'block';
 
-            let filesToSearch = (filterValue === 'all') ? allIdocFiles : [filterValue];
-            let totalFound = 0;
+            // Reset UI
+            resultsArea.innerHTML = '';
+            statusArea.innerHTML = '<div class="loader"></div>';
 
-            const fetchPromises = filesToSearch.map(async (fileName) => {
+            // Determinar quais arquivos buscar
+            const targets = filterFile === 'all' 
+                ? FILES_TO_SEARCH 
+                : FILES_TO_SEARCH.filter(f => f.file === filterFile);
+
+            let totalHits = 0;
+            const resultsHTML = [];
+
+            // Processamento Paralelo
+            const promises = targets.map(async (target) => {
                 try {
-                    const response = await fetch(fileName);
-                    if (!response.ok) {
-                        console.error(`Erro ao carregar o arquivo: ${fileName}`);
-                        return [];
-                    }
-                    
-                    const htmlText = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(htmlText, 'text/html');
-                    
-                    const idocTitle = doc.querySelector('h2, h3, h1')?.textContent.replace('Documentação', '').trim() || fileName;
-                    const fields = doc.querySelectorAll('ol > li');
-                    const foundItems = [];
+                    const response = await fetch(target.file);
+                    if (!response.ok) throw new Error('404');
+                    const text = await response.text();
+                    const doc = new DOMParser().parseFromString(text, 'text/html');
 
-                    fields.forEach(li => {
-                        if (li.textContent.toLowerCase().includes(searchTerm)) {
-                            let segmentTitle = 'Segmento não identificado';
-                            
-                            // --- LÓGICA DE BUSCA APRIMORADA ---
-                            // Usa a nova função para encontrar o cabeçalho
-                            const segmentHeader = findPreviousHeader(li);
-                            if (segmentHeader) {
-                                segmentTitle = segmentHeader.textContent;
-                            }
-                            
-                            foundItems.push({
-                                idoc: idocTitle,
-                                segment: segmentTitle,
-                                content: li.innerHTML
+                    // --- ESTRATÉGIA DE PARSING HÍBRIDA ---
+                    
+                    // 1. Tentar Formato Novo (Cards + Tables)
+                    let foundInFile = [];
+                    const cards = doc.querySelectorAll('.segment-card');
+                    
+                    if (cards.length > 0) {
+                        // Lógica Nova
+                        cards.forEach(card => {
+                            const segTitle = card.querySelector('h2, h3')?.innerText.trim() || 'Segmento';
+                            const segId = card.id; // ID usado na âncora
+                            const rows = card.querySelectorAll('tbody tr');
+
+                            rows.forEach(row => {
+                                if (row.innerText.toLowerCase().includes(term)) {
+                                    // Highlight visual simples
+                                    const content = row.innerHTML.replace(/<span class="tech-name".*?>/g, '<b>').replace(/<\/span>/g, '</b>');
+                                    
+                                    foundInFile.push({
+                                        idoc: target.name,
+                                        segment: segTitle,
+                                        content: `<table><tr>${content}</tr></table>`, // Hack para manter formatação de tabela
+                                        link: `${target.file}#${segId}`
+                                    });
+                                }
                             });
-                            totalFound++;
-                        }
-                    });
-                    return foundItems;
-                } catch (error) {
-                    console.error(`Falha no fetch para ${fileName}:`, error);
-                    return [];
+                        });
+                    } else {
+                        // 2. Fallback para Formato Antigo (Listas OL/LI)
+                        const lis = doc.querySelectorAll('ol > li');
+                        lis.forEach(li => {
+                            if (li.textContent.toLowerCase().includes(term)) {
+                                // Tenta achar o cabeçalho anterior (segmento)
+                                let current = li.parentElement; 
+                                let segmentName = "Desconhecido";
+                                // Sobe até achar o H2 anterior ao OL
+                                while(current && current.previousElementSibling) {
+                                    current = current.previousElementSibling;
+                                    if(current.tagName === 'H2' || current.tagName === 'H3') {
+                                        segmentName = current.innerText;
+                                        break;
+                                    }
+                                }
+
+                                // Tenta extrair a âncora do nome
+                                const anchorMatch = segmentName.match(/NAME\s*=\s*"([^"]+)"/);
+                                const anchor = anchorMatch ? anchorMatch[1] : '';
+
+                                foundInFile.push({
+                                    idoc: target.name,
+                                    segment: segmentName.replace(/<[^>]*>/g, '').trim(), // Limpa HTML do título
+                                    content: li.innerHTML,
+                                    link: `${target.file}#${anchor}`
+                                });
+                            }
+                        });
+                    }
+
+                    if (foundInFile.length > 0) {
+                        totalHits += foundInFile.length;
+                        return foundInFile;
+                    }
+
+                } catch (e) {
+                    console.warn(`Erro ao ler ${target.file}:`, e);
                 }
+                return [];
             });
 
-            const allResults = (await Promise.all(fetchPromises)).flat();
-            
-            loader.style.display = 'none';
+            const allResults = (await Promise.all(promises)).flat();
 
-            if (allResults.length > 0) {
-                allResults.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'result-card';
-                    card.innerHTML = `
-                        <div class="meta">
-                            <span><strong>IDOC:</strong> ${item.idoc}</span>
-                            <span><strong>Segmento:</strong> ${item.segment}</span>
-                        </div>
-                        <hr style="display:block; border-top: 1px solid #eee; margin: 10px 0;">
-                        <p>${item.content}</p>
-                    `;
-                    resultsContainer.appendChild(card);
-                });
-            } else {
-                noResultsContainer.style.display = 'block';
-            }
+            statusArea.innerHTML = allResults.length > 0 
+                ? `<p class="status-msg">Encontrados <b>${allResults.length}</b> resultados.</p>`
+                : `<p class="status-msg">Nenhum resultado encontrado para "<b>${term}</b>".</p>`;
 
-            statusContainer.textContent = `${totalFound} resultado(s) encontrado(s).`;
+            // Renderizar Resultados
+            allResults.forEach(res => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <div class="res-header">
+                        <span class="res-idoc">${res.idoc}</span>
+                        <span class="res-segment">${res.segment}</span>
+                    </div>
+                    <div class="res-content">${res.content}</div>
+                    <a href="${res.link}" target="_blank" class="btn-link">Ver na Documentação &rarr;</a>
+                `;
+                resultsArea.appendChild(div);
+            });
         }
     </script>
-
 </body>
 </html>

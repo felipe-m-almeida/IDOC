@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCUMENTACAO IDOC ENDERECOS CLIENTES E FORNECEDORES</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <div class="brand">DOCUMENTACAO IDOC ENDERECOS CLIENTES E FORNECEDORES</div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar campo, segmento ou descrição...">
+        </div>
+    </header>
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Estrutura Hierárquica</div>
+    <div class="node">
+        <a href="#E1ADRMAS" class="node-item" onclick="activateNode(this)">
+            <strong>E1ADRMAS</strong>
+            <span>Segmento de cabeçalho...</span>
+        </a>
+        <div class="node">
+        <a href="#E1BPAD1VL" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPAD1VL</strong>
+            <span>Estrutura BAPI para distribu...</span>
+        </a>
+        <div class="node">
+        <a href="#E1BPAD1VL1" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPAD1VL1</strong>
+            <span>Estrutura BAPI p/distribuiçã...</span>
+        </a>
+        </div>
+        <a href="#E1BPADTEL" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADTEL</strong>
+            <span>Estrutura BAPI p/nºs de tele...</span>
+        </a>
+        
+        <a href="#E1BPADFAX" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADFAX</strong>
+            <span>Estrutura BAPI p/nºs fax (ad...</span>
+        </a>
+        
+        <a href="#E1BPADTTX" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADTTX</strong>
+            <span>Estrutura BAPI p/nºs teletex...</span>
+        </a>
+        
+        <a href="#E1BPADTLX" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADTLX</strong>
+            <span>Estrutura BAPI p/nºs telex (...</span>
+        </a>
+        
+        <a href="#E1BPADSMTP" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADSMTP</strong>
+            <span>Estrutura BAPI p/endereços e...</span>
+        </a>
+        
+        <a href="#E1BPADRML" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADRML</strong>
+            <span>Estrutura BAPI p/endereços R...</span>
+        </a>
+        
+        <a href="#E1BPADX400" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADX400</strong>
+            <span>Estrutura BAPI p/endereços X...</span>
+        </a>
+        
+        <a href="#E1BPADRFC" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADRFC</strong>
+            <span>Estrutura BAPI p/endereços R...</span>
+        </a>
+        
+        <a href="#E1BPADPRT" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADPRT</strong>
+            <span>Estrutura BAPI p/endereços P...</span>
+        </a>
+        
+        <a href="#E1BPADSSF" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADSSF</strong>
+            <span>Estrutura BAPI p/endereços S...</span>
+        </a>
+        <div class="node">
+        <a href="#E1BPADSSF1" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADSSF1</strong>
+            <span>Estrutura BAPI p/endereços S...</span>
+        </a>
+        <div class="node">
+        <a href="#E1BPADSSF2" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADSSF2</strong>
+            <span>Estrutura BAPI p/endereços S...</span>
+        </a>
+        </div></div>
+        <a href="#E1BPADURI" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADURI</strong>
+            <span>Estrutura BAPI p/endereços U...</span>
+        </a>
+        <div class="node">
+        <a href="#E1BPADURI1" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADURI1</strong>
+            <span>Estrutura BAPI p/endereços U...</span>
+        </a>
+        <div class="node">
+        <a href="#E1BPADURI2" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADURI2</strong>
+            <span>Estrutura BAPI p/endereços U...</span>
+        </a>
+        </div></div>
+        <a href="#E1BPADPAG" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADPAG</strong>
+            <span>Estrutura BAPI p/nºs pager (...</span>
+        </a>
+        
+        <a href="#E1BPAD_REM" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPAD_REM</strong>
+            <span>Estrutura BAPI para os comen...</span>
+        </a>
+        
+        <a href="#E1BPCOMREM" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPCOMREM</strong>
+            <span>Estrutura BAPI para comentár...</span>
+        </a>
+        
+        <a href="#E1BPADUSE" class="node-item" onclick="activateNode(this)">
+            <strong>E1BPADUSE</strong>
+            <span>Estrutura BAPI para utilizaç...</span>
+        </a>
+        </div></div>
+            </div>
+        </aside>
+        <main id="mainContent">
+    
+    <div id="E1ADRMAS" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1ADRMAS <span class="desc">Segmento de cabeçalho</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">6 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJ_TYPE</span></td>
+            <td>Tipo de objeto do objeto proprietário para endereço</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJ_ID</span></td>
+            <td>ID objeto do objeto proprietário para endereço</td>
+            <td><span class="dt-type">CHAR(70)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">OBJ_ID_EXT</span></td>
+            <td>Chave de objeto</td>
+            <td><span class="dt-type">CHAR(70)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONTEXT</span></td>
+            <td>Descrição semântica de um endereço de um objeto</td>
+            <td><span class="dt-type">NUMC(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IV_CHECK_ADDRESS</span></td>
+            <td>Código: verificar endereço?</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">IV_TIME_DEPENDENT_COMM_DATA</span></td>
+            <td>Código: período de validade para dados para comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPAD1VL" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPAD1VL <span class="desc">Estrutura BAPI para distribuição de endereços</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">55 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ADDR_VERS</span></td>
+            <td>Código de versão para endereços internacionais</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FROM_DATE</span></td>
+            <td>Data "válido de" - no release atual só é possível 00010101</td>
+            <td><span class="dt-type">DATS(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TO_DATE</span></td>
+            <td>Data "válido até" - no release atual só é possível 99991231</td>
+            <td><span class="dt-type">DATS(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TITLE</span></td>
+            <td>Chave de forma de tratamento</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">NAME</span></td>
+            <td>Nome 1</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">NAME_2</span></td>
+            <td>Nome 2</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">NAME_3</span></td>
+            <td>Nome 3</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">NAME_4</span></td>
+            <td>Nome 4</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONV_NAME</span></td>
+            <td>Campo de nome convertido (com forma de tratamento)</td>
+            <td><span class="dt-type">CHAR(50)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">C_O_NAME</span></td>
+            <td>Nome c/o</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CITY</span></td>
+            <td>Local</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DISTRICT</span></td>
+            <td>Bairro</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CITY_NO</span></td>
+            <td>Codificação da localidade para file de localidades e ruas</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DISTRCT_NO</span></td>
+            <td>Codificação do bairro para file de bairros e ruas</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CHCKSTATUS</span></td>
+            <td>Status de verificação para file de localidades</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">REGIOGROUP</span></td>
+            <td>Agrupamento da estrutura regional</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">POSTL_COD1</span></td>
+            <td>Código postal da localidade</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">POSTL_COD2</span></td>
+            <td>Código postal da cx.postal</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">POSTL_COD3</span></td>
+            <td>Código postal da empresa (para clientes importantes)</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PCODE1_EXT</span></td>
+            <td>Ampl.p/cód.postal local, p.ex.cód.ZIP+4+2 (não suportado)</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PCODE2_EXT</span></td>
+            <td>Ampliação p/cód.postal da caixa postal (não suportada)</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PCODE3_EXT</span></td>
+            <td>Ampliação p/cód.postal de cliente importante (não suportada)</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PO_BOX</span></td>
+            <td>Caixa postal</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PO_W_O_NO</span></td>
+            <td>Código: indicação de caixa postal sem nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PO_BOX_CIT</span></td>
+            <td>Localidade da caixa postal</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PBOXCIT_NO</span></td>
+            <td>Codificação localidade por caixa postal (file localidades)</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PO_BOX_REG</span></td>
+            <td>Região para a caixa postal (país, estado, província, ...)</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">POBOX_CTRY</span></td>
+            <td>País da caixa postal</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PO_CTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DELIV_DIS</span></td>
+            <td>Distrito postal (não suportado)</td>
+            <td><span class="dt-type">CHAR(15)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TRANSPZONE</span></td>
+            <td>Zona de transporte para a qual ou da qual é fornecido</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STREET</span></td>
+            <td>Rua</td>
+            <td><span class="dt-type">CHAR(60)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STREET_NO</span></td>
+            <td>Codificação da rua para file de localidades e ruas</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STR_ABBR</span></td>
+            <td>Abreviatura da denominação de rua (não suportada)</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOUSE_NO</span></td>
+            <td>Nº</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOUSE_NO2</span></td>
+            <td>Complemento do nº</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOUSE_NO3</span></td>
+            <td>Área do nº (não suportado)</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STR_SUPPL1</span></td>
+            <td>Rua 2</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STR_SUPPL2</span></td>
+            <td>Rua 3</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STR_SUPPL3</span></td>
+            <td>Rua 4</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LOCATION</span></td>
+            <td>Rua 5</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">BUILDING</span></td>
+            <td>Edifício (nº ou sigla)</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLOOR</span></td>
+            <td>Andar do edifício</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ROOM_NO</span></td>
+            <td>Nº morada, apartamento ou sala</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>Chave do país</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU</span></td>
+            <td>Código de idioma</td>
+            <td><span class="dt-type">LANG(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU_ISO</span></td>
+            <td>Código de idiomas SAP de 2 dígitos</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">REGION</span></td>
+            <td>Região (estado federal, estado federado, província, condado)</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SORT1</span></td>
+            <td>Termo de pesquisa 1</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SORT2</span></td>
+            <td>Termo de pesquisa 2</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">EXTENS_1</span></td>
+            <td>Ampl.(só p/conversão dds.) (p.ex.linha transmissão dds.)</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">EXTENS_2</span></td>
+            <td>Ampliação (só p/conversão dados) (p.ex.telebox)</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TIME_ZONE</span></td>
+            <td>Fuso horário do endereço</td>
+            <td><span class="dt-type">CHAR(6)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TAXJURCODE</span></td>
+            <td>Domicílio fiscal</td>
+            <td><span class="dt-type">CHAR(15)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPAD1VL1" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPAD1VL1 <span class="desc">Estrutura BAPI p/distribuição de categoria destinatário 1</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">16 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ADDRESS_ID</span></td>
+            <td>ID de endereço para endereço físico (não suportado)</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU_CR</span></td>
+            <td>Idioma original na criação do registro de endereços</td>
+            <td><span class="dt-type">LANG(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGUCRISO</span></td>
+            <td>Código de idiomas SAP de 2 dígitos</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COMM_TYPE</span></td>
+            <td>Meio comunicação (chave) (administração endereços central)</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ADDR_GROUP</span></td>
+            <td>Grupo endereços (chave) (administração de endereços central)</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_CITY</span></td>
+            <td>Localidade de residência (diferente da localidade postal)</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOMECITYNO</span></td>
+            <td>Codificação local.residência diferente p/file ruas/localids.</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DONT_USE_S</span></td>
+            <td>Código para impossibilidade entrega no endereço de rua</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DONT_USE_P</span></td>
+            <td>Código para impossibilidade entrega em endereço caixa postal</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PO_BOX_LOBBY</span></td>
+            <td>Agência da caixa postal (PO Box Lobby)</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DELI_SERV_TYPE</span></td>
+            <td>Tipo do serviço de entrega</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DELI_SERV_NUMBER</span></td>
+            <td>Nº do serviço de entrega</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTY_CODE</span></td>
+            <td>Código para município</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTY</span></td>
+            <td>Distrito</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TOWNSHIP_CODE</span></td>
+            <td>Código para cidade</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TOWNSHIP</span></td>
+            <td>Cidade</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADTEL" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADTEL <span class="desc">Estrutura BAPI p/nºs de telefone (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">15 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>País para nº de telefone/fax</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TELEPHONE</span></td>
+            <td>Nº telefone: código telefónico+nº</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">EXTENSION</span></td>
+            <td>Nº de telefone: extensão</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TEL_NO</span></td>
+            <td>Nº completo: código telefónico+nº+extensão</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CALLER_NO</span></td>
+            <td>Nº telefone para determinação do chamador</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: telefone compatível com SMS</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o telefone é um telefone celular</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADFAX" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADFAX <span class="desc">Estrutura BAPI p/nºs fax (administração endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-meta">Técnico/Flag</span>
+                <span class="badge badge-meta">16 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>País para nº de telefone/fax</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FAX</span></td>
+            <td>Nº de fax: prefixo + número</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">EXTENSION</span></td>
+            <td>Nº fax: extensão</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FAX_NO</span></td>
+            <td>Nº completo: código telefónico+nº+extensão</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SENDER_NO</span></td>
+            <td>Nº de fax p/determinação de remetente</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FAX_GROUP</span></td>
+            <td>Grupo fax (G3, G4, ...)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADTTX" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADTTX <span class="desc">Estrutura BAPI p/nºs teletex (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-meta">Técnico/Flag</span>
+                <span class="badge badge-meta">12 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>Chave do país</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TELETEX</span></td>
+            <td>Nº teletex</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADTLX" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADTLX <span class="desc">Estrutura BAPI p/nºs telex (administração endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-meta">Técnico/Flag</span>
+                <span class="badge badge-meta">12 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>Chave do país</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TELEX_NO</span></td>
+            <td>Nº telex</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADSMTP" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADSMTP <span class="desc">Estrutura BAPI p/endereços e-mail (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">13 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">E_MAIL</span></td>
+            <td>Endereço de e-mail</td>
+            <td><span class="dt-type">CHAR(241)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">EMAIL_SRCH</span></td>
+            <td>Campo de pesquisa para o endereço de e-mail</td>
+            <td><span class="dt-type">CHAR(20)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ENCODE</span></td>
+            <td>Codificação de dados desejada (e-mail)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TNEF</span></td>
+            <td>Código: receptor pode receber codif.TNEF através de SMTP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADRML" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADRML <span class="desc">Estrutura BAPI p/endereços RML (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">13 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SYMB_DEST</span></td>
+            <td>Destino simbólico</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">REC_TYPE</span></td>
+            <td>Tp.destinatário (atualmente o campo não está sendo utiliz.)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_MAIL_CLT</span></td>
+            <td>Mandante mail remoto (mail remoto, SAP - comunicação SAP)</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_MAIL</span></td>
+            <td>RML - nome (mail remoto, SAP - comunicação SAP)</td>
+            <td><span class="dt-type">CHAR(12)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADX400" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADX400 <span class="desc">Estrutura BAPI p/endereços X.400 (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">36 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>Chave de países X.400</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ADM_DOM</span></td>
+            <td>Domínio de administração X.400</td>
+            <td><span class="dt-type">CHAR(16)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PRIV_DOM</span></td>
+            <td>Domínio privado X.400</td>
+            <td><span class="dt-type">CHAR(16)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ORGANIZATN</span></td>
+            <td>Organização X.400</td>
+            <td><span class="dt-type">CHAR(64)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ORG_UNIT_1</span></td>
+            <td>Unidade organizacional 1 X.400</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ORG_UNIT_2</span></td>
+            <td>Unidade organizacional 2 X.400</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ORG_UNIT_3</span></td>
+            <td>Unidade organizacional 3 X.400</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ORG_UNIT_4</span></td>
+            <td>Unidade organizacional 4 X.400</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LASTNAME</span></td>
+            <td>Sobrenome X.400</td>
+            <td><span class="dt-type">CHAR(40)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FIRSTNAME</span></td>
+            <td>Nome próprio X.400</td>
+            <td><span class="dt-type">CHAR(16)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">INITIALS</span></td>
+            <td>Iniciais X.400</td>
+            <td><span class="dt-type">CHAR(5)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">GENERATION</span></td>
+            <td>Geração X.400</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">X_121_ADDR</span></td>
+            <td>Endereço de rede X.400 X.121</td>
+            <td><span class="dt-type">CHAR(15)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TERM_ID</span></td>
+            <td>ID de terminal X.400</td>
+            <td><span class="dt-type">CHAR(24)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TERM_TYPE</span></td>
+            <td>Categoria de terminal X.400</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">UANID</span></td>
+            <td>ID numérica de agente de usuário X.400</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_TYPE1</span></td>
+            <td>X.400 Domain Defined Attribute, tipo 1</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_VALUE1</span></td>
+            <td>Domain Defined Attribute X.400, valor 1</td>
+            <td><span class="dt-type">CHAR(128)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_TYPE2</span></td>
+            <td>X.400 Domain Defined Attribute, tipo 2</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_VALUE2</span></td>
+            <td>Domain Defined Attribute X.400, valor 2</td>
+            <td><span class="dt-type">CHAR(128)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_TYPE3</span></td>
+            <td>X.400 Domain Defined Attribute, tipo 3</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_VALUE3</span></td>
+            <td>Domain Defined Attribute X.400, valor 3</td>
+            <td><span class="dt-type">CHAR(128)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_TYPE4</span></td>
+            <td>X.400 Domain Defined Attribute, tipo 4</td>
+            <td><span class="dt-type">CHAR(8)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DDA_VALUE4</span></td>
+            <td>Domain Defined Attribute X.400, valor 4</td>
+            <td><span class="dt-type">CHAR(128)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TXT_ENCODE</span></td>
+            <td>Codificação de dados de texto pretendida (X.400)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">TNEF</span></td>
+            <td>Código: receptor pode receber codif.TNEF através de X.400</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADRFC" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADRFC <span class="desc">Estrutura BAPI p/endereços RFC (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">10 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LOG_DEST</span></td>
+            <td>Destino lógico RFC</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Código: o lado oposto está ligado ao sistema da SAP</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADPRT" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADPRT <span class="desc">Estrutura BAPI p/endereços PRT (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">9 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PRINT_DEST</span></td>
+            <td>Spool: dispositivo de saída</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADSSF" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADSSF <span class="desc">Estrutura BAPI p/endereços SSF (administr.central endereços)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">11 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DUMMY</span></td>
+            <td>Código de um caractere</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">RFCDEST</span></td>
+            <td>destino lógico (indicado em chamada de função)</td>
+            <td><span class="dt-type">CHAR(32)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDSHORT</span></td>
+            <td>Campo SSFID para representação na tela</td>
+            <td><span class="dt-type">CHAR(132)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSF_NS</span></td>
+            <td>SSF identificador de conjunto de nomes</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSF_PROF</span></td>
+            <td>Nome de perfil SSF</td>
+            <td><span class="dt-type">CHAR(132)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART1</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART2</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADSSF1" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADSSF1 <span class="desc">Estrutura BAPI p/endereços SSF (administr.central endereços)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">4 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART3</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART4</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART5</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART6</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADSSF2" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADSSF2 <span class="desc">Estrutura BAPI p/endereços SSF (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">7 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART7</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART8</span></td>
+            <td>SSF nome signatário/receptor: 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">SSFIDPART9</span></td>
+            <td>SSF nome signatário/receptor - 9ª parte</td>
+            <td><span class="dt-type">CHAR(48)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADURI" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADURI <span class="desc">Estrutura BAPI p/endereços URI (administr.central endereços)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">9 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_TYPE</span></td>
+            <td>Código: qual o tipo de URI</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI</span></td>
+            <td>URI, por exemplo home page ou endereço ftp</td>
+            <td><span class="dt-type">CHAR(132)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Código: destinatário standard para este nº</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART1</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART2</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART3</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADURI1" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADURI1 <span class="desc">Estrutura BAPI p/endereços URI (administr.central endereços)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">4 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART4</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART5</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART6</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART7</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADURI2" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADURI2 <span class="desc">Estrutura BAPI p/endereços URI (admin.endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">6 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART8</span></td>
+            <td>Universal Resource Identifier (URI): 1ª-8ª parte</td>
+            <td><span class="dt-type">CHAR(250)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">URI_PART9</span></td>
+            <td>Universal Resource Identifier (URI) - 9ª parte</td>
+            <td><span class="dt-type">CHAR(48)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADPAG" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADPAG <span class="desc">Estrutura BAPI p/nºs pager (administração endereços central)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">15 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td>
+            <td>País para nº de telefone/fax</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td>
+            <td>Código ISO do país</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_NO</span></td>
+            <td>Endereço remetente standard neste tipo de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PAGER_TYPE</span></td>
+            <td>ServiçoPager</td>
+            <td><span class="dt-type">CHAR(4)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PAGER</span></td>
+            <td>Nº pager</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">PAGER_NO</span></td>
+            <td>Campo pesquisa normalizado para pager</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CALLER_NO</span></td>
+            <td>Nº pager para determinação de remetente</td>
+            <td><span class="dt-type">CHAR(30)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">STD_RECIP</span></td>
+            <td>Referência encriptada a um nº seqüêncial</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">R_3_USER</span></td>
+            <td>Referência encriptada a um nº seqüêncial</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">HOME_FLAG</span></td>
+            <td>Endereço destinat.neste tp.comunic.(rede correio eletrônico)</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">FLG_NOUSE</span></td>
+            <td>Código: sem utilizar este nº de comunicação</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPAD_REM" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPAD_REM <span class="desc">Estrutura BAPI para os comentários a endereço</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">5 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ADDR_VERS</span></td>
+            <td>Código de versão para endereços internacionais</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU</span></td>
+            <td>Código de idioma</td>
+            <td><span class="dt-type">LANG(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU_ISO</span></td>
+            <td>Código de idiomas SAP de 2 dígitos</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ADR_NOTES</span></td>
+            <td>Observações sobre endereço</td>
+            <td><span class="dt-type">CHAR(50)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPCOMREM" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPCOMREM <span class="desc">Estrutura BAPI para comentários a tipos de comunicação</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">6 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COMM_TYPE</span></td>
+            <td>Meio comunicação (chave) (administração endereços central)</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU</span></td>
+            <td>Código de idioma</td>
+            <td><span class="dt-type">LANG(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">LANGU_ISO</span></td>
+            <td>Código de idiomas SAP de 2 dígitos</td>
+            <td><span class="dt-type">CHAR(2)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COMM_NOTES</span></td>
+            <td>Observações sobre a ligação de comunicação</td>
+            <td><span class="dt-type">CHAR(50)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="E1BPADUSE" class="segment-card">
+        <div class="card-header">
+            <div class="card-title">
+                <h2>E1BPADUSE <span class="desc">Estrutura BAPI para utilizações de comunicação (BAS)</span></h2>
+            </div>
+            <div class="badges">
+                <span class="badge badge-req">Dados</span>
+                <span class="badge badge-meta">7 campos</span>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%">Campo</th>
+                        <th style="width: 55%">Descrição</th>
+                        <th style="width: 20%">Tipo/Tam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COMM_TYPE</span></td>
+            <td>Meio comunicação (chave) (administração endereços central)</td>
+            <td><span class="dt-type">CHAR(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">CONSNUMBER</span></td>
+            <td>Nº sequencial</td>
+            <td><span class="dt-type">NUMC(3)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">COMM_USAGE</span></td>
+            <td>Utilização de comunicação: campo chave</td>
+            <td><span class="dt-type">CHAR(10)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_TO</span></td>
+            <td>Dados para comunicação: válido até (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">VALID_FROM</span></td>
+            <td>Dados para comunicação: válido desde (AAAAMMDDHHMMSS)</td>
+            <td><span class="dt-type">CHAR(14)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">DEF_USAGE</span></td>
+            <td>Código: default para esta utilização</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+        <tr>
+            <td><span class="tech-name" onclick="copy(this)">ERRORFLAG</span></td>
+            <td>Código: registro não processado</td>
+            <td><span class="dt-type">CHAR(1)</span></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+        </main>
+    </div>
+    
+    <div id="toast">Copiado!</div>
+    
+    <script>
+        // Função de Copiar
+        function copy(el) { 
+            navigator.clipboard.writeText(el.innerText).then(() => { 
+                let t = document.getElementById('toast'); 
+                t.classList.add('show'); 
+                setTimeout(() => t.classList.remove('show'), 2000); 
+            }); 
+        }
+        
+        // Ativar item na sidebar
+        function activateNode(el) { 
+            document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active')); 
+            el.classList.add('active'); 
+        }
+        
+        // Busca em Tempo Real
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            let term = e.target.value.toUpperCase();
+            document.querySelectorAll('.segment-card').forEach(card => {
+                let show = false;
+                
+                // Verifica título do card
+                if(card.querySelector('.card-header').innerText.toUpperCase().includes(term)) show = true;
+                
+                // Verifica linhas da tabela
+                card.querySelectorAll('tbody tr').forEach(row => {
+                    if(row.innerText.toUpperCase().includes(term)) {
+                        row.classList.remove('hidden');
+                        if(term) row.style.backgroundColor = '#fffbeb'; 
+                        else row.style.backgroundColor = '';
+                        show = true;
+                    } else { 
+                        row.classList.add('hidden'); 
+                    }
+                });
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+    

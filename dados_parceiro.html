@@ -1,957 +1,481 @@
 <!DOCTYPE html>
-<HTML>
-<HEAD>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<TITLE> Documentação Estrutura de Dados BUPARTNER </TITLE>
-<link rel="stylesheet" href="estilos.css">
-</HEAD>
-<BODY>
-<HR>
-<h3><a name="IDOCTYPE">Documentação Estrutura de Dados: BUPARTNER</a></h3>
-<p><hr>
-<ul>
-<p>
-<li><b>BUPARTNER: Estrutura principal do Parceiro de Negócios</b>
-<p>
-Status : Necessário  ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#BUPARTNER_STRUCT"><i>estrutura</i></a>
-<ul>
-<p>
-<li><b>CENTRALDATA: Dados Centrais</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATA_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>ADDRESSDATA: Dados de Endereço</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :       9999      <p>
-<p>
-<a href="#ADDRESSDATA_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>TAX_DATA: Dados Fiscais</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :       9999      <p>
-<p>
-<a href="#TAX_DATA_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>BUSINESSPARTNERROLE: Funções do Parceiro de Negócios</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :       9999      <p>
-<p>
-<a href="#BUSINESSPARTNERROLE_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATAPERSON: Dados Pessoais</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATAPERSON_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATAORGANIZATION: Dados da Organização</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATAORGANIZATION_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATAGROUP: Dados de Grupo</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATAGROUP_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATA_X: Marcação de Campos para Edição (Dados Centrais)</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATA_X_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATAPERSON_X: Marcação de Campos para Edição (Dados Pessoais)</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATAPERSON_X_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATAORGANIZATION_X: Marcação de Campos para Edição (Dados da Organização)</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATAORGANIZATION_X_STRUCT"><i>estrutura</i></a>
-</p>
-<li><b>CENTRALDATAGROUP_X: Marcação de Campos para Edição (Dados de Grupo)</b>
-<p>
-Status : Opcional    ,
-Núm.mín. :          1     , núm.máx. :          1      <p>
-<p>
-<a href="#CENTRALDATAGROUP_X_STRUCT"><i>estrutura</i></a>
-</p>
-</ul>
-</ul>
-<hr>
-<h1>
-<a name="SEGMENTSTRUCT">Estruturas de Segmento</a>
-</h1><p><hr>
-<ul>
-<p><li><h2><a name="BUPARTNER_STRUCT">BUPARTNER: Estrutura principal do Parceiro de Negócios</a></h2>
-<p>
-Definição de segmento BUPARTNER
-<p>
-<ol>
-<li>BUSINESSPARTNEREXTERN     : <b>Nº parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>NATURALPERSON     : <b>Parceiro negócios é válido como pessoa física a nível fiscal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNERCATEGORY     : <b>Categoria do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNERGROUP     : <b>Agrupamento de parceiros de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATA_STRUCT">CENTRALDATA: Dados Centrais</a></h2>
-<p>
-Definição de segmento CENTRALDATA
-<p>
-<ol>
-<li>AUTHORIZATIONGROUP     : <b>Grupo de autorizações</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>CENTRALARCHIVINGFLAG     : <b>Marcação para arquivamento central</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CENTRALBLOCK     : <b>Bloqueio central para parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>COMM_TYPE     : <b>Meio comunicação (chave) (administração endereços central)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>CONTACTALLOWANCE     : <b>Parceiro de negócios: permissão de contato</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>DATAORIGINTYPE     : <b>Tipos de origem dos dados</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>NOTRELEASED     : <b>Código: não liberado</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNEREXTERNAL     : <b>Nº parceiro de negócios no sistema externo</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 20 posições <br>
-<li>PARTNERLANGUAGE     : <b>Parceiro de negócio: idioma</b><p>
-<p>
-Ctg.dados interna : LANG<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNERLANGUAGEISO     : <b>Código de idiomas SAP de 2 dígitos</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>PARTNERTYPE     : <b>Tipo de parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>PRINT_MODE     : <b>Formato da impressão parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>SEARCHTERM1     : <b>Termo de pesquisa 1 para parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 20 posições <br>
-<li>SEARCHTERM2     : <b>Termo de pesquisa 2 para parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 20 posições <br>
-<li>TITLELETTER     : <b>Vocativo</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 50 posições <br>
-<li>TITLE_KEY     : <b>Chave de forma de tratamento</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="ADDRESSDATA_STRUCT">ADDRESSDATA: Dados de Endereço</a></h2>
-<p>
-Definição de segmento ADDRESSDATA
-<p>
-<ol>
-<li>BUILDING     : <b>Edifício (nº ou sigla)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 20 posições <br>
-<li>CHCKSTATUS     : <b>Status de verificação para file de localidades</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CITY     : <b>Cidade</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>CITY_NO     : <b>Codificação da localidade para file de localidades e ruas</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 12 posições <br>
-<li>COMM_TYPE     : <b>Meio comunicação (chave) (administração endereços central)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>COUNTRY     : <b>Chave do país/região</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>COUNTRYISO     : <b>Código ISO do país/região</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>COUNTY     : <b>Distrito</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>COUNTY_NO     : <b>Código para município</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 8 posições <br>
-<li>C_O_NAME     : <b>Nome c/o</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>DELI_SERV_NUMBER     : <b>Nº do serviço de entrega</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>DELI_SERV_TYPE     : <b>Tipo do serviço de entrega</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>DISTRICT     : <b>Bairro</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>DISTRCT_NO     : <b>Codificação do bairro para file de bairros e ruas</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 8 posições <br>
-<li>DONT_USE_P     : <b>Código para impossibilidade entrega em endereço caixa postal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>DONT_USE_S     : <b>Código para impossibilidade entrega no endereço de rua</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>EXTADDRESSNUMBER     : <b>Nº endereço em sistema externo</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 20 posições <br>
-<li>FLOOR     : <b>Andar do edifício</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>HOMECITYNO     : <b>Codificação local.residência diferente p/file ruas/localids.</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 12 posições <br>
-<li>HOME_CITY     : <b>Localidade de residência (diferente da localidade postal)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>HOUSE_NO     : <b>Nº</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>HOUSE_NO2     : <b>Complemento do nº</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>HOUSE_NO3     : <b>Área do nº (não suportado)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>LANGU     : <b>Código de idioma</b><p>
-<p>
-Ctg.dados interna : LANG<br>
-Comprim.int.: 1 posições <br>
-<li>LANGUISO     : <b>Código de idiomas SAP de 2 dígitos</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>LOCATION     : <b>Rua 5</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>MOVE_ADDR_GUID     : <b>ID único em representação de caracteres</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 32 posições <br>
-<li>MOVE_ADDRESS     : <b>Nº do endereço de destino de mudança em mudanças de endereço</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>MOVE_DATE     : <b>Data de mudança</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-<li>PBOXCIT_NO     : <b>Codificação localidade por caixa postal (file localidades)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 12 posições <br>
-<li>PCODE1_EXT     : <b>Ampl.p/cód.postal local, p.ex.cód.ZIP+4+2 (não suportado)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>PCODE2_EXT     : <b>Ampliação p/cód.postal da caixa postal (não suportada)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>PCODE3_EXT     : <b>Ampliação p/cód.postal de cliente importante (não suportada)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>POBOX_CTRY     : <b>País/região da caixa postal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>POSTL_COD1     : <b>Código postal da cidade</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>POSTL_COD2     : <b>Código postal da cx.postal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>POSTL_COD3     : <b>Código postal da empresa (para clientes importantes)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>PO_BOX     : <b>Caixa postal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>PO_BOX_CIT     : <b>Localidade da caixa postal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>PO_BOX_LOBBY     : <b>Agência da caixa postal (PO Box Lobby)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>PO_BOX_REG     : <b>Região para a caixa postal (país, estado, província, ...)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>PO_CTRYISO     : <b>Código ISO do país/região</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>PO_W_O_NO     : <b>Código: indicação de caixa postal sem nº</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>REGION     : <b>Região (estado, província, município)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>REGIOGROUP     : <b>Agrupamento da estrutura regional</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 8 posições <br>
-<li>ROOM_NO     : <b>Nº morada, apartamento ou sala</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>STANDARDADDRESS     : <b>Seleção: endereço é endereço standard</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>STREET     : <b>Rua</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 60 posições <br>
-<li>STREET_NO     : <b>Codificação da rua para file de localidades e ruas</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 12 posições <br>
-<li>STR_ABBR     : <b>Abreviatura da denominação de rua (não suportada)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>STR_SUPPL1     : <b>Rua 2</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>STR_SUPPL2     : <b>Rua 3</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>STR_SUPPL3     : <b>Rua 4</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>TAXJURCODE     : <b>Domicílio fiscal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 15 posições <br>
-<li>TIME_ZONE     : <b>Fuso horário do endereço</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 6 posições <br>
-<li>TOWNSHIP     : <b>Cidade</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>TOWNSHIP_NO     : <b>Código para cidade</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 8 posições <br>
-<li>TRANSPZONE     : <b>Zona de transporte para a qual ou da qual é fornecido</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>VALIDFROMDATE     : <b>Data de validade (válido desde)</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-<li>VALIDTODATE     : <b>Data de validade (válido até)</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="TAX_DATA_STRUCT">TAX_DATA: Dados Fiscais</a></h2>
-<p>
-Definição de segmento TAX_DATA
-<p>
-<ol>
-<li>TAXNUMBER     : <b>Nº ID fiscal para parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 20 posições <br>
-<li>TAXNUMXL     : <b>Nº de identificação fiscal do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 60 posições <br>
-<li>TAXTYPE     : <b>Tipo de nº fiscal</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="BUSINESSPARTNERROLE_STRUCT">BUSINESSPARTNERROLE: Funções do Parceiro de Negócios</a></h2>
-<p>
-Definição de segmento BUSINESSPARTNERROLE
-<p>
-<ol>
-<li>PARTNERROLE     : <b>Função de parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 6 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATAPERSON_STRUCT">CENTRALDATAPERSON: Dados Pessoais</a></h2>
-<p>
-Definição de segmento CENTRALDATAPERSON
-<p>
-<ol>
-<li>BIRTHDATE     : <b>Data de nascimento do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-<li>BIRTHDT_STATUS     : <b>Data de nascimento: status</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>BIRTHNAME     : <b>Sobrenome de solteiro do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>BIRTHPLACE     : <b>Localidade de nascimento do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>CORRESPONDLANGUAGE     : <b>Parceiro de negócio: idioma de correspondência</b><p>
-<p>
-Ctg.dados interna : LANG<br>
-Comprim.int.: 1 posições <br>
-<li>CORRESPONDLANGUAGEISO     : <b>Código de idiomas SAP de 2 dígitos</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>COUNTRYORIGIN     : <b>País/região de procedência em não residentes</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>DEATHDATE     : <b>Data de morte do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-<li>EMPLOYER     : <b>Nome do empregador de uma pessoa física</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 35 posições <br>
-<li>FIRSTNAME     : <b>1º nome do parceiro de negócios (pessoa)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>FULLNAME     : <b>Nome completo</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 80 posições <br>
-<li>GENDER     : <b>Sexo do parceiro de negócios (pessoa)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>INITIALS     : <b>Inicial do segundo nome ou iniciais da pessoa</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>LASTNAME     : <b>Sobrenome do parceiro de negócios (pessoa)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>MARITALSTATUS     : <b>Estado civil do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>MIDDLENAME     : <b>2º nome ou nome do meio da pessoa</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>NAMCOUNTRY     : <b>País/região para regra de edição de nomes</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>NAMCOUNTRYISO     : <b>Código ISO do país/região</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>NAMEFORMAT     : <b>Formato para a edição de nomes</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>NATIONALITY     : <b>Nacionalidade do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 3 posições <br>
-<li>NATIONALITYISO     : <b>Código ISO do país/região</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>NICKNAME     : <b>O parceiro de negócios é conhecido como (pessoa)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>OCCUPATION     : <b>Ocupação do parceiro de negócios</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>PREFIX1     : <b>Prefixo do nome (chave)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>PREFIX2     : <b>2º prefixo do nome (chave)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>SECONDNAME     : <b>2º sobrenome da pessoa</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>SEX     : <b>Sexo do parceiro de negócios (pessoa)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>TITLE_ACA1     : <b>Título acadêmico: chave</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>TITLE_ACA2     : <b>Segundo título académico (chave)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>TITLE_SPPL     : <b>Complemento do nome, p.ex.título nobiliárquico (chave)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATAORGANIZATION_STRUCT">CENTRALDATAORGANIZATION: Dados da Organização</a></h2>
-<p>
-Definição de segmento CENTRALDATAORGANIZATION
-<p>
-<ol>
-<li>CHK_DIGIT     : <b>Dígito de controle da matrícula internacional da empresa</b><p>
-<p>
-Ctg.dados interna : NUMC<br>
-Comprim.int.: 1 posições <br>
-<li>FOUNDATIONDATE     : <b>Data de fundação da organização</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-<li>INDUSTRYSECTOR     : <b>Setor industrial</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 10 posições <br>
-<li>LEGALFORM     : <b>PN: forma jurídica da organização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>LEGALORG     : <b>Pessoa jurídica da organização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 2 posições <br>
-<li>LIQUIDATIONDATE     : <b>Data de liquidação da organização</b><p>
-<p>
-Ctg.dados interna : DATS<br>
-Comprim.int.: 8 posições <br>
-<li>LOC_NO_1     : <b>Nº global de localização (parte 1)</b><p>
-<p>
-Ctg.dados interna : NUMC<br>
-Comprim.int.: 7 posições <br>
-<li>LOC_NO_2     : <b>Número global de localização (parte 2)</b><p>
-<p>
-Ctg.dados interna : NUMC<br>
-Comprim.int.: 5 posições <br>
-<li>NAME1     : <b>Nome 1 da organização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>NAME2     : <b>Nome 2 da organização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>NAME3     : <b>Nome 3 da organização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>NAME4     : <b>Nome 4 da organização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATAGROUP_STRUCT">CENTRALDATAGROUP: Dados de Grupo</a></h2>
-<p>
-Definição de segmento CENTRALDATAGROUP
-<p>
-<ol>
-<li>GROUPTYPE     : <b>Tipo de grupo</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 4 posições <br>
-<li>NAMEGROUP1     : <b>Nome 1 (grupo)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-<li>NAMEGROUP2     : <b>Nome 2 (grupo)</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 40 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATA_X_STRUCT">CENTRALDATA_X: Marcação de Campos para Edição (Dados Centrais)</a></h2>
-<p>
-Definição de segmento CENTRALDATA_X
-<p>
-<ol>
-<li>AUTHORIZATIONGROUP     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CENTRALARCHIVINGFLAG     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CENTRALBLOCK     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>COMM_TYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CONTACTALLOWANCE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>DATAORIGINTYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NOTRELEASED     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNEREXTERNAL     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNERLANGUAGE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNERLANGUAGEISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PARTNERTYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PRINT_MODE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>SEARCHTERM1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>SEARCHTERM2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>TITLELETTER     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>TITLE_KEY     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATAPERSON_X_STRUCT">CENTRALDATAPERSON_X: Marcação de Campos para Edição (Dados Pessoais)</a></h2>
-<p>
-Definição de segmento CENTRALDATAPERSON_X
-<p>
-<ol>
-<li>BIRTHDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>BIRTHDT_STATUS     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>BIRTHNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>BIRTHPLACE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CORRESPONDLANGUAGE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>CORRESPONDLANGUAGEISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>COUNTRYORIGIN     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>DEATHDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>EMPLOYER     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>FIRSTNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>FULLNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>GENDER     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>INITIALS     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>LASTNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>MARITALSTATUS     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>MIDDLENAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAMCOUNTRY     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAMCOUNTRYISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAMEFORMAT     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NATIONALITY     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NATIONALITYISO     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NICKNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>OCCUPATION     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PREFIX1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>PREFIX2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>SECONDNAME     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>SEX     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>TITLE_ACA1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>TITLE_ACA2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>TITLE_SPPL     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATAORGANIZATION_X_STRUCT">CENTRALDATAORGANIZATION_X: Marcação de Campos para Edição (Dados da Organização)</a></h2>
-<p>
-Definição de segmento CENTRALDATAORGANIZATION_X
-<p>
-<ol>
-<li>CHK_DIGIT     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>FOUNDATIONDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>INDUSTRYSECTOR     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>LEGALFORM     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>LEGALORG     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>LIQUIDATIONDATE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>LOC_NO_1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>LOC_NO_2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAME1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAME2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAME3     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAME4     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-</ol>
-<p>
-<p><li><h2><a name="CENTRALDATAGROUP_X_STRUCT">CENTRALDATAGROUP_X: Marcação de Campos para Edição (Dados de Grupo)</a></h2>
-<p>
-Definição de segmento CENTRALDATAGROUP_X
-<p>
-<ol>
-<li>GROUPTYPE     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAMEGROUP1     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-<li>NAMEGROUP2     : <b>Info modificação p/respectivo campo dados utilização</b><p>
-<p>
-Ctg.dados interna : CHAR<br>
-Comprim.int.: 1 posições <br>
-</ol>
-<p>
-</ul>
-<p>
-<hr>
-<p>
-<h2><a name="INFO"> Info... </a></h2>
-Documento HTML gerado a partir de dados_parceiro.html.<br>
-</BODY>
-</HTML>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDoc Docs: BUPARTNER</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            BUPARTNER <span>Estrutura de Parceiro de Negócios</span>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar campo, descrição ou segmento (ex: TAXNUMBER)...">
+        </div>
+    </header>
+
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Estrutura BAPI/IDoc</div>
+                
+                <div style="margin-left: 0;">
+                    <a href="#BUPARTNER" class="node-item" onclick="activateNode(this)">
+                        <strong>BUPARTNER</strong>
+                        <span>Header Parceiro</span>
+                    </a>
+                    
+                    <div class="node">
+                        <a href="#CENTRALDATA" class="node-item" onclick="activateNode(this)">
+                            <strong>CENTRALDATA</strong>
+                            <span>Dados Centrais</span>
+                        </a>
+                        <a href="#ADDRESSDATA" class="node-item" onclick="activateNode(this)">
+                            <strong>ADDRESSDATA</strong>
+                            <span>Endereços</span>
+                        </a>
+                        <a href="#TAX_DATA" class="node-item" onclick="activateNode(this)">
+                            <strong>TAX_DATA</strong>
+                            <span>Dados Fiscais</span>
+                        </a>
+                        <a href="#BUSINESSPARTNERROLE" class="node-item" onclick="activateNode(this)">
+                            <strong>BP_ROLE</strong>
+                            <span>Funções do PN</span>
+                        </a>
+                        
+                        <div class="tree-label" style="margin-top: 15px;">Categorias</div>
+                        <a href="#CENTRALDATAPERSON" class="node-item" onclick="activateNode(this)">
+                            <strong>PERSON</strong>
+                            <span>Dados Pessoais</span>
+                        </a>
+                        <a href="#CENTRALDATAORGANIZATION" class="node-item" onclick="activateNode(this)">
+                            <strong>ORGANIZATION</strong>
+                            <span>Dados da Organização</span>
+                        </a>
+                        <a href="#CENTRALDATAGROUP" class="node-item" onclick="activateNode(this)">
+                            <strong>GROUP</strong>
+                            <span>Dados de Grupo</span>
+                        </a>
+
+                        <div class="tree-label" style="margin-top: 15px;">Update Flags (X)</div>
+                        <a href="#CENTRALDATA_X" class="node-item" onclick="activateNode(this)">
+                            <strong>CENTRALDATA_X</strong>
+                        </a>
+                        <a href="#CENTRALDATAPERSON_X" class="node-item" onclick="activateNode(this)">
+                            <strong>PERSON_X</strong>
+                        </a>
+                        <a href="#CENTRALDATAORGANIZATION_X" class="node-item" onclick="activateNode(this)">
+                            <strong>ORGANIZATION_X</strong>
+                        </a>
+                         <a href="#CENTRALDATAGROUP_X" class="node-item" onclick="activateNode(this)">
+                            <strong>GROUP_X</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main id="mainContent">
+
+            <div id="BUPARTNER" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>BUPARTNER <span class="desc">Estrutura principal do Parceiro de Negócios</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-req">Necessário</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 1</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%">Campo</th>
+                                <th style="width: 50%">Descrição</th>
+                                <th style="width: 25%">Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BUSINESSPARTNEREXTERN</span></td><td>Nº parceiro de negócios (Externo)</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NATURALPERSON</span></td><td>É Pessoa Física (Flag Fiscal)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERCATEGORY</span></td><td>Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERGROUP</span></td><td>Agrupamento de parceiros (BP Grouping)</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="CENTRALDATA" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATA <span class="desc">Dados Centrais (Comuns a todas categorias)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 1</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%">Campo</th>
+                                <th style="width: 50%">Descrição</th>
+                                <th style="width: 25%">Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">AUTHORIZATIONGROUP</span></td><td>Grupo de autorizações</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">CENTRALARCHIVINGFLAG</span></td><td>Marcação para arquivamento</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">CENTRALBLOCK</span></td><td>Bloqueio central</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">COMM_TYPE</span></td><td>Meio comunicação padrão</td><td><span class="dt-type">CHAR(3)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">CONTACTALLOWANCE</span></td><td>Permissão de contato</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">DATAORIGINTYPE</span></td><td>Tipos de origem dos dados</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NOTRELEASED</span></td><td>Código: não liberado</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNEREXTERNAL</span></td><td>Nº parceiro no sistema externo</td><td><span class="dt-type">CHAR(20)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERLANGUAGE</span></td><td>Idioma do Parceiro</td><td><span class="dt-type">LANG(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERLANGUAGEISO</span></td><td>Idioma ISO (2 chars)</td><td><span class="dt-type">CHAR(2)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERTYPE</span></td><td>Tipo de parceiro de negócios</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PRINT_MODE</span></td><td>Formato da impressão</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SEARCHTERM1</span></td><td>Termo de pesquisa 1</td><td><span class="dt-type">CHAR(20)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SEARCHTERM2</span></td><td>Termo de pesquisa 2</td><td><span class="dt-type">CHAR(20)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TITLELETTER</span></td><td>Vocativo</td><td><span class="dt-type">CHAR(50)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TITLE_KEY</span></td><td>Chave de forma de tratamento (Sr, Sra, Empresa)</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="ADDRESSDATA" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>ADDRESSDATA <span class="desc">Dados de Endereço</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 9999</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descrição</th>
+                                <th>Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">STREET</span></td><td>Rua / Logradouro</td><td><span class="dt-type">CHAR(60)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">HOUSE_NO</span></td><td>Número</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">HOUSE_NO2</span></td><td>Complemento do nº</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">CITY</span></td><td>Cidade</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">POSTL_COD1</span></td><td>CEP (Código Postal)</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td><td>País (Chave SAP ex: BR)</td><td><span class="dt-type">CHAR(3)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td><td>País ISO (ex: BR)</td><td><span class="dt-type">CHAR(2)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">REGION</span></td><td>Região/Estado (UF)</td><td><span class="dt-type">CHAR(3)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">DISTRICT</span></td><td>Bairro</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TAXJURCODE</span></td><td>Domicílio Fiscal</td><td><span class="dt-type">CHAR(15)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LANGU</span></td><td>Idioma do endereço</td><td><span class="dt-type">LANG(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">VALIDFROMDATE</span></td><td>Válido desde</td><td><span class="dt-type">DATS(8)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">VALIDTODATE</span></td><td>Válido até</td><td><span class="dt-type">DATS(8)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">STR_SUPPL1</span></td><td>Rua 2 (Complemento)</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">STR_SUPPL2</span></td><td>Rua 3</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">STR_SUPPL3</span></td><td>Rua 4</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LOCATION</span></td><td>Rua 5 (Location)</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BUILDING</span></td><td>Edifício</td><td><span class="dt-type">CHAR(20)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">FLOOR</span></td><td>Andar</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">ROOM_NO</span></td><td>Sala / Apartamento</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TIME_ZONE</span></td><td>Fuso Horário</td><td><span class="dt-type">CHAR(6)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TRANSPZONE</span></td><td>Zona de transporte</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PO_BOX</span></td><td>Caixa Postal</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">POSTL_COD2</span></td><td>CEP Caixa Postal</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">C_O_NAME</span></td><td>A/C (Care of)</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">EXTADDRESSNUMBER</span></td><td>ID Endereço Externo</td><td><span class="dt-type">CHAR(20)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="TAX_DATA" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>TAX_DATA <span class="desc">Dados Fiscais (CNPJ, CPF, IE)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 9999</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descrição</th>
+                                <th>Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TAXTYPE</span></td><td>Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TAXNUMBER</span></td><td>Número Fiscal (Formatado ou não)</td><td><span class="dt-type">CHAR(20)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TAXNUMXL</span></td><td>Número Fiscal Longo (Se maior que 20 chars)</td><td><span class="dt-type">CHAR(60)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="BUSINESSPARTNERROLE" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>BUSINESSPARTNERROLE <span class="desc">Funções do Parceiro (FLCU00, FLCU01, etc)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 9999</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descrição</th>
+                                <th>Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERROLE</span></td><td>Função de parceiro (ex: FLCU01 - Cliente)</td><td><span class="dt-type">CHAR(6)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="CENTRALDATAPERSON" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAPERSON <span class="desc">Dados Pessoais (Categoria 1)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 1</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descrição</th>
+                                <th>Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">FIRSTNAME</span></td><td>Primeiro nome</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LASTNAME</span></td><td>Sobrenome</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">FULLNAME</span></td><td>Nome completo</td><td><span class="dt-type">CHAR(80)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BIRTHDATE</span></td><td>Data de nascimento</td><td><span class="dt-type">DATS(8)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BIRTHPLACE</span></td><td>Local de nascimento</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MIDDLENAME</span></td><td>Nome do meio</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SECONDNAME</span></td><td>Segundo sobrenome</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NICKNAME</span></td><td>Apelido / Conhecido como</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TITLE_ACA1</span></td><td>Título acadêmico 1</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TITLE_ACA2</span></td><td>Título acadêmico 2</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TITLE_SPPL</span></td><td>Complemento título (ex: Dr.)</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PREFIX1</span></td><td>Prefixo nome</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PREFIX2</span></td><td>Prefixo nome 2</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">GENDER</span></td><td>Gênero (Legado)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">SEX</span></td><td>Sexo</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">MARITALSTATUS</span></td><td>Estado civil</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NATIONALITY</span></td><td>Nacionalidade</td><td><span class="dt-type">CHAR(3)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">CORRESPONDLANGUAGE</span></td><td>Idioma correspondência</td><td><span class="dt-type">LANG(1)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="CENTRALDATAORGANIZATION" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAORGANIZATION <span class="desc">Dados da Organização (Categoria 2)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 1</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descrição</th>
+                                <th>Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAME1</span></td><td>Nome 1 (Razão Social)</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAME2</span></td><td>Nome 2</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAME3</span></td><td>Nome 3</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAME4</span></td><td>Nome 4</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">INDUSTRYSECTOR</span></td><td>Setor Industrial (Ramo)</td><td><span class="dt-type">CHAR(10)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LEGALFORM</span></td><td>Forma Jurídica</td><td><span class="dt-type">CHAR(2)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">FOUNDATIONDATE</span></td><td>Data de fundação</td><td><span class="dt-type">DATS(8)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LIQUIDATIONDATE</span></td><td>Data de liquidação</td><td><span class="dt-type">DATS(8)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="CENTRALDATAGROUP" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAGROUP <span class="desc">Dados de Grupo (Categoria 3)</span></h2>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-opt">Opcional</span>
+                        <span class="badge badge-meta">Min: 1 / Máx: 1</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Descrição</th>
+                                <th>Tipo/Tam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAMEGROUP1</span></td><td>Nome 1 (Grupo)</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAMEGROUP2</span></td><td>Nome 2 (Grupo)</td><td><span class="dt-type">CHAR(40)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">GROUPTYPE</span></td><td>Tipo de grupo</td><td><span class="dt-type">CHAR(4)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="CENTRALDATA_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATA_X <span class="desc">Flags de Atualização (Dados Centrais)</span></h2>
+                    </div>
+                    <div class="badges"><span class="badge badge-meta">Técnico</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Campo</th><th>Descrição</th><th>Tipo</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">AUTHORIZATIONGROUP</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERLANGUAGE</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">PARTNERTYPE</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">TITLE_KEY</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td colspan="3" style="text-align:center; color:#94a3b8; font-size:0.8rem;">(E demais campos correspondentes ao segmento de dados...)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="CENTRALDATAPERSON_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAPERSON_X <span class="desc">Flags de Atualização (Pessoa)</span></h2>
+                    </div>
+                    <div class="badges"><span class="badge badge-meta">Técnico</span></div>
+                </div>
+                 <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Campo</th><th>Descrição</th><th>Tipo</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">FIRSTNAME</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">LASTNAME</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">BIRTHDATE</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                             <tr><td colspan="3" style="text-align:center; color:#94a3b8; font-size:0.8rem;">(E demais campos correspondentes...)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+             <div id="CENTRALDATAORGANIZATION_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAORGANIZATION_X <span class="desc">Flags de Atualização (Org)</span></h2>
+                    </div>
+                    <div class="badges"><span class="badge badge-meta">Técnico</span></div>
+                </div>
+                 <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Campo</th><th>Descrição</th><th>Tipo</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="tech-name" onclick="copy(this)">NAME1</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                            <tr><td><span class="tech-name" onclick="copy(this)">INDUSTRYSECTOR</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr>
+                             <tr><td colspan="3" style="text-align:center; color:#94a3b8; font-size:0.8rem;">(E demais campos correspondentes...)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="toast">Copiado para a área de transferência!</div>
+
+    <script>
+        // --- COPY TO CLIPBOARD ---
+        function copy(element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // --- NAVIGATION HIGHLIGHT ---
+        function activateNode(el) {
+            document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // --- SEARCH ENGINE ---
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const term = e.target.value.toUpperCase();
+            const cards = document.querySelectorAll('.segment-card');
+            
+            cards.forEach(card => {
+                const rows = card.querySelectorAll('tbody tr');
+                let cardVisible = false;
+                
+                // Verifica Header do Card
+                const cardHeader = card.querySelector('.card-header').innerText.toUpperCase();
+                if (cardHeader.includes(term)) cardVisible = true;
+
+                // Verifica Linhas da Tabela
+                rows.forEach(row => {
+                    const rowText = row.innerText.toUpperCase();
+                    if (rowText.includes(term)) {
+                        row.classList.remove('hidden');
+                        if (term !== '') row.classList.add('highlight');
+                        else row.classList.remove('highlight');
+                        cardVisible = true;
+                    } else {
+                        row.classList.add('hidden');
+                        row.classList.remove('highlight');
+                    }
+                });
+
+                if (cardVisible) card.classList.remove('hidden');
+                else card.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
