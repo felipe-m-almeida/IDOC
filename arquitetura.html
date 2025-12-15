@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cenários de Arquitetura 4MDG</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+    </script>
+    <style>
+        .diagram-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+        .diagram-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .diagram-title { font-size: 1.1rem; color: #1e293b; font-weight: 700; margin: 0; }
+        .diagram-desc { font-size: 0.9rem; color: #64748b; margin-bottom: 20px; line-height: 1.6; }
+        .mermaid { display: flex; justify-content: center; margin: 20px 0; }
+        
+        /* Badges de Tecnologia */
+        .tech-badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .tb-cloud { background: #dbeafe; color: #1e40af; }
+        .tb-onprem { background: #fee2e2; color: #991b1b; }
+        .tb-sap { background: #fef9c3; color: #854d0e; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">ARQUITETURA <span>Cenários de Integração</span></div>
+        <div style="display:flex; gap:10px;">
+             <a href="index.html" style="text-decoration:none; color:#64748b; font-weight:600; font-size:0.9rem; align-self:center;">Voltar ao Portal</a>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <aside>
+            <div class="tree-container">
+                <div class="tree-label">Cenários</div>
+                <div style="margin-left: 0;">
+                    <a href="#scenario-cpi" class="node-item active" onclick="scrollToSection('scenario-cpi')"><strong>1. Via SAP CPI (Cloud)</strong></a>
+                    <a href="#scenario-pi" class="node-item" onclick="scrollToSection('scenario-pi')"><strong>2. Via SAP PI/PO (OnPrem)</strong></a>
+                    <a href="#scenario-outbound" class="node-item" onclick="scrollToSection('scenario-outbound')"><strong>3. SAP chamando 4MDG</strong></a>
+                </div>
+            </div>
+        </aside>
+
+        <main id="mainContent" style="padding: 40px; background: #f8fafc;">
+
+            <div id="scenario-cpi" class="diagram-container">
+                <div class="diagram-header">
+                    <h2 class="diagram-title">1. Integração via SAP CPI (Cloud Integration)</h2>
+                    <span class="tech-badge tb-cloud">JSON Nativo</span>
+                </div>
+                <p class="diagram-desc">
+                    Neste fluxo moderno, os dados trafegam inteiramente em <strong>JSON</strong>. O 4MDG envia para o Gateway do cliente, que repassa ao SAP CPI. O CPI orquestra a entrega no SAP S/4HANA ou ECC e retorna a confirmação (Devolução) pelo mesmo caminho.
+                </p>
+                
+                <div class="mermaid">
+                sequenceDiagram
+                    participant 4MDG as Portal 4MDG
+                    participant GW as Gateway
+                    participant CPI as SAP CPI
+                    participant SAP as SAP Backend
+
+                    Note over 4MDG, SAP: Fluxo JSON (Sem conversão XML)
+
+                    4MDG->>GW: Envia Dados (JSON)
+                    GW->>CPI: Repassa (JSON)
+                    CPI->>SAP: Integração (JSON/OData/RFC)
+                    
+                    activate SAP
+                    SAP->>SAP: Processa Dados
+                    SAP-->>CPI: Retorno/Devolução (JSON)
+                    deactivate SAP
+                    
+                    CPI-->>GW: Response
+                    GW-->>4MDG: Confirmação Final
+                </div>
+            </div>
+
+            <div id="scenario-pi" class="diagram-container">
+                <div class="diagram-header">
+                    <h2 class="diagram-title">2. Integração via SAP PI/PO (Process Orchestration)</h2>
+                    <span class="tech-badge tb-onprem">Conversão XML</span>
+                </div>
+                <p class="diagram-desc">
+                    No fluxo legado/on-premise, ocorre a <strong>transformação de formato</strong>. O 4MDG envia JSON, mas o SAP PI/PO converte para <strong>XML (IDoc)</strong> antes de entregar ao SAP.
+                </p>
+
+                <div class="mermaid">
+                sequenceDiagram
+                    participant 4MDG as Portal 4MDG
+                    participant GW as Gateway
+                    participant PI as SAP PI/PO
+                    participant SAP as SAP Backend
+
+                    4MDG->>GW: Envia Dados (JSON)
+                    GW->>PI: Repassa (JSON)
+                    
+                    Note right of PI: Conversão: JSON -> XML
+                    
+                    PI->>SAP: Envia IDoc (XML)
+                    
+                    activate SAP
+                    SAP->>SAP: Processa IDoc
+                    SAP-->>PI: Status 53/51 (XML)
+                    deactivate SAP
+                    
+                    Note right of PI: Conversão: XML -> JSON
+                    
+                    PI-->>GW: Response (JSON)
+                    GW-->>4MDG: Devolução/Status
+                </div>
+            </div>
+
+            <div id="scenario-outbound" class="diagram-container">
+                <div class="diagram-header">
+                    <h2 class="diagram-title">3. SAP Chamando 4MDG (Outbound)</h2>
+                    <span class="tech-badge tb-sap">SAP Ativo</span>
+                </div>
+                <p class="diagram-desc">
+                    Cenário onde o SAP inicia a comunicação (ex: envio de notas fiscais, atualização de status). O tráfego é <strong>JSON</strong> direto, passando pelo Gateway até chegar ao 4MDG, que devolve o recebimento.
+                </p>
+
+                <div class="mermaid">
+                sequenceDiagram
+                    participant SAP as SAP Backend
+                    participant GW as Gateway
+                    participant 4MDG as Portal 4MDG
+
+                    Note over SAP, 4MDG: Fluxo JSON
+
+                    SAP->>GW: Chamada HTTP POST (JSON)
+                    GW->>4MDG: Entrega Dados (JSON)
+                    
+                    activate 4MDG
+                    4MDG->>4MDG: Processa/Atualiza
+                    4MDG-->>GW: Devolução (OK/Erro)
+                    deactivate 4MDG
+                    
+                    GW-->>SAP: Retorno ao SAP
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // --- HISTÓRICO ---
+        (function() {
+            const MAX_HISTORY = 10;
+            const HISTORY_KEY = 'sap_docs_history';
+            if (!window.location.pathname.endsWith('index.html')) {
+                const standardizedTitle = document.title;
+                const currentPage = { title: standardizedTitle, url: window.location.pathname.split('/').pop() };
+                let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                history = history.filter(h => h.url !== currentPage.url);
+                history.unshift(currentPage);
+                if (history.length > MAX_HISTORY) history.pop();
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+                
+                const btn = document.createElement('a'); btn.id = 'global-back-btn'; btn.href = 'index.html'; btn.innerHTML = '🏠'; btn.title = 'Voltar ao Início'; document.body.appendChild(btn);
+            }
+            const container = document.getElementById('history-list');
+            if (container) {
+                const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                if (history.length === 0) container.innerHTML = '<div style="padding:5px 8px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
+                else { container.innerHTML = history.map(h => `<a href="${h.url}" class="history-link">${h.title}</a>`).join(''); }
+            }
+            window.clearHistory = function() { localStorage.removeItem(HISTORY_KEY); if(document.getElementById('history-list')) document.getElementById('history-list').innerHTML = ''; }
+        })();
+    </script>
+</body>
+</html>
