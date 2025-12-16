@@ -6,24 +6,16 @@
     <title>Dicionário SAP</title>
     <link rel="stylesheet" href="estilos.css">
     <style>
-        /* Correção de Layout Global */
-        body { 
-            overflow-y: auto !important; 
-            height: auto !important; 
-            background-color: #f8fafc; 
-        }
-        
-        /* HEADER (HERO) - Ajustado para não ter altura fixa */
+        /* Ajustes locais para o Glossário dentro do novo Layout */
         .glossary-hero {
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             color: white;
-            padding: 60px 20px; /* Espaçamento interno confortável */
+            padding: 60px 20px 100px 20px; /* Padding extra embaixo para o efeito de overlap */
             text-align: center;
-            border-bottom: 1px solid #1e40af;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #1e40af;
+            position: relative;
         }
         
-        /* Input de Busca */
         .glossary-search-input {
             padding: 15px 25px;
             width: 100%;
@@ -40,88 +32,36 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
         
-        /* GRID DE CARDS - Agora com margem positiva (sem sobreposição) */
         .term-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 20px;
             max-width: 1000px;
-            margin: 40px auto 60px; /* Margem superior de 40px para separar do header */
+            margin: -60px auto 50px; /* Margem negativa para subir no Hero */
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
         .term-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
+            background: white; border-radius: 12px; padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border);
+            transition: transform 0.2s; display: flex; flex-direction: column;
         }
-        
-        .term-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px -5px rgba(0,0,0,0.1);
-            border-color: var(--primary);
-        }
+        .term-card:hover { transform: translateY(-3px); border-color: var(--primary); }
 
-        .term-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 10px;
-        }
-
-        .term-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #1e293b;
-            font-family: 'Consolas', monospace;
-        }
+        .term-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+        .term-title { font-size: 1.4rem; font-weight: 800; color: #1e293b; font-family: 'Consolas', monospace; }
         
-        .term-tag {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-        
-        /* Cores das Tags */
+        .term-tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; }
         .tag-tech { background: #f1f5f9; color: #64748b; }
         .tag-idoc { background: #dbeafe; color: #1e40af; }
         .tag-infra { background: #fef9c3; color: #854d0e; }
 
-        .term-def {
-            font-size: 0.95rem;
-            color: #475569;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            flex: 1;
-        }
-
-        .term-example {
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: #334155;
-            border-left: 3px solid #cbd5e1;
-            margin-top: auto;
-        }
+        .term-def { font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 15px; flex: 1; }
+        .term-example { background: #f8fafc; padding: 10px; border-radius: 6px; font-size: 0.85rem; color: #334155; border-left: 3px solid #cbd5e1; }
         
-        /* Estado Vazio */
-        #noResults {
-            text-align: center;
-            display: none;
-            color: #94a3b8;
-            margin-top: 50px;
-            font-size: 1.1rem;
-        }
+        #noResults { text-align: center; display: none; color: #64748b; margin-top: 50px; font-size: 1.2rem; }
     </style>
 </head>
 <body>
@@ -133,164 +73,167 @@
         </div>
     </header>
 
-    <div class="glossary-hero">
-        <h1 style="margin: 0 0 15px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px;">Dicionário SAP</h1>
-        <p style="opacity: 0.9; max-width: 600px; margin: 0 auto 35px; font-size: 1.05rem; line-height: 1.5;">
-            Tradução de siglas e códigos técnicos para o português claro.
-        </p>
-        
-        <input type="text" id="termSearch" class="glossary-search-input" 
-               placeholder="Digite uma sigla (ex: DEBMAS, PI, RFC)..." autofocus>
-    </div>
-
     <div class="workspace">
-        <div id="termsContainer" class="term-grid">
+        <main style="padding: 0; overflow-y: auto;">
             
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">IDoc</span><span class="term-tag tag-tech">Conceito</span></div>
-                <div class="term-def"><strong>Intermediate Document.</strong> É o formato padrão de arquivo para troca de dados entre o SAP e outros sistemas. Funciona como um "envelope" digital que carrega as informações de negócio.</div>
+            <div class="glossary-hero">
+                <h1 style="margin: 0 0 15px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px;">Dicionário SAP</h1>
+                <p style="opacity: 0.9; max-width: 600px; margin: 0 auto 35px; font-size: 1.05rem; line-height: 1.5;">
+                    Tradução de siglas e códigos técnicos para o português claro.
+                </p>
+                
+                <input type="text" id="termSearch" class="glossary-search-input" 
+                       placeholder="Digite uma sigla (ex: DEBMAS, PI, RFC)..." autofocus>
             </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">BAPI</span><span class="term-tag tag-tech">Função</span></div>
-                <div class="term-def"><strong>Business API.</strong> É uma "função pronta" e segura do SAP. Imagine um formulário oficial que valida tudo (se o cliente existe, se o CPF é válido) antes de salvar no banco de dados.</div>
-            </div>
+            <div id="termsContainer" class="term-grid">
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">IDoc</span><span class="term-tag tag-tech">Conceito</span></div>
+                    <div class="term-def"><strong>Intermediate Document.</strong> É o formato padrão de arquivo para troca de dados entre o SAP e outros sistemas. Funciona como um "envelope" digital que carrega as informações de negócio.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">RFC</span><span class="term-tag tag-tech">Conexão</span></div>
-                <div class="term-def"><strong>Remote Function Call.</strong> É a tecnologia que permite chamar uma função do SAP vindo de fora. É o "protocolo" de comunicação direta.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">BAPI</span><span class="term-tag tag-tech">Função</span></div>
+                    <div class="term-def"><strong>Business API.</strong> É uma "função pronta" e segura do SAP. Imagine um formulário oficial que valida tudo (se o cliente existe, se o CPF é válido) antes de salvar no banco de dados.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">CPI</span><span class="term-tag tag-infra">Nuvem</span></div>
-                <div class="term-def"><strong>Cloud Platform Integration.</strong> O "carteiro moderno" da SAP. Ele fica na nuvem (BTP), recebe os dados do 4MDG (JSON), traduz para a linguagem do SAP e entrega.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">RFC</span><span class="term-tag tag-tech">Conexão</span></div>
+                    <div class="term-def"><strong>Remote Function Call.</strong> É a tecnologia que permite chamar uma função do SAP vindo de fora. É o "protocolo" de comunicação direta.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">PI / PO</span><span class="term-tag tag-infra">Legado</span></div>
-                <div class="term-def"><strong>Process Integration (Orchestration).</strong> O antecessor do CPI. É um servidor físico instalado na empresa que gerencia integrações. Muitos clientes antigos ainda usam.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">CPI</span><span class="term-tag tag-infra">Nuvem</span></div>
+                    <div class="term-def"><strong>Cloud Platform Integration.</strong> O "carteiro moderno" da SAP. Ele fica na nuvem (BTP), recebe os dados do 4MDG (JSON), traduz para a linguagem do SAP e entrega.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">CC</span><span class="term-tag tag-infra">Segurança</span></div>
-                <div class="term-def"><strong>Cloud Connector.</strong> Um software de segurança vital. Ele cria um "túnel" seguro entre a nuvem e o servidor da empresa, permitindo integração sem abrir portas perigosas no firewall.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">PI / PO</span><span class="term-tag tag-infra">Legado</span></div>
+                    <div class="term-def"><strong>Process Integration (Orchestration).</strong> O antecessor do CPI. É um servidor físico instalado na empresa que gerencia integrações. Muitos clientes antigos ainda usam.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">WE02 / WE05</span><span class="term-tag tag-tech">Transação</span></div>
-                <div class="term-def"><strong>Lista de IDocs.</strong> É o "Google" dos seus dados. É a tela onde você pesquisa, filtra e vê se o IDoc chegou, se deu erro (vermelho) ou se foi sucesso (verde).</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">CC</span><span class="term-tag tag-infra">Segurança</span></div>
+                    <div class="term-def"><strong>Cloud Connector.</strong> Um software de segurança vital. Ele cria um "túnel" seguro entre a nuvem e o servidor da empresa, permitindo integração sem abrir portas perigosas no firewall.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">WE19</span><span class="term-tag tag-tech">Ferramenta Teste</span></div>
-                <div class="term-def"><strong>Ferramenta de Teste.</strong> Permite clonar um IDoc existente (mesmo com erro), editar os dados manualmente e processar como um novo. Essencial para testar correções (Debug) sem pedir reenvio da origem.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">WE02 / WE05</span><span class="term-tag tag-tech">Transação</span></div>
+                    <div class="term-def"><strong>Lista de IDocs.</strong> É o "Google" dos seus dados. É a tela onde você pesquisa, filtra e vê se o IDoc chegou, se deu erro (vermelho) ou se foi sucesso (verde).</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">ST22</span><span class="term-tag tag-tech">Debug</span></div>
-                <div class="term-def"><strong>Análise de Dumps.</strong> Quando o SAP "explode" (crash/tela de erro), ele gera um Dump. A ST22 é a caixa-preta que mostra exatamente qual linha do código ABAP quebrou e o motivo (ex: Time Out, Memória, Erro de Sintaxe).</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">WE19</span><span class="term-tag tag-tech">Ferramenta Teste</span></div>
+                    <div class="term-def"><strong>Ferramenta de Teste.</strong> Permite clonar um IDoc existente (mesmo com erro), editar os dados manualmente e processar como um novo. Essencial para testar correções (Debug) sem pedir reenvio da origem.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">SALE</span><span class="term-tag tag-tech">Config</span></div>
-                <div class="term-def"><strong>Menu ALE/IDoc.</strong> O "QG" da configuração de integração. É uma transação de menu que agrupa tudo necessário para criar Sistemas Lógicos, Modelos de Distribuição e configurar a comunicação entre sistemas.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">ST22</span><span class="term-tag tag-tech">Debug</span></div>
+                    <div class="term-def"><strong>Análise de Dumps.</strong> Quando o SAP "explode" (crash/tela de erro), ele gera um Dump. A ST22 é a caixa-preta que mostra exatamente qual linha do código ABAP quebrou e o motivo (ex: Time Out, Memória, Erro de Sintaxe).</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">MM90</span><span class="term-tag tag-tech">Logs Material</span></div>
-                <div class="term-def"><strong>Logs Detalhados (MM).</strong> Quando o IDoc de Material (MATMAS) dá erro genérico na WE02, a MM90 revela o detalhe técnico oculto do Application Log.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">SALE</span><span class="term-tag tag-tech">Config</span></div>
+                    <div class="term-def"><strong>Menu ALE/IDoc.</strong> O "QG" da configuração de integração. É uma transação de menu que agrupa tudo necessário para criar Sistemas Lógicos, Modelos de Distribuição e configurar a comunicação entre sistemas.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">SLG1</span><span class="term-tag tag-tech">Log Aplicação</span></div>
-                <div class="term-def"><strong>Application Log Geral.</strong> O "Raio-X" do sistema. Erros complexos de CLFMAS (Classificação) e Business Partners que não aparecem na mensagem curta do IDoc ficam gravados aqui.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">MM90</span><span class="term-tag tag-tech">Logs Material</span></div>
+                    <div class="term-def"><strong>Logs Detalhados (MM).</strong> Quando o IDoc de Material (MATMAS) dá erro genérico na WE02, a MM90 revela o detalhe técnico oculto do Application Log.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">BD87</span><span class="term-tag tag-tech">Transação</span></div>
-                <div class="term-def"><strong>Reprocessamento.</strong> Se um IDoc deu erro técnico (ex: banco travado), é aqui que você "chuta" ele de novo para tentar processar sem precisar reenviar do 4MDG.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">SLG1</span><span class="term-tag tag-tech">Log Aplicação</span></div>
+                    <div class="term-def"><strong>Application Log Geral.</strong> O "Raio-X" do sistema. Erros complexos de CLFMAS (Classificação) e Business Partners que não aparecem na mensagem curta do IDoc ficam gravados aqui.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">WE20</span><span class="term-tag tag-tech">Config</span></div>
-                <div class="term-def"><strong>Perfil do Parceiro.</strong> É onde configuramos "quem" pode falar com o SAP. Se o IDoc falha dizendo "Parceiro não encontrado", o problema está aqui.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">BD87</span><span class="term-tag tag-tech">Transação</span></div>
+                    <div class="term-def"><strong>Reprocessamento.</strong> Se um IDoc deu erro técnico (ex: banco travado), é aqui que você "chuta" ele de novo para tentar processar sem precisar reenviar do 4MDG.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">BP</span><span class="term-tag tag-idoc">Conceito</span></div>
-                <div class="term-def"><strong>Business Partner.</strong> No SAP moderno (S/4HANA), não existe mais separação rígida entre Cliente e Fornecedor. Todos são "Parceiros de Negócio" (BP) que assumem papéis diferentes.</div>
-                <div class="term-example">Substitui: XK01, XD01, MK01.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">WE20</span><span class="term-tag tag-tech">Config</span></div>
+                    <div class="term-def"><strong>Perfil do Parceiro.</strong> É onde configuramos "quem" pode falar com o SAP. Se o IDoc falha dizendo "Parceiro não encontrado", o problema está aqui.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">Segmento</span><span class="term-tag tag-tech">Estrutura</span></div>
-                <div class="term-def"><strong>Gaveta de Dados.</strong> O IDoc é organizado em pastas chamadas segmentos. Ex: <code>E1MARAM</code> é o segmento mestre do material. Se você não mandar o segmento, o SAP ignora os campos dentro dele.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">BP</span><span class="term-tag tag-idoc">Conceito</span></div>
+                    <div class="term-def"><strong>Business Partner.</strong> No SAP moderno (S/4HANA), não existe mais separação rígida entre Cliente e Fornecedor. Todos são "Parceiros de Negócio" (BP) que assumem papéis diferentes.</div>
+                    <div class="term-example">Substitui: XK01, XD01, MK01.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">Inbound</span><span class="term-tag tag-infra">Direção</span></div>
-                <div class="term-def"><strong>Entrada.</strong> Tudo que vem de fora e <strong>ENTRA</strong> no SAP. É o fluxo de carga de dados.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">Segmento</span><span class="term-tag tag-tech">Estrutura</span></div>
+                    <div class="term-def"><strong>Gaveta de Dados.</strong> O IDoc é organizado em pastas chamadas segmentos. Ex: <code>E1MARAM</code> é o segmento mestre do material. Se você não mandar o segmento, o SAP ignora os campos dentro dele.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">Outbound</span><span class="term-tag tag-infra">Direção</span></div>
-                <div class="term-def"><strong>Saída.</strong> Tudo que o SAP gera e <strong>ENVIA</strong> para fora.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">Inbound</span><span class="term-tag tag-infra">Direção</span></div>
+                    <div class="term-def"><strong>Entrada.</strong> Tudo que vem de fora e <strong>ENTRA</strong> no SAP. É o fluxo de carga de dados.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">Empresa Global</span><span class="term-tag tag-idoc">Mapeamento</span></div>
-                <div class="term-def"><strong>Global Company Code.</strong> O IDoc muitas vezes não aceita o código da empresa direto (ex: "1000"). Ele exige um código global (ex: "GL_1000") configurado na OB08. Fundamental para preencher os segmentos <code>E1LFB1M</code> (Fornecedor) e <code>E1KNB1M</code> (Cliente) sem erro.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">Outbound</span><span class="term-tag tag-infra">Direção</span></div>
+                    <div class="term-def"><strong>Saída.</strong> Tudo que o SAP gera e <strong>ENVIA</strong> para fora.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">MATMAS</span><span class="term-tag tag-idoc">Material</span></div>
-                <div class="term-def"><strong>Material Master.</strong> O IDoc mais comum para cadastrar Produtos/Materiais. Contém dados básicos (peso, nome), dados de vendas e contabilidade.</div>
-                <div class="term-example">Tabelas Principais: MARA, MARC.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">Empresa Global</span><span class="term-tag tag-idoc">Mapeamento</span></div>
+                    <div class="term-def"><strong>Global Company Code.</strong> O IDoc muitas vezes não aceita o código da empresa direto (ex: "1000"). Ele exige um código global (ex: "GL_1000") configurado na OB08. Fundamental para preencher os segmentos <code>E1LFB1M</code> (Fornecedor) e <code>E1KNB1M</code> (Cliente) sem erro.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">ARTMAS</span><span class="term-tag tag-idoc">Varejo</span></div>
-                <div class="term-def"><strong>Article Master.</strong> Uma versão "vitaminada" do MATMAS feita para o Varejo. Suporta grades (Cor/Tamanho) e categorias complexas.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">MATMAS</span><span class="term-tag tag-idoc">Material</span></div>
+                    <div class="term-def"><strong>Material Master.</strong> O IDoc mais comum para cadastrar Produtos/Materiais. Contém dados básicos (peso, nome), dados de vendas e contabilidade.</div>
+                    <div class="term-example">Tabelas Principais: MARA, MARC.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">DEBMAS</span><span class="term-tag tag-idoc">Cliente</span></div>
-                <div class="term-def"><strong>Debtor Master (Cliente).</strong> IDoc para cadastrar Clientes. No S/4HANA, ele é processado para criar um "Business Partner" (Parceiro de Negócio).</div>
-                <div class="term-example">Tabelas: KNA1, KNB1.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">ARTMAS</span><span class="term-tag tag-idoc">Varejo</span></div>
+                    <div class="term-def"><strong>Article Master.</strong> Uma versão "vitaminada" do MATMAS feita para o Varejo. Suporta grades (Cor/Tamanho) e categorias complexas.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">CREMAS</span><span class="term-tag tag-idoc">Fornecedor</span></div>
-                <div class="term-def"><strong>Creditor Master (Fornecedor).</strong> IDoc para cadastrar Fornecedores. Assim como o DEBMAS, vira um Business Partner no S/4HANA.</div>
-                <div class="term-example">Tabelas: LFA1, LFB1.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">DEBMAS</span><span class="term-tag tag-idoc">Cliente</span></div>
+                    <div class="term-def"><strong>Debtor Master (Cliente).</strong> IDoc para cadastrar Clientes. No S/4HANA, ele é processado para criar um "Business Partner" (Parceiro de Negócio).</div>
+                    <div class="term-example">Tabelas: KNA1, KNB1.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">SRVMAS</span><span class="term-tag tag-idoc">Serviço</span></div>
-                <div class="term-def"><strong>Service Master.</strong> Usado para cadastrar Serviços (mão de obra, consultoria). Não tem estoque, mas possui descrições longas e categorias de avaliação.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">CREMAS</span><span class="term-tag tag-idoc">Fornecedor</span></div>
+                    <div class="term-def"><strong>Creditor Master (Fornecedor).</strong> IDoc para cadastrar Fornecedores. Assim como o DEBMAS, vira um Business Partner no S/4HANA.</div>
+                    <div class="term-example">Tabelas: LFA1, LFB1.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">ADRMAS</span><span class="term-tag tag-idoc">Endereço</span></div>
-                <div class="term-def"><strong>Address Master.</strong> IDoc auxiliar. Às vezes o SAP pede para enviar o endereço separado do Cliente/Fornecedor. É aqui que ele vai.</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">SRVMAS</span><span class="term-tag tag-idoc">Serviço</span></div>
+                    <div class="term-def"><strong>Service Master.</strong> Usado para cadastrar Serviços (mão de obra, consultoria). Não tem estoque, mas possui descrições longas e categorias de avaliação.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">CLFMAS</span><span class="term-tag tag-idoc">Técnico</span></div>
-                <div class="term-def"><strong>Classification.</strong> IDoc para "colar adesivos" de características técnicas nos materiais (ex: Voltagem: 220v, Cor: Azul).</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">ADRMAS</span><span class="term-tag tag-idoc">Endereço</span></div>
+                    <div class="term-def"><strong>Address Master.</strong> IDoc auxiliar. Às vezes o SAP pede para enviar o endereço separado do Cliente/Fornecedor. É aqui que ele vai.</div>
+                </div>
 
-            <div class="term-card">
-                <div class="term-header"><span class="term-title">MATQM</span><span class="term-tag tag-idoc">Qualidade</span></div>
-                <div class="term-def"><strong>Quality Management.</strong> Extensão do material para dizer como ele deve ser inspecionado ao chegar no estoque (regras de qualidade).</div>
-            </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">CLFMAS</span><span class="term-tag tag-idoc">Técnico</span></div>
+                    <div class="term-def"><strong>Classification.</strong> IDoc para "colar adesivos" de características técnicas nos materiais (ex: Voltagem: 220v, Cor: Azul).</div>
+                </div>
 
-        </div>
-        
-        <div id="noResults">
-            <span style="font-size: 3rem; display: block; margin-bottom: 10px;">🤔</span>
-            Nenhum termo encontrado para sua busca.
-        </div>
+                <div class="term-card">
+                    <div class="term-header"><span class="term-title">MATQM</span><span class="term-tag tag-idoc">Qualidade</span></div>
+                    <div class="term-def"><strong>Quality Management.</strong> Extensão do material para dizer como ele deve ser inspecionado ao chegar no estoque (regras de qualidade).</div>
+                </div>
+
+            </div>
+            
+            <div id="noResults">
+                <span style="font-size: 3rem; display: block; margin-bottom: 10px;">🤔</span>
+                Nenhum termo encontrado para sua busca.
+            </div>
+        </main>
     </div>
 
     <script>
@@ -299,7 +242,6 @@
             let visibleCount = 0;
             
             document.querySelectorAll('.term-card').forEach(card => {
-                // Busca no título, na tag e na descrição
                 const content = card.innerText.toUpperCase();
                 
                 if (content.includes(term)) {
