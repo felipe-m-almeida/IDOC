@@ -225,7 +225,50 @@
                             <span class="solution-title">Solução</span>
                             Escape os caracteres na origem.<br>
                             <code>&</code> vira <code>&amp;amp;</code><br>
-                            <code><</code> vira <code>&amp;lt;</code>
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Regional</span>
+                        <h3 class="error-title">Incompatibilidade Região/País <span class="error-code">Region Check</span></h3>
+                        <p><strong>Sintoma:</strong> Erro "Região SP não definida para o país US".</p>
+                        <p><strong>Causa:</strong> Tentar enviar um estado (UF) que não pertence ao país informado (Tabela T005S).</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Valide a combinação País/UF antes do envio. SP é BR, CA é US (California).
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Bloqueio</span>
+                        <h3 class="error-title">Objeto Bloqueado <span class="error-code">Lock Entry</span></h3>
+                        <p><strong>Sintoma:</strong> Erro "O objeto está sendo processado pelo usuário X".</p>
+                        <p><strong>Causa:</strong> Alguém está com o cadastro aberto na tela (GUI) enquanto o IDoc tenta salvar.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Não é erro de dados. Reprocessar o IDoc (BD87) após alguns minutos.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Fiscal</span>
+                        <h3 class="error-title">CNPJ/CPF Inválido <span class="error-code">Tax Number</span></h3>
+                        <p><strong>Sintoma:</strong> Erro de validação "Dígito verificador inválido".</p>
+                        <p><strong>Causa:</strong> O SAP valida matematicamente os documentos fiscais brasileiros (STCD1/STCD2).</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Saneamento de dados. Não é possível integrar documentos fictícios ou errados em ambiente produtivo.
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Estrutura</span>
+                        <h3 class="error-title">Segmento Obrigatório Faltando <span class="error-code">Mandatory Seg</span></h3>
+                        <p><strong>Sintoma:</strong> Status 26 ou erro de sintaxe "Segmento E1MARAM obrigatório".</p>
+                        <p><strong>Causa:</strong> O IDoc foi montado sem um segmento pai/filho exigido pela hierarquia.</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Revisar a estrutura do JSON/XML gerado. Campos chave como <code>MATNR</code> exigem seus segmentos container.
                         </div>
                     </div>
 
@@ -326,6 +369,16 @@
                         <div class="solution-box">
                             <span class="solution-title">Solução</span>
                             Verificar se o IP de origem está liberado no Firewall/Cloud Connector. Testar conectividade básica (Ping/Telnet).
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="cat-tag">Configuração PI/PO/CPI</span>
+                        <h3 class="error-title">Erro Business System SLD <span class="error-code">LCR_GET_OWN_BUSINESS_SYSTEM</span></h3>
+                        <p><strong>Erro:</strong> "Erro ao ler o ID de um business system próprio do SLD...". Comum em cenários PI/PO e <strong>CPI</strong> (via Cloud Connector).</p>
+                        <div class="solution-box">
+                            <span class="solution-title">Solução</span>
+                            Acesse a transação <strong>SXMB_ADM</strong> &rarr; Integration Engine Configuration (ou use <strong>SXMB_APPL</strong>). Configure a categoria "Role of Business System" corretamente.
                         </div>
                     </div>
 

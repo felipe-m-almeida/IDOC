@@ -188,6 +188,32 @@
                     </div>
                 </div>
 
+                <div class="rule-card">
+                    <div class="rule-icon">🏘️</div>
+                    <div class="rule-content">
+                        <h3>Endereços (Rua e Número)</h3>
+                        <p>No SAP moderno (Business Partner), Rua e Número ficam em campos separados. Não envie concatenado.</p>
+                        <div class="comparison">
+                            <div style="display:flex; flex-direction:column; gap:5px;">
+                                <span class="do">✅ STRAS="Av. Paulista" / HOUSE_NO="1000"</span>
+                                <span class="dont">❌ STRAS="Av. Paulista, 1000"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">🚦</div>
+                    <div class="rule-content">
+                        <h3>Funções de Mensagem (MSGFN)</h3>
+                        <p>Controle o ciclo de vida do registro. Use 009 para criar, 004 para alterar e 003 para deletar (quando permitido).</p>
+                        <div class="comparison">
+                            <span class="do">✅ 009 (Novo) / 004 (Alt)</span>
+                            <span class="dont">❌ (Vazio)</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             <div class="page-footer">
