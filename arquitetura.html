@@ -73,19 +73,19 @@
                     <span class="tech-badge tb-cloud">JSON Nativo</span>
                 </div>
                 <p class="diagram-desc">
-                    Neste fluxo moderno, os dados trafegam inteiramente em <strong>JSON</strong>. O 4MDG envia para o Gateway do cliente, que repassa ao SAP CPI. O CPI orquestra a entrega no SAP S/4HANA ou ECC e retorna a confirmação (Devolução) pelo mesmo caminho.
+                    Neste fluxo moderno, os dados trafegam inteiramente em <strong>JSON</strong>. O portal envia para o Gateway do cliente, que repassa ao SAP CPI. O CPI orquestra a entrega no SAP S/4HANA ou ECC e retorna a confirmação (Devolução) pelo mesmo caminho.
                 </p>
                 
                 <div class="mermaid">
                 sequenceDiagram
-                    participant 4MDG as Portal 4MDG
+                    participant Portal as Portal
                     participant GW as Gateway
                     participant CPI as SAP CPI
                     participant SAP as SAP Backend
 
-                    Note over 4MDG, SAP: Fluxo JSON (Sem conversão XML)
+                    Note over Portal, SAP: Fluxo JSON (Sem conversão XML)
 
-                    4MDG->>GW: Envia Dados (JSON)
+                    Portal->>GW: Envia Dados (JSON)
                     GW->>CPI: Repassa (JSON)
                     CPI->>SAP: Integração (JSON/OData/RFC)
                     
@@ -95,7 +95,7 @@
                     deactivate SAP
                     
                     CPI-->>GW: Response
-                    GW-->>4MDG: Confirmação Final
+                    GW-->>Portal: Confirmação Final
                 </div>
             </div>
 
@@ -105,17 +105,17 @@
                     <span class="tech-badge tb-onprem">Conversão XML</span>
                 </div>
                 <p class="diagram-desc">
-                    No fluxo legado/on-premise, ocorre a <strong>transformação de formato</strong>. O 4MDG envia JSON, mas o SAP PI/PO converte para <strong>XML (IDoc)</strong> antes de entregar ao SAP.
+                    No fluxo legado/on-premise, ocorre a <strong>transformação de formato</strong>. O Portal envia JSON, mas o SAP PI/PO converte para <strong>XML (IDoc)</strong> antes de entregar ao SAP.
                 </p>
 
                 <div class="mermaid">
                 sequenceDiagram
-                    participant 4MDG as Portal 4MDG
+                    participant Portal as Portal
                     participant GW as Gateway
                     participant PI as SAP PI/PO
                     participant SAP as SAP Backend
 
-                    4MDG->>GW: Envia Dados (JSON)
+                    Portal->>GW: Envia Dados (JSON)
                     GW->>PI: Repassa (JSON)
                     
                     Note right of PI: Conversão: JSON -> XML
@@ -130,34 +130,34 @@
                     Note right of PI: Conversão: XML -> JSON
                     
                     PI-->>GW: Response (JSON)
-                    GW-->>4MDG: Devolução/Status
+                    GW-->>Portal: Devolução/Status
                 </div>
             </div>
 
             <div id="scenario-outbound" class="diagram-container">
                 <div class="diagram-header">
-                    <h2 class="diagram-title">3. SAP Chamando 4MDG (Outbound)</h2>
+                    <h2 class="diagram-title">3. SAP Chamando Portal (Outbound)</h2>
                     <span class="tech-badge tb-sap">SAP Ativo</span>
                 </div>
                 <p class="diagram-desc">
-                    Cenário onde o SAP inicia a comunicação (ex: envio de notas fiscais, atualização de status). O tráfego é <strong>JSON</strong> direto, passando pelo Gateway até chegar ao 4MDG, que devolve o recebimento.
+                    Cenário onde o SAP inicia a comunicação (ex: envio de notas fiscais, atualização de status). O tráfego é <strong>JSON</strong> direto, passando pelo Gateway até chegar ao Portal, que devolve o recebimento.
                 </p>
 
                 <div class="mermaid">
                 sequenceDiagram
                     participant SAP as SAP Backend
                     participant GW as Gateway
-                    participant 4MDG as Portal 4MDG
+                    participant Portal as Portal
 
-                    Note over SAP, 4MDG: Fluxo JSON
+                    Note over SAP, Portal: Fluxo JSON
 
                     SAP->>GW: Chamada HTTP POST (JSON)
-                    GW->>4MDG: Entrega Dados (JSON)
+                    GW->>Portal: Entrega Dados (JSON)
                     
-                    activate 4MDG
-                    4MDG->>4MDG: Processa/Atualiza
-                    4MDG-->>GW: Devolução (OK/Erro)
-                    deactivate 4MDG
+                    activate Portal
+                    Portal->>Portal: Processa/Atualiza
+                    Portal-->>GW: Devolução (OK/Erro)
+                    deactivate Portal
                     
                     GW-->>SAP: Retorno ao SAP
                 </div>

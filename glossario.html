@@ -187,6 +187,16 @@
             </div>
 
             <div class="term-card">
+                <div class="term-header"><span class="term-title">ST22</span><span class="term-tag tag-tech">Debug</span></div>
+                <div class="term-def"><strong>Análise de Dumps.</strong> Quando o SAP "explode" (crash/tela de erro), ele gera um Dump. A ST22 é a caixa-preta que mostra exatamente qual linha do código ABAP quebrou e o motivo (ex: Time Out, Memória, Erro de Sintaxe).</div>
+            </div>
+
+            <div class="term-card">
+                <div class="term-header"><span class="term-title">SALE</span><span class="term-tag tag-tech">Config</span></div>
+                <div class="term-def"><strong>Menu ALE/IDoc.</strong> O "QG" da configuração de integração. É uma transação de menu que agrupa tudo necessário para criar Sistemas Lógicos, Modelos de Distribuição e configurar a comunicação entre sistemas.</div>
+            </div>
+
+            <div class="term-card">
                 <div class="term-header"><span class="term-title">MM90</span><span class="term-tag tag-tech">Logs Material</span></div>
                 <div class="term-def"><strong>Logs Detalhados (MM).</strong> Quando o IDoc de Material (MATMAS) dá erro genérico na WE02, a MM90 revela o detalhe técnico oculto do Application Log.</div>
             </div>
@@ -219,12 +229,17 @@
 
             <div class="term-card">
                 <div class="term-header"><span class="term-title">Inbound</span><span class="term-tag tag-infra">Direção</span></div>
-                <div class="term-def"><strong>Entrada.</strong> Tudo que vem de fora (4MDG) e <strong>ENTRA</strong> no SAP. É o fluxo de carga de dados.</div>
+                <div class="term-def"><strong>Entrada.</strong> Tudo que vem de fora e <strong>ENTRA</strong> no SAP. É o fluxo de carga de dados.</div>
             </div>
 
             <div class="term-card">
                 <div class="term-header"><span class="term-title">Outbound</span><span class="term-tag tag-infra">Direção</span></div>
                 <div class="term-def"><strong>Saída.</strong> Tudo que o SAP gera e <strong>ENVIA</strong> para fora.</div>
+            </div>
+
+            <div class="term-card">
+                <div class="term-header"><span class="term-title">Empresa Global</span><span class="term-tag tag-idoc">Mapeamento</span></div>
+                <div class="term-def"><strong>Global Company Code.</strong> O IDoc muitas vezes não aceita o código da empresa direto (ex: "1000"). Ele exige um código global (ex: "GL_1000") configurado na OB08. Fundamental para preencher os segmentos <code>E1LFB1M</code> (Fornecedor) e <code>E1KNB1M</code> (Cliente) sem erro.</div>
             </div>
 
             <div class="term-card">
