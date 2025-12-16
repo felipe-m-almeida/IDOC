@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Integração SAP - Do Zero ao IDoc</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos Exclusivos do Guia (Timeline) */
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 24px;
+            width: 4px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+        .step-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            margin-left: 60px;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .step-card:hover {
+            transform: translateX(5px);
+            border-color: var(--primary);
+        }
+
+        .step-icon {
+            position: absolute;
+            left: -60px;
+            top: 20px;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 4px solid #f8fafc;
+            z-index: 1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .step-title { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+        .step-desc { color: #475569; line-height: 1.6; margin-bottom: 15px; }
+
+        .code-snippet {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border-left: 4px solid #3b82f6;
+            margin-top: 10px;
+        }
+
+        .pro-tip {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Comparativo CPI vs PI */
+        .comparison-box {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .comp-col {
+            flex: 1;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .comp-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; display: block; }
+        .comp-cpi { border-top: 3px solid #f59e0b; }
+        .comp-pi { border-top: 3px solid #64748b; }
+
+        /* Card 4MDG Especial */
+        .card-4mdg {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            border: none;
+        }
+        .card-4mdg .step-icon { background: #fff; color: #7c3aed; }
+        .card-4mdg .step-title { color: white; }
+        .card-4mdg .step-desc { color: #e9d5ff; }
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #7c3aed;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* Responsividade para o Comparativo */
+        @media (max-width: 600px) {
+            .comparison-box { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="menuToggle" class="mobile-menu-btn">☰</button>
+        <div class="brand">PORTAL SAP <span>Integration Guide</span></div>
+        <div class="header-actions">
+             <a href="index.html" style="text-decoration:none; color:white; border:1px solid rgba(255,255,255,0.3); padding:5px 10px; border-radius:5px; font-size:0.8rem; font-weight:600;">🏠 Voltar</a>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
+        <aside id="mainSidebar">
+            <div class="tree-container">
+                <div class="tree-label">Navegação</div>
+                <div style="margin-left: 0;">
+                    <a href="#fluxo" class="node-item active"><strong>Fluxo de Dados</strong></a>
+                    <a href="#middleware" class="node-item"><strong>CPI vs PI</strong></a>
+                    <a href="#sap" class="node-item"><strong>O Lado do SAP</strong></a>
+                </div>
+            </div>
+            <div style="padding: 20px; font-size: 0.75rem; color: #64748b; border-top: 1px solid #1e293b;">
+                <p>Didático & Prático</p>
+            </div>
+        </aside>
+
+        <main id="mainContent">
+            
+            <div class="welcome-section" style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%); margin-bottom: 50px;">
+                <h1 class="welcome-title">Como funciona a Integração SAP?</h1>
+                <p class="welcome-text">Entenda a jornada do dado: do seu site/app até virar um registro oficial dentro do ERP.</p>
+            </div>
+
+            <div class="timeline-container">
+
+                <div class="step-card">
+                    <div class="step-icon">1</div>
+                    <div class="step-title">A Origem (Payload JSON)</div>
+                    <div class="step-desc">
+                        Tudo começa no sistema externo (Site, CRM, App). Hoje em dia, o mundo fala <strong>JSON</strong> via API REST.
+                    </div>
+                    <div class="code-snippet">
+{
+  "cliente": "Empresa X",
+  "cnpj": "12.345.678/0001-90",
+  "email": "contato@x.com"
+}
+                    </div>
+                </div>
+
+                <div class="step-card" id="middleware">
+                    <div class="step-icon">2</div>
+                    <div class="step-title">O Tradutor (Middleware)</div>
+                    <div class="step-desc">
+                        O dado sai da origem e chega no Middleware SAP. Aqui temos dois caminhos possíveis, dependendo da tecnologia da sua empresa:
+                    </div>
+                    
+                    <div class="comparison-box">
+                        <div class="comp-col comp-cpi">
+                            <span class="comp-title">🚀 CPI (Nuvem / Moderno)</span>
+                            <p style="font-size:0.85rem; color:#475569;">
+                                <strong>Cloud Platform Integration.</strong><br>
+                                Mantém a agilidade. Ele recebe o JSON e <strong>continua trafegando JSON</strong>. A conversão é mínima e mapeada diretamente para a API do SAP.
+                            </p>
+                        </div>
+                        <div class="comp-col comp-pi">
+                            <span class="comp-title">🏢 PI/PO (On-Premise / Legado)</span>
+                            <p style="font-size:0.85rem; color:#475569;">
+                                <strong>Process Orchestration.</strong><br>
+                                Sistema mais antigo. Ele pega o JSON e obrigatoriamente <strong>converte para XML</strong> (IDoc clássico) para conseguir falar com o SAP ECC.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">3</div>
+                    <div class="step-title">A Entrega (JSON vs XML)</div>
+                    <div class="step-desc">
+                        Veja a diferença do que chega tecnicamente no SAP. O conteúdo é o mesmo (mapeado), mas o formato muda drasticamente.
+                    </div>
+
+                    <div style="margin-bottom:15px;">
+                        <span style="font-size:0.8rem; font-weight:700; color:#f59e0b; text-transform:uppercase;">Via CPI (JSON Mapeado)</span>
+                        <div class="code-snippet" style="border-left-color: #f59e0b;">
+{
+  "NAME1": "Empresa X",        // Mapeado de 'cliente'
+  "STCD1": "12345678000190",   // Limpo (sem pontos)
+  "SMTP_ADDR": "contato@x.com"
+}
+                        </div>
+                    </div>
+
+                    <div>
+                        <span style="font-size:0.8rem; font-weight:700; color:#64748b; text-transform:uppercase;">Via PI/PO (XML IDoc)</span>
+                        <div class="code-snippet" style="border-left-color: #64748b;">
+&lt;E1KNA1M&gt;
+  &lt;NAME1&gt;Empresa X&lt;/NAME1&gt;
+  &lt;STCD1&gt;12345678000190&lt;/STCD1&gt;
+  &lt;SMTP_ADDR&gt;contato@x.com&lt;/SMTP_ADDR&gt;
+&lt;/E1KNA1M&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card" id="sap">
+                    <div class="step-icon">4</div>
+                    <div class="step-title">Processamento no SAP</div>
+                    <div class="step-desc">
+                        O SAP recebe o pacote. Se for <strong>XML</strong>, entra via porta IDoc (WE02). Se for <strong>JSON</strong> (CPI), entra via Proxy ou API OData.
+                        <br><br>
+                        Independente do formato, se o dado estiver "sujo" (ex: CEP errado), o SAP rejeita e gera erro.
+                    </div>
+                    <div class="pro-tip">
+                        💡 <strong>Dica:</strong> É por isso que você deve consultar nosso <a href="glossario.html" style="color:inherit; font-weight:700;">Glossário</a> para entender o que cada campo técnico (NAME1, STCD1) espera.
+                    </div>
+                </div>
+
+                <div class="step-card card-4mdg">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-title">O Atalho Inteligente (4MDG)</div>
+                    <div class="step-desc">
+                        Cansado de configurar De-Para no CPI ou mapear XML no PI?
+                        <br><br>
+                        A plataforma <strong>4MDG</strong> entrega o dado <strong>pronto, validado e saneado</strong>. Você não precisa se preocupar se é JSON ou XML, nós garantimos que o SAP vai aceitar de primeira.
+                    </div>
+                    <a href="https://4mdg.com.br/" target="_blank" class="cta-button">Conhecer a Automação 4MDG</a>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        function toggleMenu() {
+            document.getElementById('mainSidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
