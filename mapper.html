@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Data Mapper - Portal SAP</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="dados_campos.js"></script>
+    <style>
+        /* Estilos específicos do Mapper */
+        .mapper-container {
+            display: flex;
+            height: calc(100vh - 70px);
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-right: 1px solid var(--border);
+            min-width: 0; /* Prevent flex item from overflowing */
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .col-header {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .col-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-area {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            resize: none;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .field-list {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .field-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: grab;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        .field-item:hover {
+            background: #e2e8f0;
+            transform: translateX(2px);
+        }
+
+        .field-item.mapped {
+            background: #dcfce7;
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .sap-item {
+            cursor: pointer; /* SAP items are drop targets or clickable */
+            background: white;
+        }
+
+        .sap-item:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .sap-meta {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-left: 10px;
+        }
+
+        .mapping-area {
+            flex: 1.5;
+            background: #f1f5f9;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mapping-list {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .map-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .map-conn {
+            flex: 1;
+            height: 2px;
+            background: #cbd5e1;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .map-conn::after {
+            content: '→';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #64748b;
+            font-size: 1.2rem;
+            background: white;
+            padding: 0 5px;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-action:hover { background: var(--primary-dark); }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { background: #f8fafc; }
+
+        .search-bar {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 20px;
+            background: #f8fafc;
+            transition: all 0.2s;
+        }
+
+        .drop-zone p { margin: 5px 0; }
+        .drop-zone strong { color: var(--primary); }
+
+        .drop-zone.active {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+            color: var(--primary);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            PORTAL SAP <span>Data Mapper</span>
+        </div>
+        <div class="header-actions">
+            <button onclick="exportMapping()">💾 JSON</button>
+            <button onclick="exportExcel()">📊 Excel</button>
+            <button onclick="exportPDF()">📄 PDF</button>
+            <a href="index.html">🏠 Voltar</a>
+        </div>
+    </header>
+
+    <div class="mapper-container">
+        
+        <!-- COLUNA ESQUERDA: ORIGEM -->
+        <div class="column">
+            <div class="col-header">
+                <div class="col-title">📂 Origem (Source)</div>
+                <button class="btn-action btn-secondary" onclick="clearSource()">Limpar</button>
+            </div>
+            
+            <textarea id="sourceInput" class="input-area" placeholder="Cole aqui seu JSON ou Cabeçalhos CSV (separados por vírgula)..."></textarea>
+            <button class="btn-action" style="width: 100%; margin-bottom: 15px;" onclick="parseSource()">Processar Campos</button>
+            
+            <div class="col-title" style="font-size: 0.9rem; margin-bottom: 10px;">Campos Disponíveis:</div>
+            <div id="sourceList" class="field-list">
+                <div style="text-align: center; color: #94a3b8; padding-top: 20px;">
+                    Processe um input acima para ver os campos.
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA CENTRAL: MAPEAMENTO -->
+        <div class="mapping-area">
+            <div class="col-header" style="padding: 20px 20px 0;">
+                <div class="col-title">🔗 Mapeamentos (<span id="mapCount">0</span>)</div>
+                <button class="btn-action btn-secondary" style="font-size: 0.8rem;" onclick="clearMappings()">Resetar</button>
+            </div>
+            
+            <div id="mappingList" class="mapping-list">
+                <div class="drop-zone" id="dropZone">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">👇</div>
+                    <p><strong>Como mapear:</strong></p>
+                    <p>1. Arraste um campo da <strong>Origem</strong> (esquerda)</p>
+                    <p>2. Solte em cima de um campo <strong>SAP</strong> (direita)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA: DESTINO (SAP) -->
+        <div class="column">
+            <div class="col-header">
+                <div class="col-title">🏢 Destino SAP (Target)</div>
+            </div>
+            
+            <input type="text" id="sapSearch" class="search-bar" placeholder="Buscar campo SAP (ex: NAME1, KUNNR)..." onkeyup="searchSAPFields()">
+            
+            <div id="sapList" class="field-list">
+                <!-- Preenchido via JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- ESTADO ---
+        let sourceFields = [];
+        let sapFields = []; // Loaded from GLOBAL_FIELDS
+        let mappings = []; // Array of { source: 'field', target: 'field', targetDesc: 'desc' }
+
+        // --- INICIALIZAÇÃO ---
+        window.onload = function() {
+            // Carregar campos SAP iniciais (apenas os primeiros 50 para performance)
+            if (typeof GLOBAL_FIELDS !== 'undefined') {
+                const keys = Object.keys(GLOBAL_FIELDS);
+                renderSAPList(keys.slice(0, 50));
+            } else {
+                document.getElementById('sapList').innerHTML = '<div style="padding:10px; color:red;">Erro: dados_campos.js não carregado.</div>';
+            }
+
+            setupDragAndDrop();
+        };
+
+        // --- PARSING ORIGEM ---
+        function parseSource() {
+            const input = document.getElementById('sourceInput').value.trim();
+            if (!input) return;
+
+            sourceFields = [];
+            
+            try {
+                // Tenta JSON primeiro
+                if (input.startsWith('{') || input.startsWith('[')) {
+                    const json = JSON.parse(input);
+                    sourceFields = extractKeys(json);
+                } else {
+                    // Assume CSV/Texto
+                    sourceFields = input.split(/[,;\t\n]+/).map(s => s.trim()).filter(s => s);
+                }
+
+                // Remove duplicatas e ordena
+                sourceFields = [...new Set(sourceFields)].sort();
+
+                if (sourceFields.length === 0) {
+                    alert("Nenhum campo encontrado no JSON fornecido.");
+                }
+
+                renderSourceList();
+            } catch (e) {
+                console.error(e);
+                alert("Erro ao ler input. Verifique se é um JSON válido ou lista separada por vírgulas.");
+            }
+        }
+
+        // Função recursiva para extrair todas as chaves de um objeto complexo
+        function extractKeys(obj, prefix = '') {
+            let keys = [];
+
+            if (Array.isArray(obj)) {
+                obj.forEach(item => {
+                    keys = keys.concat(extractKeys(item, prefix));
+                });
+            } else if (typeof obj === 'object' && obj !== null) {
+                Object.keys(obj).forEach(key => {
+                    // Adiciona a própria chave (nome do campo)
+                    keys.push(key);
+                    
+                    // Mergulha recursivamente
+                    // Opcional: Se quiser prefixo de caminho (ex: E1MARAM.MATNR), descomente abaixo e ajuste a lógica de push
+                    // const nextPrefix = prefix ? `${prefix}.${key}` : key;
+                    keys = keys.concat(extractKeys(obj[key], '')); 
+                });
+            }
+            
+            return keys;
+        }
+
+        function renderSourceList() {
+            const container = document.getElementById('sourceList');
+            container.innerHTML = '';
+            
+            sourceFields.forEach(field => {
+                const div = document.createElement('div');
+                div.className = 'field-item';
+                div.draggable = true;
+                div.innerText = field;
+                div.dataset.field = field;
+                
+                // Eventos Drag
+                div.addEventListener('dragstart', handleDragStart);
+                
+                container.appendChild(div);
+            });
+        }
+
+        function clearSource() {
+            document.getElementById('sourceInput').value = '';
+            sourceFields = [];
+            renderSourceList();
+        }
+
+        // --- SAP SEARCH ---
+        let debounceTimer;
+        function searchSAPFields() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                const term = document.getElementById('sapSearch').value.toUpperCase();
+                const allKeys = Object.keys(GLOBAL_FIELDS);
+                
+                if (!term) {
+                    renderSAPList(allKeys.slice(0, 50));
+                    return;
+                }
+
+                // Filtrar (limitado a 50 resultados)
+                const filtered = [];
+                for (let key of allKeys) {
+                    if (filtered.length >= 50) break;
+                    const meta = GLOBAL_FIELDS[key];
+                    if (key.includes(term) || (meta.desc && meta.desc.toUpperCase().includes(term))) {
+                        filtered.push(key);
+                    }
+                }
+                renderSAPList(filtered);
+
+            }, 300);
+        }
+
+        function renderSAPList(keys) {
+            const container = document.getElementById('sapList');
+            container.innerHTML = '';
+
+            keys.forEach(key => {
+                const meta = GLOBAL_FIELDS[key];
+                const div = document.createElement('div');
+                div.className = 'field-item sap-item';
+                
+                // Allow dropping ONTO a list item
+                div.ondragover = (e) => { e.preventDefault(); div.style.background = '#eff6ff'; };
+                div.ondragleave = () => { div.style.background = 'white'; };
+                div.ondrop = (e) => handleDropOnTarget(e, key, meta.desc);
+
+                div.innerHTML = `
+                    <div style="font-weight:700; color:#2563eb;">${key}</div>
+                    <div class="sap-meta">${meta.desc || ''} <span style="background:#f1f5f9; padding:2px 4px; border-radius:4px;">${meta.type}(${meta.len})</span></div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // --- DRAG & DROP LOGIC ---
+        let draggedField = null;
+
+        function handleDragStart(e) {
+            draggedField = e.target.dataset.field;
+            e.dataTransfer.setData('text/plain', draggedField);
+            e.dataTransfer.effectAllowed = 'copy';
+        }
+
+        function setupDragAndDrop() {
+            const dropZone = document.getElementById('dropZone');
+            
+            // Permitir Drop na área central (genérico)
+            /*
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('active');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('active');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('active');
+                // Se soltar no vazio, não faz nada ou pede para selecionar target?
+                // Vamos focar no drop direto no item da lista SAP por enquanto.
+            });
+            */
+        }
+
+        function handleDropOnTarget(e, targetField, targetDesc) {
+            e.preventDefault();
+            e.currentTarget.style.background = 'white'; // Reset hover style
+            
+            if (!draggedField) return;
+
+            addMapping(draggedField, targetField, targetDesc);
+            draggedField = null;
+        }
+
+        // --- MAPPING MANAGEMENT ---
+        function addMapping(source, target, desc) {
+            // Evitar duplicatas exatas
+            if (mappings.some(m => m.source === source && m.target === target)) return;
+
+            mappings.push({ source, target, desc });
+            renderMappings();
+            markSourceAsMapped(source);
+        }
+
+        function removeMapping(index) {
+            const removed = mappings.splice(index, 1)[0];
+            renderMappings();
+            
+            // Check if source is used elsewhere, if not, unmark it
+            const isStillUsed = mappings.some(m => m.source === removed.source);
+            if (!isStillUsed) {
+                unmarkSource(removed.source);
+            }
+        }
+
+        function renderMappings() {
+            const container = document.getElementById('mappingList');
+            // Mantém a drop zone se vazio, senão limpa
+            // Para simplificar, vamos reconstruir a lista sempre, mas podemos manter a dropzone oculta
+            
+            let html = '';
+            if (mappings.length === 0) {
+                html = `
+                <div class="drop-zone" id="dropZone">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">👇</div>
+                    <p><strong>Como mapear:</strong></p>
+                    <p>1. Arraste um campo da <strong>Origem</strong> (esquerda)</p>
+                    <p>2. Solte em cima de um campo <strong>SAP</strong> (direita)</p>
+                </div>`;
+            }
+
+            mappings.forEach((m, idx) => {
+                html += `
+                    <div class="map-card">
+                        <div style="font-weight:600;">${m.source}</div>
+                        <div class="map-conn"></div>
+                        <div style="text-align:right;">
+                            <div style="font-weight:700; color:#2563eb;">${m.target}</div>
+                            <div style="font-size:0.75rem; color:#64748b;">${m.desc || ''}</div>
+                        </div>
+                        <button onclick="removeMapping(${idx})" style="margin-left:15px; background:none; border:none; color:#ef4444; cursor:pointer;">✖</button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('mapCount').innerText = mappings.length;
+        }
+
+        function markSourceAsMapped(fieldName) {
+            const els = document.querySelectorAll(`[data-field="${fieldName}"]`);
+            els.forEach(el => el.classList.add('mapped'));
+        }
+
+        function unmarkSource(fieldName) {
+            const els = document.querySelectorAll(`[data-field="${fieldName}"]`);
+            els.forEach(el => el.classList.remove('mapped'));
+        }
+
+        function clearMappings() {
+            if (confirm('Tem certeza que deseja limpar todos os mapeamentos?')) {
+                mappings = [];
+                renderMappings();
+                // Reset visual state of source items
+                document.querySelectorAll('.field-item.mapped').forEach(el => el.classList.remove('mapped'));
+            }
+        }
+
+        // --- EXPORT ---
+        function exportMapping() {
+            if (mappings.length === 0) {
+                alert("Nada para exportar!");
+                return;
+            }
+
+            const exportData = {
+                title: "Especificação de Mapeamento (DE/PARA)",
+                generatedAt: new Date().toISOString(),
+                mappings: mappings
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+            downloadFile(dataStr, "mapping_spec.json");
+        }
+
+        function exportExcel() {
+            if (mappings.length === 0) {
+                alert("Nada para exportar!");
+                return;
+            }
+
+            // CSV com BOM para suportar acentos no Excel
+            let csvContent = "\uFEFFCampo Origem;Campo SAP;Descrição Técnica\n";
+            
+            mappings.forEach(m => {
+                // Escapar ponto e vírgula se houver
+                const source = m.source.replace(/;/g, ",");
+                const target = m.target.replace(/;/g, ",");
+                const desc = (m.desc || "").replace(/;/g, ",");
+                csvContent += `${source};${target};${desc}\n`;
+            });
+
+            const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
+            downloadFile(dataStr, "mapeamento_de_para.csv");
+        }
+
+        function exportPDF() {
+            if (mappings.length === 0) {
+                alert("Nada para exportar!");
+                return;
+            }
+
+            const printWindow = window.open('', '', 'height=800,width=900');
+            
+            let tableRows = mappings.map(m => `
+                <tr>
+                    <td>${m.source}</td>
+                    <td><strong>${m.target}</strong></td>
+                    <td>${m.desc || ''}</td>
+                </tr>
+            `).join('');
+
+            const html = `
+                <html>
+                <head>
+                    <title>Especificação de Mapeamento - Portal SAP</title>
+                    <style>
+                        body { font-family: 'Segoe UI', sans-serif; padding: 40px; color: #333; }
+                        h1 { color: #2563eb; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+                        .meta { color: #64748b; font-size: 0.9rem; margin-bottom: 30px; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        th { background: #f1f5f9; text-align: left; padding: 12px; border: 1px solid #cbd5e1; }
+                        td { padding: 10px 12px; border: 1px solid #e2e8f0; font-size: 0.9rem; }
+                        tr:nth-child(even) { background: #f8fafc; }
+                        strong { color: #0f172a; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Especificação de Mapeamento (DE/PARA)</h1>
+                    <div class="meta">
+                        Gerado em: ${new Date().toLocaleString()}<br>
+                        Total de campos mapeados: ${mappings.length}
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo Origem</th>
+                                <th>Campo SAP (Destino)</th>
+                                <th>Descrição Técnica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                        </tbody>
+                    </table>
+                    <script>
+                        window.onload = function() { window.print(); }
+                    <\/script>
+                </body>
+                </html>
+            `;
+
+            printWindow.document.write(html);
+            printWindow.document.close();
+        }
+
+        function downloadFile(dataStr, fileName) {
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", fileName);
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+    </script>
+</body>
+</html>
