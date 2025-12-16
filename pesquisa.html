@@ -3,400 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca Inteligente - IDocs</title>
+    <title>Busca Inteligente SAP</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="dados_campos.js"></script>
     <style>
-        /* Estilos específicos para a página de busca que complementam o estilos.css */
+        /* --- CORREÇÃO DO SCROLL (CRÍTICO) --- */
+        /* Sobrescreve o travamento do layout principal apenas nesta página */
         body {
-            overflow-y: auto; /* Permite scroll na página inteira */
-            background-color: var(--body-bg);
-        }
-
-        .search-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .hero-section {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .hero-title {
-            font-size: 2rem;
-            color: #0f172a;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .hero-subtitle {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Barra de Busca Aprimorada */
-        .search-wrapper {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            display: flex;
-            gap: 10px;
-            border: 1px solid var(--border);
-        }
-
-        .input-group {
-            position: relative;
-            flex: 1;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-        }
-
-        .main-input {
-            width: 100%;
-            padding: 14px 14px 14px 45px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .main-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-        }
-
-        .filter-select {
-            padding: 0 20px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            overflow-y: auto !important; /* Libera o scroll da página */
+            height: auto !important;
             background-color: #f8fafc;
-            color: #334155;
-            font-weight: 500;
-            cursor: pointer;
-            outline: none;
+        }
+        
+        .workspace {
+            overflow: visible !important; /* Remove barra de rolagem interna dupla */
+            height: auto !important;
+            padding-bottom: 50px; /* Espaço extra no final */
         }
 
-        .btn-search {
-            background-color: var(--primary);
+        /* --- ESTILO DA BUSCA --- */
+        .search-hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 60px 20px 80px 20px;
+            text-align: center;
             color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
+            border-bottom: 4px solid var(--primary);
+            margin-bottom: -40px; /* Efeito de sobreposição */
         }
+        
+        .hero-title { font-size: 2rem; margin-bottom: 10px; font-weight: 800; }
+        .hero-subtitle { font-size: 1rem; color: #cbd5e1; margin-bottom: 30px; }
 
-        .btn-search:hover {
-            background-color: #1d4ed8;
-        }
-
-        /* Cards de Resultado */
-        .results-area {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .result-item {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            transition: transform 0.2s, box-shadow 0.2s;
+        .big-search-box {
+            max-width: 700px;
+            margin: 0 auto;
             position: relative;
+            z-index: 10;
         }
 
-        .result-item:hover {
+        .big-search-box input {
+            width: 100%;
+            padding: 18px 25px;
+            padding-left: 55px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .big-search-box input:focus {
+            outline: none;
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+        }
+        
+        .big-search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 20px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            opacity: 0.6;
+        }
+
+        /* --- RESULTADOS --- */
+        .results-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            animation: fadeIn 0.4s ease;
+            transition: transform 0.2s;
+        }
+
+        .result-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: var(--primary);
         }
 
-        .res-header {
+        .rc-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 12px;
         }
 
-        .res-idoc {
+        .rc-title {
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
-            background: #eff6ff;
-            padding: 2px 8px;
+            font-family: 'Consolas', monospace;
+        }
+
+        .rc-type {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
+        }
+
+        .rc-desc {
+            color: #334155;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .source-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .source-tag {
+            background: #dcfce7; /* Verde suave */
+            color: #166534;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            border: 1px solid #bbf7d0;
+        }
+
+        .source-tag:hover {
+            background: #166534;
+            color: white;
+            border-color: #166534;
+        }
+
+        .source-seg {
+            font-weight: 400;
+            opacity: 0.8;
+            font-size: 0.75rem;
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
             border-radius: 4px;
         }
 
-        .res-segment {
-            color: var(--text-muted);
-            font-family: monospace;
-        }
-
-        .res-content {
-            color: #334155;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .res-content b {
-            color: #0f172a;
-        }
-
-        /* Highlight do termo encontrado */
-        .highlight-term {
-            background-color: #fef08a; /* Amarelo suave */
-            color: #854d0e;
-            padding: 0 2px;
-            border-radius: 2px;
-            font-weight: 600;
-        }
-
-        .btn-link {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.2s;
-            text-decoration: none;
-            background: white;
-            border: 1px solid var(--border);
-            padding: 8px 12px;
-            border-radius: 6px;
-            color: var(--primary);
-            font-size: 0.8rem;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .result-item:hover .btn-link {
-            opacity: 1;
-        }
-
-        .status-msg {
+        .empty-state {
             text-align: center;
-            color: var(--text-muted);
-            margin-top: 20px;
-            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-top: 50px;
         }
+        .empty-icon { font-size: 3rem; margin-bottom: 10px; display: block; opacity: 0.5; }
 
-        /* Loader */
-        .loader {
-            width: 24px;
-            height: 24px;
-            border: 3px solid #e2e8f0;
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="search-container">
+    <header>
+        <div class="brand">FERRAMENTA <span>Busca Global</span></div>
+        <div class="header-actions">
+             <a href="index.html" style="text-decoration:none; color:white; border:1px solid rgba(255,255,255,0.3); padding:5px 10px; border-radius:5px; font-size:0.8rem; font-weight:600;">🏠 Voltar</a>
+        </div>
+    </header>
+
+    <div class="search-hero">
+        <h1 class="hero-title">Pesquisa Inteligente</h1>
+        <p class="hero-subtitle">Localize campos (ex: CNPJ, STCD1) ou conceitos em todas as interfaces.</p>
         
-        <div class="hero-section">
-            <div class="hero-title">Pesquisa Global de IDocs</div>
-            <div class="hero-subtitle">Encontre campos, segmentos e descrições em toda a documentação técnica.</div>
+        <div class="big-search-box">
+            <input type="text" id="globalSearch" placeholder="O que você procura hoje?" oninput="performSearch()" autofocus>
         </div>
+    </div>
 
-        <div class="search-wrapper">
-            <div class="input-group">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="main-input" placeholder="Ex: Grupo de mercadorias, MATKL, E1ASMDM..." onkeyup="handleEnter(event)">
+    <div class="workspace">
+        <div id="resultsArea" class="results-container">
+            <div class="empty-state">
+                <span class="empty-icon">⌨️</span>
+                Comece a digitar para pesquisar em todos os documentos.
             </div>
-            
-            <select id="idocFilter" class="filter-select">
-                <option value="all">Todos os Arquivos</option>
-                <option value="dados_parceiro.html">Parceiros (BP)</option>
-                <option value="DOC_ARTMAS09.html">Material (ARTMAS)</option>
-                <option value="SRVMAS01.html">Serviço (SRVMAS)</option>
-                </select>
-
-            <button class="btn-search" onclick="performSearch()">Buscar</button>
         </div>
-
-        <div id="statusArea"></div>
-        <div id="resultsArea" class="results-area"></div>
-
     </div>
 
     <script>
-        // Lista de arquivos para buscar. 
-        // DICA: Se você rodar o script Python, atualize esses nomes para os _Refatorado.html
-        const FILES_TO_SEARCH = [
-            { name: 'Parceiro de Negócios', file: 'dados_parceiro.html' },
-            { name: 'Material Retail', file: 'DOC_ARTMAS09.html' },
-            { name: 'Serviços', file: 'SRVMAS01.html' },
-            { name: 'Clientes', file: 'DOCUMENTACAO_IDOC_CLIENTES.html' },
-            { name: 'Fornecedores', file: 'DOCUMENTACAO_IDOC_FORNECEDOR.html' },
-            { name: 'Material Std', file: 'DOCUMENTACAO_IDOC_MATERIAL.html' },
-            { name: 'Características', file: 'DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.html' },
-            { name: 'QM', file: 'DOCUMENTACAO_IDOC_MATQM01.html' },
-            { name: 'Endereços', file: 'DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.html' }
-        ];
-
-        // Populando o Select dinamicamente (opcional, mas garante sincronia)
-        const select = document.getElementById('idocFilter');
-        select.innerHTML = '<option value="all">Todos os Arquivos</option>';
-        FILES_TO_SEARCH.forEach(f => {
-            const opt = document.createElement('option');
-            opt.value = f.file;
-            opt.textContent = f.name;
-            select.appendChild(opt);
-        });
-
-        function handleEnter(e) {
-            if(e.key === 'Enter') performSearch();
-        }
-
-        async function performSearch() {
-            const term = document.getElementById('searchInput').value.trim().toLowerCase();
-            const filterFile = document.getElementById('idocFilter').value;
-            const resultsArea = document.getElementById('resultsArea');
-            const statusArea = document.getElementById('statusArea');
-
-            if (term.length < 3) {
-                statusArea.innerHTML = '<p class="status-msg">Digite pelo menos 3 caracteres.</p>';
+        function performSearch() {
+            const term = document.getElementById('globalSearch').value.trim().toUpperCase();
+            const container = document.getElementById('resultsArea');
+            
+            if (term.length < 2) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <span class="empty-icon">⌨️</span>
+                        Digite pelo menos 2 caracteres...
+                    </div>`;
                 return;
             }
 
-            // Reset UI
-            resultsArea.innerHTML = '';
-            statusArea.innerHTML = '<div class="loader"></div>';
+            container.innerHTML = '';
+            let count = 0;
 
-            // Determinar quais arquivos buscar
-            const targets = filterFile === 'all' 
-                ? FILES_TO_SEARCH 
-                : FILES_TO_SEARCH.filter(f => f.file === filterFile);
+            if (typeof GLOBAL_FIELDS === 'undefined') {
+                container.innerHTML = `
+                    <div class="empty-state" style="color:#ef4444;">
+                        <span class="empty-icon">⚠️</span>
+                        Erro: Índice de busca (dados_campos.js) não encontrado.<br>
+                        Por favor, execute o script Python "converter_batch.py" (V13) para gerar o índice.
+                    </div>`;
+                return;
+            }
 
-            let totalHits = 0;
-            const resultsHTML = [];
+            // Busca no dicionário global (O(n))
+            for (const [key, val] of Object.entries(GLOBAL_FIELDS)) {
+                // Lógica de Match: Nome do Campo OU Descrição
+                if (key.includes(term) || val.desc.toUpperCase().includes(term)) {
+                    count++;
+                    if (count > 50) break; // Trava de segurança para não travar o browser
 
-            // Processamento Paralelo
-            const promises = targets.map(async (target) => {
-                try {
-                    const response = await fetch(target.file);
-                    if (!response.ok) throw new Error('404');
-                    const text = await response.text();
-                    const doc = new DOMParser().parseFromString(text, 'text/html');
-
-                    // --- ESTRATÉGIA DE PARSING HÍBRIDA ---
+                    const card = document.createElement('div');
+                    card.className = 'result-card';
                     
-                    // 1. Tentar Formato Novo (Cards + Tables)
-                    let foundInFile = [];
-                    const cards = doc.querySelectorAll('.segment-card');
-                    
-                    if (cards.length > 0) {
-                        // Lógica Nova
-                        cards.forEach(card => {
-                            const segTitle = card.querySelector('h2, h3')?.innerText.trim() || 'Segmento';
-                            const segId = card.id; // ID usado na âncora
-                            const rows = card.querySelectorAll('tbody tr');
-
-                            rows.forEach(row => {
-                                if (row.innerText.toLowerCase().includes(term)) {
-                                    // Highlight visual simples
-                                    const content = row.innerHTML.replace(/<span class="tech-name".*?>/g, '<b>').replace(/<\/span>/g, '</b>');
-                                    
-                                    foundInFile.push({
-                                        idoc: target.name,
-                                        segment: segTitle,
-                                        content: `<table><tr>${content}</tr></table>`, // Hack para manter formatação de tabela
-                                        link: `${target.file}#${segId}`
-                                    });
-                                }
-                            });
-                        });
-                    } else {
-                        // 2. Fallback para Formato Antigo (Listas OL/LI)
-                        const lis = doc.querySelectorAll('ol > li');
-                        lis.forEach(li => {
-                            if (li.textContent.toLowerCase().includes(term)) {
-                                // Tenta achar o cabeçalho anterior (segmento)
-                                let current = li.parentElement; 
-                                let segmentName = "Desconhecido";
-                                // Sobe até achar o H2 anterior ao OL
-                                while(current && current.previousElementSibling) {
-                                    current = current.previousElementSibling;
-                                    if(current.tagName === 'H2' || current.tagName === 'H3') {
-                                        segmentName = current.innerText;
-                                        break;
-                                    }
-                                }
-
-                                // Tenta extrair a âncora do nome
-                                const anchorMatch = segmentName.match(/NAME\s*=\s*"([^"]+)"/);
-                                const anchor = anchorMatch ? anchorMatch[1] : '';
-
-                                foundInFile.push({
-                                    idoc: target.name,
-                                    segment: segmentName.replace(/<[^>]*>/g, '').trim(), // Limpa HTML do título
-                                    content: li.innerHTML,
-                                    link: `${target.file}#${anchor}`
-                                });
-                            }
-                        });
+                    // Monta lista de links (Onde esse campo aparece?)
+                    let sourcesHtml = '';
+                    if (val.sources && val.sources.length > 0) {
+                        sourcesHtml = val.sources.map(s => 
+                            `<a href="${s.file}#${s.segment}" class="source-tag" target="_blank">
+                                📄 ${s.title} 
+                                <span class="source-seg">${s.segment}</span>
+                            </a>`
+                        ).join('');
                     }
 
-                    if (foundInFile.length > 0) {
-                        totalHits += foundInFile.length;
-                        return foundInFile;
-                    }
-
-                } catch (e) {
-                    console.warn(`Erro ao ler ${target.file}:`, e);
+                    card.innerHTML = `
+                        <div class="rc-header">
+                            <span class="rc-title">${key}</span>
+                            <span class="rc-type">${val.type}(${val.len})</span>
+                        </div>
+                        <div class="rc-desc">${val.desc}</div>
+                        <div style="font-size: 0.75rem; color: #64748b; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">
+                            Encontrado em:
+                        </div>
+                        <div class="source-list">${sourcesHtml}</div>
+                    `;
+                    container.appendChild(card);
                 }
-                return [];
-            });
+            }
 
-            const allResults = (await Promise.all(promises)).flat();
-
-            statusArea.innerHTML = allResults.length > 0 
-                ? `<p class="status-msg">Encontrados <b>${allResults.length}</b> resultados.</p>`
-                : `<p class="status-msg">Nenhum resultado encontrado para "<b>${term}</b>".</p>`;
-
-            // Renderizar Resultados
-            allResults.forEach(res => {
-                const div = document.createElement('div');
-                div.className = 'result-item';
-                div.innerHTML = `
-                    <div class="res-header">
-                        <span class="res-idoc">${res.idoc}</span>
-                        <span class="res-segment">${res.segment}</span>
-                    </div>
-                    <div class="res-content">${res.content}</div>
-                    <a href="${res.link}" target="_blank" class="btn-link">Ver na Documentação &rarr;</a>
-                `;
-                resultsArea.appendChild(div);
-            });
+            if (count === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <span class="empty-icon">🤷</span>
+                        Nenhum resultado encontrado para "<strong>${term}</strong>".
+                    </div>`;
+            }
         }
+        
+        
+        
     </script>
-
-<script>
-    // Injetor do Botão Home
-    (function() {
-        const btn = document.createElement('a');
-        btn.id = 'global-back-btn';
-        btn.href = 'index.html';
-        btn.innerHTML = '🏠'; 
-        btn.title = 'Voltar ao Início';
-        document.body.appendChild(btn);
-    })();
-</script>
-
 </body>
 </html>

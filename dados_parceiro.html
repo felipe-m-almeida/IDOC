@@ -1,302 +1,795 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>BP - Parceiro de Negócios (JSON)</title>
     <link rel="stylesheet" href="estilos.css">
-    <script>const IDOC_TREE = [{"segment": "BUPARTNER", "max": 1, "children": [{"segment": "CENTRALDATA", "max": 1, "children": []}, {"segment": "ADDRESSDATA", "max": 9999, "children": []}, {"segment": "TAX_DATA", "max": 9999, "children": []}, {"segment": "BUSINESSPARTNERROLE", "max": 9999, "children": []}, {"segment": "CENTRALDATAPERSON", "max": 1, "children": []}, {"segment": "CENTRALDATAORGANIZATION", "max": 1, "children": []}, {"segment": "CENTRALDATAGROUP", "max": 1, "children": []}, {"segment": "CENTRALDATA_X", "max": 1, "children": []}, {"segment": "CENTRALDATAPERSON_X", "max": 1, "children": []}, {"segment": "CENTRALDATAORGANIZATION_X", "max": 1, "children": []}, {"segment": "CENTRALDATAGROUP_X", "max": 1, "children": []}]}]; const SEGMENT_DEFINITIONS = {"BUPARTNER": {"desc": "Estrutura principal do Parceiro de Neg\u00f3cios", "fields": [{"name": "BUSINESSPARTNEREXTERN", "desc": "N\u00ba parceiro de neg\u00f3cios (Externo)", "type": "CHAR", "len": "10"}, {"name": "NATURALPERSON", "desc": "\u00c9 Pessoa F\u00edsica (Flag Fiscal)", "type": "CHAR", "len": "1"}, {"name": "PARTNERCATEGORY", "desc": "Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)", "type": "CHAR", "len": "1"}, {"name": "PARTNERGROUP", "desc": "Agrupamento de parceiros (BP Grouping)", "type": "CHAR", "len": "4"}], "max": 1}, "CENTRALDATA": {"desc": "Dados Centrais (Comuns a todas categorias)", "fields": [{"name": "AUTHORIZATIONGROUP", "desc": "Grupo de autoriza\u00e7\u00f5es", "type": "CHAR", "len": "4"}, {"name": "CENTRALARCHIVINGFLAG", "desc": "Marca\u00e7\u00e3o para arquivamento", "type": "CHAR", "len": "1"}, {"name": "CENTRALBLOCK", "desc": "Bloqueio central", "type": "CHAR", "len": "1"}, {"name": "COMM_TYPE", "desc": "Meio comunica\u00e7\u00e3o padr\u00e3o", "type": "CHAR", "len": "3"}, {"name": "CONTACTALLOWANCE", "desc": "Permiss\u00e3o de contato", "type": "CHAR", "len": "1"}, {"name": "DATAORIGINTYPE", "desc": "Tipos de origem dos dados", "type": "CHAR", "len": "4"}, {"name": "NOTRELEASED", "desc": "C\u00f3digo: n\u00e3o liberado", "type": "CHAR", "len": "1"}, {"name": "PARTNEREXTERNAL", "desc": "N\u00ba parceiro no sistema externo", "type": "CHAR", "len": "20"}, {"name": "PARTNERLANGUAGE", "desc": "Idioma do Parceiro", "type": "LANG", "len": "1"}, {"name": "PARTNERLANGUAGEISO", "desc": "Idioma ISO (2 chars)", "type": "CHAR", "len": "2"}, {"name": "PARTNERTYPE", "desc": "Tipo de parceiro de neg\u00f3cios", "type": "CHAR", "len": "4"}, {"name": "PRINT_MODE", "desc": "Formato da impress\u00e3o", "type": "CHAR", "len": "1"}, {"name": "SEARCHTERM1", "desc": "Termo de pesquisa 1", "type": "CHAR", "len": "20"}, {"name": "SEARCHTERM2", "desc": "Termo de pesquisa 2", "type": "CHAR", "len": "20"}, {"name": "TITLELETTER", "desc": "Vocativo", "type": "CHAR", "len": "50"}, {"name": "TITLE_KEY", "desc": "Chave de forma de tratamento (Sr, Sra, Empresa)", "type": "CHAR", "len": "4"}], "max": 1}, "ADDRESSDATA": {"desc": "Dados de Endere\u00e7o", "fields": [{"name": "STREET", "desc": "Rua / Logradouro", "type": "CHAR", "len": "60"}, {"name": "HOUSE_NO", "desc": "N\u00famero", "type": "CHAR", "len": "10"}, {"name": "HOUSE_NO2", "desc": "Complemento do n\u00ba", "type": "CHAR", "len": "10"}, {"name": "CITY", "desc": "Cidade", "type": "CHAR", "len": "40"}, {"name": "POSTL_COD1", "desc": "CEP (C\u00f3digo Postal)", "type": "CHAR", "len": "10"}, {"name": "COUNTRY", "desc": "Pa\u00eds (Chave SAP ex: BR)", "type": "CHAR", "len": "3"}, {"name": "COUNTRYISO", "desc": "Pa\u00eds ISO (ex: BR)", "type": "CHAR", "len": "2"}, {"name": "REGION", "desc": "Regi\u00e3o/Estado (UF)", "type": "CHAR", "len": "3"}, {"name": "DISTRICT", "desc": "Bairro", "type": "CHAR", "len": "40"}, {"name": "TAXJURCODE", "desc": "Domic\u00edlio Fiscal", "type": "CHAR", "len": "15"}, {"name": "LANGU", "desc": "Idioma do endere\u00e7o", "type": "LANG", "len": "1"}, {"name": "VALIDFROMDATE", "desc": "V\u00e1lido desde", "type": "DATS", "len": "8"}, {"name": "VALIDTODATE", "desc": "V\u00e1lido at\u00e9", "type": "DATS", "len": "8"}, {"name": "STR_SUPPL1", "desc": "Rua 2 (Complemento)", "type": "CHAR", "len": "40"}, {"name": "STR_SUPPL2", "desc": "Rua 3", "type": "CHAR", "len": "40"}, {"name": "STR_SUPPL3", "desc": "Rua 4", "type": "CHAR", "len": "40"}, {"name": "LOCATION", "desc": "Rua 5 (Location)", "type": "CHAR", "len": "40"}, {"name": "BUILDING", "desc": "Edif\u00edcio", "type": "CHAR", "len": "20"}, {"name": "FLOOR", "desc": "Andar", "type": "CHAR", "len": "10"}, {"name": "ROOM_NO", "desc": "Sala / Apartamento", "type": "CHAR", "len": "10"}, {"name": "TIME_ZONE", "desc": "Fuso Hor\u00e1rio", "type": "CHAR", "len": "6"}, {"name": "TRANSPZONE", "desc": "Zona de transporte", "type": "CHAR", "len": "10"}, {"name": "PO_BOX", "desc": "Caixa Postal", "type": "CHAR", "len": "10"}, {"name": "POSTL_COD2", "desc": "CEP Caixa Postal", "type": "CHAR", "len": "10"}, {"name": "C_O_NAME", "desc": "A/C (Care of)", "type": "CHAR", "len": "40"}, {"name": "EXTADDRESSNUMBER", "desc": "ID Endere\u00e7o Externo", "type": "CHAR", "len": "20"}], "max": 9999}, "TAX_DATA": {"desc": "Dados Fiscais (CNPJ, CPF, IE)", "fields": [{"name": "TAXTYPE", "desc": "Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)", "type": "CHAR", "len": "4"}, {"name": "TAXNUMBER", "desc": "N\u00famero Fiscal (Formatado ou n\u00e3o)", "type": "CHAR", "len": "20"}, {"name": "TAXNUMXL", "desc": "N\u00famero Fiscal Longo (Se maior que 20 chars)", "type": "CHAR", "len": "60"}], "max": 9999}, "BUSINESSPARTNERROLE": {"desc": "Fun\u00e7\u00f5es do Parceiro (FLCU00, FLCU01, etc)", "fields": [{"name": "PARTNERROLE", "desc": "Fun\u00e7\u00e3o de parceiro (ex: FLCU01 - Cliente)", "type": "CHAR", "len": "6"}], "max": 9999}, "CENTRALDATAPERSON": {"desc": "Dados Pessoais (Categoria 1)", "fields": [{"name": "FIRSTNAME", "desc": "Primeiro nome", "type": "CHAR", "len": "40"}, {"name": "LASTNAME", "desc": "Sobrenome", "type": "CHAR", "len": "40"}, {"name": "FULLNAME", "desc": "Nome completo", "type": "CHAR", "len": "80"}, {"name": "BIRTHDATE", "desc": "Data de nascimento", "type": "DATS", "len": "8"}, {"name": "BIRTHPLACE", "desc": "Local de nascimento", "type": "CHAR", "len": "40"}, {"name": "MIDDLENAME", "desc": "Nome do meio", "type": "CHAR", "len": "40"}, {"name": "SECONDNAME", "desc": "Segundo sobrenome", "type": "CHAR", "len": "40"}, {"name": "NICKNAME", "desc": "Apelido / Conhecido como", "type": "CHAR", "len": "40"}, {"name": "TITLE_ACA1", "desc": "T\u00edtulo acad\u00eamico 1", "type": "CHAR", "len": "4"}, {"name": "TITLE_ACA2", "desc": "T\u00edtulo acad\u00eamico 2", "type": "CHAR", "len": "4"}, {"name": "TITLE_SPPL", "desc": "Complemento t\u00edtulo (ex: Dr.)", "type": "CHAR", "len": "4"}, {"name": "PREFIX1", "desc": "Prefixo nome", "type": "CHAR", "len": "4"}, {"name": "PREFIX2", "desc": "Prefixo nome 2", "type": "CHAR", "len": "4"}, {"name": "GENDER", "desc": "G\u00eanero (Legado)", "type": "CHAR", "len": "1"}, {"name": "SEX", "desc": "Sexo", "type": "CHAR", "len": "1"}, {"name": "MARITALSTATUS", "desc": "Estado civil", "type": "CHAR", "len": "1"}, {"name": "NATIONALITY", "desc": "Nacionalidade", "type": "CHAR", "len": "3"}, {"name": "CORRESPONDLANGUAGE", "desc": "Idioma correspond\u00eancia", "type": "LANG", "len": "1"}], "max": 1}, "CENTRALDATAORGANIZATION": {"desc": "Dados da Organiza\u00e7\u00e3o (Categoria 2)", "fields": [{"name": "NAME1", "desc": "Nome 1 (Raz\u00e3o Social)", "type": "CHAR", "len": "40"}, {"name": "NAME2", "desc": "Nome 2", "type": "CHAR", "len": "40"}, {"name": "NAME3", "desc": "Nome 3", "type": "CHAR", "len": "40"}, {"name": "NAME4", "desc": "Nome 4", "type": "CHAR", "len": "40"}, {"name": "INDUSTRYSECTOR", "desc": "Setor Industrial (Ramo)", "type": "CHAR", "len": "10"}, {"name": "LEGALFORM", "desc": "Forma Jur\u00eddica", "type": "CHAR", "len": "2"}, {"name": "FOUNDATIONDATE", "desc": "Data de funda\u00e7\u00e3o", "type": "DATS", "len": "8"}, {"name": "LIQUIDATIONDATE", "desc": "Data de liquida\u00e7\u00e3o", "type": "DATS", "len": "8"}], "max": 1}, "CENTRALDATAGROUP": {"desc": "Dados de Grupo (Categoria 3)", "fields": [{"name": "NAMEGROUP1", "desc": "Nome 1 (Grupo)", "type": "CHAR", "len": "40"}, {"name": "NAMEGROUP2", "desc": "Nome 2 (Grupo)", "type": "CHAR", "len": "40"}, {"name": "GROUPTYPE", "desc": "Tipo de grupo", "type": "CHAR", "len": "4"}], "max": 1}, "CENTRALDATA_X": {"desc": "Flags de Atualiza\u00e7\u00e3o (Dados Centrais)", "fields": [{"name": "AUTHORIZATIONGROUP", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}, {"name": "PARTNERLANGUAGE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}, {"name": "PARTNERTYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}, {"name": "TITLE_KEY", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}], "max": 1}, "CENTRALDATAPERSON_X": {"desc": "Flags de Atualiza\u00e7\u00e3o (Pessoa)", "fields": [{"name": "FIRSTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}, {"name": "LASTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}, {"name": "BIRTHDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}], "max": 1}, "CENTRALDATAORGANIZATION_X": {"desc": "Flags de Atualiza\u00e7\u00e3o (Org)", "fields": [{"name": "NAME1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}, {"name": "INDUSTRYSECTOR", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1"}], "max": 1}};</script>
+    <script>const IDOC_TREE = [{ "segment": "BUPARTNER", "max": 1, "children": [{ "segment": "CENTRALDATA", "max": 1, "children": [] }, { "segment": "ADDRESSDATA", "max": 9999, "children": [] }, { "segment": "TAX_DATA", "max": 9999, "children": [] }, { "segment": "BUSINESSPARTNERROLE", "max": 9999, "children": [] }, { "segment": "CENTRALDATAPERSON", "max": 1, "children": [] }, { "segment": "CENTRALDATAORGANIZATION", "max": 1, "children": [] }, { "segment": "CENTRALDATAGROUP", "max": 1, "children": [] }, { "segment": "CENTRALDATA_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAPERSON_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAORGANIZATION_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAGROUP_X", "max": 1, "children": [] }] }]; const SEGMENT_DEFINITIONS = { "BUPARTNER": { "desc": "Estrutura principal do Parceiro de Neg\u00f3cios", "fields": [{ "name": "BUSINESSPARTNEREXTERN", "desc": "N\u00ba parceiro de neg\u00f3cios (Externo)", "type": "CHAR", "len": "10" }, { "name": "NATURALPERSON", "desc": "\u00c9 Pessoa F\u00edsica (Flag Fiscal)", "type": "CHAR", "len": "1" }, { "name": "PARTNERCATEGORY", "desc": "Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)", "type": "CHAR", "len": "1" }, { "name": "PARTNERGROUP", "desc": "Agrupamento de parceiros (BP Grouping)", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATA": { "desc": "Dados Centrais (Comuns a todas categorias)", "fields": [{ "name": "AUTHORIZATIONGROUP", "desc": "Grupo de autoriza\u00e7\u00f5es", "type": "CHAR", "len": "4" }, { "name": "CENTRALARCHIVINGFLAG", "desc": "Marca\u00e7\u00e3o para arquivamento", "type": "CHAR", "len": "1" }, { "name": "CENTRALBLOCK", "desc": "Bloqueio central", "type": "CHAR", "len": "1" }, { "name": "COMM_TYPE", "desc": "Meio comunica\u00e7\u00e3o padr\u00e3o", "type": "CHAR", "len": "3" }, { "name": "CONTACTALLOWANCE", "desc": "Permiss\u00e3o de contato", "type": "CHAR", "len": "1" }, { "name": "DATAORIGINTYPE", "desc": "Tipos de origem dos dados", "type": "CHAR", "len": "4" }, { "name": "NOTRELEASED", "desc": "C\u00f3digo: n\u00e3o liberado", "type": "CHAR", "len": "1" }, { "name": "PARTNEREXTERNAL", "desc": "N\u00ba parceiro no sistema externo", "type": "CHAR", "len": "20" }, { "name": "PARTNERLANGUAGE", "desc": "Idioma do Parceiro", "type": "LANG", "len": "1" }, { "name": "PARTNERLANGUAGEISO", "desc": "Idioma ISO (2 chars)", "type": "CHAR", "len": "2" }, { "name": "PARTNERTYPE", "desc": "Tipo de parceiro de neg\u00f3cios", "type": "CHAR", "len": "4" }, { "name": "PRINT_MODE", "desc": "Formato da impress\u00e3o", "type": "CHAR", "len": "1" }, { "name": "SEARCHTERM1", "desc": "Termo de pesquisa 1", "type": "CHAR", "len": "20" }, { "name": "SEARCHTERM2", "desc": "Termo de pesquisa 2", "type": "CHAR", "len": "20" }, { "name": "TITLELETTER", "desc": "Vocativo", "type": "CHAR", "len": "50" }, { "name": "TITLE_KEY", "desc": "Chave de forma de tratamento (Sr, Sra, Empresa)", "type": "CHAR", "len": "4" }], "max": 1 }, "ADDRESSDATA": { "desc": "Dados de Endere\u00e7o", "fields": [{ "name": "STREET", "desc": "Rua / Logradouro", "type": "CHAR", "len": "60" }, { "name": "HOUSE_NO", "desc": "N\u00famero", "type": "CHAR", "len": "10" }, { "name": "HOUSE_NO2", "desc": "Complemento do n\u00ba", "type": "CHAR", "len": "10" }, { "name": "CITY", "desc": "Cidade", "type": "CHAR", "len": "40" }, { "name": "POSTL_COD1", "desc": "CEP (C\u00f3digo Postal)", "type": "CHAR", "len": "10" }, { "name": "COUNTRY", "desc": "Pa\u00eds (Chave SAP ex: BR)", "type": "CHAR", "len": "3" }, { "name": "COUNTRYISO", "desc": "Pa\u00eds ISO (ex: BR)", "type": "CHAR", "len": "2" }, { "name": "REGION", "desc": "Regi\u00e3o/Estado (UF)", "type": "CHAR", "len": "3" }, { "name": "DISTRICT", "desc": "Bairro", "type": "CHAR", "len": "40" }, { "name": "TAXJURCODE", "desc": "Domic\u00edlio Fiscal", "type": "CHAR", "len": "15" }, { "name": "LANGU", "desc": "Idioma do endere\u00e7o", "type": "LANG", "len": "1" }, { "name": "VALIDFROMDATE", "desc": "V\u00e1lido desde", "type": "DATS", "len": "8" }, { "name": "VALIDTODATE", "desc": "V\u00e1lido at\u00e9", "type": "DATS", "len": "8" }, { "name": "STR_SUPPL1", "desc": "Rua 2 (Complemento)", "type": "CHAR", "len": "40" }, { "name": "STR_SUPPL2", "desc": "Rua 3", "type": "CHAR", "len": "40" }, { "name": "STR_SUPPL3", "desc": "Rua 4", "type": "CHAR", "len": "40" }, { "name": "LOCATION", "desc": "Rua 5 (Location)", "type": "CHAR", "len": "40" }, { "name": "BUILDING", "desc": "Edif\u00edcio", "type": "CHAR", "len": "20" }, { "name": "FLOOR", "desc": "Andar", "type": "CHAR", "len": "10" }, { "name": "ROOM_NO", "desc": "Sala / Apartamento", "type": "CHAR", "len": "10" }, { "name": "TIME_ZONE", "desc": "Fuso Hor\u00e1rio", "type": "CHAR", "len": "6" }, { "name": "TRANSPZONE", "desc": "Zona de transporte", "type": "CHAR", "len": "10" }, { "name": "PO_BOX", "desc": "Caixa Postal", "type": "CHAR", "len": "10" }, { "name": "POSTL_COD2", "desc": "CEP Caixa Postal", "type": "CHAR", "len": "10" }, { "name": "C_O_NAME", "desc": "A/C (Care of)", "type": "CHAR", "len": "40" }, { "name": "EXTADDRESSNUMBER", "desc": "ID Endere\u00e7o Externo", "type": "CHAR", "len": "20" }], "max": 9999 }, "TAX_DATA": { "desc": "Dados Fiscais (CNPJ, CPF, IE)", "fields": [{ "name": "TAXTYPE", "desc": "Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)", "type": "CHAR", "len": "4" }, { "name": "TAXNUMBER", "desc": "N\u00famero Fiscal (Formatado ou n\u00e3o)", "type": "CHAR", "len": "20" }, { "name": "TAXNUMXL", "desc": "N\u00famero Fiscal Longo (Se maior que 20 chars)", "type": "CHAR", "len": "60" }], "max": 9999 }, "BUSINESSPARTNERROLE": { "desc": "Fun\u00e7\u00f5es do Parceiro (FLCU00, FLCU01, etc)", "fields": [{ "name": "PARTNERROLE", "desc": "Fun\u00e7\u00e3o de parceiro (ex: FLCU01 - Cliente)", "type": "CHAR", "len": "6" }], "max": 9999 }, "CENTRALDATAPERSON": { "desc": "Dados Pessoais (Categoria 1)", "fields": [{ "name": "FIRSTNAME", "desc": "Primeiro nome", "type": "CHAR", "len": "40" }, { "name": "LASTNAME", "desc": "Sobrenome", "type": "CHAR", "len": "40" }, { "name": "FULLNAME", "desc": "Nome completo", "type": "CHAR", "len": "80" }, { "name": "BIRTHDATE", "desc": "Data de nascimento", "type": "DATS", "len": "8" }, { "name": "BIRTHPLACE", "desc": "Local de nascimento", "type": "CHAR", "len": "40" }, { "name": "MIDDLENAME", "desc": "Nome do meio", "type": "CHAR", "len": "40" }, { "name": "SECONDNAME", "desc": "Segundo sobrenome", "type": "CHAR", "len": "40" }, { "name": "NICKNAME", "desc": "Apelido / Conhecido como", "type": "CHAR", "len": "40" }, { "name": "TITLE_ACA1", "desc": "T\u00edtulo acad\u00eamico 1", "type": "CHAR", "len": "4" }, { "name": "TITLE_ACA2", "desc": "T\u00edtulo acad\u00eamico 2", "type": "CHAR", "len": "4" }, { "name": "TITLE_SPPL", "desc": "Complemento t\u00edtulo (ex: Dr.)", "type": "CHAR", "len": "4" }, { "name": "PREFIX1", "desc": "Prefixo nome", "type": "CHAR", "len": "4" }, { "name": "PREFIX2", "desc": "Prefixo nome 2", "type": "CHAR", "len": "4" }, { "name": "GENDER", "desc": "G\u00eanero (Legado)", "type": "CHAR", "len": "1" }, { "name": "SEX", "desc": "Sexo", "type": "CHAR", "len": "1" }, { "name": "MARITALSTATUS", "desc": "Estado civil", "type": "CHAR", "len": "1" }, { "name": "NATIONALITY", "desc": "Nacionalidade", "type": "CHAR", "len": "3" }, { "name": "CORRESPONDLANGUAGE", "desc": "Idioma correspond\u00eancia", "type": "LANG", "len": "1" }], "max": 1 }, "CENTRALDATAORGANIZATION": { "desc": "Dados da Organiza\u00e7\u00e3o (Categoria 2)", "fields": [{ "name": "NAME1", "desc": "Nome 1 (Raz\u00e3o Social)", "type": "CHAR", "len": "40" }, { "name": "NAME2", "desc": "Nome 2", "type": "CHAR", "len": "40" }, { "name": "NAME3", "desc": "Nome 3", "type": "CHAR", "len": "40" }, { "name": "NAME4", "desc": "Nome 4", "type": "CHAR", "len": "40" }, { "name": "INDUSTRYSECTOR", "desc": "Setor Industrial (Ramo)", "type": "CHAR", "len": "10" }, { "name": "LEGALFORM", "desc": "Forma Jur\u00eddica", "type": "CHAR", "len": "2" }, { "name": "FOUNDATIONDATE", "desc": "Data de funda\u00e7\u00e3o", "type": "DATS", "len": "8" }, { "name": "LIQUIDATIONDATE", "desc": "Data de liquida\u00e7\u00e3o", "type": "DATS", "len": "8" }], "max": 1 }, "CENTRALDATAGROUP": { "desc": "Dados de Grupo (Categoria 3)", "fields": [{ "name": "NAMEGROUP1", "desc": "Nome 1 (Grupo)", "type": "CHAR", "len": "40" }, { "name": "NAMEGROUP2", "desc": "Nome 2 (Grupo)", "type": "CHAR", "len": "40" }, { "name": "GROUPTYPE", "desc": "Tipo de grupo", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATA_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Dados Centrais)", "fields": [{ "name": "AUTHORIZATIONGROUP", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERLANGUAGE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERTYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLE_KEY", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAPERSON_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Pessoa)", "fields": [{ "name": "FIRSTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LASTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "BIRTHDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAORGANIZATION_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Org)", "fields": [{ "name": "NAME1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "INDUSTRYSECTOR", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 } };</script>
 </head>
+
 <body>
     <header>
-        <div class="brand">BP - Parceiro de Negócios (JSON)</div>
-        <div class="search-box"><input type="text" id="searchInput" placeholder="Buscar..."></div>
-        <div style="display:flex; gap:10px;">
-             <button class="btn-csv" style="background:#15803d; color:white; border:none;" onclick="exportFullCSV()">CSV Completo</button>
-             <button class="btn-payload" style="background:#2563eb; color:white; border:none;" onclick="openFullPayloadModal()">Payload Completo</button>
-             <a href="index.html" style="text-decoration:none; color:#64748b; font-weight:600; font-size:0.9rem; align-self:center;">Voltar</a>
-        </div>
+        <div class="brand">DOCUMENTAÇÃO <span>BP - Parceiro de Negócios (JSON)</span></div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="Filtrar campos..."></div>
+        <div class="header-actions"><button onclick="exportFullCSV()">📊 Baixar CSV Completo</button><button
+                onclick="openFullPayloadModal()">📦 Payload Completo</button><a href="index.html">🏠 Voltar</a></div>
     </header>
     <div class="workspace">
         <aside>
             <div class="history-container">
-                <div class="history-header"><span class="history-title">Vistos Recentemente</span><button class="btn-clear-history" onclick="clearHistory()">Limpar</button></div>
+                <div class="history-header"><span class="history-title">Vistos Recentemente</span><button
+                        class="btn-clear-history" onclick="clearHistory()">Limpar</button></div>
                 <div id="history-list" class="history-list"></div>
             </div>
-            <div class="tree-container"><div class="tree-label">Navegação</div><a href="#BUPARTNER" class="node-item" style="padding-left: 10px" onclick="activateNode(this)"><strong>BUPARTNER</strong></a><a href="#CENTRALDATA" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATA</strong></a><a href="#ADDRESSDATA" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>ADDRESSDATA</strong></a><a href="#TAX_DATA" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>TAX_DATA</strong></a><a href="#BUSINESSPARTNERROLE" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>BUSINESSPARTNERROLE</strong></a><a href="#CENTRALDATAPERSON" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATAPERSON</strong></a><a href="#CENTRALDATAORGANIZATION" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATAORGANIZATION</strong></a><a href="#CENTRALDATAGROUP" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATAGROUP</strong></a><a href="#CENTRALDATA_X" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATA_X</strong></a><a href="#CENTRALDATAPERSON_X" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATAPERSON_X</strong></a><a href="#CENTRALDATAORGANIZATION_X" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATAORGANIZATION_X</strong></a><a href="#CENTRALDATAGROUP_X" class="node-item" style="padding-left: 20px" onclick="activateNode(this)"><strong>CENTRALDATAGROUP_X</strong></a></div></aside><main id="mainContent">
-    <div id="BUPARTNER" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>BUPARTNER <span class="desc">Estrutura principal do Parceiro de Negócios</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('BUPARTNER')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('BUPARTNER')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">4 campos</span>
+            <div class="tree-container">
+                <div class="tree-label">Estrutura</div><a href="#BUPARTNER" class="node-item" style="padding-left:10px"
+                    onclick="activateNode(this)"><strong>BUPARTNER</strong></a><a href="#CENTRALDATA" class="node-item"
+                    style="padding-left:20px" onclick="activateNode(this)"><strong>CENTRALDATA</strong></a><a
+                    href="#ADDRESSDATA" class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>ADDRESSDATA</strong></a><a href="#TAX_DATA" class="node-item"
+                    style="padding-left:20px" onclick="activateNode(this)"><strong>TAX_DATA</strong></a><a
+                    href="#BUSINESSPARTNERROLE" class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>BUSINESSPARTNERROLE</strong></a><a href="#CENTRALDATAPERSON"
+                    class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATAPERSON</strong></a><a
+                    href="#CENTRALDATAORGANIZATION" class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATAORGANIZATION</strong></a><a href="#CENTRALDATAGROUP"
+                    class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATAGROUP</strong></a><a href="#CENTRALDATA_X"
+                    class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATA_X</strong></a><a href="#CENTRALDATAPERSON_X"
+                    class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATAPERSON_X</strong></a><a
+                    href="#CENTRALDATAORGANIZATION_X" class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATAORGANIZATION_X</strong></a><a
+                    href="#CENTRALDATAGROUP_X" class="node-item" style="padding-left:20px"
+                    onclick="activateNode(this)"><strong>CENTRALDATAGROUP_X</strong></a>
             </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">BUSINESSPARTNEREXTERN</span></td><td>Nº parceiro de negócios (Externo)</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NATURALPERSON</span></td><td>É Pessoa Física (Flag Fiscal)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERCATEGORY</span></td><td>Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERGROUP</span></td><td>Agrupamento de parceiros (BP Grouping)</td><td><span class="dt-type">CHAR(4)</span></td></tr></tbody></table></div>
+        </aside>
+        <main id="mainContent">
+            <div id="BUPARTNER" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>BUPARTNER <span class="desc">Estrutura principal do Parceiro de Negócios</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('BUPARTNER')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('BUPARTNER')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BUSINESSPARTNEREXTERN</span></td>
+                                <td>Nº parceiro de negócios (Externo)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NATURALPERSON</span></td>
+                                <td>É Pessoa Física (Flag Fiscal)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERCATEGORY</span></td>
+                                <td>Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERGROUP</span></td>
+                                <td>Agrupamento de parceiros (BP Grouping)</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATA" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATA <span class="desc">Dados Centrais (Comuns a todas categorias)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATA')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('CENTRALDATA')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>AUTHORIZATIONGROUP</span></td>
+                                <td>Grupo de autorizações</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CENTRALARCHIVINGFLAG</span></td>
+                                <td>Marcação para arquivamento</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CENTRALBLOCK</span></td>
+                                <td>Bloqueio central</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COMM_TYPE</span></td>
+                                <td>Meio comunicação padrão</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CONTACTALLOWANCE</span></td>
+                                <td>Permissão de contato</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DATAORIGINTYPE</span></td>
+                                <td>Tipos de origem dos dados</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NOTRELEASED</span></td>
+                                <td>Código: não liberado</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNEREXTERNAL</span></td>
+                                <td>Nº parceiro no sistema externo</td>
+                                <td><span class='dt-type'>CHAR(20)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERLANGUAGE</span></td>
+                                <td>Idioma do Parceiro</td>
+                                <td><span class='dt-type'>LANG(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERLANGUAGEISO</span></td>
+                                <td>Idioma ISO (2 chars)</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERTYPE</span></td>
+                                <td>Tipo de parceiro de negócios</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PRINT_MODE</span></td>
+                                <td>Formato da impressão</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SEARCHTERM1</span></td>
+                                <td>Termo de pesquisa 1</td>
+                                <td><span class='dt-type'>CHAR(20)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SEARCHTERM2</span></td>
+                                <td>Termo de pesquisa 2</td>
+                                <td><span class='dt-type'>CHAR(20)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLELETTER</span></td>
+                                <td>Vocativo</td>
+                                <td><span class='dt-type'>CHAR(50)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_KEY</span></td>
+                                <td>Chave de forma de tratamento (Sr, Sra, Empresa)</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="ADDRESSDATA" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>ADDRESSDATA <span class="desc">Dados de Endereço</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('ADDRESSDATA')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('ADDRESSDATA')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 9999</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STREET</span></td>
+                                <td>Rua / Logradouro</td>
+                                <td><span class='dt-type'>CHAR(60)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>HOUSE_NO</span></td>
+                                <td>Número</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>HOUSE_NO2</span></td>
+                                <td>Complemento do nº</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CITY</span></td>
+                                <td>Cidade</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>POSTL_COD1</span></td>
+                                <td>CEP (Código Postal)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COUNTRY</span></td>
+                                <td>País (Chave SAP ex: BR)</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COUNTRYISO</span></td>
+                                <td>País ISO (ex: BR)</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>REGION</span></td>
+                                <td>Região/Estado (UF)</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DISTRICT</span></td>
+                                <td>Bairro</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TAXJURCODE</span></td>
+                                <td>Domicílio Fiscal</td>
+                                <td><span class='dt-type'>CHAR(15)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LANGU</span></td>
+                                <td>Idioma do endereço</td>
+                                <td><span class='dt-type'>LANG(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>VALIDFROMDATE</span></td>
+                                <td>Válido desde</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>VALIDTODATE</span></td>
+                                <td>Válido até</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STR_SUPPL1</span></td>
+                                <td>Rua 2 (Complemento)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STR_SUPPL2</span></td>
+                                <td>Rua 3</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STR_SUPPL3</span></td>
+                                <td>Rua 4</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LOCATION</span></td>
+                                <td>Rua 5 (Location)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BUILDING</span></td>
+                                <td>Edifício</td>
+                                <td><span class='dt-type'>CHAR(20)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FLOOR</span></td>
+                                <td>Andar</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>ROOM_NO</span></td>
+                                <td>Sala / Apartamento</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TIME_ZONE</span></td>
+                                <td>Fuso Horário</td>
+                                <td><span class='dt-type'>CHAR(6)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TRANSPZONE</span></td>
+                                <td>Zona de transporte</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PO_BOX</span></td>
+                                <td>Caixa Postal</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>POSTL_COD2</span></td>
+                                <td>CEP Caixa Postal</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>C_O_NAME</span></td>
+                                <td>A/C (Care of)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>EXTADDRESSNUMBER</span></td>
+                                <td>ID Endereço Externo</td>
+                                <td><span class='dt-type'>CHAR(20)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="TAX_DATA" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>TAX_DATA <span class="desc">Dados Fiscais (CNPJ, CPF, IE)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('TAX_DATA')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('TAX_DATA')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 9999</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TAXTYPE</span></td>
+                                <td>Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TAXNUMBER</span></td>
+                                <td>Número Fiscal (Formatado ou não)</td>
+                                <td><span class='dt-type'>CHAR(20)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TAXNUMXL</span></td>
+                                <td>Número Fiscal Longo (Se maior que 20 chars)</td>
+                                <td><span class='dt-type'>CHAR(60)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="BUSINESSPARTNERROLE" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>BUSINESSPARTNERROLE <span class="desc">Funções do Parceiro (FLCU00, FLCU01, etc)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('BUSINESSPARTNERROLE')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('BUSINESSPARTNERROLE')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 9999</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERROLE</span></td>
+                                <td>Função de parceiro (ex: FLCU01 - Cliente)</td>
+                                <td><span class='dt-type'>CHAR(6)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATAPERSON" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAPERSON <span class="desc">Dados Pessoais (Categoria 1)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATAPERSON')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('CENTRALDATAPERSON')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FIRSTNAME</span></td>
+                                <td>Primeiro nome</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LASTNAME</span></td>
+                                <td>Sobrenome</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FULLNAME</span></td>
+                                <td>Nome completo</td>
+                                <td><span class='dt-type'>CHAR(80)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHDATE</span></td>
+                                <td>Data de nascimento</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHPLACE</span></td>
+                                <td>Local de nascimento</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MIDDLENAME</span></td>
+                                <td>Nome do meio</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SECONDNAME</span></td>
+                                <td>Segundo sobrenome</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NICKNAME</span></td>
+                                <td>Apelido / Conhecido como</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_ACA1</span></td>
+                                <td>Título acadêmico 1</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_ACA2</span></td>
+                                <td>Título acadêmico 2</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_SPPL</span></td>
+                                <td>Complemento título (ex: Dr.)</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PREFIX1</span></td>
+                                <td>Prefixo nome</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PREFIX2</span></td>
+                                <td>Prefixo nome 2</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>GENDER</span></td>
+                                <td>Gênero (Legado)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SEX</span></td>
+                                <td>Sexo</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MARITALSTATUS</span></td>
+                                <td>Estado civil</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NATIONALITY</span></td>
+                                <td>Nacionalidade</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CORRESPONDLANGUAGE</span></td>
+                                <td>Idioma correspondência</td>
+                                <td><span class='dt-type'>LANG(1)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATAORGANIZATION" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAORGANIZATION <span class="desc">Dados da Organização (Categoria 2)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATAORGANIZATION')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions"
+                            onclick="openPayloadModal('CENTRALDATAORGANIZATION')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME1</span></td>
+                                <td>Nome 1 (Razão Social)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME2</span></td>
+                                <td>Nome 2</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME3</span></td>
+                                <td>Nome 3</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME4</span></td>
+                                <td>Nome 4</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>INDUSTRYSECTOR</span></td>
+                                <td>Setor Industrial (Ramo)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LEGALFORM</span></td>
+                                <td>Forma Jurídica</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FOUNDATIONDATE</span></td>
+                                <td>Data de fundação</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LIQUIDATIONDATE</span></td>
+                                <td>Data de liquidação</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATAGROUP" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAGROUP <span class="desc">Dados de Grupo (Categoria 3)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATAGROUP')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('CENTRALDATAGROUP')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMEGROUP1</span></td>
+                                <td>Nome 1 (Grupo)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMEGROUP2</span></td>
+                                <td>Nome 2 (Grupo)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>GROUPTYPE</span></td>
+                                <td>Tipo de grupo</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATA_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATA_X <span class="desc">Flags de Atualização (Dados Centrais)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATA_X')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('CENTRALDATA_X')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>AUTHORIZATIONGROUP</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERLANGUAGE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERTYPE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_KEY</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATAPERSON_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAPERSON_X <span class="desc">Flags de Atualização (Pessoa)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATAPERSON_X')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('CENTRALDATAPERSON_X')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FIRSTNAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LASTNAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHDATE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATAORGANIZATION_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAORGANIZATION_X <span class="desc">Flags de Atualização (Org)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions"
+                            onclick="exportToCSV('CENTRALDATAORGANIZATION_X')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions"
+                            onclick="openPayloadModal('CENTRALDATAORGANIZATION_X')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME1</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>INDUSTRYSECTOR</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
-    <div id="CENTRALDATA" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATA <span class="desc">Dados Centrais (Comuns a todas categorias)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATA')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATA')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">16 campos</span>
+    <div id="payloadModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">Payload: <span id="modalSegName"></span></div><button class="modal-close"
+                    onclick="closePayloadModal()">&times;</button>
+            </div>
+            <div class="payload-tabs">
+                <div class="payload-tab active" onclick="switchTab('json')">JSON</div>
+                <div class="payload-tab" onclick="switchTab('xml')">XML</div>
+            </div>
+            <div class="modal-body">
+                <pre id="jsonContent" class="payload-content active"></pre>
+                <pre id="xmlContent" class="payload-content"></pre>
+            </div>
+            <div class="modal-footer"><button onclick="copyCurrentPayload()"
+                    style="background:#2563eb;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;">Copiar</button>
             </div>
         </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">AUTHORIZATIONGROUP</span></td><td>Grupo de autorizações</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">CENTRALARCHIVINGFLAG</span></td><td>Marcação para arquivamento</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">CENTRALBLOCK</span></td><td>Bloqueio central</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">COMM_TYPE</span></td><td>Meio comunicação padrão</td><td><span class="dt-type">CHAR(3)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">CONTACTALLOWANCE</span></td><td>Permissão de contato</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">DATAORIGINTYPE</span></td><td>Tipos de origem dos dados</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NOTRELEASED</span></td><td>Código: não liberado</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNEREXTERNAL</span></td><td>Nº parceiro no sistema externo</td><td><span class="dt-type">CHAR(20)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERLANGUAGE</span></td><td>Idioma do Parceiro</td><td><span class="dt-type">LANG(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERLANGUAGEISO</span></td><td>Idioma ISO (2 chars)</td><td><span class="dt-type">CHAR(2)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERTYPE</span></td><td>Tipo de parceiro de negócios</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PRINT_MODE</span></td><td>Formato da impressão</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">SEARCHTERM1</span></td><td>Termo de pesquisa 1</td><td><span class="dt-type">CHAR(20)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">SEARCHTERM2</span></td><td>Termo de pesquisa 2</td><td><span class="dt-type">CHAR(20)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TITLELETTER</span></td><td>Vocativo</td><td><span class="dt-type">CHAR(50)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TITLE_KEY</span></td><td>Chave de forma de tratamento (Sr, Sra, Empresa)</td><td><span class="dt-type">CHAR(4)</span></td></tr></tbody></table></div>
     </div>
-    <div id="ADDRESSDATA" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>ADDRESSDATA <span class="desc">Dados de Endereço</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('ADDRESSDATA')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('ADDRESSDATA')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 9999</span>
-                <span class="badge badge-meta">26 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">STREET</span></td><td>Rua / Logradouro</td><td><span class="dt-type">CHAR(60)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">HOUSE_NO</span></td><td>Número</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">HOUSE_NO2</span></td><td>Complemento do nº</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">CITY</span></td><td>Cidade</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">POSTL_COD1</span></td><td>CEP (Código Postal)</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">COUNTRY</span></td><td>País (Chave SAP ex: BR)</td><td><span class="dt-type">CHAR(3)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">COUNTRYISO</span></td><td>País ISO (ex: BR)</td><td><span class="dt-type">CHAR(2)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">REGION</span></td><td>Região/Estado (UF)</td><td><span class="dt-type">CHAR(3)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">DISTRICT</span></td><td>Bairro</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TAXJURCODE</span></td><td>Domicílio Fiscal</td><td><span class="dt-type">CHAR(15)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">LANGU</span></td><td>Idioma do endereço</td><td><span class="dt-type">LANG(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">VALIDFROMDATE</span></td><td>Válido desde</td><td><span class="dt-type">DATS(8)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">VALIDTODATE</span></td><td>Válido até</td><td><span class="dt-type">DATS(8)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">STR_SUPPL1</span></td><td>Rua 2 (Complemento)</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">STR_SUPPL2</span></td><td>Rua 3</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">STR_SUPPL3</span></td><td>Rua 4</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">LOCATION</span></td><td>Rua 5 (Location)</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">BUILDING</span></td><td>Edifício</td><td><span class="dt-type">CHAR(20)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">FLOOR</span></td><td>Andar</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">ROOM_NO</span></td><td>Sala / Apartamento</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TIME_ZONE</span></td><td>Fuso Horário</td><td><span class="dt-type">CHAR(6)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TRANSPZONE</span></td><td>Zona de transporte</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PO_BOX</span></td><td>Caixa Postal</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">POSTL_COD2</span></td><td>CEP Caixa Postal</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">C_O_NAME</span></td><td>A/C (Care of)</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">EXTADDRESSNUMBER</span></td><td>ID Endereço Externo</td><td><span class="dt-type">CHAR(20)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="TAX_DATA" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>TAX_DATA <span class="desc">Dados Fiscais (CNPJ, CPF, IE)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('TAX_DATA')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('TAX_DATA')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 9999</span>
-                <span class="badge badge-meta">3 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">TAXTYPE</span></td><td>Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TAXNUMBER</span></td><td>Número Fiscal (Formatado ou não)</td><td><span class="dt-type">CHAR(20)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TAXNUMXL</span></td><td>Número Fiscal Longo (Se maior que 20 chars)</td><td><span class="dt-type">CHAR(60)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="BUSINESSPARTNERROLE" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>BUSINESSPARTNERROLE <span class="desc">Funções do Parceiro (FLCU00, FLCU01, etc)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('BUSINESSPARTNERROLE')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('BUSINESSPARTNERROLE')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 9999</span>
-                <span class="badge badge-meta">1 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">PARTNERROLE</span></td><td>Função de parceiro (ex: FLCU01 - Cliente)</td><td><span class="dt-type">CHAR(6)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="CENTRALDATAPERSON" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATAPERSON <span class="desc">Dados Pessoais (Categoria 1)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATAPERSON')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATAPERSON')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">18 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">FIRSTNAME</span></td><td>Primeiro nome</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">LASTNAME</span></td><td>Sobrenome</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">FULLNAME</span></td><td>Nome completo</td><td><span class="dt-type">CHAR(80)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">BIRTHDATE</span></td><td>Data de nascimento</td><td><span class="dt-type">DATS(8)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">BIRTHPLACE</span></td><td>Local de nascimento</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">MIDDLENAME</span></td><td>Nome do meio</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">SECONDNAME</span></td><td>Segundo sobrenome</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NICKNAME</span></td><td>Apelido / Conhecido como</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TITLE_ACA1</span></td><td>Título acadêmico 1</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TITLE_ACA2</span></td><td>Título acadêmico 2</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TITLE_SPPL</span></td><td>Complemento título (ex: Dr.)</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PREFIX1</span></td><td>Prefixo nome</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PREFIX2</span></td><td>Prefixo nome 2</td><td><span class="dt-type">CHAR(4)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">GENDER</span></td><td>Gênero (Legado)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">SEX</span></td><td>Sexo</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">MARITALSTATUS</span></td><td>Estado civil</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NATIONALITY</span></td><td>Nacionalidade</td><td><span class="dt-type">CHAR(3)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">CORRESPONDLANGUAGE</span></td><td>Idioma correspondência</td><td><span class="dt-type">LANG(1)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="CENTRALDATAORGANIZATION" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATAORGANIZATION <span class="desc">Dados da Organização (Categoria 2)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATAORGANIZATION')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATAORGANIZATION')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">8 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">NAME1</span></td><td>Nome 1 (Razão Social)</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NAME2</span></td><td>Nome 2</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NAME3</span></td><td>Nome 3</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NAME4</span></td><td>Nome 4</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">INDUSTRYSECTOR</span></td><td>Setor Industrial (Ramo)</td><td><span class="dt-type">CHAR(10)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">LEGALFORM</span></td><td>Forma Jurídica</td><td><span class="dt-type">CHAR(2)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">FOUNDATIONDATE</span></td><td>Data de fundação</td><td><span class="dt-type">DATS(8)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">LIQUIDATIONDATE</span></td><td>Data de liquidação</td><td><span class="dt-type">DATS(8)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="CENTRALDATAGROUP" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATAGROUP <span class="desc">Dados de Grupo (Categoria 3)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATAGROUP')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATAGROUP')">Payload</button>
-                <span class="badge badge-req">Dados</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">3 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">NAMEGROUP1</span></td><td>Nome 1 (Grupo)</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">NAMEGROUP2</span></td><td>Nome 2 (Grupo)</td><td><span class="dt-type">CHAR(40)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">GROUPTYPE</span></td><td>Tipo de grupo</td><td><span class="dt-type">CHAR(4)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="CENTRALDATA_X" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATA_X <span class="desc">Flags de Atualização (Dados Centrais)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATA_X')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATA_X')">Payload</button>
-                <span class="badge badge-meta">Técnico/Flag</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">4 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">AUTHORIZATIONGROUP</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERLANGUAGE</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">PARTNERTYPE</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">TITLE_KEY</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="CENTRALDATAPERSON_X" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATAPERSON_X <span class="desc">Flags de Atualização (Pessoa)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATAPERSON_X')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATAPERSON_X')">Payload</button>
-                <span class="badge badge-meta">Técnico/Flag</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">3 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">FIRSTNAME</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">LASTNAME</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">BIRTHDATE</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr></tbody></table></div>
-    </div>
-    <div id="CENTRALDATAORGANIZATION_X" class="segment-card">
-        <div class="card-header">
-            <div class="card-title"><h2>CENTRALDATAORGANIZATION_X <span class="desc">Flags de Atualização (Org)</span></h2></div>
-            <div class="badges">
-                <button class="btn-csv" onclick="exportToCSV('CENTRALDATAORGANIZATION_X')">CSV</button>
-                <button class="btn-payload" onclick="openPayloadModal('CENTRALDATAORGANIZATION_X')">Payload</button>
-                <span class="badge badge-meta">Técnico/Flag</span>
-                <span class="badge badge-meta">Máx: 1</span>
-                <span class="badge badge-meta">2 campos</span>
-            </div>
-        </div>
-        <div class="table-wrapper"><table><thead><tr><th style="width: 25%">Campo</th><th style="width: 55%">Descrição</th><th style="width: 20%">Tipo/Tam</th></tr></thead><tbody><tr><td><span class="tech-name" onclick="copy(this)">NAME1</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr><tr><td><span class="tech-name" onclick="copy(this)">INDUSTRYSECTOR</span></td><td>Atualizar? (X)</td><td><span class="dt-type">CHAR(1)</span></td></tr></tbody></table></div>
-    </div></main></div>
-    <div id="payloadModal" class="modal-overlay"><div class="modal-container">
-            <div class="modal-header"><div class="modal-title">Payload: <span id="modalSegName"></span></div><button class="modal-close" onclick="closePayloadModal()">&times;</button></div>
-            <div class="payload-tabs"><div class="payload-tab active" onclick="switchTab('json')">JSON</div><div class="payload-tab" onclick="switchTab('xml')">XML</div></div>
-            <div class="modal-body"><pre id="jsonContent" class="payload-content active"></pre><pre id="xmlContent" class="payload-content"></pre></div>
-            <div class="modal-footer"><button class="btn-payload" onclick="copyCurrentPayload()">Copiar Código</button></div>
-    </div></div>
     <div id="toast">Copiado!</div>
-    <script>
-        function copy(el) { navigator.clipboard.writeText(el.innerText).then(() => showToast()); }
-        function showToast() { let t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); }
-        function activateNode(el) { document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active')); el.classList.add('active'); }
-        document.getElementById('searchInput').addEventListener('keyup', function(e) {
-            let term = e.target.value.toUpperCase();
-            document.querySelectorAll('.segment-card').forEach(card => {
-                let show = false;
-                if(card.querySelector('.card-header').innerText.toUpperCase().includes(term)) show = true;
-                card.querySelectorAll('tbody tr').forEach(row => {
-                    if(row.innerText.toUpperCase().includes(term)) { row.classList.remove('hidden'); show = true; } else { row.classList.add('hidden'); }
-                });
-                card.style.display = show ? 'block' : 'none';
-            });
-        });
-
-        function exportFullCSV() {
-            let csv = "Segmento;Campo;Descrição;Tipo;Tamanho\n";
-            for (const [segName, data] of Object.entries(SEGMENT_DEFINITIONS)) {
-                data.fields.forEach(f => {
-                    csv += `${segName};${f.name};${f.desc};${f.type};${f.len}\n`;
-                });
-            }
-            downloadCSV(csv, "IDoc_Completo.csv");
-        }
-
-        function exportToCSV(segName) {
-            const data = SEGMENT_DEFINITIONS[segName]; if(!data) return;
-            let csv = "Campo;Descrição;Tipo;Tamanho\n";
-            data.fields.forEach(f => { csv += `${f.name};${f.desc};${f.type};${f.len}\n`; });
-            downloadCSV(csv, `${segName}.csv`);
-        }
-
-        function downloadCSV(content, fileName) {
-            const blob = new Blob(["\uFEFF" + content], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement("a");
-            const url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", fileName);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function generateFakeValue(type, name) {
-            if (!type) return "texto";
-            if (type.includes('NUMC') || type.includes('INT') || type.includes('DEC')) return 123;
-            if (type.includes('DATS')) return "20251231";
-            if (type.includes('TIMS')) return "235959";
-            if (name.includes('CURRENCY') || name.includes('WAERS')) return "BRL";
-            if (name.includes('LANG')) return "PT";
-            return "texto";
-        }
-        function getSegmentData(segName) {
-            const def = SEGMENT_DEFINITIONS[segName]; if (!def) return {};
-            const obj = {};
-            def.fields.forEach(f => { obj[f.name] = generateFakeValue(f.type, f.name); });
-            return obj;
-        }
-        function buildFullJson(nodes) {
-            const result = {};
-            const nodeList = Array.isArray(nodes) ? nodes : [nodes];
-            nodeList.forEach(node => {
-                let content = getSegmentData(node.segment);
-                if (node.children && node.children.length > 0) Object.assign(content, buildFullJson(node.children));
-                if (node.max > 1) result[node.segment] = [content]; else result[node.segment] = content;
-            });
-            return result;
-        }
-        function jsonToXml(obj, depth = 0) {
-            let xml = ''; const indent = '  '.repeat(depth);
-            for (const key in obj) {
-                const value = obj[key];
-                if (Array.isArray(value)) { value.forEach(item => { xml += `${indent}<${key}>\n` + jsonToXml(item, depth + 1) + `${indent}</${key}>\n`; }); }
-                else if (typeof value === 'object' && value !== null) { xml += `${indent}<${key}>\n` + jsonToXml(value, depth + 1) + `${indent}</${key}>\n`; }
-                else { xml += `${indent}<${key}>${value}</${key}>\n`; }
-            }
-            return xml;
-        }
-        function openPayloadModal(segName) {
-            document.getElementById('modalSegName').innerText = segName;
-            const data = getSegmentData(segName);
-            document.getElementById('jsonContent').innerText = JSON.stringify(data, null, 2);
-            document.getElementById('xmlContent').innerText = `<${segName}>\n${jsonToXml(data, 1)}</${segName}>`;
-            document.getElementById('payloadModal').classList.add('open');
-        }
-        function openFullPayloadModal() {
-            document.getElementById('modalSegName').innerText = "ESTRUTURA COMPLETA";
-            let fullData = {};
-            if (typeof IDOC_TREE !== 'undefined' && IDOC_TREE.length > 0) fullData = buildFullJson(IDOC_TREE);
-            document.getElementById('jsonContent').innerText = JSON.stringify(fullData, null, 2);
-            document.getElementById('xmlContent').innerText = `<IDOC>\n${jsonToXml(fullData, 1)}</IDOC>`;
-            document.getElementById('payloadModal').classList.add('open');
-        }
-        function closePayloadModal() { document.getElementById('payloadModal').classList.remove('open'); }
-        function switchTab(type) {
-            document.querySelectorAll('.payload-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.payload-content').forEach(c => c.classList.remove('active'));
-            event.target.classList.add('active');
-            document.getElementById(type + 'Content').classList.add('active');
-        }
-        function copyCurrentPayload() { navigator.clipboard.writeText(document.querySelector('.payload-content.active').innerText).then(() => showToast()); }
-        (function() {
-            const MAX_HISTORY = 10;
-            const HISTORY_KEY = 'sap_docs_history';
-            if (!window.location.pathname.endsWith('index.html')) {
-                const standardizedTitle = document.title;
-                const currentPage = { title: standardizedTitle, url: window.location.pathname.split('/').pop() };
-                let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
-                history = history.filter(h => h.url !== currentPage.url);
-                history.unshift(currentPage);
-                if (history.length > MAX_HISTORY) history.pop();
-                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-                const btn = document.createElement('a'); btn.id = 'global-back-btn'; btn.href = 'index.html'; btn.innerHTML = '🏠'; btn.title = 'Voltar ao Início'; document.body.appendChild(btn);
-            }
-            const container = document.getElementById('history-list');
-            if (container) {
-                const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
-                if (history.length === 0) container.innerHTML = '<div style="padding:5px 8px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
-                else { container.innerHTML = history.map(h => `<a href="${h.url}" class="history-link">${h.title}</a>`).join(''); }
-            }
-            window.clearHistory = function() { localStorage.removeItem(HISTORY_KEY); if(document.getElementById('history-list')) document.getElementById('history-list').innerHTML = ''; }
-        })();
-    </script>
+    <script>function copy(e) { navigator.clipboard.writeText(e.innerText).then(() => { document.getElementById('toast').classList.add('show'); setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000) }) }; function activateNode(e) { document.querySelectorAll('.node-item').forEach(i => i.classList.remove('active')); e.classList.add('active') }; document.getElementById('searchInput').addEventListener('keyup', e => { let t = e.target.value.toUpperCase(); document.querySelectorAll('.segment-card').forEach(c => { let s = c.querySelector('.card-header').innerText.toUpperCase().includes(t); c.querySelectorAll('tbody tr').forEach(r => { if (r.innerText.toUpperCase().includes(t)) { r.classList.remove('hidden'); s = true } else r.classList.add('hidden') }); c.style.display = s ? 'block' : 'none' }) }); function exportFullCSV() { let c = "Segmento;Campo;Descrição;Tipo;Tamanho\n"; for (let [k, v] of Object.entries(SEGMENT_DEFINITIONS)) v.fields.forEach(f => c += `${k};${f.name};${f.desc};${f.type};${f.len}\n`); downloadCSV(c, "IDoc_Completo.csv") }; function exportToCSV(n) { let d = SEGMENT_DEFINITIONS[n]; if (!d) return; let c = "Campo;Descrição;Tipo;Tamanho\n"; d.fields.forEach(f => c += `${f.name};${f.desc};${f.type};${f.len}\n`); downloadCSV(c, n + ".csv") }; function downloadCSV(c, n) { let b = new Blob(["\uFEFF" + c], { type: 'text/csv;charset=utf-8;' }), l = document.createElement("a"); l.href = URL.createObjectURL(b); l.download = n; document.body.appendChild(l); l.click(); document.body.removeChild(l) }; function genVal(t, n) { if (!t) return "text"; if (t.includes('NUMC') || t.includes('INT') || t.includes('DEC')) return 123; if (t.includes('DATS')) return "20251231"; if (t.includes('TIMS')) return "235959"; return "text" }; function getSeg(n) { let d = SEGMENT_DEFINITIONS[n]; if (!d) return {}; let o = {}; d.fields.forEach(f => o[f.name] = genVal(f.type, f.name)); return o }; function buildJson(nodes) { let r = {}, l = Array.isArray(nodes) ? nodes : [nodes]; l.forEach(n => { let c = getSeg(n.segment); if (n.children) Object.assign(c, buildJson(n.children)); if (n.max > 1) r[n.segment] = [c]; else r[n.segment] = c }); return r }; function jsonToXml(o, d = 0) { let x = "", i = "  ".repeat(d); for (let k in o) { let v = o[k]; if (Array.isArray(v)) v.forEach(it => x += `${i}<${k}>\n${jsonToXml(it, d + 1)}${i}</${k}>\n`); else if (typeof v === 'object') x += `${i}<${k}>\n${jsonToXml(v, d + 1)}${i}</${k}>\n`; else x += `${i}<${k}>${v}</${k}>\n` } return x }; function openPayloadModal(n) { document.getElementById('modalSegName').innerText = n; let d = getSeg(n); document.getElementById('jsonContent').innerText = JSON.stringify(d, null, 2); document.getElementById('xmlContent').innerText = `<${n}>\n${jsonToXml(d, 1)}</${n}>`; document.getElementById('payloadModal').classList.add('open') }; function openFullPayloadModal() { document.getElementById('modalSegName').innerText = "COMPLETO"; let d = typeof IDOC_TREE !== 'undefined' ? buildJson(IDOC_TREE) : {}; document.getElementById('jsonContent').innerText = JSON.stringify(d, null, 2); document.getElementById('xmlContent').innerText = `<IDOC>\n${jsonToXml(d, 1)}</IDOC>`; document.getElementById('payloadModal').classList.add('open') }; function closePayloadModal() { document.getElementById('payloadModal').classList.remove('open') }; function switchTab(t) { document.querySelectorAll('.payload-tab').forEach(e => e.classList.remove('active')); document.querySelectorAll('.payload-content').forEach(e => e.classList.remove('active')); event.target.classList.add('active'); document.getElementById(t + 'Content').classList.add('active') }; function copyCurrentPayload() { navigator.clipboard.writeText(document.querySelector('.payload-content.active').innerText).then(() => { document.getElementById('toast').classList.add('show'); setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000) }) }; (function () { const H = 'sap_docs_history'; if (!window.location.pathname.endsWith('index.html')) { let h = JSON.parse(localStorage.getItem(H) || '[]'); h = h.filter(x => x.url !== window.location.pathname.split('/').pop()); h.unshift({ title: document.title, url: window.location.pathname.split('/').pop() }); if (h.length > 10) h.pop(); localStorage.setItem(H, JSON.stringify(h)) } let c = document.getElementById('history-list'); if (c) { let h = JSON.parse(localStorage.getItem(H) || '[]'); c.innerHTML = h.length ? h.map(x => `<a href="${x.url}" class="history-link">${x.title}</a>`).join('') : '<div style="padding:5px;font-size:0.7rem;opacity:0.7">Vazio</div>' } window.clearHistory = function () { localStorage.removeItem(H); if (document.getElementById('history-list')) document.getElementById('history-list').innerHTML = '' } })();</script>
 </body>
+
 </html>

@@ -6,120 +6,8 @@
     <title>Portal de Documentação SAP</title>
     <link rel="stylesheet" href="estilos.css">
     <style>
-        /* Estilos específicos do Dashboard */
-        .welcome-section {
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-
-        .welcome-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; color: white; border: none; }
-        .welcome-text { font-size: 1rem; opacity: 0.9; max-width: 600px; }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            margin-top: 40px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-        }
-        
-        .section-icon { font-size: 1.5rem; margin-right: 10px; }
-        .section-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin: 0; border: none; padding: 0;}
-
-        /* Grid de Cards */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .nav-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            border-color: #cbd5e1;
-        }
-
-        /* Cores de borda superior para categorias */
-        .card-tool { border-top: 4px solid #10b981; } /* Verde para ferramentas */
-        .card-doc { border-top: 4px solid #3b82f6; }  /* Azul para docs */
-        .card-json { border-top: 4px solid #f59e0b; } /* Laranja para JSON */
-
-        .nc-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .nc-icon {
-            width: 40px;
-            height: 40px;
-            background: #f1f5f9;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .nc-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 5px;
-        }
-
-        .nc-desc {
-            font-size: 0.85rem;
-            color: #64748b;
-            line-height: 1.5;
-            flex: 1; /* Empurra o footer para baixo */
-        }
-
-        .nc-footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .nc-arrow {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nc-badge {
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
-            background: #f1f5f9;
-            color: #475569;
-        }
-
+        /* Ajuste específico para index rolar a tela inteira */
+        body { overflow-y: auto; height: auto; }
     </style>
 </head>
 <body>
@@ -138,15 +26,9 @@
             <div class="tree-container">
                 <div class="tree-label">Navegação</div>
                 <div style="margin-left: 0;">
-                    <a href="#ferramentas" class="node-item active" onclick="scrollToSection('ferramentas')">
-                        <strong>Ferramentas</strong>
-                    </a>
-                    <a href="#master-data" class="node-item" onclick="scrollToSection('master-data')">
-                        <strong>Dados Mestres</strong>
-                    </a>
-                    <a href="#transacional" class="node-item" onclick="scrollToSection('transacional')">
-                        <strong>Transacional</strong>
-                    </a>
+                    <a href="#ferramentas" class="node-item active" onclick="scrollToSection('ferramentas')"><strong>Ferramentas</strong></a>
+                    <a href="#master-data" class="node-item" onclick="scrollToSection('master-data')"><strong>Dados Mestres</strong></a>
+                    <a href="#transacional" class="node-item" onclick="scrollToSection('transacional')"><strong>Transacional</strong></a>
                 </div>
             </div>
             
@@ -171,62 +53,38 @@
                 <div class="dashboard-grid">
                     
                     <a href="pesquisa.html" class="nav-card card-tool">
-                        <div class="nc-header">
-                            <div class="nc-icon">🔍</div>
-                            <span class="nc-badge">Busca</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🔍</div><span class="nc-badge">Busca</span></div>
                         <div class="nc-title">Pesquisa Inteligente</div>
                         <div class="nc-desc">Busque por campos técnicos (ex: MATKL), descrições ou segmentos em todos os arquivos de documentação simultaneamente.</div>
-                        <div class="nc-footer">
-                            <span class="nc-arrow">Acessar &rarr;</span>
-                        </div>
+                        <div class="nc-footer"><span class="nc-arrow">Acessar &rarr;</span></div>
                     </a>
 
                     <a href="gerador_queries.html" class="nav-card card-tool">
-                        <div class="nc-header">
-                            <div class="nc-icon">⚡</div>
-                            <span class="nc-badge">SQL</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">⚡</div><span class="nc-badge">SQL</span></div>
                         <div class="nc-title">Gerador de Queries</div>
                         <div class="nc-desc">Ferramenta auxiliar para montar queries de extração ou validação de dados baseadas nas estruturas.</div>
-                        <div class="nc-footer">
-                            <span class="nc-arrow">Acessar &rarr;</span>
-                        </div>
+                        <div class="nc-footer"><span class="nc-arrow">Acessar &rarr;</span></div>
                     </a>
 
                     <a href="troubleshooting.html" class="nav-card card-tool">
-                        <div class="nc-header">
-                            <div class="nc-icon">🚦</div>
-                            <span class="nc-badge">Suporte</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🚦</div><span class="nc-badge">Suporte</span></div>
                         <div class="nc-title">Troubleshooting & Status</div>
                         <div class="nc-desc">Guia de referência para códigos de status IDoc (51, 53, 68) e soluções para erros comuns de integração.</div>
-                        <div class="nc-footer">
-                            <span class="nc-arrow">Acessar &rarr;</span>
-                        </div>
+                        <div class="nc-footer"><span class="nc-arrow">Acessar &rarr;</span></div>
                     </a>
 
                     <a href="validador.html" class="nav-card card-tool">
-                        <div class="nc-header">
-                            <div class="nc-icon">🧪</div> <span class="nc-badge">Playground</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🧪</div> <span class="nc-badge">Playground</span></div>
                         <div class="nc-title">Validador SAP</div>
                         <div class="nc-desc">Simule e valide dados antes de integrar. Teste formatos de data (DATS), numéricos (NUMC) e truncamento de texto.</div>
-                        <div class="nc-footer">
-                            <span class="nc-arrow">Testar Agora &rarr;</span>
-                        </div>
+                        <div class="nc-footer"><span class="nc-arrow">Testar Agora &rarr;</span></div>
                     </a>
 
                     <a href="arquitetura.html" class="nav-card card-tool">
-                        <div class="nc-header">
-                            <div class="nc-icon">📐</div>
-                            <span class="nc-badge">Visual</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">📐</div><span class="nc-badge">Visual</span></div>
                         <div class="nc-title">Arquitetura & Fluxos</div>
                         <div class="nc-desc">Diagramas visuais do fluxo de integração (Inbound/Outbound) e ciclo de vida dos status do IDoc.</div>
-                        <div class="nc-footer">
-                            <span class="nc-arrow">Visualizar &rarr;</span>
-                        </div>
+                        <div class="nc-footer"><span class="nc-arrow">Visualizar &rarr;</span></div>
                     </a>
 
                 </div>
@@ -240,55 +98,37 @@
                 <div class="dashboard-grid">
 
                     <a href="dados_parceiro.html" class="nav-card card-json">
-                        <div class="nc-header">
-                            <div class="nc-icon">👤</div>
-                            <span class="nc-badge">JSON / API</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">👤</div><span class="nc-badge">BAPIs</span></div>
                         <div class="nc-title">Parceiro de Negócios</div>
                         <div class="nc-desc">Estrutura BUPARTNER. Inclui dados centrais, endereços, identificação fiscal e funções do parceiro.</div>
                     </a>
 
                     <a href="DOC_ARTMAS09.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">👕</div>
-                            <span class="nc-badge">IDOC Retail</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">👕</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Material Retail (ARTMAS)</div>
                         <div class="nc-desc">Mestre de materiais completo para Varejo. Inclui dados básicos, fashion, segmentação e logística.</div>
                     </a>
 
                     <a href="DOCUMENTACAO_IDOC_MATERIAL.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">📦</div>
-                            <span class="nc-badge">IDOC Std</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">📦</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Material Standard (MATMAS)</div>
                         <div class="nc-desc">Estrutura clássica do mestre de materiais para indústrias (não-retail).</div>
                     </a>
 
                     <a href="DOCUMENTACAO_IDOC_CLIENTES.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">🏢</div>
-                            <span class="nc-badge">IDOC</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🏢</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Clientes (DEBMAS)</div>
                         <div class="nc-desc">Dados mestre de clientes (Customer Master), área de vendas e dados da empresa.</div>
                     </a>
 
                     <a href="DOCUMENTACAO_IDOC_FORNECEDOR.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">🚚</div>
-                            <span class="nc-badge">IDOC</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🚚</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Fornecedores (CREMAS)</div>
                         <div class="nc-desc">Dados mestre de fornecedores (Vendor Master) e dados de compras.</div>
                     </a>
 
                     <a href="SRVMAS01.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">🪛</div>
-                            <span class="nc-badge">IDOC</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🪛</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Serviços (SRVMAS)</div>
                         <div class="nc-desc">Mestre de serviços prestados, textos breves e descritivos.</div>
                     </a>
@@ -304,28 +144,19 @@
                 <div class="dashboard-grid">
 
                     <a href="DOCUMENTACAO_IDOC_ENDERECOS_CLIENTES_E_FORNECEDORES.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">📫</div>
-                            <span class="nc-badge">IDOC</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">📫</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Endereços (ADRMAS)</div>
                         <div class="nc-desc">Distribuição isolada de endereços de parceiros.</div>
                     </a>
 
                     <a href="DOCUMENTACAO_IDOC_MATERIAL_CARACTERISTICAS.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">🏷️</div>
-                            <span class="nc-badge">IDOC</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🏷️</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Características (CLFMAS)</div>
                         <div class="nc-desc">Sistema de classificação, classes e valoração de características.</div>
                     </a>
 
                     <a href="DOCUMENTACAO_IDOC_MATQM01.html" class="nav-card card-doc">
-                        <div class="nc-header">
-                            <div class="nc-icon">🔬</div>
-                            <span class="nc-badge">IDOC</span>
-                        </div>
+                        <div class="nc-header"><div class="nc-icon">🔬</div><span class="nc-badge">IDOC</span></div>
                         <div class="nc-title">Dados de QM (MATQM)</div>
                         <div class="nc-desc">Extensão de dados de qualidade para materiais.</div>
                     </a>
@@ -339,10 +170,7 @@
     <script>
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-            
-            // Atualiza sidebar ativa
             document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
-            // Adiciona active no item clicado (lógica simplificada)
             event.currentTarget.classList.add('active');
         }
     </script>
