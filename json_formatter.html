@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Pretty Printer & Formatter</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* --- GLOBAL --- */
+        body { 
+            overflow: hidden; /* Evita scroll na página inteira, scrolla só o editor */
+            height: 100vh; 
+            background-color: #0f172a; /* Fundo geral escuro para imersão */
+            display: flex;
+            flex-direction: column;
+        }
+
+        header { flex-shrink: 0; }
+        
+        /* --- CONTAINER PRINCIPAL --- */
+        .tool-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            max-width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        /* --- EDITOR PANES (Estados) --- */
+        .editor-pane {
+            display: none; /* Escondido por padrão */
+            flex-direction: column;
+            flex: 1;
+            background: #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .editor-pane.active {
+            display: flex; /* Mostra o ativo */
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        /* --- BARRA DE FERRAMENTAS DO EDITOR (Chrome) --- */
+        .editor-chrome {
+            background: #162032;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            flex-shrink: 0;
+        }
+
+        .chrome-title {
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chrome-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* --- BOTÕES --- */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary { 
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); 
+            color: white; 
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.5); }
+
+        .btn-secondary { background: #334155; color: #cbd5e1; border: 1px solid #475569; }
+        .btn-secondary:hover { background: #475569; color: white; }
+
+        .btn-ghost { background: transparent; color: #94a3b8; border: 1px solid transparent; }
+        .btn-ghost:hover { color: white; background: rgba(255,255,255,0.05); }
+
+        /* --- ÁREAS DE TEXTO (Input/Output) --- */
+        .editor-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden; /* Scroll interno */
+            display: flex;
+        }
+
+        textarea.code-area {
+            width: 100%;
+            height: 100%;
+            background: #1e293b;
+            color: #e2e8f0;
+            border: none;
+            padding: 30px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.1rem; /* Fonte maior */
+            resize: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .code-output {
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            margin: 0;
+            background: #1e293b;
+            color: #d4d4d4;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.1rem; /* Fonte maior */
+            overflow: auto;
+            white-space: pre-wrap;
+            box-sizing: border-box;
+        }
+
+        /* --- SYNTAX HIGHLIGHTING NEON --- */
+        .json-key { color: #f472b6; font-weight: bold; }   /* Rosa */
+        .json-string { color: #a3e635; }                    /* Verde */
+        .json-number { color: #38bdf8; }                    /* Azul Claro */
+        .json-boolean { color: #c084fc; font-style: italic;}/* Roxo */
+        .json-null { color: #ef4444; }                      /* Vermelho */
+
+        /* --- TOAST --- */
+        .error-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ef4444;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 100;
+            font-size: 1rem;
+        }
+
+        /* Ajuste responsivo do Header */
+        header .brand { color: white !important; }
+        header .brand span { color: #38bdf8 !important; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">FERRAMENTA <span>JSON Studio</span></div>
+        <div class="header-actions">
+             <a href="index.html" class="btn-ghost" style="text-decoration:none; padding:5px 15px; border:1px solid rgba(255,255,255,0.2); border-radius:6px;">🏠 Voltar</a>
+        </div>
+    </header>
+
+    <div class="tool-wrapper">
+
+        <!-- ESTADO 1: INPUT (Entrada) -->
+        <div id="paneInput" class="editor-pane active">
+            <div class="editor-chrome">
+                <div class="chrome-title">
+                    <span style="font-size: 1.5rem;">📝</span> Entrada de Dados
+                </div>
+                <div class="chrome-actions">
+                    <button class="btn btn-ghost" onclick="pasteFromClipboard()">📋 Colar</button>
+                    <button class="btn btn-secondary" onclick="minifyJson()">📦 Minificar</button>
+                    <button class="btn btn-primary" onclick="processJson()">✨ Formatar JSON</button>
+                </div>
+            </div>
+            <div class="editor-content">
+                <textarea id="jsonInput" class="code-area" placeholder='Cole seu JSON aqui...' spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <!-- ESTADO 2: OUTPUT (Resultado) -->
+        <div id="paneOutput" class="editor-pane">
+            <div class="editor-chrome">
+                <div class="chrome-title">
+                    <span style="font-size: 1.5rem;">🚀</span> Resultado Formatado
+                </div>
+                <div class="chrome-actions">
+                    <button class="btn btn-ghost" onclick="editSource()">✏️ Editar</button>
+                    <button class="btn btn-secondary" onclick="copyResult()">📑 Copiar</button>
+                    <button class="btn btn-primary" onclick="resetAll()">🗑️ Novo (Limpar)</button>
+                </div>
+            </div>
+            <div class="editor-content">
+                <pre id="jsonOutput" class="code-output"></pre>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="errorToast" class="error-toast"></div>
+
+    <script>
+        const paneInput = document.getElementById('paneInput');
+        const paneOutput = document.getElementById('paneOutput');
+        const inputEl = document.getElementById('jsonInput');
+        const outputEl = document.getElementById('jsonOutput');
+        const toastEl = document.getElementById('errorToast');
+
+        // --- NAVEGAÇÃO ENTRE TELAS ---
+        function showInputScreen() {
+            paneOutput.classList.remove('active');
+            paneInput.classList.add('active');
+            setTimeout(() => inputEl.focus(), 100);
+        }
+
+        function showOutputScreen() {
+            paneInput.classList.remove('active');
+            paneOutput.classList.add('active');
+        }
+
+        // --- AÇÕES ---
+
+        function processJson() {
+            const raw = inputEl.value.trim();
+            if (!raw) { showError("Cole um JSON primeiro!"); return; }
+
+            try {
+                const parsed = JSON.parse(raw);
+                const prettified = JSON.stringify(parsed, null, 4);
+                outputEl.innerHTML = syntaxHighlight(prettified);
+                showOutputScreen(); // Muda a tela apenas se der sucesso
+            } catch (e) {
+                showError("JSON Inválido: " + e.message);
+            }
+        }
+
+        function minifyJson() {
+            const raw = inputEl.value.trim();
+            if (!raw) { showError("Cole um JSON primeiro!"); return; }
+
+            try {
+                const parsed = JSON.parse(raw);
+                const minified = JSON.stringify(parsed);
+                outputEl.textContent = minified; // Texto puro
+                showOutputScreen();
+            } catch (e) {
+                showError("JSON Inválido: " + e.message);
+            }
+        }
+
+        function editSource() {
+            // Volta para o input sem limpar, permitindo corrigir
+            showInputScreen();
+        }
+
+        function resetAll() {
+            // Limpa tudo e volta para o início
+            inputEl.value = "";
+            outputEl.innerHTML = "";
+            showInputScreen();
+        }
+
+        function copyResult() {
+            const text = outputEl.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("✅ Copiado com sucesso!", "#22c55e");
+            });
+        }
+
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                inputEl.value = text;
+                inputEl.focus();
+            } catch (err) {
+                showError("Não foi possível colar automaticamente.");
+            }
+        }
+
+        // --- UTILITÁRIOS ---
+
+        function showError(msg) {
+            showToast("❌ " + msg, "#ef4444");
+        }
+
+        function showToast(msg, color) {
+            toastEl.innerText = msg;
+            toastEl.style.background = color;
+            toastEl.style.display = 'block';
+            setTimeout(() => {
+                toastEl.style.display = 'none';
+            }, 3000);
+        }
+
+        function syntaxHighlight(json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+    </script>
+</body>
+</html>
