@@ -407,17 +407,26 @@
 
             keys.forEach(key => {
                 const meta = GLOBAL_FIELDS[key];
+                // Extrair segmento(s)
+                const segments = meta.sources ? meta.sources.map(s => s.segment).join(', ') : 'N/A';
+
                 const div = document.createElement('div');
                 div.className = 'field-item sap-item';
                 
                 // Allow dropping ONTO a list item
                 div.ondragover = (e) => { e.preventDefault(); div.style.background = '#eff6ff'; };
                 div.ondragleave = () => { div.style.background = 'white'; };
-                div.ondrop = (e) => handleDropOnTarget(e, key, meta.desc);
+                div.ondrop = (e) => handleDropOnTarget(e, key, meta.desc, segments);
 
                 div.innerHTML = `
-                    <div style="font-weight:700; color:#2563eb;">${key}</div>
-                    <div class="sap-meta">${meta.desc || ''} <span style="background:#f1f5f9; padding:2px 4px; border-radius:4px;">${meta.type}(${meta.len})</span></div>
+                    <div style="flex:1;">
+                        <div style="font-size:0.65rem; color:#d97706; font-weight:700; text-transform:uppercase; margin-bottom:2px;">${segments}</div>
+                        <div style="font-weight:700; color:#2563eb;">${key}</div>
+                    </div>
+                    <div class="sap-meta" style="flex:1; text-align:right;">
+                        ${meta.desc || ''} 
+                        <div style="margin-top:2px;"><span style="background:#f1f5f9; padding:2px 4px; border-radius:4px; font-size:0.7rem;">${meta.type}(${meta.len})</span></div>
+                    </div>
                 `;
                 container.appendChild(div);
             });
@@ -455,22 +464,22 @@
             */
         }
 
-        function handleDropOnTarget(e, targetField, targetDesc) {
+        function handleDropOnTarget(e, targetField, targetDesc, targetSegment) {
             e.preventDefault();
             e.currentTarget.style.background = 'white'; // Reset hover style
             
             if (!draggedField) return;
 
-            addMapping(draggedField, targetField, targetDesc);
+            addMapping(draggedField, targetField, targetDesc, targetSegment);
             draggedField = null;
         }
 
         // --- MAPPING MANAGEMENT ---
-        function addMapping(source, target, desc) {
+        function addMapping(source, target, desc, segment) {
             // Evitar duplicatas exatas
             if (mappings.some(m => m.source === source && m.target === target)) return;
 
-            mappings.push({ source, target, desc });
+            mappings.push({ source, target, desc, segment });
             renderMappings();
             markSourceAsMapped(source);
         }
@@ -508,6 +517,7 @@
                         <div style="font-weight:600;">${m.source}</div>
                         <div class="map-conn"></div>
                         <div style="text-align:right;">
+                            <div style="font-size:0.7rem; color:#d97706; font-weight:700; text-transform:uppercase;">${m.segment || 'N/A'}</div>
                             <div style="font-weight:700; color:#2563eb;">${m.target}</div>
                             <div style="font-size:0.75rem; color:#64748b;">${m.desc || ''}</div>
                         </div>
@@ -563,14 +573,15 @@
             }
 
             // CSV com BOM para suportar acentos no Excel
-            let csvContent = "\uFEFFCampo Origem;Campo SAP;Descrição Técnica\n";
+            let csvContent = "\uFEFFCampo Origem;Estrutura SAP;Campo SAP;Descrição Técnica\n";
             
             mappings.forEach(m => {
                 // Escapar ponto e vírgula se houver
                 const source = m.source.replace(/;/g, ",");
+                const segment = (m.segment || "N/A").replace(/;/g, ",");
                 const target = m.target.replace(/;/g, ",");
                 const desc = (m.desc || "").replace(/;/g, ",");
-                csvContent += `${source};${target};${desc}\n`;
+                csvContent += `${source};${segment};${target};${desc}\n`;
             });
 
             const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
@@ -588,6 +599,7 @@
             let tableRows = mappings.map(m => `
                 <tr>
                     <td>${m.source}</td>
+                    <td>${m.segment || 'N/A'}</td>
                     <td><strong>${m.target}</strong></td>
                     <td>${m.desc || ''}</td>
                 </tr>
@@ -618,6 +630,7 @@
                         <thead>
                             <tr>
                                 <th>Campo Origem</th>
+                                <th>Estrutura SAP</th>
                                 <th>Campo SAP (Destino)</th>
                                 <th>Descrição Técnica</th>
                             </tr>

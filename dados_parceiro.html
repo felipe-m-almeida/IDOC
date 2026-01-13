@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>BP - Parceiro de Negócios (JSON)</title>
     <link rel="stylesheet" href="estilos.css">
-    <script>const IDOC_TREE = [{ "segment": "BUPARTNER", "max": 1, "children": [{ "segment": "CENTRALDATA", "max": 1, "children": [] }, { "segment": "ADDRESSDATA", "max": 9999, "children": [] }, { "segment": "TAX_DATA", "max": 9999, "children": [] }, { "segment": "BUSINESSPARTNERROLE", "max": 9999, "children": [] }, { "segment": "CENTRALDATAPERSON", "max": 1, "children": [] }, { "segment": "CENTRALDATAORGANIZATION", "max": 1, "children": [] }, { "segment": "CENTRALDATAGROUP", "max": 1, "children": [] }, { "segment": "CENTRALDATA_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAPERSON_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAORGANIZATION_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAGROUP_X", "max": 1, "children": [] }] }]; const SEGMENT_DEFINITIONS = { "BUPARTNER": { "desc": "Estrutura principal do Parceiro de Neg\u00f3cios", "fields": [{ "name": "BUSINESSPARTNEREXTERN", "desc": "N\u00ba parceiro de neg\u00f3cios (Externo)", "type": "CHAR", "len": "10" }, { "name": "NATURALPERSON", "desc": "\u00c9 Pessoa F\u00edsica (Flag Fiscal)", "type": "CHAR", "len": "1" }, { "name": "PARTNERCATEGORY", "desc": "Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)", "type": "CHAR", "len": "1" }, { "name": "PARTNERGROUP", "desc": "Agrupamento de parceiros (BP Grouping)", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATA": { "desc": "Dados Centrais (Comuns a todas categorias)", "fields": [{ "name": "AUTHORIZATIONGROUP", "desc": "Grupo de autoriza\u00e7\u00f5es", "type": "CHAR", "len": "4" }, { "name": "CENTRALARCHIVINGFLAG", "desc": "Marca\u00e7\u00e3o para arquivamento", "type": "CHAR", "len": "1" }, { "name": "CENTRALBLOCK", "desc": "Bloqueio central", "type": "CHAR", "len": "1" }, { "name": "COMM_TYPE", "desc": "Meio comunica\u00e7\u00e3o padr\u00e3o", "type": "CHAR", "len": "3" }, { "name": "CONTACTALLOWANCE", "desc": "Permiss\u00e3o de contato", "type": "CHAR", "len": "1" }, { "name": "DATAORIGINTYPE", "desc": "Tipos de origem dos dados", "type": "CHAR", "len": "4" }, { "name": "NOTRELEASED", "desc": "C\u00f3digo: n\u00e3o liberado", "type": "CHAR", "len": "1" }, { "name": "PARTNEREXTERNAL", "desc": "N\u00ba parceiro no sistema externo", "type": "CHAR", "len": "20" }, { "name": "PARTNERLANGUAGE", "desc": "Idioma do Parceiro", "type": "LANG", "len": "1" }, { "name": "PARTNERLANGUAGEISO", "desc": "Idioma ISO (2 chars)", "type": "CHAR", "len": "2" }, { "name": "PARTNERTYPE", "desc": "Tipo de parceiro de neg\u00f3cios", "type": "CHAR", "len": "4" }, { "name": "PRINT_MODE", "desc": "Formato da impress\u00e3o", "type": "CHAR", "len": "1" }, { "name": "SEARCHTERM1", "desc": "Termo de pesquisa 1", "type": "CHAR", "len": "20" }, { "name": "SEARCHTERM2", "desc": "Termo de pesquisa 2", "type": "CHAR", "len": "20" }, { "name": "TITLELETTER", "desc": "Vocativo", "type": "CHAR", "len": "50" }, { "name": "TITLE_KEY", "desc": "Chave de forma de tratamento (Sr, Sra, Empresa)", "type": "CHAR", "len": "4" }], "max": 1 }, "ADDRESSDATA": { "desc": "Dados de Endere\u00e7o", "fields": [{ "name": "STREET", "desc": "Rua / Logradouro", "type": "CHAR", "len": "60" }, { "name": "HOUSE_NO", "desc": "N\u00famero", "type": "CHAR", "len": "10" }, { "name": "HOUSE_NO2", "desc": "Complemento do n\u00ba", "type": "CHAR", "len": "10" }, { "name": "CITY", "desc": "Cidade", "type": "CHAR", "len": "40" }, { "name": "POSTL_COD1", "desc": "CEP (C\u00f3digo Postal)", "type": "CHAR", "len": "10" }, { "name": "COUNTRY", "desc": "Pa\u00eds (Chave SAP ex: BR)", "type": "CHAR", "len": "3" }, { "name": "COUNTRYISO", "desc": "Pa\u00eds ISO (ex: BR)", "type": "CHAR", "len": "2" }, { "name": "REGION", "desc": "Regi\u00e3o/Estado (UF)", "type": "CHAR", "len": "3" }, { "name": "DISTRICT", "desc": "Bairro", "type": "CHAR", "len": "40" }, { "name": "TAXJURCODE", "desc": "Domic\u00edlio Fiscal", "type": "CHAR", "len": "15" }, { "name": "LANGU", "desc": "Idioma do endere\u00e7o", "type": "LANG", "len": "1" }, { "name": "VALIDFROMDATE", "desc": "V\u00e1lido desde", "type": "DATS", "len": "8" }, { "name": "VALIDTODATE", "desc": "V\u00e1lido at\u00e9", "type": "DATS", "len": "8" }, { "name": "STR_SUPPL1", "desc": "Rua 2 (Complemento)", "type": "CHAR", "len": "40" }, { "name": "STR_SUPPL2", "desc": "Rua 3", "type": "CHAR", "len": "40" }, { "name": "STR_SUPPL3", "desc": "Rua 4", "type": "CHAR", "len": "40" }, { "name": "LOCATION", "desc": "Rua 5 (Location)", "type": "CHAR", "len": "40" }, { "name": "BUILDING", "desc": "Edif\u00edcio", "type": "CHAR", "len": "20" }, { "name": "FLOOR", "desc": "Andar", "type": "CHAR", "len": "10" }, { "name": "ROOM_NO", "desc": "Sala / Apartamento", "type": "CHAR", "len": "10" }, { "name": "TIME_ZONE", "desc": "Fuso Hor\u00e1rio", "type": "CHAR", "len": "6" }, { "name": "TRANSPZONE", "desc": "Zona de transporte", "type": "CHAR", "len": "10" }, { "name": "PO_BOX", "desc": "Caixa Postal", "type": "CHAR", "len": "10" }, { "name": "POSTL_COD2", "desc": "CEP Caixa Postal", "type": "CHAR", "len": "10" }, { "name": "C_O_NAME", "desc": "A/C (Care of)", "type": "CHAR", "len": "40" }, { "name": "EXTADDRESSNUMBER", "desc": "ID Endere\u00e7o Externo", "type": "CHAR", "len": "20" }], "max": 9999 }, "TAX_DATA": { "desc": "Dados Fiscais (CNPJ, CPF, IE)", "fields": [{ "name": "TAXTYPE", "desc": "Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)", "type": "CHAR", "len": "4" }, { "name": "TAXNUMBER", "desc": "N\u00famero Fiscal (Formatado ou n\u00e3o)", "type": "CHAR", "len": "20" }, { "name": "TAXNUMXL", "desc": "N\u00famero Fiscal Longo (Se maior que 20 chars)", "type": "CHAR", "len": "60" }], "max": 9999 }, "BUSINESSPARTNERROLE": { "desc": "Fun\u00e7\u00f5es do Parceiro (FLCU00, FLCU01, etc)", "fields": [{ "name": "PARTNERROLE", "desc": "Fun\u00e7\u00e3o de parceiro (ex: FLCU01 - Cliente)", "type": "CHAR", "len": "6" }], "max": 9999 }, "CENTRALDATAPERSON": { "desc": "Dados Pessoais (Categoria 1)", "fields": [{ "name": "FIRSTNAME", "desc": "Primeiro nome", "type": "CHAR", "len": "40" }, { "name": "LASTNAME", "desc": "Sobrenome", "type": "CHAR", "len": "40" }, { "name": "FULLNAME", "desc": "Nome completo", "type": "CHAR", "len": "80" }, { "name": "BIRTHDATE", "desc": "Data de nascimento", "type": "DATS", "len": "8" }, { "name": "BIRTHPLACE", "desc": "Local de nascimento", "type": "CHAR", "len": "40" }, { "name": "MIDDLENAME", "desc": "Nome do meio", "type": "CHAR", "len": "40" }, { "name": "SECONDNAME", "desc": "Segundo sobrenome", "type": "CHAR", "len": "40" }, { "name": "NICKNAME", "desc": "Apelido / Conhecido como", "type": "CHAR", "len": "40" }, { "name": "TITLE_ACA1", "desc": "T\u00edtulo acad\u00eamico 1", "type": "CHAR", "len": "4" }, { "name": "TITLE_ACA2", "desc": "T\u00edtulo acad\u00eamico 2", "type": "CHAR", "len": "4" }, { "name": "TITLE_SPPL", "desc": "Complemento t\u00edtulo (ex: Dr.)", "type": "CHAR", "len": "4" }, { "name": "PREFIX1", "desc": "Prefixo nome", "type": "CHAR", "len": "4" }, { "name": "PREFIX2", "desc": "Prefixo nome 2", "type": "CHAR", "len": "4" }, { "name": "GENDER", "desc": "G\u00eanero (Legado)", "type": "CHAR", "len": "1" }, { "name": "SEX", "desc": "Sexo", "type": "CHAR", "len": "1" }, { "name": "MARITALSTATUS", "desc": "Estado civil", "type": "CHAR", "len": "1" }, { "name": "NATIONALITY", "desc": "Nacionalidade", "type": "CHAR", "len": "3" }, { "name": "CORRESPONDLANGUAGE", "desc": "Idioma correspond\u00eancia", "type": "LANG", "len": "1" }], "max": 1 }, "CENTRALDATAORGANIZATION": { "desc": "Dados da Organiza\u00e7\u00e3o (Categoria 2)", "fields": [{ "name": "NAME1", "desc": "Nome 1 (Raz\u00e3o Social)", "type": "CHAR", "len": "40" }, { "name": "NAME2", "desc": "Nome 2", "type": "CHAR", "len": "40" }, { "name": "NAME3", "desc": "Nome 3", "type": "CHAR", "len": "40" }, { "name": "NAME4", "desc": "Nome 4", "type": "CHAR", "len": "40" }, { "name": "INDUSTRYSECTOR", "desc": "Setor Industrial (Ramo)", "type": "CHAR", "len": "10" }, { "name": "LEGALFORM", "desc": "Forma Jur\u00eddica", "type": "CHAR", "len": "2" }, { "name": "FOUNDATIONDATE", "desc": "Data de funda\u00e7\u00e3o", "type": "DATS", "len": "8" }, { "name": "LIQUIDATIONDATE", "desc": "Data de liquida\u00e7\u00e3o", "type": "DATS", "len": "8" }], "max": 1 }, "CENTRALDATAGROUP": { "desc": "Dados de Grupo (Categoria 3)", "fields": [{ "name": "NAMEGROUP1", "desc": "Nome 1 (Grupo)", "type": "CHAR", "len": "40" }, { "name": "NAMEGROUP2", "desc": "Nome 2 (Grupo)", "type": "CHAR", "len": "40" }, { "name": "GROUPTYPE", "desc": "Tipo de grupo", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATA_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Dados Centrais)", "fields": [{ "name": "AUTHORIZATIONGROUP", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERLANGUAGE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERTYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLE_KEY", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAPERSON_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Pessoa)", "fields": [{ "name": "FIRSTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LASTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "BIRTHDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAORGANIZATION_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Org)", "fields": [{ "name": "NAME1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "INDUSTRYSECTOR", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 } };</script>
+    <script>const IDOC_TREE = [{ "segment": "BUPARTNER", "max": 1, "children": [{ "segment": "CENTRALDATA", "max": 1, "children": [] }, { "segment": "ADDRESSDATA", "max": 9999, "children": [] }, { "segment": "TAX_DATA", "max": 9999, "children": [] }, { "segment": "BUSINESSPARTNERROLE", "max": 9999, "children": [] }, { "segment": "CENTRALDATAPERSON", "max": 1, "children": [] }, { "segment": "CENTRALDATAORGANIZATION", "max": 1, "children": [] }, { "segment": "CENTRALDATAGROUP", "max": 1, "children": [] }, { "segment": "CENTRALDATA_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAPERSON_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAORGANIZATION_X", "max": 1, "children": [] }, { "segment": "CENTRALDATAGROUP_X", "max": 1, "children": [] }] }]; const SEGMENT_DEFINITIONS = { "BUPARTNER": { "desc": "Estrutura principal do Parceiro de Neg\u00f3cios", "fields": [{ "name": "BUSINESSPARTNEREXTERN", "desc": "N\u00ba parceiro de neg\u00f3cios (Externo)", "type": "CHAR", "len": "10" }, { "name": "NATURALPERSON", "desc": "\u00c9 Pessoa F\u00edsica (Flag Fiscal)", "type": "CHAR", "len": "1" }, { "name": "PARTNERCATEGORY", "desc": "Categoria do parceiro (1=Pessoa, 2=Org, 3=Grupo)", "type": "CHAR", "len": "1" }, { "name": "PARTNERGROUP", "desc": "Agrupamento de parceiros (BP Grouping)", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATA": { "desc": "Dados Centrais (Comuns a todas categorias)", "fields": [{ "name": "AUTHORIZATIONGROUP", "desc": "Grupo de autoriza\u00e7\u00f5es", "type": "CHAR", "len": "4" }, { "name": "CENTRALARCHIVINGFLAG", "desc": "Marca\u00e7\u00e3o para arquivamento", "type": "CHAR", "len": "1" }, { "name": "CENTRALBLOCK", "desc": "Bloqueio central", "type": "CHAR", "len": "1" }, { "name": "COMM_TYPE", "desc": "Meio comunica\u00e7\u00e3o padr\u00e3o", "type": "CHAR", "len": "3" }, { "name": "CONTACTALLOWANCE", "desc": "Permiss\u00e3o de contato", "type": "CHAR", "len": "1" }, { "name": "DATAORIGINTYPE", "desc": "Tipos de origem dos dados", "type": "CHAR", "len": "4" }, { "name": "NOTRELEASED", "desc": "C\u00f3digo: n\u00e3o liberado", "type": "CHAR", "len": "1" }, { "name": "PARTNEREXTERNAL", "desc": "N\u00ba parceiro no sistema externo", "type": "CHAR", "len": "20" }, { "name": "PARTNERLANGUAGE", "desc": "Idioma do Parceiro", "type": "LANG", "len": "1" }, { "name": "PARTNERLANGUAGEISO", "desc": "Idioma ISO (2 chars)", "type": "CHAR", "len": "2" }, { "name": "PARTNERTYPE", "desc": "Tipo de parceiro de neg\u00f3cios", "type": "CHAR", "len": "4" }, { "name": "PRINT_MODE", "desc": "Formato da impress\u00e3o", "type": "CHAR", "len": "1" }, { "name": "SEARCHTERM1", "desc": "Termo de pesquisa 1", "type": "CHAR", "len": "20" }, { "name": "SEARCHTERM2", "desc": "Termo de pesquisa 2", "type": "CHAR", "len": "20" }, { "name": "TITLELETTER", "desc": "Vocativo", "type": "CHAR", "len": "50" }, { "name": "TITLE_KEY", "desc": "Chave de forma de tratamento (Sr, Sra, Empresa)", "type": "CHAR", "len": "4" }], "max": 1 }, "ADDRESSDATA": { "desc": "Dados de Endere\u00e7o", "fields": [{ "name": "STREET", "desc": "Rua / Logradouro", "type": "CHAR", "len": "60" }, { "name": "HOUSE_NO", "desc": "N\u00famero", "type": "CHAR", "len": "10" }, { "name": "HOUSE_NO2", "desc": "Complemento do n\u00ba", "type": "CHAR", "len": "10" }, { "name": "CITY", "desc": "Cidade", "type": "CHAR", "len": "40" }, { "name": "POSTL_COD1", "desc": "CEP (C\u00f3digo Postal)", "type": "CHAR", "len": "10" }, { "name": "COUNTRY", "desc": "Pa\u00eds (Chave SAP ex: BR)", "type": "CHAR", "len": "3" }, { "name": "COUNTRYISO", "desc": "Pa\u00eds ISO (ex: BR)", "type": "CHAR", "len": "2" }, { "name": "REGION", "desc": "Regi\u00e3o/Estado (UF)", "type": "CHAR", "len": "3" }, { "name": "DISTRICT", "desc": "Bairro", "type": "CHAR", "len": "40" }, { "name": "TAXJURCODE", "desc": "Domic\u00edlio Fiscal", "type": "CHAR", "len": "15" }, { "name": "LANGU", "desc": "Idioma do endere\u00e7o", "type": "LANG", "len": "1" }, { "name": "VALIDFROMDATE", "desc": "V\u00e1lido desde", "type": "DATS", "len": "8" }, { "name": "VALIDTODATE", "desc": "V\u00e1lido at\u00e9", "type": "DATS", "len": "8" }, { "name": "STR_SUPPL1", "desc": "Rua 2 (Complemento)", "type": "CHAR", "len": "40" }, { "name": "STR_SUPPL2", "desc": "Rua 3", "type": "CHAR", "len": "40" }, { "name": "STR_SUPPL3", "desc": "Rua 4", "type": "CHAR", "len": "40" }, { "name": "LOCATION", "desc": "Rua 5 (Location)", "type": "CHAR", "len": "40" }, { "name": "BUILDING", "desc": "Edif\u00edcio", "type": "CHAR", "len": "20" }, { "name": "FLOOR", "desc": "Andar", "type": "CHAR", "len": "10" }, { "name": "ROOM_NO", "desc": "Sala / Apartamento", "type": "CHAR", "len": "10" }, { "name": "TIME_ZONE", "desc": "Fuso Hor\u00e1rio", "type": "CHAR", "len": "6" }, { "name": "TRANSPZONE", "desc": "Zona de transporte", "type": "CHAR", "len": "10" }, { "name": "PO_BOX", "desc": "Caixa Postal", "type": "CHAR", "len": "10" }, { "name": "POSTL_COD2", "desc": "CEP Caixa Postal", "type": "CHAR", "len": "10" }, { "name": "C_O_NAME", "desc": "A/C (Care of)", "type": "CHAR", "len": "40" }, { "name": "EXTADDRESSNUMBER", "desc": "ID Endere\u00e7o Externo", "type": "CHAR", "len": "20" }, { "name": "CHCKSTATUS", "desc": "Status de verifica\u00e7\u00e3o para file de localidades", "type": "CHAR", "len": "1" }, { "name": "CITY_NO", "desc": "Codifica\u00e7\u00e3o da localidade para file de localidades e ruas", "type": "CHAR", "len": "12" }, { "name": "COMM_TYPE", "desc": "Meio comunica\u00e7\u00e3o (chave) (administra\u00e7\u00e3o endere\u00e7os central)", "type": "CHAR", "len": "3" }, { "name": "COUNTY", "desc": "Distrito", "type": "CHAR", "len": "40" }, { "name": "COUNTY_NO", "desc": "C\u00f3digo para munic\u00edpio", "type": "CHAR", "len": "8" }, { "name": "DELI_SERV_NUMBER", "desc": "N\u00ba do servi\u00e7o de entrega", "type": "CHAR", "len": "10" }, { "name": "DELI_SERV_TYPE", "desc": "Tipo do servi\u00e7o de entrega", "type": "CHAR", "len": "4" }, { "name": "DISTRCT_NO", "desc": "Codifica\u00e7\u00e3o do bairro para file de bairros e ruas", "type": "CHAR", "len": "8" }, { "name": "DONT_USE_P", "desc": "C\u00f3digo para impossibilidade entrega em endere\u00e7o caixa postal", "type": "CHAR", "len": "4" }, { "name": "DONT_USE_S", "desc": "C\u00f3digo para impossibilidade entrega no endere\u00e7o de rua", "type": "CHAR", "len": "4" }, { "name": "HOMECITYNO", "desc": "Codifica\u00e7\u00e3o local.resid\u00eancia diferente p/file ruas/localids.", "type": "CHAR", "len": "12" }, { "name": "HOME_CITY", "desc": "Localidade de resid\u00eancia (diferente da localidade postal)", "type": "CHAR", "len": "40" }, { "name": "HOUSE_NO3", "desc": "\u00c1rea do n\u00ba (n\u00e3o suportado)", "type": "CHAR", "len": "10" }, { "name": "LANGUISO", "desc": "C\u00f3digo de idiomas SAP de 2 d\u00edgitos", "type": "CHAR", "len": "2" }, { "name": "MOVE_ADDR_GUID", "desc": "ID \u00fanico em representa\u00e7\u00e3o de caracteres", "type": "CHAR", "len": "32" }, { "name": "MOVE_ADDRESS", "desc": "N\u00ba do endere\u00e7o de destino de mudan\u00e7a em mudan\u00e7as de endere\u00e7o", "type": "CHAR", "len": "10" }, { "name": "MOVE_DATE", "desc": "Data de mudan\u00e7a", "type": "DATS", "len": "8" }, { "name": "PBOXCIT_NO", "desc": "Codifica\u00e7\u00e3o localidade por caixa postal (file localidades)", "type": "CHAR", "len": "12" }, { "name": "PCODE1_EXT", "desc": "Ampl.p/c\u00f3d.postal local, p.ex.c\u00f3d.ZIP+4+2 (n\u00e3o suportado)", "type": "CHAR", "len": "10" }, { "name": "PCODE2_EXT", "desc": "Amplia\u00e7\u00e3o p/c\u00f3d.postal da caixa postal (n\u00e3o suportada)", "type": "CHAR", "len": "10" }, { "name": "PCODE3_EXT", "desc": "Amplia\u00e7\u00e3o p/c\u00f3d.postal de cliente importante (n\u00e3o suportada)", "type": "CHAR", "len": "10" }, { "name": "POBOX_CTRY", "desc": "Pa\u00eds/regi\u00e3o da caixa postal", "type": "CHAR", "len": "3" }, { "name": "POSTL_COD3", "desc": "C\u00f3digo postal da empresa (para clientes importantes)", "type": "CHAR", "len": "10" }, { "name": "PO_BOX_CIT", "desc": "Localidade da caixa postal", "type": "CHAR", "len": "40" }, { "name": "PO_BOX_LOBBY", "desc": "Ag\u00eancia da caixa postal (PO Box Lobby)", "type": "CHAR", "len": "40" }, { "name": "PO_BOX_REG", "desc": "Regi\u00e3o para a caixa postal (pa\u00eds, estado, prov\u00edncia, ...)", "type": "CHAR", "len": "3" }, { "name": "PO_CTRYISO", "desc": "C\u00f3digo ISO do pa\u00eds/regi\u00e3o", "type": "CHAR", "len": "2" }, { "name": "PO_W_O_NO", "desc": "C\u00f3digo: indica\u00e7\u00e3o de caixa postal sem n\u00ba", "type": "CHAR", "len": "1" }, { "name": "REGIOGROUP", "desc": "Agrupamento da estrutura regional", "type": "CHAR", "len": "8" }, { "name": "STANDARDADDRESS", "desc": "Sele\u00e7\u00e3o: endere\u00e7o \u00e9 endere\u00e7o standard", "type": "CHAR", "len": "1" }, { "name": "STREET_NO", "desc": "Codifica\u00e7\u00e3o da rua para file de localidades e ruas", "type": "CHAR", "len": "12" }, { "name": "STR_ABBR", "desc": "Abreviatura da denomina\u00e7\u00e3o de rua (n\u00e3o suportada)", "type": "CHAR", "len": "2" }, { "name": "TOWNSHIP", "desc": "Cidade", "type": "CHAR", "len": "40" }, { "name": "TOWNSHIP_NO", "desc": "C\u00f3digo para cidade", "type": "CHAR", "len": "8" }], "max": 9999 }, "TAX_DATA": { "desc": "Dados Fiscais (CNPJ, CPF, IE)", "fields": [{ "name": "TAXTYPE", "desc": "Tipo de imposto (ex: BR1 para CNPJ, BR2 para CPF)", "type": "CHAR", "len": "4" }, { "name": "TAXNUMBER", "desc": "N\u00famero Fiscal (Formatado ou n\u00e3o)", "type": "CHAR", "len": "20" }, { "name": "TAXNUMXL", "desc": "N\u00famero Fiscal Longo (Se maior que 20 chars)", "type": "CHAR", "len": "60" }], "max": 9999 }, "BUSINESSPARTNERROLE": { "desc": "Fun\u00e7\u00f5es do Parceiro (FLCU00, FLCU01, etc)", "fields": [{ "name": "PARTNERROLE", "desc": "Fun\u00e7\u00e3o de parceiro (ex: FLCU01 - Cliente)", "type": "CHAR", "len": "6" }], "max": 9999 }, "CENTRALDATAPERSON": { "desc": "Dados Pessoais (Categoria 1)", "fields": [{ "name": "FIRSTNAME", "desc": "Primeiro nome", "type": "CHAR", "len": "40" }, { "name": "LASTNAME", "desc": "Sobrenome", "type": "CHAR", "len": "40" }, { "name": "FULLNAME", "desc": "Nome completo", "type": "CHAR", "len": "80" }, { "name": "BIRTHDATE", "desc": "Data de nascimento", "type": "DATS", "len": "8" }, { "name": "BIRTHPLACE", "desc": "Local de nascimento", "type": "CHAR", "len": "40" }, { "name": "MIDDLENAME", "desc": "Nome do meio", "type": "CHAR", "len": "40" }, { "name": "SECONDNAME", "desc": "Segundo sobrenome", "type": "CHAR", "len": "40" }, { "name": "NICKNAME", "desc": "Apelido / Conhecido como", "type": "CHAR", "len": "40" }, { "name": "TITLE_ACA1", "desc": "T\u00edtulo acad\u00eamico 1", "type": "CHAR", "len": "4" }, { "name": "TITLE_ACA2", "desc": "T\u00edtulo acad\u00eamico 2", "type": "CHAR", "len": "4" }, { "name": "TITLE_SPPL", "desc": "Complemento t\u00edtulo (ex: Dr.)", "type": "CHAR", "len": "4" }, { "name": "PREFIX1", "desc": "Prefixo nome", "type": "CHAR", "len": "4" }, { "name": "PREFIX2", "desc": "Prefixo nome 2", "type": "CHAR", "len": "4" }, { "name": "GENDER", "desc": "G\u00eanero (Legado)", "type": "CHAR", "len": "1" }, { "name": "SEX", "desc": "Sexo", "type": "CHAR", "len": "1" }, { "name": "MARITALSTATUS", "desc": "Estado civil", "type": "CHAR", "len": "1" }, { "name": "NATIONALITY", "desc": "Nacionalidade", "type": "CHAR", "len": "3" }, { "name": "CORRESPONDLANGUAGE", "desc": "Idioma correspond\u00eancia", "type": "LANG", "len": "1" }, { "name": "BIRTHDT_STATUS", "desc": "Data de nascimento: status", "type": "CHAR", "len": "1" }, { "name": "BIRTHNAME", "desc": "Sobrenome de solteiro do parceiro de neg\u00f3cios", "type": "CHAR", "len": "40" }, { "name": "CORRESPONDLANGUAGEISO", "desc": "C\u00f3digo de idiomas SAP de 2 d\u00edgitos", "type": "CHAR", "len": "2" }, { "name": "COUNTRYORIGIN", "desc": "Pa\u00eds/regi\u00e3o de proced\u00eancia em n\u00e3o residentes", "type": "CHAR", "len": "3" }, { "name": "DEATHDATE", "desc": "Data de morte do parceiro de neg\u00f3cios", "type": "DATS", "len": "8" }, { "name": "EMPLOYER", "desc": "Nome do empregador de uma pessoa f\u00edsica", "type": "CHAR", "len": "35" }, { "name": "INITIALS", "desc": "Inicial do segundo nome ou iniciais da pessoa", "type": "CHAR", "len": "10" }, { "name": "NAMCOUNTRY", "desc": "Pa\u00eds/regi\u00e3o para regra de edi\u00e7\u00e3o de nomes", "type": "CHAR", "len": "3" }, { "name": "NAMCOUNTRYISO", "desc": "C\u00f3digo ISO do pa\u00eds/regi\u00e3o", "type": "CHAR", "len": "2" }, { "name": "NAMEFORMAT", "desc": "Formato para a edi\u00e7\u00e3o de nomes", "type": "CHAR", "len": "2" }, { "name": "NATIONALITYISO", "desc": "C\u00f3digo ISO do pa\u00eds/regi\u00e3o", "type": "CHAR", "len": "2" }, { "name": "OCCUPATION", "desc": "Ocupa\u00e7\u00e3o do parceiro de neg\u00f3cios", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATAORGANIZATION": { "desc": "Dados da Organiza\u00e7\u00e3o (Categoria 2)", "fields": [{ "name": "NAME1", "desc": "Nome 1 (Raz\u00e3o Social)", "type": "CHAR", "len": "40" }, { "name": "NAME2", "desc": "Nome 2", "type": "CHAR", "len": "40" }, { "name": "NAME3", "desc": "Nome 3", "type": "CHAR", "len": "40" }, { "name": "NAME4", "desc": "Nome 4", "type": "CHAR", "len": "40" }, { "name": "INDUSTRYSECTOR", "desc": "Setor Industrial (Ramo)", "type": "CHAR", "len": "10" }, { "name": "LEGALFORM", "desc": "Forma Jur\u00eddica", "type": "CHAR", "len": "2" }, { "name": "FOUNDATIONDATE", "desc": "Data de funda\u00e7\u00e3o", "type": "DATS", "len": "8" }, { "name": "LIQUIDATIONDATE", "desc": "Data de liquida\u00e7\u00e3o", "type": "DATS", "len": "8" }, { "name": "CHK_DIGIT", "desc": "D\u00edgito de controle da matr\u00edcula internacional da empresa", "type": "NUMC", "len": "1" }, { "name": "LEGALORG", "desc": "Pessoa jur\u00eddica da organiza\u00e7\u00e3o", "type": "CHAR", "len": "2" }, { "name": "LOC_NO_1", "desc": "N\u00ba global de localiza\u00e7\u00e3o (parte 1)", "type": "NUMC", "len": "7" }, { "name": "LOC_NO_2", "desc": "N\u00famero global de localiza\u00e7\u00e3o (parte 2)", "type": "NUMC", "len": "5" }], "max": 1 }, "CENTRALDATAGROUP": { "desc": "Dados de Grupo (Categoria 3)", "fields": [{ "name": "NAMEGROUP1", "desc": "Nome 1 (Grupo)", "type": "CHAR", "len": "40" }, { "name": "NAMEGROUP2", "desc": "Nome 2 (Grupo)", "type": "CHAR", "len": "40" }, { "name": "GROUPTYPE", "desc": "Tipo de grupo", "type": "CHAR", "len": "4" }], "max": 1 }, "CENTRALDATA_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Dados Centrais)", "fields": [{ "name": "AUTHORIZATIONGROUP", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERLANGUAGE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERTYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLE_KEY", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "CENTRALARCHIVINGFLAG", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "CENTRALBLOCK", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "COMM_TYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "CONTACTALLOWANCE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "DATAORIGINTYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NOTRELEASED", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNEREXTERNAL", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PARTNERLANGUAGEISO", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PRINT_MODE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "SEARCHTERM1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "SEARCHTERM2", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLELETTER", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAPERSON_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Pessoa)", "fields": [{ "name": "FIRSTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LASTNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "BIRTHDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "BIRTHDT_STATUS", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "BIRTHNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "BIRTHPLACE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "CORRESPONDLANGUAGE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "CORRESPONDLANGUAGEISO", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "COUNTRYORIGIN", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "DEATHDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "EMPLOYER", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "FULLNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "GENDER", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "INITIALS", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "MARITALSTATUS", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "MIDDLENAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAMCOUNTRY", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAMCOUNTRYISO", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAMEFORMAT", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NATIONALITY", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NATIONALITYISO", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NICKNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "OCCUPATION", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PREFIX1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "PREFIX2", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "SECONDNAME", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "SEX", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLE_ACA1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLE_ACA2", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "TITLE_SPPL", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAORGANIZATION_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Org)", "fields": [{ "name": "NAME1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "INDUSTRYSECTOR", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "CHK_DIGIT", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "FOUNDATIONDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LEGALFORM", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LEGALORG", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LIQUIDATIONDATE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LOC_NO_1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "LOC_NO_2", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAME2", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAME3", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAME4", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 }, "CENTRALDATAGROUP_X": { "desc": "Flags de Atualiza\u00e7\u00e3o (Grupo)", "fields": [{ "name": "GROUPTYPE", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAMEGROUP1", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }, { "name": "NAMEGROUP2", "desc": "Atualizar? (X)", "type": "CHAR", "len": "1" }], "max": 1 } };</script>
 </head>
 
 <body>
@@ -350,6 +350,176 @@
                                 <td>ID Endereço Externo</td>
                                 <td><span class='dt-type'>CHAR(20)</span></td>
                             </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CHCKSTATUS</span></td>
+                                <td>Status de verificação para file de localidades</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CITY_NO</span></td>
+                                <td>Codificação da localidade para file de localidades e ruas</td>
+                                <td><span class='dt-type'>CHAR(12)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COMM_TYPE</span></td>
+                                <td>Meio comunicação (chave) (administração endereços central)</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COUNTY</span></td>
+                                <td>Distrito</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COUNTY_NO</span></td>
+                                <td>Código para município</td>
+                                <td><span class='dt-type'>CHAR(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DELI_SERV_NUMBER</span></td>
+                                <td>Nº do serviço de entrega</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DELI_SERV_TYPE</span></td>
+                                <td>Tipo do serviço de entrega</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DISTRCT_NO</span></td>
+                                <td>Codificação do bairro para file de bairros e ruas</td>
+                                <td><span class='dt-type'>CHAR(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DONT_USE_P</span></td>
+                                <td>Código para impossibilidade entrega em endereço caixa postal</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DONT_USE_S</span></td>
+                                <td>Código para impossibilidade entrega no endereço de rua</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>HOMECITYNO</span></td>
+                                <td>Codificação local.residência diferente p/file ruas/localids.</td>
+                                <td><span class='dt-type'>CHAR(12)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>HOME_CITY</span></td>
+                                <td>Localidade de residência (diferente da localidade postal)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>HOUSE_NO3</span></td>
+                                <td>Área do nº (não suportado)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LANGUISO</span></td>
+                                <td>Código de idiomas SAP de 2 dígitos</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MOVE_ADDR_GUID</span></td>
+                                <td>ID único em representação de caracteres</td>
+                                <td><span class='dt-type'>CHAR(32)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MOVE_ADDRESS</span></td>
+                                <td>Nº do endereço de destino de mudança em mudanças de endereço</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MOVE_DATE</span></td>
+                                <td>Data de mudança</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PBOXCIT_NO</span></td>
+                                <td>Codificação localidade por caixa postal (file localidades)</td>
+                                <td><span class='dt-type'>CHAR(12)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PCODE1_EXT</span></td>
+                                <td>Ampl.p/cód.postal local, p.ex.cód.ZIP+4+2 (não suportado)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PCODE2_EXT</span></td>
+                                <td>Ampliação p/cód.postal da caixa postal (não suportada)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PCODE3_EXT</span></td>
+                                <td>Ampliação p/cód.postal de cliente importante (não suportada)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>POBOX_CTRY</span></td>
+                                <td>País/região da caixa postal</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>POSTL_COD3</span></td>
+                                <td>Código postal da empresa (para clientes importantes)</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PO_BOX_CIT</span></td>
+                                <td>Localidade da caixa postal</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PO_BOX_LOBBY</span></td>
+                                <td>Agência da caixa postal (PO Box Lobby)</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PO_BOX_REG</span></td>
+                                <td>Região para a caixa postal (país, estado, província, ...)</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PO_CTRYISO</span></td>
+                                <td>Código ISO do país/região</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PO_W_O_NO</span></td>
+                                <td>Código: indicação de caixa postal sem nº</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>REGIOGROUP</span></td>
+                                <td>Agrupamento da estrutura regional</td>
+                                <td><span class='dt-type'>CHAR(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STANDARDADDRESS</span></td>
+                                <td>Seleção: endereço é endereço standard</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STREET_NO</span></td>
+                                <td>Codificação da rua para file de localidades e ruas</td>
+                                <td><span class='dt-type'>CHAR(12)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>STR_ABBR</span></td>
+                                <td>Abreviatura da denominação de rua (não suportada)</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TOWNSHIP</span></td>
+                                <td>Cidade</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TOWNSHIP_NO</span></td>
+                                <td>Código para cidade</td>
+                                <td><span class='dt-type'>CHAR(8)</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -535,6 +705,66 @@
                                 <td>Idioma correspondência</td>
                                 <td><span class='dt-type'>LANG(1)</span></td>
                             </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHDT_STATUS</span></td>
+                                <td>Data de nascimento: status</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHNAME</span></td>
+                                <td>Sobrenome de solteiro do parceiro de negócios</td>
+                                <td><span class='dt-type'>CHAR(40)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CORRESPONDLANGUAGEISO</span></td>
+                                <td>Código de idiomas SAP de 2 dígitos</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COUNTRYORIGIN</span></td>
+                                <td>País/região de procedência em não residentes</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DEATHDATE</span></td>
+                                <td>Data de morte do parceiro de negócios</td>
+                                <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>EMPLOYER</span></td>
+                                <td>Nome do empregador de uma pessoa física</td>
+                                <td><span class='dt-type'>CHAR(35)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>INITIALS</span></td>
+                                <td>Inicial do segundo nome ou iniciais da pessoa</td>
+                                <td><span class='dt-type'>CHAR(10)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMCOUNTRY</span></td>
+                                <td>País/região para regra de edição de nomes</td>
+                                <td><span class='dt-type'>CHAR(3)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMCOUNTRYISO</span></td>
+                                <td>Código ISO do país/região</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMEFORMAT</span></td>
+                                <td>Formato para a edição de nomes</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NATIONALITYISO</span></td>
+                                <td>Código ISO do país/região</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>OCCUPATION</span></td>
+                                <td>Ocupação do parceiro de negócios</td>
+                                <td><span class='dt-type'>CHAR(4)</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -600,6 +830,26 @@
                                 <td><span class='tech-name' onclick='copy(this)'>LIQUIDATIONDATE</span></td>
                                 <td>Data de liquidação</td>
                                 <td><span class='dt-type'>DATS(8)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CHK_DIGIT</span></td>
+                                <td>Dígito de controle da matrícula internacional da empresa</td>
+                                <td><span class='dt-type'>NUMC(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LEGALORG</span></td>
+                                <td>Pessoa jurídica da organização</td>
+                                <td><span class='dt-type'>CHAR(2)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LOC_NO_1</span></td>
+                                <td>Nº global de localização (parte 1)</td>
+                                <td><span class='dt-type'>NUMC(7)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LOC_NO_2</span></td>
+                                <td>Número global de localização (parte 2)</td>
+                                <td><span class='dt-type'>NUMC(5)</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -686,6 +936,66 @@
                                 <td>Atualizar? (X)</td>
                                 <td><span class='dt-type'>CHAR(1)</span></td>
                             </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CENTRALARCHIVINGFLAG</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CENTRALBLOCK</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COMM_TYPE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CONTACTALLOWANCE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DATAORIGINTYPE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NOTRELEASED</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNEREXTERNAL</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PARTNERLANGUAGEISO</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PRINT_MODE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SEARCHTERM1</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SEARCHTERM2</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLELETTER</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -726,6 +1036,141 @@
                                 <td>Atualizar? (X)</td>
                                 <td><span class='dt-type'>CHAR(1)</span></td>
                             </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHDT_STATUS</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHNAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>BIRTHPLACE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CORRESPONDLANGUAGE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CORRESPONDLANGUAGEISO</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>COUNTRYORIGIN</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>DEATHDATE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>EMPLOYER</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FULLNAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>GENDER</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>INITIALS</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MARITALSTATUS</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>MIDDLENAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMCOUNTRY</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMCOUNTRYISO</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMEFORMAT</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NATIONALITY</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NATIONALITYISO</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NICKNAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>OCCUPATION</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PREFIX1</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>PREFIX2</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SECONDNAME</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>SEX</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_ACA1</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_ACA2</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>TITLE_SPPL</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -760,6 +1205,96 @@
                             </tr>
                             <tr>
                                 <td><span class='tech-name' onclick='copy(this)'>INDUSTRYSECTOR</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>CHK_DIGIT</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>FOUNDATIONDATE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LEGALFORM</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LEGALORG</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LIQUIDATIONDATE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LOC_NO_1</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>LOC_NO_2</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME2</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME3</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAME4</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="CENTRALDATAGROUP_X" class="segment-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>CENTRALDATAGROUP_X <span class="desc">Flags de Atualização (Grupo)</span></h2>
+                    </div>
+                    <div class="badges"><button class="header-actions" onclick="exportToCSV('CENTRALDATAGROUP_X')"
+                            style="background:none;border:1px solid #15803d;color:#15803d;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📊
+                            CSV</button><button class="header-actions" onclick="openPayloadModal('CENTRALDATAGROUP_X')"
+                            style="background:none;border:1px solid #2563eb;color:#2563eb;margin-right:5px;cursor:pointer;padding:4px 8px;border-radius:4px;font-weight:600;">📦
+                            Payload</button><span class="badge badge-meta">Máx: 1</span></div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Campo</th>
+                                <th style="width:55%">Descrição</th>
+                                <th style="width:20%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>GROUPTYPE</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMEGROUP1</span></td>
+                                <td>Atualizar? (X)</td>
+                                <td><span class='dt-type'>CHAR(1)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class='tech-name' onclick='copy(this)'>NAMEGROUP2</span></td>
                                 <td>Atualizar? (X)</td>
                                 <td><span class='dt-type'>CHAR(1)</span></td>
                             </tr>
