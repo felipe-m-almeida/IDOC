@@ -6,42 +6,20 @@
     <title>Boas Práticas SAP</title>
     <link rel="stylesheet" href="estilos.css">
     <style>
-        /* Ajustes específicos desta página */
-        
-        .rules-hero {
-            background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
-            color: white; 
-            padding: 60px 20px; 
-            text-align: center;
-            border-bottom: 1px solid #78350f;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
         .grid-rules { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
             gap: 20px; 
             max-width: 1100px; 
-            margin: 40px auto 20px; /* Margem ajustada */
+            margin: 40px auto 20px;
             padding: 0 20px; 
         }
 
-        .rule-card {
-            background: white; 
-            border-radius: 12px; 
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
-            border: 1px solid var(--border);
+        .card {
             display: flex; 
             gap: 20px; 
             align-items: flex-start;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .rule-card:hover { 
-            transform: translateY(-4px); 
-            box-shadow: 0 12px 20px -5px rgba(0,0,0,0.1);
-            border-color: #f59e0b; 
+            padding: 25px;
         }
 
         .rule-icon { 
@@ -58,8 +36,8 @@
             border: 1px solid #fcd34d;
         }
         
-        .rule-content h3 { margin: 0 0 8px 0; color: #1e293b; font-size: 1.1rem; font-weight: 700; }
-        .rule-content p { margin: 0 0 15px 0; color: #475569; line-height: 1.5; font-size: 0.9rem; }
+        .rule-content h3 { margin: 0 0 8px 0; color: var(--text-main); font-size: 1.1rem; font-weight: 700; }
+        .rule-content p { margin: 0 0 15px 0; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; }
 
         .comparison { 
             display: flex; 
@@ -88,23 +66,27 @@
     <header>
         <div class="brand">CONHECIMENTO <span>Boas Práticas</span></div>
         <div class="header-actions">
-             <a href="index.html" style="text-decoration:none; color:white; border:1px solid rgba(255,255,255,0.3); padding:5px 10px; border-radius:5px; font-size:0.8rem; font-weight:600;">🏠 Voltar</a>
+             <a href="index.html" class="btn-back">🏠 Voltar</a>
         </div>
     </header>
 
     <div class="workspace">
-        <main style="padding: 0; overflow-y: auto; width: 100%;">
-            
-            <div class="rules-hero">
-                <h1 style="margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px;">Mandamentos da Integração</h1>
-                <p style="opacity: 0.9; max-width: 600px; margin: 0 auto; font-size: 1.05rem;">
-                    Siga estas regras sagradas para evitar erros básicos e ser feliz no SAP.
-                </p>
+        <aside>
+            <div class="history-container">
+                <div class="history-header"><span class="history-title">Vistos Recentemente</span><button class="btn-clear-history" onclick="clearHistory()">Limpar</button></div>
+                <div id="history-list" class="history-list"></div>
             </div>
-
+        </aside>
+        
+        <main style="flex: 1; overflow-y: auto; padding: 0;">
+            <div class="hero hero-orange">
+                <h1>Mandamentos da Integração</h1>
+                <p>Siga estas regras sagradas para evitar erros básicos e ser feliz no SAP.</p>
+            </div>
+            
             <div class="grid-rules">
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">📅</div>
                     <div class="rule-content">
                         <h3>Formato de Data (YYYYMMDD)</h3>
@@ -116,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">🕵️</div>
                     <div class="rule-content">
                         <h3>Valide o Valor Real (Tabela)</h3>
@@ -128,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">0️⃣</div>
                     <div class="rule-content">
                         <h3>Zeros à Esquerda (Alpha)</h3>
@@ -140,7 +122,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">🇧🇷</div>
                     <div class="rule-content">
                         <h3>CEP Brasileiro (Com Traço)</h3>
@@ -152,7 +134,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">💲</div>
                     <div class="rule-content">
                         <h3>Decimais com Ponto</h3>
@@ -164,7 +146,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">🔠</div>
                     <div class="rule-content">
                         <h3>Texto em Maiúsculo (UPPER)</h3>
@@ -176,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">✂️</div>
                     <div class="rule-content">
                         <h3>Respeite o Limite (Length)</h3>
@@ -188,7 +170,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">🏘️</div>
                     <div class="rule-content">
                         <h3>Endereços (Rua e Número)</h3>
@@ -202,7 +184,7 @@
                     </div>
                 </div>
 
-                <div class="rule-card">
+                <div class="card">
                     <div class="rule-icon">🚦</div>
                     <div class="rule-content">
                         <h3>Funções de Mensagem (MSGFN)</h3>
@@ -223,5 +205,28 @@
         </main>
     </div>
 
+    <script>
+        // --- HISTÓRICO DE NAVEGAÇÃO ---
+        (function() {
+            const MAX_HISTORY = 10;
+            const HISTORY_KEY = 'sap_docs_history';
+            if (!window.location.pathname.endsWith('index.html')) {
+                const pageTitle = document.title.split('-')[0].trim();
+                const currentPage = { title: pageTitle, url: window.location.pathname.split('/').pop() };
+                let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                history = history.filter(h => h.url !== currentPage.url);
+                history.unshift(currentPage);
+                if (history.length > MAX_HISTORY) history.pop();
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+            }
+            const container = document.getElementById('history-list');
+            if (container) {
+                const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                if (history.length === 0) container.innerHTML = '<div style="padding:5px 12px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
+                else { container.innerHTML = history.map(h => `<a href="${h.url}" class="history-link">${h.title}</a>`).join(''); }
+            }
+            window.clearHistory = function() { localStorage.removeItem(HISTORY_KEY); if(document.getElementById('history-list')) document.getElementById('history-list').innerHTML = ''; }
+        })();
+    </script>
 </body>
 </html>

@@ -127,20 +127,13 @@
 <body>
 
     <header>
-        <button id="menuToggle" class="mobile-menu-btn">☰</button>
-
         <div class="brand">
             PORTAL SAP <span>Documentação & Integração</span>
-        </div>
-        <div class="search-box">
-            <input type="text" placeholder="Pesquisa rápida..." onclick="window.location.href='pesquisa.html'">
         </div>
     </header>
 
     <div class="workspace">
         
-        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
-
         <aside id="mainSidebar">
             <div class="tree-container">
                 <div class="tree-label">Navegação</div>
@@ -445,23 +438,8 @@
             
             // Atualiza sidebar ativa
             document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            // Fecha o menu no mobile se clicar num link
-            if (window.innerWidth <= 768) {
-                toggleMenu();
-            }
-        }
-
-        // Lógica do Menu Mobile
-        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
-
-        function toggleMenu() {
-            const sidebar = document.getElementById('mainSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('open');
+            const activeNode = Array.from(document.querySelectorAll('.node-item')).find(el => el.getAttribute('onclick')?.includes(id));
+            if(activeNode) activeNode.classList.add('active');
         }
     </script>
 

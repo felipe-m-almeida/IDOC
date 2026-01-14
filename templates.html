@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Templates de Integração SAP</title>
+    <title>Biblioteca de Templates - Portal SAP</title>
     <link rel="stylesheet" href="estilos.css">
     <style>
-        .template-hero {
-            background: linear-gradient(135deg, #475569 0%, #1e293b 100%);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-            border-bottom: 4px solid #334155;
-        }
-
-        /* TABS */
-        .tabs {
+        /* Ajustes específicos para a navegação de abas */
+        .tabs-nav {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: -30px;
-            padding-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
         }
         
         .tab-btn {
             background: white;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border);
             padding: 12px 25px;
             border-radius: 30px;
             font-weight: 700;
-            color: #64748b;
+            color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -43,38 +37,7 @@
             box-shadow: 0 10px 15px rgba(37, 99, 235, 0.2);
         }
 
-        /* CONTEÚDO */
-        .template-container {
-            max-width: 1000px;
-            margin: 0 auto 50px;
-            padding: 20px;
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .template-container.active { display: block; }
-
-        .scenario-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-
-        .scenario-header {
-            padding: 20px;
-            background: #f8fafc;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .scenario-title { font-size: 1.1rem; font-weight: 700; color: #1e293b; }
-        .scenario-badge { font-size: 0.75rem; background: #dbeafe; color: #1e40af; padding: 4px 8px; border-radius: 4px; font-weight: 600; }
-
+        /* Área de código */
         .code-area {
             background: #0f172a;
             color: #e2e8f0;
@@ -83,6 +46,7 @@
             font-size: 0.85rem;
             overflow-x: auto;
             position: relative;
+            border-radius: 0; /* O card cuida do arredondamento superior se necessário, mas aqui fica entre o header e a nota */
         }
 
         .copy-btn {
@@ -98,7 +62,7 @@
         }
         .copy-btn:hover { background: rgba(255,255,255,0.2); }
 
-        /* NOTAS DE RODAPÉ (Didático) */
+        /* Notas de rodapé didáticas */
         .notes-area {
             padding: 15px 20px;
             background: #fffbeb;
@@ -113,44 +77,49 @@
             border-top: 1px solid #fecaca;
         }
 
-        /* FUNIL 4MDG */
+        /* Caixa de conversão 4MDG */
         .funnel-box {
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            background: var(--grad-purple);
             color: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 12px;
             text-align: center;
             margin-top: 40px;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
         }
         .funnel-btn {
             display: inline-block;
             margin-top: 15px;
             background: white;
-            color: #6d28d9;
-            padding: 10px 20px;
-            border-radius: 20px;
+            color: var(--cat-edu);
+            padding: 12px 25px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
             transition: transform 0.2s;
         }
         .funnel-btn:hover { transform: scale(1.05); }
 
+        .template-container { display: none; animation: fadeIn 0.3s ease; }
+        .template-container.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <header>
-        <button id="menuToggle" class="mobile-menu-btn">☰</button>
         <div class="brand">PORTAL SAP <span>Playbook</span></div>
         <div class="header-actions">
-             <a href="index.html" style="text-decoration:none; color:white; border:1px solid rgba(255,255,255,0.3); padding:5px 10px; border-radius:5px; font-size:0.8rem; font-weight:600;">🏠 Voltar</a>
+             <a href="index.html" class="btn-back">🏠 Voltar</a>
         </div>
     </header>
 
     <div class="workspace">
-        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
-        <aside id="mainSidebar">
+        <aside>
+            <div class="history-container">
+                <div class="history-header"><span class="history-title">Vistos Recentemente</span><button class="btn-clear-history" onclick="clearHistory()">Limpar</button></div>
+                <div id="history-list" class="history-list"></div>
+            </div>
             <div class="tree-container">
                 <div class="tree-label">Navegação</div>
                 <div style="margin-left: 0;">
@@ -160,28 +129,34 @@
             </div>
         </aside>
 
-        <main id="mainContent" style="padding:0; overflow-y:auto;">
+        <main id="mainContent" style="padding:0;">
             
-            <div class="template-hero">
-                <h1 style="margin:0; font-size:2rem;">Biblioteca de Templates</h1>
-                <p style="opacity:0.9; margin-top:10px;">Copie modelos JSON prontos e validados para acelerar sua integração.</p>
+            <div class="hero hero-purple">
+                <h1>Biblioteca de Templates</h1>
+                <p>Copie modelos JSON prontos e validados para acelerar sua integração.</p>
             </div>
 
-            <div class="tabs">
-                <div class="tab-btn active" onclick="openTab('clientes')">Clientes</div>
-                <div class="tab-btn" onclick="openTab('fornecedores')">Fornecedores</div>
-                <div class="tab-btn" onclick="openTab('materiais')">Materiais</div>
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab('clientes')">Clientes</button>
+                <button class="tab-btn" onclick="openTab('fornecedores')">Fornecedores</button>
+                <button class="tab-btn" onclick="openTab('materiais')">Materiais</button>
             </div>
 
-            <div id="clientes" class="template-container active">
-                
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Cliente PJ (Indústria/Comércio)</span>
-                        <span class="scenario-badge bg-cremas">Mercado Nacional</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+            <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px 60px 20px;">
+
+                <!-- ABA: CLIENTES -->
+                <div id="clientes" class="template-container active">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Cliente PJ (Indústria/Comércio)</h2>
+                                <span class="desc">ADRMAS03 + DEBMAS06</span>
+                            </div>
+                            <span class="badge badge-info">Mercado Nacional</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "ADRMAS03": {
     "E1ADRMAS": {
@@ -199,47 +174,43 @@
         "LANGU_ISO": "PT"
       }],
       "E1BPADSMTP": [{           
-        "E_MAIL": "nfe@industriamodelo.com.br"
+        "E_MAIL": "nfe @industriamodelo.com.br"
       }]
     }
   },
   "DEBMAS06": {
-    "E1KNA1M": { // --- DADOS GERAIS ---
+    "E1KNA1M": { 
       "KTOKD": "Z001",           
       "LAND1": "BR",
       "NAME1": "INDÚSTRIA MODELO LTDA",
-      "STCD1": "12345678000190", // CNPJ
-      "STCD3": "123456789",      // IE
-      "STCD4": "98765432",       // IM
+      "STCD1": "12345678000190", 
+      "STCD3": "123456789",      
+      "STCD4": "98765432",       
       
-      // --- DADOS DA EMPRESA (FINANCEIRO) ---
-      // Segmento repetível para cada Empresa (BUKRS)
       "E1KNB1M": [
         {
-          "BUKRS": "1000",       // Empresa
-          "AKONT": "11210001",   // Conta Reconciliação (Obrigatório)
-          "ZTERM": "Z040",       // Condição Pagto (Finan)
-          "ZWELS": "E"           // Forma Pagto (Ex: Boleto)
+          "BUKRS": "1000",       
+          "AKONT": "11210001",   
+          "ZTERM": "Z040",       
+          "ZWELS": "E"           
         }
       ],
 
-      // --- DADOS DE VENDAS (COMERCIAL) ---
-      // Segmento repetível para cada Área de Vendas
       "E1KNVVM": [
         {
-          "VKORG": "2000",       // Org Vendas
-          "VTWEG": "20",         // Canal
-          "SPART": "30",         // Setor
+          "VKORG": "2000",       
+          "VTWEG": "20",         
+          "SPART": "30",         
           "WAERS": "BRL",
-          "ZTERM": "Z040",       // Condição Pagto (Vendas)
-          "VSBED": "01",         // Condição Expedição
+          "ZTERM": "Z040",       
+          "VSBED": "01",         
           
-          "E1KNVPM": [           // Parceiros
+          "E1KNVPM": [           
             { "PARVW": "AG", "KUNN2": "10000661", "PARZA": "000" }, 
             { "PARVW": "WE", "KUNN2": "10000661", "PARZA": "000" }
           ],
           
-          "E1KNVIM": [           // Impostos (Tax Indicator)
+          "E1KNVIM": [           
             { "ALAND": "BR", "TATYP": "IBRX", "TAXKD": "1" }, 
             { "ALAND": "BR", "TATYP": "IPI1", "TAXKD": "1" }
           ]
@@ -248,19 +219,22 @@
     }
   }
 }</pre>
+                        </div>
+                        <div class="notes-area">
+                            💡 <strong>Estrutura Hierárquica:</strong> Note que <code>AKONT</code> fica dentro de <code>E1KNB1M</code> e não na raiz. Se colocar na raiz (`E1KNA1M`), o IDoc falha ou ignora o dado contábil.
+                        </div>
                     </div>
-                    <div class="notes-area">
-                        💡 <strong>Estrutura Hierárquica:</strong> Note que <code>AKONT</code> fica dentro de <code>E1KNB1M</code> e não na raiz. Se colocar na raiz (`E1KNA1M`), o IDoc falha ou ignora o dado contábil.
-                    </div>
-                </div>
 
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Cliente PF (Consumidor Final)</span>
-                        <span class="scenario-badge bg-cremas">B2C / Varejo</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Cliente PF (Consumidor Final)</h2>
+                                <span class="desc">Identificação via CPF</span>
+                            </div>
+                            <span class="badge badge-info">B2C / Varejo</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "ADRMAS03": {
     "E1ADRMAS": {
@@ -277,47 +251,50 @@
   },
   "DEBMAS06": {
     "E1KNA1M": {
-      "KTOKD": "Z010",           // Consumidor Final
+      "KTOKD": "Z010",           
       "NAME1": "SIDNEY CORREIA",
-      "STCD2": "12345678900",    // CPF (Campo STCD2)
-      "STKZN": "X",              // FLAG OBRIGATÓRIO (Pessoa Física)
+      "STCD2": "12345678900",    
+      "STKZN": "X",              
       "LAND1": "BR",
       
       "E1KNB1M": [
         {
            "BUKRS": "1000",
-           "AKONT": "11210002",  // Conta Diferente para PF
-           "ZTERM": "Z001"       // À Vista
+           "AKONT": "11210002",  
+           "ZTERM": "Z001"       
         }
       ],
       
       "E1KNVVM": [
         {
           "VKORG": "2000",
-          "VTWEG": "10",         // Canal Varejo
+          "VTWEG": "10",         
           "SPART": "30",
           "WAERS": "BRL",
           "E1KNVIM": [
-            { "ALAND": "BR", "TATYP": "IBRX", "TAXKD": "0" } // Isento
+            { "ALAND": "BR", "TATYP": "IBRX", "TAXKD": "0" } 
           ]
         }
       ]
     }
   }
 }</pre>
+                        </div>
+                        <div class="notes-area notes-error">
+                            ⚠️ <strong>Erro Comum:</strong> Para Pessoa Física, o CPF vai no <code>STCD2</code> e o campo <code>STKZN</code> deve ser "X". Se mandar CPF no <code>STCD1</code> (campo de CNPJ), o SAP rejeita por erro de dígito verificador.
+                        </div>
                     </div>
-                    <div class="notes-area notes-error">
-                        ⚠️ <strong>Erro Comum:</strong> Para Pessoa Física, o CPF vai no <code>STCD2</code> e o campo <code>STKZN</code> deve ser "X". Se mandar CPF no <code>STCD1</code> (campo de CNPJ), o SAP rejeita por erro de dígito verificador.
-                    </div>
-                </div>
 
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Cliente Estrangeiro (Exportação)</span>
-                        <span class="scenario-badge" style="background:#f3e8ff; color:#6b21a8;">Foreign Trade</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Cliente Estrangeiro (Exportação)</h2>
+                                <span class="desc">Configuração Incoterms</span>
+                            </div>
+                            <span class="badge badge-warning">Foreign Trade</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "ADRMAS03": {
     "E1ADRMAS": {
@@ -327,33 +304,32 @@
         "HOUSE_NO": "500",
         "CITY": "NEW YORK",
         "REGION": "NY",          
-        "COUNTRY": "US",         // País ISO
+        "COUNTRY": "US",         
         "LANGU_ISO": "EN"
       }]
     }
   },
   "DEBMAS06": {
     "E1KNA1M": {
-      "KTOKD": "Z002",           // Mercado Externo
+      "KTOKD": "Z002",           
       "LAND1": "US",
       "NAME1": "TIMBERLAND US INC",
-      // STCD1 e STCD2 ficam vazios
       
       "E1KNB1M": [
         {
           "BUKRS": "1000",
-          "AKONT": "11210003",   // Conta Exterior
-          "ZWELS": "T"           // Transferência Swift
+          "AKONT": "11210003",   
+          "ZWELS": "T"           
         }
       ],
       
       "E1KNVVM": [
         {
           "VKORG": "2000",
-          "VTWEG": "99",         // Canal Exportação
+          "VTWEG": "99",         
           "SPART": "30",
-          "WAERS": "USD",        // Moeda Dólar
-          "INCO1": "FOB",        // Incoterms (Obrigatório)
+          "WAERS": "USD",        
+          "INCO1": "FOB",        
           "INCO2": "NEW YORK",   
           "E1KNVIM": [
             { "ALAND": "BR", "TATYP": "IBRX", "TAXKD": "0" } 
@@ -363,20 +339,23 @@
     }
   }
 }</pre>
+                        </div>
                     </div>
                 </div>
 
-            </div>
-
-            <div id="fornecedores" class="template-container">
-                
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Fornecedor Nacional PJ (Padrão)</span>
-                        <span class="scenario-badge bg-cremas">Indústria / Serviços</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                <!-- ABA: FORNECEDORES -->
+                <div id="fornecedores" class="template-container">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Fornecedor Nacional PJ (Padrão)</h2>
+                                <span class="desc">CREMAS06 + Domicílio Fiscal</span>
+                            </div>
+                            <span class="badge badge-info">Indústria / Serviços</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "ADRMAS03": {
     "E1ADRMAS": {
@@ -392,54 +371,55 @@
         "REGION": "SC",
         "COUNTRY": "BR",
         "LANGU": "P",
-        "TAXJURCODE": "SC 4209102" // Domicílio Fiscal (Obrigatório)
+        "TAXJURCODE": "SC 4209102" 
       }],
-      "E1BPADSMTP": [{ "E_MAIL": "vendas@metalurgicasul.com.br" }]
+      "E1BPADSMTP": [{ "E_MAIL": "vendas @metalurgicasul.com.br" }]
     }
   },
   "CREMAS06": {
-    "E1LFA1M": { // --- DADOS GERAIS ---
-      "KTOKD": "FORN",           // Grupo Contas Padrão
+    "E1LFA1M": { 
+      "KTOKD": "FORN",           
       "NAME1": "INDÚSTRIA METALÚRGICA DO SUL LTDA",
       "LAND1": "BR",
-      "STCD1": "12345678000199", // CNPJ
-      "STCD3": "251234567",      // Inscrição Estadual
-      "STCD4": "45678901",       // Inscrição Municipal
+      "STCD1": "12345678000199", 
+      "STCD3": "251234567",      
+      "STCD4": "45678901",       
       
-      // --- DADOS DA EMPRESA (FINANCEIRO) ---
       "E1LFB1M": [{
          "BUKRS": "1000",
-         "AKONT": "21100001",    // Fornecedores Nacionais
-         "ZTERM": "0030",        // 30 Dias Líquido
-         "ZWELS": "F",           // Forma Pagto (Boleto)
-         "FDGRV": "A1"           // Grp Tesouraria
+         "AKONT": "21100001",    
+         "ZTERM": "0030",        
+         "ZWELS": "F",           
+         "FDGRV": "A1"           
       }],
 
-      // --- DADOS DE COMPRAS ---
       "E1LFM1M": [{
-         "EKORG": "1000",        // Org Compras
+         "EKORG": "1000",        
          "WAERS": "BRL",
-         "WEBRE": "X",           // Verif. Fatura baseada em GR (Vital p/ MIRO)
-         "LEBRE": "X",           // Verif. Fatura baseada em Serviços
-         "KALSK": "BR01",        // Esquema de Cálculo
-         "E1WYT3M": [            // Funções de Parceiro
-            { "PARVW": "LF", "LIFN2": "", "PARZA": "000" }, // Fornecedor Principal
-            { "PARVW": "RS", "LIFN2": "", "PARZA": "000" }  // Emissor Fatura (Mesmo do principal)
+         "WEBRE": "X",           
+         "LEBRE": "X",           
+         "KALSK": "BR01",        
+         "E1WYT3M": [            
+            { "PARVW": "LF", "LIFN2": "", "PARZA": "000" }, 
+            { "PARVW": "RS", "LIFN2": "", "PARZA": "000" }  
          ]
       }]
     }
   }
 }</pre>
+                        </div>
                     </div>
-                </div>
 
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Fornecedor Pessoa Física (Autônomo)</span>
-                        <span class="scenario-badge bg-cremas">Pagto Transferência</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Fornecedor Pessoa Física (Autônomo)</h2>
+                                <span class="desc">Dados Bancários para Transferência</span>
+                            </div>
+                            <span class="badge badge-info">Pagto Transferência</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "ADRMAS03": {
     "E1ADRMAS": {
@@ -457,94 +437,92 @@
   },
   "CREMAS06": {
     "E1LFA1M": {
-      "KTOKD": "ZAUT",           // Grupo: Autônomos
+      "KTOKD": "ZAUT",           
       "NAME1": "MARIA DA SILVA CONSULTORIA",
       "LAND1": "BR",
-      "STCD2": "98765432100",    // CPF vai no STCD2!
-      "STKZN": "X",              // FLAG OBRIGATÓRIO: Pessoa Física
+      "STCD2": "98765432100",    
+      "STKZN": "X",              
       
       "E1LFB1M": [{
          "BUKRS": "1000",
-         "AKONT": "21100002",    // Conta Autônomos
-         "ZTERM": "Z000",        // Pagto à Vista
-         "ZWELS": "T",           // Forma Pagto: Transferência Bancária
-         "HBKID": "ITAU"         // Banco da Empresa Pagadora
+         "AKONT": "21100002",    
+         "ZTERM": "Z000",        
+         "ZWELS": "T",           
+         "HBKID": "ITAU"         
       }],
 
-      // --- DADOS BANCÁRIOS (Para Transferência) ---
       "E1LFBKM": [{
-         "BANKS": "BR",          // País do Banco
-         "BANKL": "341",         // Código do Banco (Itaú)
-         "BANKN": "12345-6",     // Conta Corrente
-         "BKONT": "12",          // Dígito Verificador ou Chave
-         "KOINH": "MARIA DA SILVA" // Titular da Conta
+         "BANKS": "BR",          
+         "BANKL": "341",         
+         "BANKN": "12345-6",     
+         "BKONT": "12",          
+         "KOINH": "MARIA DA SILVA" 
       }],
 
       "E1LFM1M": [{
          "EKORG": "1000",
          "WAERS": "BRL",
-         "LEBRE": "X",           // Aceita Folha de Serviço
-         "WEBRE": ""             // Geralmente autônomo não tem GR de material
+         "LEBRE": "X",           
+         "WEBRE": ""             
       }]
     }
   }
 }</pre>
-                    </div>
-                    <div class="notes-area">
-                        💰 <strong>Dados Bancários:</strong> O segmento <code>E1LFBKM</code> é crítico para pagamentos via transferência (TED/DOC/PIX). O campo <code>KOINH</code> (Titular) deve ser igual ao nome do cadastro para evitar rejeição bancária.
+                        </div>
+                        <div class="notes-area">
+                            💰 <strong>Dados Bancários:</strong> O segmento <code>E1LFBKM</code> é crítico para pagamentos via transferência (TED/DOC/PIX). O campo <code>KOINH</code> (Titular) deve ser igual ao nome do cadastro para evitar rejeição bancária.
+                        </div>
                     </div>
                 </div>
 
-            </div>
-
-<div id="materiais" class="template-container">
-                
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Material de Consumo / Peça (Indústria)</span>
-                        <span class="scenario-badge bg-matmas">Peça de Reposição</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                <!-- ABA: MATERIAIS -->
+                <div id="materiais" class="template-container">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Material de Consumo / Peça (Indústria)</h2>
+                                <span class="desc">MATMAS05 + Textos Longos</span>
+                            </div>
+                            <span class="badge badge-info">Peça de Reposição</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "MATMAS05": {
     "E1MARAM": [{
-      "MATNR": "000000000000111211", // Código (com zeros à esquerda)
-      "MBRSH": "M",                  // Setor: Mecânica
-      "MTART": "ERSA",               // Tipo: Peça de Reposição
-      "MEINS": "UN",                 // Unidade Base
-      "MATKL": "YBR05",              // Grupo de Mercadorias
-      "BRGEW": "0.150",              // Peso Bruto
-      "GEWEI": "KG",                 // Unidade Peso
-      "SPART": "05",                 // Setor de Atividade
-      "TRAGR": "0001",               // Grupo de Transporte
+      "MATNR": "000000000000111211", 
+      "MBRSH": "M",                  
+      "MTART": "ERSA",               
+      "MEINS": "UN",                 
+      "MATKL": "YBR05",              
+      "BRGEW": "0.150",              
+      "GEWEI": "KG",                 
+      "SPART": "05",                 
+      "TRAGR": "0001",               
       
-      // DESCRIÇÃO CURTA (Obrigatório)
       "E1MAKTM": [{
           "MAKTX": "PORCA SEXTAVADA INOX 10MM",
           "SPRAS": "P",
           "SPRAS_ISO": "PT"
       }],
 
-      // DADOS DE CENTRO (Logística)
       "E1MARCM": [{
-          "WERKS": "1000",           // Centro (Planta)
-          "LADGR": "0004",           // Grupo de Carregamento
-          "MTVFP": "DR",             // Verif. Disponibilidade
-          "BESKZ": "F",              // Tipo de Suprimento (F=Externo)
+          "WERKS": "1000",           
+          "LADGR": "0004",           
+          "MTVFP": "DR",             
+          "BESKZ": "F",              
           
-          // DADOS DE DEPÓSITO
           "E1MARDM": [{
-              "LGORT": "0001"        // Depósito (Almoxarifado)
+              "LGORT": "0001"        
           }]
       }],
 
-      // TEXTOS LONGOS (Agora no lugar certo: Raiz do Material)
       "E1MTXHM": [
           {
               "TDOBJECT": "MATERIAL",
-              "TDNAME": "000000000000111211", // Repete o cód material
-              "TDID": "GRUN",                 // ID: Texto Dados Básicos
+              "TDNAME": "000000000000111211", 
+              "TDID": "GRUN",                 
               "TDSPRAS": "P",
               "SPRAS_ISO": "PT",
               "E1MTXLM": [
@@ -555,7 +533,7 @@
           {
               "TDOBJECT": "MATERIAL",
               "TDNAME": "000000000000111211",
-              "TDID": "BEST",                 // ID: Texto Pedido de Compras
+              "TDID": "BEST",                 
               "TDSPRAS": "P",
               "SPRAS_ISO": "PT",
               "E1MTXLM": [
@@ -566,57 +544,61 @@
     }]
   }
 }</pre>
+                        </div>
+                        <div class="notes-area">
+                            📝 <strong>Textos Longos:</strong> O segmento <code>E1MTXHM</code> fica no mesmo nível que o <code>E1MAKTM</code>. Use o ID <code>GRUN</code> para textos técnicos gerais e <code>BEST</code> para textos que devem sair impressos no Pedido de Compra.
+                        </div>
                     </div>
-                    <div class="notes-area">
-                        📝 <strong>Textos Longos:</strong> O segmento <code>E1MTXHM</code> fica no mesmo nível que o <code>E1MAKTM</code>. Use o ID <code>GRUN</code> para textos técnicos gerais e <code>BEST</code> para textos que devem sair impressos no Pedido de Compra.
-                    </div>
-                </div>
 
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <span class="scenario-title">Material de Revenda (Simples)</span>
-                        <span class="scenario-badge bg-matmas">Varejo / Retail</span>
-                    </div>
-                    <div class="code-area">
-                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Material de Revenda (Simples)</h2>
+                                <span class="desc">Venda e Código de Barras (EAN)</span>
+                            </div>
+                            <span class="badge badge-info">Varejo / Retail</span>
+                        </div>
+                        <div class="code-area">
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre>{
   "MATMAS05": {
     "E1MARAM": [{
       "MATNR": "SKU-500",
-      "MTART": "HAWA",           // Mercadoria de Revenda
-      "MBRSH": "1",              // Varejo
-      "MEINS": "PC",             // Peça
-      "EAN11": "7891000200030",  // Código de Barras (EAN)
+      "MTART": "HAWA",           
+      "MBRSH": "1",              
+      "MEINS": "PC",             
+      "EAN11": "7891000200030",  
       
       "E1MAKTM": [{
           "MAKTX": "SMARTPHONE GALAXY 128GB",
           "SPRAS": "P"
       }],
       
-      // DADOS DE VENDA (Para gerar Ordem de Venda)
       "E1MVEGM": [{
-         "VKORG": "2000",        // Org Vendas
-         "VTWEG": "10"           // Canal Distribuição
+         "VKORG": "2000",        
+         "VTWEG": "10"           
       }]
     }]
   }
 }</pre>
+                        </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="funnel-box">
+                    <h2>A integração quebrou por dados ruins?</h2>
+                    <p style="margin: 15px 0; opacity: 0.9;">
+                        Validar se o CNPJ é válido, se o NCM existe ou se a unidade está correta manualmente é arriscado.
+                        <br>O <strong>4MDG</strong> automatiza 100% dessas regras antes do dado chegar ao SAP.
+                    </p>
+                    <a href="https://4mdg.com.br/" target="_blank" class="funnel-btn">Conhecer Solução de Governança 4MDG</a>
+                </div>
 
-            <div class="funnel-box">
-                <h2 style="margin:0;">A integração quebrou por dados ruins?</h2>
-                <p style="margin: 15px 0; opacity: 0.9;">
-                    Validar se o CNPJ é válido, se o NCM existe ou se a unidade está correta manualmente é arriscado.
-                    <br>O <strong>4MDG</strong> automatiza 100% dessas regras antes do dado chegar ao SAP.
-                </p>
-                <a href="https://4mdg.com.br/" target="_blank" class="funnel-btn">Conhecer Solução de Governança 4MDG</a>
             </div>
-
         </main>
     </div>
+
+    <div id="toast"></div>
 
     <script>
         function openTab(tabName) {
@@ -634,25 +616,38 @@
             const pre = btn.nextElementSibling;
             const text = pre.innerText;
             navigator.clipboard.writeText(text).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = "Copiado!";
-                btn.style.background = "#22c55e";
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = "";
-                }, 2000);
+                showToast("✅ Template copiado!");
             });
         }
 
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            document.getElementById('mainSidebar').classList.toggle('open');
-            document.getElementById('sidebarOverlay').classList.toggle('open');
-        });
-        
-        function toggleMenu() {
-            document.getElementById('mainSidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('open');
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
+
+        // --- HISTÓRICO DE NAVEGAÇÃO ---
+        (function() {
+            const MAX_HISTORY = 10;
+            const HISTORY_KEY = 'sap_docs_history';
+            if (!window.location.pathname.endsWith('index.html')) {
+                const pageTitle = document.title.split('-')[0].trim();
+                const currentPage = { title: pageTitle, url: window.location.pathname.split('/').pop() };
+                let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                history = history.filter(h => h.url !== currentPage.url);
+                history.unshift(currentPage);
+                if (history.length > MAX_HISTORY) history.pop();
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+            }
+            const container = document.getElementById('history-list');
+            if (container) {
+                const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                if (history.length === 0) container.innerHTML = '<div style="padding:5px 12px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
+                else { container.innerHTML = history.map(h => `<a href="${h.url}" class="history-link">${h.title}</a>`).join(''); }
+            }
+            window.clearHistory = function() { localStorage.removeItem(HISTORY_KEY); if(document.getElementById('history-list')) document.getElementById('history-list').innerHTML = ''; }
+        })();
     </script>
 </body>
 </html>

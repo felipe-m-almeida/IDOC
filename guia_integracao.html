@@ -40,6 +40,13 @@
             border-color: var(--primary);
         }
 
+        .timeline-container .card {
+            overflow: visible !important; /* Permite ícone flutuante */
+            margin-left: 60px;
+            margin-bottom: 30px;
+            position: relative; /* Ancora o ícone step-icon ao card */
+        }
+
         .step-icon {
             position: absolute;
             left: -60px;
@@ -135,16 +142,18 @@
 <body>
 
     <header>
-        <button id="menuToggle" class="mobile-menu-btn">☰</button>
         <div class="brand">PORTAL SAP <span>Integration Guide</span></div>
         <div class="header-actions">
-             <a href="index.html" style="text-decoration:none; color:white; border:1px solid rgba(255,255,255,0.3); padding:5px 10px; border-radius:5px; font-size:0.8rem; font-weight:600;">🏠 Voltar</a>
+             <a href="index.html" class="btn-back">🏠 Voltar</a>
         </div>
     </header>
 
     <div class="workspace">
-        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
         <aside id="mainSidebar">
+            <div class="history-container">
+                <div class="history-header"><span class="history-title">Vistos Recentemente</span><button class="btn-clear-history" onclick="clearHistory()">Limpar</button></div>
+                <div id="history-list" class="history-list"></div>
+            </div>
             <div class="tree-container">
                 <div class="tree-label">Navegação</div>
                 <div style="margin-left: 0;">
@@ -158,107 +167,117 @@
             </div>
         </aside>
 
-        <main id="mainContent">
+        <main id="mainContent" style="padding:0; overflow-y:auto;">
             
-            <div class="welcome-section" style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%); margin-bottom: 50px;">
-                <h1 class="welcome-title">Como funciona a Integração SAP?</h1>
-                <p class="welcome-text">Entenda a jornada do dado: do seu site/app até virar um registro oficial dentro do ERP.</p>
+            <div class="hero hero-dark">
+                <h1>Como funciona a Integração SAP?</h1>
+                <p>Entenda a jornada do dado: do seu site/app até virar um registro oficial dentro do ERP.</p>
             </div>
 
             <div class="timeline-container">
 
-                <div class="step-card">
-                    <div class="step-icon">1</div>
-                    <div class="step-title">A Origem (Payload JSON)</div>
-                    <div class="step-desc">
-                        Tudo começa no sistema externo (Site, CRM, App). Hoje em dia, o mundo fala <strong>JSON</strong> via API REST.
-                    </div>
-                    <div class="code-snippet">
-{
-  "cliente": "Empresa X",
-  "cnpj": "12.345.678/0001-90",
-  "email": "contato@x.com"
-}
-                    </div>
-                </div>
-
-                <div class="step-card" id="middleware">
-                    <div class="step-icon">2</div>
-                    <div class="step-title">O Tradutor (Middleware)</div>
-                    <div class="step-desc">
-                        O dado sai da origem e chega no Middleware SAP. Aqui temos dois caminhos possíveis, dependendo da tecnologia da sua empresa:
-                    </div>
-                    
-                    <div class="comparison-box">
-                        <div class="comp-col comp-cpi">
-                            <span class="comp-title">🚀 CPI (Nuvem / Moderno)</span>
-                            <p style="font-size:0.85rem; color:#475569;">
-                                <strong>Cloud Platform Integration.</strong><br>
-                                Mantém a agilidade. Ele recebe o JSON e <strong>continua trafegando JSON</strong>. A conversão é mínima e mapeada diretamente para a API do SAP.
-                            </p>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="step-icon">1</div>
+                        <div class="step-title">A Origem (Payload JSON)</div>
+                        <div class="step-desc">
+                            Tudo começa no sistema externo (Site, CRM, App). Hoje em dia, o mundo fala <strong>JSON</strong> via API REST.
                         </div>
-                        <div class="comp-col comp-pi">
-                            <span class="comp-title">🏢 PI/PO (On-Premise / Legado)</span>
-                            <p style="font-size:0.85rem; color:#475569;">
-                                <strong>Process Orchestration.</strong><br>
-                                Sistema mais antigo. Ele pega o JSON e obrigatoriamente <strong>converte para XML</strong> (IDoc clássico) para conseguir falar com o SAP ECC.
-                            </p>
+                        <div class="code-snippet">
+    {
+      "cliente": "Empresa X",
+      "cnpj": "12.345.678/0001-90",
+      "email": "contato@x.com"
+    }
                         </div>
                     </div>
                 </div>
 
-                <div class="step-card">
-                    <div class="step-icon">3</div>
-                    <div class="step-title">A Entrega (JSON vs XML)</div>
-                    <div class="step-desc">
-                        Veja a diferença do que chega tecnicamente no SAP. O conteúdo é o mesmo (mapeado), mas o formato muda drasticamente.
-                    </div>
-
-                    <div style="margin-bottom:15px;">
-                        <span style="font-size:0.8rem; font-weight:700; color:#f59e0b; text-transform:uppercase;">Via CPI (JSON Mapeado)</span>
-                        <div class="code-snippet" style="border-left-color: #f59e0b;">
-{
-  "NAME1": "Empresa X",        // Mapeado de 'cliente'
-  "STCD1": "12345678000190",   // Limpo (sem pontos)
-  "SMTP_ADDR": "contato@x.com"
-}
+                <div class="card" id="middleware">
+                    <div class="card-body">
+                        <div class="step-icon">2</div>
+                        <div class="step-title">O Tradutor (Middleware)</div>
+                        <div class="step-desc">
+                            O dado sai da origem e chega no Middleware SAP. Aqui temos dois caminhos possíveis, dependendo da tecnologia da sua empresa:
                         </div>
-                    </div>
-
-                    <div>
-                        <span style="font-size:0.8rem; font-weight:700; color:#64748b; text-transform:uppercase;">Via PI/PO (XML IDoc)</span>
-                        <div class="code-snippet" style="border-left-color: #64748b;">
-&lt;E1KNA1M&gt;
-  &lt;NAME1&gt;Empresa X&lt;/NAME1&gt;
-  &lt;STCD1&gt;12345678000190&lt;/STCD1&gt;
-  &lt;SMTP_ADDR&gt;contato@x.com&lt;/SMTP_ADDR&gt;
-&lt;/E1KNA1M&gt;
+                        
+                        <div class="comparison-box">
+                            <div class="comp-col comp-cpi">
+                                <span class="comp-title">🚀 CPI (Nuvem / Moderno)</span>
+                                <p style="font-size:0.85rem; color:#475569;">
+                                    <strong>Cloud Platform Integration.</strong><br>
+                                    Mantém a agilidade. Ele recebe o JSON e <strong>continua trafegando JSON</strong>. A conversão é mínima e mapeada diretamente para a API do SAP.
+                                </p>
+                            </div>
+                            <div class="comp-col comp-pi">
+                                <span class="comp-title">🏢 PI/PO (On-Premise / Legado)</span>
+                                <p style="font-size:0.85rem; color:#475569;">
+                                    <strong>Process Orchestration.</strong><br>
+                                    Sistema mais antigo. Ele pega o JSON e obrigatoriamente <strong>converte para XML</strong> (IDoc clássico) para conseguir falar com o SAP ECC.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="step-card" id="sap">
-                    <div class="step-icon">4</div>
-                    <div class="step-title">Processamento no SAP</div>
-                    <div class="step-desc">
-                        O SAP recebe o pacote. Se for <strong>XML</strong>, entra via porta IDoc (WE02). Se for <strong>JSON</strong> (CPI), entra via Proxy ou API OData.
-                        <br><br>
-                        Independente do formato, se o dado estiver "sujo" (ex: CEP errado), o SAP rejeita e gera erro.
-                    </div>
-                    <div class="pro-tip">
-                        💡 <strong>Dica:</strong> É por isso que você deve consultar nosso <a href="glossario.html" style="color:inherit; font-weight:700;">Glossário</a> para entender o que cada campo técnico (NAME1, STCD1) espera.
+                <div class="card">
+                    <div class="card-body">
+                        <div class="step-icon">3</div>
+                        <div class="step-title">A Entrega (JSON vs XML)</div>
+                        <div class="step-desc">
+                            Veja a diferença do que chega tecnicamente no SAP. O conteúdo é o mesmo (mapeado), mas o formato muda drasticamente.
+                        </div>
+
+                        <div style="margin-bottom:15px;">
+                            <span style="font-size:0.8rem; font-weight:700; color:#f59e0b; text-transform:uppercase;">Via CPI (JSON Mapeado)</span>
+                            <div class="code-snippet" style="border-left-color: #f59e0b;">
+    {
+      "NAME1": "Empresa X",        // Mapeado de 'cliente'
+      "STCD1": "12345678000190",   // Limpo (sem pontos)
+      "SMTP_ADDR": "contato@x.com"
+    }
+                            </div>
+                        </div>
+
+                        <div>
+                            <span style="font-size:0.8rem; font-weight:700; color:#64748b; text-transform:uppercase;">Via PI/PO (XML IDoc)</span>
+                            <div class="code-snippet" style="border-left-color: #64748b;">
+    &lt;E1KNA1M&gt;
+      &lt;NAME1&gt;Empresa X&lt;/NAME1&gt;
+      &lt;STCD1&gt;12345678000190&lt;/STCD1&gt;
+      &lt;SMTP_ADDR&gt;contato@x.com&lt;/SMTP_ADDR&gt;
+    &lt;/E1KNA1M&gt;
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="step-card card-4mdg">
-                    <div class="step-icon">🚀</div>
-                    <div class="step-title">O Atalho Inteligente (4MDG)</div>
-                    <div class="step-desc">
-                        Cansado de configurar De-Para no CPI ou mapear XML no PI?
-                        <br><br>
-                        A plataforma <strong>4MDG</strong> entrega o dado <strong>pronto, validado e saneado</strong>. Você não precisa se preocupar se é JSON ou XML, nós garantimos que o SAP vai aceitar de primeira.
+                <div class="card" id="sap">
+                    <div class="card-body">
+                        <div class="step-icon">4</div>
+                        <div class="step-title">Processamento no SAP</div>
+                        <div class="step-desc">
+                            O SAP recebe o pacote. Se for <strong>XML</strong>, entra via porta IDoc (WE02). Se for <strong>JSON</strong> (CPI), entra via Proxy ou API OData.
+                            <br><br>
+                            Independente do formato, se o dado estiver "sujo" (ex: CEP errado), o SAP rejeita e gera erro.
+                        </div>
+                        <div class="pro-tip">
+                            💡 <strong>Dica:</strong> É por isso que você deve consultar nosso <a href="glossario.html" style="color:inherit; font-weight:700;">Glossário</a> para entender o que cada campo técnico (NAME1, STCD1) espera.
+                        </div>
                     </div>
-                    <a href="https://4mdg.com.br/" target="_blank" class="cta-button">Conhecer a Automação 4MDG</a>
+                </div>
+
+                <div class="card card-4mdg">
+                    <div class="card-body">
+                        <div class="step-icon">🚀</div>
+                        <div class="step-title">O Atalho Inteligente (4MDG)</div>
+                        <div class="step-desc">
+                            Cansado de configurar De-Para no CPI ou mapear XML no PI?
+                            <br><br>
+                            A plataforma <strong>4MDG</strong> entrega o dado <strong>pronto, validado e saneado</strong>. Você não precisa se preocupar se é JSON ou XML, nós garantimos que o SAP vai aceitar de primeira.
+                        </div>
+                        <a href="https://4mdg.com.br/" target="_blank" class="cta-button">Conhecer a Automação 4MDG</a>
+                    </div>
                 </div>
 
             </div>
@@ -267,11 +286,32 @@
     </div>
 
     <script>
-        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
-        function toggleMenu() {
-            document.getElementById('mainSidebar').classList.toggle('open');
-            document.getElementById('sidebarOverlay').classList.toggle('open');
-        }
+        // --- HISTÓRICO DE NAVEGAÇÃO ---
+        (function() {
+            const MAX_HISTORY = 10;
+            const HISTORY_KEY = 'sap_docs_history';
+            if (!window.location.pathname.endsWith('index.html')) {
+                const pageTitle = document.title.split('-')[0].trim();
+                const currentPage = { title: pageTitle, url: window.location.pathname.split('/').pop() };
+                let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                history = history.filter(h => h.url !== currentPage.url);
+                history.unshift(currentPage);
+                if (history.length > MAX_HISTORY) history.pop();
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+            }
+            const container = document.getElementById('history-list');
+            if (container) {
+                const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+                if (history.length === 0) container.innerHTML = '<div style="padding:5px 12px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
+                else { container.innerHTML = history.map(h => `<a href="${h.url}" class="history-link">${h.title}</a>`).join(''); }
+            }
+            window.clearHistory = function() {
+                localStorage.removeItem(HISTORY_KEY);
+                if(document.getElementById('history-list')) {
+                    document.getElementById('history-list').innerHTML = '<div style="padding:5px 12px; font-size:0.75rem; color:#64748b;">Nenhum item recente.</div>';
+                }
+            }
+        })();
     </script>
 </body>
 </html>
